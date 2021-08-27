@@ -1,0 +1,347 @@
+@media (min-width: 991px) {
+  .shine-effect {
+    overflow: hidden; }
+
+  .shine-effect:after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(30deg);
+    background: rgba(255, 255, 255, 0.13);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0) 100%); }
+
+  .shine-effect:hover:after {
+    opacity: 1;
+    left: 130%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.25s;
+    transition-timing-function: ease; } }
+@media (max-width: 1400px) {
+  .btn-sp-menu {
+    right: -80px; }
+
+  .fs-30-cv {
+    font-size: 26px !important; }
+
+  .fs-36-cv {
+    font-size: 30px !important; } }
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1170px; } }
+@media (min-width: 1200px) {
+  .col-xl-28 {
+    width: 28%; }
+
+  .col-xl-72 {
+    width: 72%; } }
+@media (max-width: 1400px) {
+  .all-title {
+    font-size: 28px;
+    padding-bottom: 10px; }
+
+  .btn-all {
+    padding: 6px 12px; }
+
+  .module-medical-examination {
+    padding: 15px;
+    margin-top: -25px; }
+
+  .banner-home .slider-pagination {
+    bottom: 35px; }
+
+  .flash-notification a {
+    padding: 8px 0px; } }
+@media (max-width: 1200px) {
+  .header-top {
+    padding: 10px 0px; }
+    .header-top .logo {
+      width: 150px; }
+
+  .fs-22-cv {
+    font-size: 20px !important; }
+
+  .all-title {
+    font-size: 26px; }
+
+  .module-medical-examination {
+    margin-top: 20px; }
+
+  .header-top .search-box {
+    width: auto; }
+    .header-top .search-box .form-search-header {
+      -webkit-transition: all 0.3s ease 0s;
+      -moz-transition: all 0.3s ease 0s;
+      -ms-transition: all 0.3s ease 0s;
+      -o-transition: all 0.3s ease 0s;
+      transition: all 0.3s ease 0s;
+      position: absolute;
+      top: calc(100% + 15px);
+      left: 0;
+      right: 0;
+      width: 100%;
+      margin-top: 30px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden; }
+      .header-top .search-box .form-search-header.active {
+        margin-top: 0px;
+        opacity: 1;
+        pointer-events: all;
+        visibility: unset; }
+  .header-top .header-action {
+    width: 265px; }
+
+  .item-doctor .content-img {
+    width: 130px; }
+  .item-doctor .info-doctor {
+    width: 180; }
+  .item-doctor .content {
+    width: 230px; } }
+@media (max-width: 991px) {
+  .fs-16-cv {
+    font-size: 16px; }
+
+  .fs-24-cv {
+    font-size: 20px !important; }
+
+  .fs-26-cv {
+    font-size: 22px !important; }
+
+  .fs-28-cv {
+    font-size: 22px !important; }
+
+  .fs-30-cv {
+    font-size: 22px !important; }
+
+  .fs-36-cv {
+    font-size: 26px !important; }
+
+  .module-medical-examination {
+    margin-top: 0px;
+    background: white; }
+    .module-medical-examination .item-wrapper {
+      padding: 0;
+      border: none; }
+
+  .module-medical-examination {
+    padding: 15px 0px; }
+
+  .expert-team .main-slide {
+    padding: 0 20px; }
+  .expert-team .slider-controls .prev-btn {
+    left: 0px; }
+  .expert-team .slider-controls .next-btn {
+    right: 0px; }
+
+  .new-module .big-col {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-right: none; }
+  .new-module .medium-col {
+    display: none; }
+  .new-module .small-col {
+    width: 100%;
+    max-width: 100%; }
+    .new-module .small-col .item-new-small:first-child {
+      border-top: solid 1px #e1e1e1;
+      padding-top: 10px; }
+
+  .item-new-small .content {
+    padding-right: 0px;
+    padding-left: 12px; }
+
+  .all-sub-title {
+    font-size: 22px; }
+
+  .new-medium .content {
+    padding-left: 12px; }
+
+  .side-bar-title {
+    font-size: 22px; }
+
+  .shadow-box-right {
+    box-shadow: none; }
+
+  .shadow-box-left {
+    box-shadow: none; }
+
+  .item-doctor .content-img {
+    width: 130px; }
+  .item-doctor .info-doctor {
+    width: calc(100% - 145px); }
+  .item-doctor .content {
+    width: 100%;
+    margin-top: 10px; } }
+@media (max-width: 767px) {
+  .fs-16-cv {
+    font-size: 14px !important; }
+
+  .fs-18-cv {
+    font-size: 16px !important; }
+
+  .fs-20-cv {
+    font-size: 18px !important; }
+
+  .fs-22-cv {
+    font-size: 18px !important; }
+
+  .fs-26-cv {
+    font-size: 20px !important; }
+
+  .fs-28-cv {
+    font-size: 20px !important; }
+
+  .fs-30-cv {
+    font-size: 20px !important; }
+
+  .fs-36-cv {
+    font-size: 22px !important; }
+
+  .btn-call {
+    display: none; }
+
+  .footer-menu {
+    border-top: dashed 1px #afafaf;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 12px; }
+    .footer-menu li {
+      margin-bottom: 3px;
+      position: relative;
+      padding-left: 10px; }
+      .footer-menu li:before {
+        display: none; }
+      .footer-menu li:not(:last-child) {
+        border-right: solid 1px #afafaf;
+        padding-right: 10px; }
+
+  .copy-right {
+    border-top: dashed 1px #afafaf; }
+
+  .expert-team .main-slide {
+    padding: 0px; }
+
+  .item-expert-team .img {
+    padding-top: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative; }
+    .item-expert-team .img img {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%; }
+  .item-expert-team .list-info .item:not(:first-child) {
+    display: none; }
+
+  .back-to-top {
+    right: 15px;
+    bottom: 70px; }
+
+  .footer {
+    padding-bottom: 51px; }
+
+  .new-big .img {
+    width: 100%; }
+  .new-big .content {
+    margin-top: 10px;
+    width: 100%;
+    padding-left: 0px; }
+
+  .new-medium .img {
+    width: 100%; }
+  .new-medium .content {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 10px; }
+
+  .question-big .img {
+    width: 100%; }
+  .question-big .content {
+    margin-top: 10px;
+    width: 100%;
+    padding-left: 0px; }
+
+  .question-medium .img {
+    width: 100%; }
+  .question-medium .content {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 10px; }
+
+  .relate-new-big .img {
+    width: 100%; }
+  .relate-new-big .content {
+    margin-top: 10px;
+    width: 100%;
+    padding-right: 0px; }
+
+  .bottom-new-detail .main-wraper {
+    padding: 12px; }
+  .bottom-new-detail .img {
+    width: 100%; }
+  .bottom-new-detail .content {
+    width: 100%;
+    padding-left: 0px;
+    margin-top: 10px; }
+  .bottom-new-detail .list-subitem {
+    padding: 12px; }
+
+  .relate-new-small .img {
+    width: 100%; }
+  .relate-new-small .content {
+    margin-top: 10px;
+    width: 100%;
+    padding-right: 0px; }
+
+  .list-item-search li {
+    width: 49%; } }
+@media (max-width: 575px) {
+  .banner-home .slider-pagination {
+    display: none; }
+  .banner-home .slider-controls {
+    display: none; }
+
+  .header-top {
+    background: white; }
+
+  .btn-menu-mobile {
+    background: #2891cc;
+    width: 60px;
+    height: 48px;
+    margin-top: -10px;
+    margin-right: -12px; }
+    .btn-menu-mobile .animated-icon span {
+      background: white;
+      height: 3px; }
+
+  .btn-show-search-form {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-left: solid 1px #cccccc;
+    border-right: solid 1px #cccccc; }
+
+  .list-doctor {
+    padding-top: 14px; }
+    .list-doctor .item-doctor {
+      padding-bottom: 14px;
+      margin-bottom: 14px; }
+
+  .item-character {
+    width: 50px;
+    height: 50px;
+    line-height: 48px;
+    margin-right: 10px;
+    margin-bottom: 10px; }
+
+  .list-question li {
+    margin-bottom: 15px; } }
+
+/*# sourceMappingURL=mobile.css.map */
