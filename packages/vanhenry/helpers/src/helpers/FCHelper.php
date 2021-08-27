@@ -313,8 +313,7 @@ class FCHelper{
 			// echo '<pre>'; var_dump($arr); die(); echo '</pre>';
 			$arr = self::groupBy($arr, 'parent');
 			// echo '<pre>'; var_dump($arr); die(); echo '</pre>';
-		}
-		else{
+		}else{
 			$sql .= ' order by a.id desc';
 			$data = \DB::select($sql);
 			$arr = [];
