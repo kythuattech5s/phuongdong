@@ -201,7 +201,7 @@ var FORM = (function() {
     return {
         _: function() {
             chooseProductModal();
-            // notify();
+            notify();
         },
         ajax: function(_this, type = '') {
             return ajax(_this, type);

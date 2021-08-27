@@ -2,6 +2,8 @@
 @section('content')
 <?php $tableMap = $tableData->get('table_map',''); ?>
 <input class="one hidden" dt-id="{{FCHelper::er($dataItem,'id')}}" ><!--Lưu id để xóa-->
+<input class="has_warning" type="hidden" value="{{$tableData->get('has_warning','')}}">
+<!-- Kiểm tra xem có cảnh báo khi lỡ ấn thoát trang -->
 <div class="header-top aclr">
 	<div class="breadc pull-left">
 		{{-- <i class="fa fa-comments pull-left"></i> --}}
