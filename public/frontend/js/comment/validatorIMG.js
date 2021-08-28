@@ -1,9 +1,11 @@
 var FORM_VALIDATION = ((options = {}) => {
     let _color = "red";
     let _colorBorder = "red";
+    let _colorComment = "red";
     function setColor(options){
         _color = options.color || 'red';
         _colorBorder = options.colorBorder || 'red';
+        _colorComment = options.colorComment || 'red';
     }
 
     var validatorRules = {
@@ -268,7 +270,7 @@ var FORM_VALIDATION = ((options = {}) => {
                     default:
                         if (!parentElement.querySelector(".r-error-message")) {
                             appendError(parentElement, errorElement);
-                            selector.style.border = "1px solid " + _colorBorder;
+                            selector.style.border = "1.68px solid " + _colorBorder;
                         }
                         break;
                 }
@@ -315,7 +317,7 @@ var FORM_VALIDATION = ((options = {}) => {
                             selector.nextSibling.className !== "r-error-message"
                         ) {
                             insertAfter(selector, errorElement);
-                            selector.style.border = "1px solid " + _colorBorder;
+                            selector.style.border = "1.68px solid " + _colorBorder;
                         }
                         break;
                 }
@@ -443,23 +445,24 @@ var FORM_VALIDATION = ((options = {}) => {
         var buttonImage = function (button, gallery, imgElement, selector) {
             Object.assign(button.style, {
                 position: "absolute",
-                color: "#1b1010",
-                background: "rgba(255, 255, 255, 0.314)",
+                color: "white",
+                background: "#01010150",
                 zIndex: 1,
-                padding: "5px 10px",
-                fontSize: "1.5vw",
+                padding: "6px 10px",
+                fontSize: "1vw",
                 fontWeight: "bold",
+                cursor:"pointer",
                 top: "15px",
                 right: "15px",
                 border: "none",
+                borderRadius: "10px"
             });
             button.onmousemove = function () {
                 button.animate(
                     [
                         {
-                            color: "black",
-                            backgroundColor: "white",
-                            boxShadow: "0px 0px 5px 2px #696969",
+                            backgroundColor: _colorBorder,
+                            boxShadow: "0.2px 0.2px 6px 0.2px " + _colorBorder,
                         },
                     ],
                     {
@@ -472,9 +475,9 @@ var FORM_VALIDATION = ((options = {}) => {
                 button.animate(
                     [
                         {
-                            color: "black",
                             boxShadow: "none",
-                            background: "rgba(255, 255, 255, 0.314)",
+                            color: "white",
+                            background: "#01010150",
                         },
                     ],
                     {
@@ -516,12 +519,13 @@ var FORM_VALIDATION = ((options = {}) => {
             Object.assign(imgElement.style, {
                 width: "35%",
                 paddingBottom: "20%",
+                borderRadius: "10px",
                 height: "0",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "contain",
                 backgroundPosition: "center",
                 transition: "box-shadow 0.1s, transform 0.1s",
-                boxShadow: "#696969 -1px 2px 5px 2px",
+                boxShadow: "0.2px 0.2px 6px 0.2px " + _colorBorder,
                 margin: "0 auto",
                 border: "0.5vw solid white",
                 backgroundOrigin: "border-box",
@@ -530,19 +534,19 @@ var FORM_VALIDATION = ((options = {}) => {
             });
 
             imgElement.onmousemove = (e) => {
-                // const height = imgElement.clientHeight;
-                // const width = imgElement.clientWidth;
-                // const layerX = e.layerX;
-                // const layerY = e.layerY;
-                // const yRotation = -8 * ((layerX - width / 2) / width);
-                // const xRotation = 8 * ((layerY - height / 2) / height);
-                // const string =
-                //     "perspective(500px) scale(1.1) rotateX(" +
-                //     xRotation +
-                //     "deg) rotateY(" +
-                //     yRotation +
-                //     "deg)";
-                // imgElement.style.transform = string;
+                const height = imgElement.clientHeight;
+                const width = imgElement.clientWidth;
+                const layerX = e.layerX;
+                const layerY = e.layerY;
+                const yRotation = -8 * ((layerX - width / 2) / width);
+                const xRotation = 8 * ((layerY - height / 2) / height);
+                const string =
+                    "perspective(500px) scale(1.1) rotateX(" +
+                    xRotation +
+                    "deg) rotateY(" +
+                    yRotation +
+                    "deg)";
+                imgElement.style.transform = string;
             };
 
             imgElement.onmouseleave = function () {
@@ -559,7 +563,7 @@ var FORM_VALIDATION = ((options = {}) => {
         var galleryImage = function (gallery, selector) {
             Object.assign(gallery.style, {
                 position: "fixed",
-                background: "#00000050",
+                background: "#01010199",
                 width: "100%",
                 height: "100%",
                 display: "flex",
@@ -652,25 +656,29 @@ var FORM_VALIDATION = ((options = {}) => {
                 flexWrap: "wrap",
                 listStyle: "none",
                 margin: "12px -16px",
-                padding: 0,
+                padding: "0 24px",
             });
         };
 
         var elementGallery = function (gallery) {
             Object.assign(gallery.style, {
                 display: "flex",
-                padding: "8px 24px",
-                border: "3px dashed #fa7a32",
+                padding: "12px 1.6vw",
+                border: "3px dashed "+ _colorComment,
                 margin: "12px 0",
                 cursor: "pointer",
+                borderRadius: "10px",
+                transition: "all 0.3s ease-in-out"
             });
 
             gallery.ondragover = function () {
-                this.style.borderColor = "green";
+                this.style.borderColor = "blue";
+                this.style.opacity = 0.5;
                 return false;
             };
             gallery.ondragleave = function () {
-                this.style.borderColor = "blue";
+                this.style.borderColor = _colorBorder;
+                this.style.opacity = 1;
                 return false;
             };
             gallery.ondragend = function (e) {
@@ -679,6 +687,8 @@ var FORM_VALIDATION = ((options = {}) => {
             };
             gallery.ondrop = function (e) {
                 e.preventDefault();
+                this.style.borderColor = "green";
+                this.style.opacity = 1;
                 fileList.push(...Array.from(e.dataTransfer.files));
                 setFileList(gallery);
             };
@@ -694,6 +704,7 @@ var FORM_VALIDATION = ((options = {}) => {
                 display: "block",
                 overflow: "hidden",
                 borderRadius: "10px",
+                padding:"6px",
                 width: "120px",
                 height: "120px",
             });
@@ -896,6 +907,8 @@ var FORM_VALIDATION = ((options = {}) => {
                 objectFit: "cover",
                 filter: "blur(1px)",
                 transition: "all 0.3s",
+                borderRadius: "10px",
+                boxShadow: "0 0 2px 0.2px #01010199"
             });
         };
 
@@ -906,12 +919,13 @@ var FORM_VALIDATION = ((options = {}) => {
                 right: "26px",
                 top: "2px",
                 cursor: "pointer",
-                background: "#fa7a32",
-                border: "1px solid #fa7a32",
-                boxShadow: "0px 0px 3px 1px #fa7a32",
+                background: _colorComment,
+                border: "1.68px solid "+_colorComment,
+                boxShadow: "0.2px 0.2px 6px 0.2px "+_colorComment,
                 color: "white",
                 padding: "0px 2px",
                 marginTop: "8px",
+                fontWeight: "bold",
                 fontSize: "10px",
                 opacity: "0",
                 borderRadius: "100%",
@@ -920,18 +934,16 @@ var FORM_VALIDATION = ((options = {}) => {
 
             button.onmouseover = function () {
                 Object.assign(button.style, {
-                    background: "transparent",
-                    border: "1px solid #fa7a32",
-                    boxShadow: "0px 0px 3px 1px #fa7a32",
-                    color: "#fa7a32",
+                    border: "1.68px solid "+_colorComment,
+                    boxShadow: "0.2px 0.2px 6px 0.2px "+_colorComment,
+                    padding:"2px 3px",
                 });
             };
             button.onmouseleave = function () {
                 Object.assign(button.style, {
-                    background: "#fa7a32",
-                    border: "1px solid #fa7a32",
-                    boxShadow: "0px 0px 3px 1px #fa7a32",
-                    color: "white",
+                    border: "1.68px solid " + _colorComment,
+                    boxShadow: "0.2px 0.2px 6px 0.2px " + _colorComment,
+                    padding: "0 2px",
                 });
             };
         };
@@ -1163,3 +1175,9 @@ var FORM_VALIDATION = ((options = {}) => {
         },
     }
 })();
+
+FORM_VALIDATION.setColor({
+    color: "#f598af",
+    colorBorder:"#f598af",
+    colorComment:"#f598af"
+})
