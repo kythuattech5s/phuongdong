@@ -3,13 +3,13 @@
 <section class="banner-home position-relative">
     <div class="swiper-container slide-banner-home">
         <div class="swiper-wrapper">
-        	<?php for ($i = 1; $i < 3; $i++) { ?>
+        	@foreach ($listBanner as $itemBanner)
                 <div class="swiper-slide">
-                	<a href="" class="smooth" title="">
-                    	<img src="frontend/images/banner<?= $i ?>.png" alt="banner">
+                	<a href="{{$itemBanner->link}}" class="smooth" title="{{$itemBanner->name}}">
+                    	<img src="{%IMGV2.itemBanner.img.-1%}" title="{%AIMGV2.itemBanner.img.title%}" alt="{%AIMGV2.itemBanner.img.alt%}">
                 	</a>
                 </div>
-            <?php } ?>
+            @endforeach
         </div>
     </div>
     <div class="slider-controls">
@@ -331,17 +331,17 @@
     <div class="container pb-4 pb-xxl-5">
         <div class="swiper-container slide-partner wow fadeInUp">
             <div class="swiper-wrapper">
-                <?php for ($i = 1; $i < 10; $i++) { ?>
+                @foreach ($listPartner as $itemPartner)
                     <div class="swiper-slide p-1">
                         <div class="item-partner cspoint">
                             <div class="img text-center">
-                                <a href="" class="smooth" title="">
-                                    <img src="frontend/images/Layer 1.png" alt="banner">
+                                <a href="{{$itemPartner->link}}" class="smooth" title="{{$itemPartner->name}}">
+                                    <img src="{%IMGV2.itemPartner.img.-1%}" title="{%AIMGV2.itemPartner.img.title%}" alt="{%AIMGV2.itemPartner.img.alt%}">
                                 </a>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                @endforeach
             </div>
         </div>
         <div class="slider-pagination d-none d-lg-block mt-3">
