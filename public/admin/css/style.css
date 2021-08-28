@@ -2629,6 +2629,25 @@ table {
     height: 42px;
 }
 
+.get-link:hover{
+    background: white;
+}
+
 .get-link{
-    
+    padding: 4px 6px;
+    border:none;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit-slug input{
+    margin-right: 12px;
+    flex: 1;
+}
+
+.edit-slug{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }

@@ -65,9 +65,9 @@ var MAIN = (function(){
         if(pathname.indexOf('/esystem/view/news') == 0){
             $('.action a').unbind('click');
             $('.action a').click(function(e){
-                e.preventDefault();
                 const _this = $(this);
                 if(_this.attr('href').indexOf('esystem/edit/news') == 0){
+                    e.preventDefault();
                     const id = $(this).closest('tr').find('.squaredTwo input').attr('dt-id');
                     $.ajax({
                         url:'/esystem/news/check-has-edit/'+id
@@ -78,8 +78,6 @@ var MAIN = (function(){
                             $.simplyToast(response.message, 'danger');
                         }
                     })
-                }else{
-                    window.location.href = _this.attr('href');
                 }
             })
         }
@@ -88,14 +86,14 @@ var MAIN = (function(){
 
     var getLink = function(){
         if($('button.get-link').length == 0) return;
+        $('button.get-link').unbind('click');
         $('button.get-link').click(function(){
             copyLink($(this).prev());
         });
 
         function copyLink(element){
-            var copyText = document.getElementById("rs-slug");
             var textarea = document.createElement("textarea");
-            textarea.textContent = copyText.dataset.url;
+            textarea.textContent = window.location.origin + '/' +$(element).val();
             textarea.style.height = 0;
             textarea.style.width = 0;
             document.body.appendChild(textarea);
