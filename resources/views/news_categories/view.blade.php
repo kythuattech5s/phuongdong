@@ -37,8 +37,8 @@
     <div class="container">
         @foreach ($listCateChildShow as $itemCate)
             <div class="py-2 py-xxl-3">
-                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="" class="smooth" title="">Sản phụ - phụ khoa</a></h2>
-                @include('news.news_module',['news'])
+                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="{{$itemCate->slug}}" class="smooth" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
+                @include('news.news_module',['news_list'=>$itemCate->news()->act()->Ord()->take(7)->get()])
             </div>
         @endforeach
     </div>

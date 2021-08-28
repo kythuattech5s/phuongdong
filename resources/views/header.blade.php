@@ -15,8 +15,8 @@
 	<div class="header-top">
 		<div class="container position-relative d-flex flex-wrap align-items-center justify-content-between">
 			<div class="logo">
-				<a href="" class="smooth" title="Trang chủ">
-					<img src="frontend/images/logo-Phuong-Dong.png" title="" alt="" class="img-fluid smooth">
+				<a href="" class="smooth" title="{[site_name]}">
+					<img src="{Ilogo.imgI}" title="{Ilogo.titleI}" alt="{Ilogo.altI}" class="img-fluid">
 				</a>
 			</div>
 			<div class="search-box">
@@ -29,13 +29,13 @@
 					</div>
 				</form>
 			</div>
-			<a href="tel:19001806" class="phone-header d-none d-md-flex hv-sp-main align-items-center">
+			<a href="tel:{[hotline]}" class="phone-header d-none d-md-flex hv-sp-main align-items-center" title="Hotline">
 				<div class="icon d-inline-block">
 					<img src="frontend/images/support-phone.png" title="" alt="" class="img-fluid smooth">
 				</div>
 				<div class="content d-inline-block ps-2">
 					<p class="smooth">Hotline</p>
-					<p class="phone-number smooth fs-20-cv d-inline-block" title="Hotline">19001806</p>
+					<p class="phone-number smooth fs-20-cv d-inline-block">{[hotline]}</p>
 				</div>
 			</a>
 			<div class="header-action d-none d-md-flex align-items-center justify-content-between">
@@ -62,82 +62,10 @@
 		<div class="position-relative">
 			<div class="container d-flex align-items-center justify-content-between position-relative">
 				<nav class="main-menu d-none d-md-inline-block">
-					<ul>
-						<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Giới thiệu</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Chuyên khoa</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Dịch vụ y tế</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Hướng dẫn khách hàng</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Hỏi đáp chuyên gia</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Tra cứu thông tin</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Tin tức</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Liên hệ</a>
-						</li>	
-					</ul>
+					@php
+						$menu = Support::getMenuRecursive();
+					@endphp
+					{{Support::showMenuRecursive($menu)}}
 				</nav>
 				<button class="btn-lang">
 					<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">

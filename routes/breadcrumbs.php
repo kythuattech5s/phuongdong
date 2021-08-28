@@ -2,6 +2,10 @@
 Breadcrumbs::for('home', function ($trail) {
 	$trail->push('Trang chủ', VRoute::get('home'));
 });
+Breadcrumbs::for('static', function ($trail,$name,$slug) {
+	$trail->push('Trang chủ', VRoute::get('home'));
+	$trail->push($name,$slug);
+});
 Breadcrumbs::for('page', function ($trail,$currentItem) {
 	$trail->parent('home');
 	$trail->push($currentItem->name);
