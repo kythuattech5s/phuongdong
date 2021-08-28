@@ -250,6 +250,7 @@ return [
         'StringHelper' => vanhenry\helpers\helpers\StringHelper::class,
         'SettingHelper' => vanhenry\helpers\helpers\SettingHelper::class,
         'VRoute' => App\Helpers\VRoute::class,
+        'Pusher' => Pusher\Pusher::class,
     ],
 
 ];

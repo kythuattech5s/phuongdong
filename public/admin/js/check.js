@@ -1,21 +1,42 @@
 'use strict';
+const pathname = window.location.pathname;
+
+let timeTab = sessionStorage.getItem('session_tab');
+if(!timeTab){
+    timeTab = sessionStorage.setItem('session_tab',+ new Date());
+}
+
 var MAIN = (function(){
-    const pathname = window.location.pathname;
     var checkEdit = function(){
         const button = document.querySelector('._vh_save');
         if(pathname.indexOf('/esystem/edit/news') == 0){
             button.style.pointerEvents = 'none';
             var id = pathname.split('/')[pathname.split('/').length - 1];
-            $.get({url:'esystem/news/check-editing/'+id}).done(function(response){
+            
+            $.ajax({
+                url:'esystem/news/check-editing/'+id,
+                method:"POST",
+                data:{
+                    id: id,
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    tab_time: timeTab
+                }
+            })
+            .done(function(response){
                 if(response.code == 100){
                     window.location.href = response.redirect_url;
                 }else{
                     button.removeAttribute('style');
+                    runWarning();
                 }
             });
+        }else if(document.querySelector('.has_warning')?.value == 1){
+            runWarning();
         }
 
-        if(document.querySelector('.has_warning')?.value == 1){
+        
+
+        function runWarning(){
             beforeUnload();
             checkClick();
             clickSave();
@@ -70,7 +91,12 @@ var MAIN = (function(){
                     e.preventDefault();
                     const id = $(this).closest('tr').find('.squaredTwo input').attr('dt-id');
                     $.ajax({
-                        url:'/esystem/news/check-has-edit/'+id
+                        url:'/esystem/news/check-has-edit/'+id,
+                        method:"POST",
+                        data:{
+                            id: id,
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                        }
                     }).done(function(response){
                         if(response.code == 200){
                             window.location.href = _this.attr('href');
@@ -82,7 +108,6 @@ var MAIN = (function(){
             })
         }
     }
-
 
     var getLink = function(){
         if($('button.get-link').length == 0) return;
@@ -113,5 +138,61 @@ var MAIN = (function(){
                 getLink();
             });
         })()
+    }
+})();
+
+var USERONLINE = (function(){
+	// Pusher.logToConsole = true;
+    
+    var pusher = new Pusher('5ef77b79133276e49bce', {
+        cluster: 'ap1'
+    });
+    var channel = pusher.subscribe('HUserOnline');
+
+    channel.bind('App\\Events\\HUserOnline', loadUser);
+
+    
+    function loadUser(data){
+        const main = document.querySelector('.h-user-online');
+        const users = data.users;
+        const html = users.map(function(user){
+            return `<li>${user.h_user.name} - ${user.doing}</li>`;
+        })
+        if(typeof main){
+            main.querySelector('ul.h-user__list').innerHTML = html.slice(0,5).join('');
+            main.querySelector('.count').innerHTML = users.length > 5 ? "5+" : users.length ;
+            main.querySelector('ul.h-user__list-all').innerHTML = html.join('');
+        }
+    }
+    
+    window.onunload = function(){
+        ajaxAction('REMOVE');
+    }
+
+    document.onreadystatechange = function () {
+        if (document.readyState === 'complete') {
+            ajaxAction('ADD');
+        }
+    }
+
+    function ajaxAction(action){
+        const content = buildContent();
+        $.ajax({
+            url:'/esystem/user-online',
+            method:"POST",
+            data:{
+                action:action,
+                tab_session:timeTab,
+                doing: content,
+                _token: $('meta[name="csrf-token"]').attr('content'),
+            }
+        });
+    }
+
+    function buildContent(){
+        const doing = document.querySelector('.list-link');
+        var content = JSON.stringify('đang ở trang ' + doing?.innerText);
+
+        return content;
     }
 })();
