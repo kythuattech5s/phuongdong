@@ -6,6 +6,11 @@ Breadcrumbs::for('static', function ($trail,$name,$slug) {
 	$trail->push('Trang chủ', VRoute::get('home'));
 	$trail->push($name,$slug);
 });
+Breadcrumbs::for('specialists', function ($trail,$currentItem) {
+	$trail->push('Trang chủ', VRoute::get('home'));
+	$trail->push('Chuyên khoa', VRoute::get('chuyen-khoa'));
+	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
 Breadcrumbs::for('page', function ($trail,$currentItem) {
 	$trail->parent('home');
 	$trail->push($currentItem->name);
