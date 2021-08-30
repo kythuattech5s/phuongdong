@@ -182,5 +182,13 @@
 
 		Route::match(['GET','POST'],'/rakuten',array('uses'=>"Admin@syncRakuten"));
 		Route::match(['GET','POST'],'/syncCategory',array('uses'=>"Admin@syncCategory"));
+
+		Route::prefix('news')->group(function(){
+			Route::post('check-editing/{id}',"CheckController@checkEditing");
+			Route::get('editing-done/{id}',"CheckController@editDone");
+			Route::post('check-has-edit/{id}',"CheckController@checkHasEdit");
+		});
+
+        Route::post('user-online', "CheckController@userOnline");
 	});
 ?>

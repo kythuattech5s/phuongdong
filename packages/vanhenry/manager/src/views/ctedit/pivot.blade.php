@@ -14,7 +14,6 @@ if (is_array($defaultData)) {
 	foreach ($targetSelect as $key => $value) {
 		$columns[] = $value;
 	}
-
 	$dataPivots = FCHelper::getDataPivot($pivotTable, $originField, $targetTable, $targetField, $columns);
 	if (count((array)$dataItem) > 0) {
 		$realValuePuts = FCHelper::getRealValuePuts($dataItem, $pivotTable, $originField, $targetField);

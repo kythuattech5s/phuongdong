@@ -2628,3 +2628,111 @@ table {
 .nav-tabs {
     height: 42px;
 }
+
+.get-link:hover{
+    background: white;
+}
+
+.get-link{
+    padding: 4px 6px;
+    border:none;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit-slug input{
+    margin-right: 12px;
+    flex: 1;
+}
+
+.edit-slug{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.h-user-online ul.h-user__list li:not(:last-child){
+    margin-right: 12px;
+}
+.h-user-online ul.h-user__list li{
+    padding: 8px 16px;
+    background-color: #389402;
+    color: white;
+    border: 1px solid #389402;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0.2px #108d35;
+}
+
+.h-user-online ul.h-user__list{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 60px;
+}
+
+.h-user-online ul.h-user__list-all li:not(:last-child){
+    border-bottom: 1.5px solid white;
+}
+.h-user-online ul.h-user__list-all li{
+    padding: 4px 20px;
+    color: white;
+}
+.h-user-online ul.h-user__list-all:hover,
+.h-user-online .count:hover ~ ul.h-user__list-all{
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+}
+
+.h-user-online ul.h-user__list-all{
+    position: absolute;
+    right: 16px;
+    top: 56px;
+    background: #010101;
+    transition: all 0.3s;
+    transform-origin: right top;
+    transform: scale(0) rotateZ(-10deg);
+    max-height: 50vh;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    overflow: auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 0.2px #010101;
+}
+.h-user-online .count:after{
+    position: absolute;
+    content: '';
+    background: transparent;
+    top: 30px;
+    right: 0px;
+    width: 100px;
+    height: 24px;
+    z-index: 1;
+}
+
+.h-user-online .count{
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    padding: 8px 16px;
+    background: #E96A0C;
+    font-weight: bold;
+    border: 1px solid #E96A0C;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 6px 0.2px #E96A0C;
+}
+
+.h-user-online{
+    position: relative;
+    padding: 8px 16px;
+    background-color: white;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 1px 6px 0.5px #ebebeb;
+    border-radius: 5px;
+}

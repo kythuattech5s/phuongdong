@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\{Banner,Partner};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class HomeController extends Controller
@@ -18,6 +19,8 @@ class HomeController extends Controller
         return (new $controller)->$method($request, $route, $link);
     }
     public function index(){
-        return view('home');
+        $listBanner = Banner::act()->Ord()->get();
+        $listPartner = Partner::act()->get();
+        return view('home',compact('listBanner','listPartner'));
     }
 }

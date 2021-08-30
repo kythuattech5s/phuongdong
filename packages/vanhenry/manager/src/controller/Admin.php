@@ -307,7 +307,7 @@ class Admin extends BaseAdminController
 	public function editableAjax(Request $request,$table){
 		if($request->isMethod('post')){
 			$post = $request->input();
-			$id = $post['id'];
+			$id = isset($post['id'])?$post["id"]:0;
 			$prop = isset($post["prop"])?$post["prop"]:0;
 			$propid = isset($post["prop_id"])?$post["prop_id"]:0;
 			unset($post['id']);

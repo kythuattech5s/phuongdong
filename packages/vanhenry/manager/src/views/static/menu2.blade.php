@@ -52,7 +52,7 @@
                <div class="r_h_t_admin">
                     <small>
                          <i class="fa fa-user" aria-hidden="true"></i>
-                         <span>Admin</span>
+                         <span>{{Auth::guard('h_users')->user()->name}}</span>
                          <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </small>
                     <ul>

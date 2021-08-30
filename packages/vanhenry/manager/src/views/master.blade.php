@@ -25,9 +25,20 @@
     <link rel="stylesheet" href="admin/css/order.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="admin/css/cssloader.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="admin/media/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    
+    <script type="text/javascript">
+        var SUCCESS=200;
+        var ERROR=100;
+        var REDIRECT=300;
+        var PERMISSION=400;
+        var typeNotify = "{{Session::get('typeNotify', '')}}";
+        var messageNotify = "{{Session::get('messageNotify', '')}}";
+    </script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="admin/plug/select2/select2.min.js"></script>
     <script src="admin/plug/toast/toast.js"></script>
     <script type="text/javascript" src="admin/js/main.js"></script>
+    <script type="text/javascript" src="admin/js/check.js"></script>
     <script type="text/javascript" src="admin/js/menu.js"></script>
     <script type="text/javascript" src="admin/js/cate.js"></script>
     <script type="text/javascript" src="admin/js/detail.js"></script>
@@ -49,16 +60,13 @@
     <script type="text/javascript" src="admin/media/fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="admin/js/webhooks.js"></script>
     @yield('css')
-    <script type="text/javascript">
-        var SUCCESS=200;
-        var ERROR=100;
-        var REDIRECT=300;
-        var PERMISSION=400;
-    </script>
 </head>
 <body>
     @include('vh::static.menu2')
     <div class="main_admin">
+        @if(Auth::guard('h_users')->user()->group == 1)
+            @include('vh::view.user_online')
+        @endif
         <div class="container-fluid site-wrap" data-menu="<?php echo session('menu_status','off') ?>">
             @yield('content')
         </div>
