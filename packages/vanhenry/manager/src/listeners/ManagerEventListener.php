@@ -125,6 +125,15 @@ class ManagerEventListener
             $content = "Update Media id = " . $id . " name = " . $name;
             $this->insertHistory($name, $content);
         });
+        $events->listen('vanhenry.manager.media.convert.img.via.cron', function ($path)
+        {
+            \DB::table('custom_media_images')->insert([
+                'name' => $path,
+                'act' => 0,
+                'created_at' => new \DateTime,
+                'updated_at' => new \DateTime,
+            ]);
+        });
     }
     private function insertHistory($name, $content)
     {

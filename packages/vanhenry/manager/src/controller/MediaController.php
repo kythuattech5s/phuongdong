@@ -142,39 +142,39 @@ class MediaController extends BaseAdminController
 			    }
 			}
 			else if(in_array($obj->extension, $extvideos)){
-			    if(file_exists("public/images/ico/".$obj->extension.".jpg")){
-			    $obj ->thumb = $basepath."public/images/ico/".$obj->extension.".jpg";
+			    if(file_exists("admin/images/ico/".$obj->extension.".jpg")){
+			    $obj ->thumb = $basepath."admin/images/ico/".$obj->extension.".jpg";
 			    }
 			    else{
-			    $obj->thumb = $basepath."public/images/file.jpg";
+			    $obj->thumb = $basepath."admin/images/ico/file.jpg";
 			    }
 			}
 			else if(in_array($obj->extension, $extfiles)){
-			    if(file_exists("public/images/ico/".$obj->extension.".jpg")){
-			    $obj ->thumb = $basepath."public/images/ico/".$obj->extension.".jpg";
+			    if(file_exists("admin/images/ico/".$obj->extension.".jpg")){
+			    $obj ->thumb = $basepath."admin/images/ico/".$obj->extension.".jpg";
 			    }
 			    else{
-			    $obj->thumb = $basepath."public/images/file.jpg";
+			    $obj->thumb = $basepath."admin/images/ico/file.jpg";
 			    }
 			  }
 			else if(in_array($obj->extension, $extmusic)){
-			    if(file_exists("public/images/ico/".$obj->extension.".jpg")){
-			    	$obj ->thumb = $basepath."public/images/ico/".$obj->extension.".jpg";
+			    if(file_exists("admin/images/ico/".$obj->extension.".jpg")){
+			    	$obj ->thumb = $basepath."admin/images/ico/".$obj->extension.".jpg";
 			    }
 			    else{
-			    $obj->thumb = $basepath."public/images/file.jpg";
+			    $obj->thumb = $basepath."admin/images/ico/file.jpg";
 			    }
 			  }
 			else if(in_array($obj->extension, $extmisc)){
-			    if(file_exists("public/images/ico/".$obj->extension.".jpg")){
-			    	$obj ->thumb = $basepath."public/images/ico/".$obj->extension.".jpg";
+			    if(file_exists("admin/images/ico/".$obj->extension.".jpg")){
+			    	$obj ->thumb = $basepath."admin/images/ico/".$obj->extension.".jpg";
 			    }
 			    else{
-			    $obj->thumb = $basepath."public/images/file.jpg";
+			    $obj->thumb = $basepath."admin/images/ico/file.jpg";
 			    }
 			  }
 			else{
-			  $obj->thumb = $basepath."public/images/file.jpg";
+			  $obj->thumb = $basepath."admin/images/ico/file.jpg";
 			}
 		}
 		return $obj;
@@ -447,22 +447,13 @@ class MediaController extends BaseAdminController
 		else{
 			$files = request()->file("file");
 			foreach ($files as $k => $file) {
-				$mimeType = $file->getClientMimeType();
-				$pathMove = $pathuploads;
+				$extension = $file->extension();
 				$name =$file->getClientOriginalName();
 				$name = $this->renameIfExist($pathuploads,$name);
-				$file->move($pathMove, $name);
-				/*convert image to webp*/
-				$imageMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
-				if (in_array($mimeType, $imageMimeTypes)) {
-					$baseName = \Str::beforeLast($name, '.');
-					WebPConvert::convert($pathMove.$name, $pathMove.$baseName.'.webp', []);
-					$arrSizes = $this->getSizes($pathMove.$name);
-					if(count($arrSizes)>0){
-	        			foreach ($arrSizes as $size) {
-	        				$new_image = $this->resizeImage($pathMove,$baseName,$name,$size["width"],$size["height"],$size["quality"],$size["name"]);
-	        			}
-	        		}
+				$file->move($pathuploads, $name);
+				if (in_array($extension, $extimgs)) {
+					/*convert image to webp*/
+					event('vanhenry.manager.media.convert.img.via.cron', ['path' => $pathuploads.$name]);
 				}
 				$ret = $this->insertImageMedia($pathuploads,$name,$pf["CURRENT_ID"]);
 	        	array_push($images,$ret);
@@ -545,16 +536,7 @@ class MediaController extends BaseAdminController
                 $img->insert($watermark, 'center');
                 $img->save($uploadedFilePath);
                 /*convert image to webp*/
-                $baseName = \Str::beforeLast($name, '.');
-				WebPConvert::convert($uploadedFilePath, $pathuploads.$baseName.'.webp', []);
-
-
-				$arrSizes = $this->getSizes($pathuploads.$name);
-				if(count($arrSizes)>0){
-        			foreach ($arrSizes as $size) {
-        				$new_image = $this->resizeImage($pathuploads,$baseName,$name,$size["width"],$size["height"],$size["quality"],$size["name"]);
-        			}
-        		}
+        		event('vanhenry.manager.media.convert.img.via.cron', ['path' => $pathuploads.$name]);
 				$ret = $this->insertImageMedia($pathuploads,$name,$pf["CURRENT_ID"]);
 	        	array_push($images,$ret);
 	        	\Event::dispatch('vanhenry.manager.media.insert.success', array($name,$ret));
@@ -562,36 +544,59 @@ class MediaController extends BaseAdminController
 			return response()->json($images);
 		}
 	}
+	/*
 	private function _deleteFile($id,$type=1){
 		$dir = $this->getSingleMedia($id);
 		if($dir->count()>0){
 			if($type==0){
 				$d = $dir[0];
-				$ext = strtolower(substr($d->file_name, strrpos($d->file_name, '.')));
-				if(in_array($ext,['.jpg','.jpeg','.gif','.png'])){
-					$sizes = $this->getSizes($d["path"].$d["file_name"]);
-					foreach ($sizes as $key => $value) {
-						$delfile = $d["path"]."thumbs/".$value["name"]."/".$d["file_name"];
-						$delfileWebp = str_replace($ext,'.webp', $delfile);
-						if(file_exists($delfile)){
-							\Event::dispatch('vanhenry.manager.media.delete.success', array($delfile,$id));
-							unlink($delfile);
-							if (file_exists($delfileWebp)) {
-								unlink($delfileWebp);
-							}
-						}
+				$sizes = $this->getSizes($d["path"].$d["file_name"]);
+				foreach ($sizes as $key => $value) {
+					$delfile = $d["path"]."thumbs/".$value["name"]."/".$d["file_name"];
+					if(file_exists($delfile)){
+						\Event::dispatch('vanhenry.manager.media.delete.success', array($delfile,$id));
+						unlink($delfile);
 					}
 				}
-				$filePath = $d["path"].$d["file_name"];
-				if(file_exists($filePath)){
-					unlink($filePath);
-					if (file_exists(str_replace($ext,'.webp', $filePath))) {
-						unlink(str_replace($ext,'.webp', $filePath));
-					}
+				if(file_exists($d["path"].$d["file_name"])){
+					unlink($d["path"].$d["file_name"]);
 				}
 			}
 			return $this->deleteMedia($id,$type);
 		}
+	}*/
+	private function _deleteFile($id,$type=1){ 
+		$dir = $this->getSingleMedia($id);  
+		if($dir->count()>0){  
+			if($type==0){  
+				$d = $dir[0];  
+				$ext = strtolower(substr($d->file_name, strrpos($d->file_name, '.')));  
+				if(in_array($ext,['.jpg','.jpeg','.gif','.png'])){  
+					$sizes = $this->getSizes($d["path"].$d["file_name"]);  
+					foreach ($sizes as $key => $value) {  
+						$delfile = $d["path"]."thumbs/".$value["name"]."/".$d["file_name"];  
+						$delfileWebp = str_replace($ext,'.webp', $delfile);  
+						if(file_exists($delfile)){  
+							\Event::dispatch('vanhenry.manager.media.delete.success',  array($delfile,$id));  
+							unlink($delfile);  
+							if (file_exists($delfileWebp)) {  
+								unlink($delfileWebp);  
+							}  
+						}  
+					}  
+				}  
+				$filePath = $d["path"].$d["file_name"];  
+				if(file_exists($filePath)){  
+					$delfile = $d["path"].$d["file_name"];  
+					\Event::dispatch('vanhenry.manager.media.delete.success',   array($delfile,$id));  
+					unlink($filePath);  
+					if (file_exists(str_replace($ext,'.webp', $filePath))) {  
+						unlink(str_replace($ext,'.webp', $filePath));  
+					}  
+				}  
+			}
+			return $this->deleteMedia($id,$type);  
+		}  
 	}
 	public function deleteFile(Request $request,$type=1){
 		$post = $request->input();
@@ -986,5 +991,35 @@ class MediaController extends BaseAdminController
 		}
 		return $str;
 	}
+	public function search(Request $request)
+	{
+		$keyword = $request->keyword;
+		$folders = array_filter(explode(',', $request->folder));
+		$url = $request->url;
+		if ($keyword == null || trim($keyword) == '') {
+			$data['listItems'] = Media::where("trash", 0)->orderBy('is_file', 'asc')->orderBy('name', 'asc');	
+		}
+		else{
+			$data['listItems'] = Media::where('name', 'like', '%'.$keyword.'%')->where("trash", 0)->orderBy('is_file', 'asc')->orderBy('name', 'asc');
+		}
+		if (count($folders) > 0) {
+			$data['listItems']->where('parent', end($folders));
+		}
+		else{
+			$data['listItems']->where('parent', 0);
+		}
+		$data['listItems'] = $data['listItems']->paginate(MEDIA_PER_PAGE);
+		$data['trash'] = 0;
+		$data['nums'] = $data['listItems']->total();
+		$data['url'] = $url;
+		return response()->json([
+			'code' => 200,
+			'html' => view("vh::media.media-manager", $data)->render()
+		]);
+	}
+	public function convertProtectedVideo(Request $request)
+	{
+		$tvsSecret = \modulevideosecurity\managevideo\Models\TvsSecret::orderBy('created_at', 'desc')->paginate(20);
+		return view('vh::media.convert-video', compact('tvsSecret'));
+	}
 }
- ?>

@@ -1,4 +1,9 @@
 @extends('vh::master')
+@section('css')
+@if($tableData->get('has_yoast_seo','') == 1)
+<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/css/yoastseo.css"></script>
+@endif
+@endsection
 @section('content')
 <?php $tableMap = $tableData->get('table_map',''); ?>
 <input class="has_warning" type="hidden" value="{{$tableData->get('has_warning','')}}">
@@ -140,7 +145,12 @@ else{
 	@include('vh::static.footer')
 </div>
 @stop
+<?php $tableYoastSeo = \Config::get('manager.table_yoast_seo'); ?>
 @section('js')
+@if($tableData->get('has_yoast_seo','') == 1)
+<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/yoastseo.js"></script>
+<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/script.js"></script>
+@endif
 @if($tableData->get('has_cutom_js','') == 1)
 <script type="text/javascript" src="admin/custom/js/script.js"></script>
 @endif

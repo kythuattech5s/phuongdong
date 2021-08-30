@@ -45,5 +45,6 @@ Route::group([
 		'namespace' => 'App\Http\Controllers'
 	], function(){
 		Route::get('/', 'HomeController@index')->name('home');
+		Route::get('cronimg', array('uses'=>'CronImgController@convertImg'));
 		Route::match(['get', 'post'],'/{link}',array('uses'=>'HomeController@direction'))->where('link', '^((?!esystem)[0-9a-zA-Z\?\.\-/])*$');
 });
