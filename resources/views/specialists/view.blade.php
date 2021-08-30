@@ -2,7 +2,7 @@
 @section('content')
 <section class="container">
     <div class="row">
-        <div class="col-lg-8 col-xl-72 shadow-box-right pt-2 pt-lg-4 pb-md-4 pb-xxl-5 pe-xxl-5">
+        <div class="col-lg-8 col-xl-72 shadow-box-right pt-1 pb-md-4 pb-xxl-5 pe-xxl-5">
             <ul class="breadcrumb">
                 {{\Breadcrumbs::render('specialists',$currentItem)}}
             </ul>
@@ -24,22 +24,32 @@
             <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
                 {!!$currentItem->content!!}
             </div>
-            <p class="all-sub-title long wow fadeInUp mt-4 mb-3 text-uppercase pt-xl-2">Hình ảnh hoạt động của TTND.TS.bác sĩ Hoàng Văn Tuyết</p>
+            <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase pt-xl-2">Một số hình ảnh hoạt động của {{$currentItem->name}}</p>
             <div class="doctor-image position-relative wow fadeInUp">
                 <div class="swiper-container slide-doctor-image">
                     <div class="swiper-wrapper">
-                        <?php for ($i = 1; $i < 10; $i++) { ?>
+                        @php
+                            $imgs = json_decode($currentItem->imgs, true);
+                            $imgs = $imgs !== null ? $imgs : [json_decode($currentItem->img,true)];
+                        @endphp
+                        @foreach ($imgs as $img)
+                            @php
+                                $itemImg = new \Stdclass;
+                                $itemImg->img = json_encode($img);
+                            @endphp
                             <div class="swiper-slide">
                                 <div class="item-doctor-image">
                                     <div class="img">
-                                        <a href="frontend/images/Layer 683.png" data-fancybox="gallery" class="smooth" title=""><img src="frontend/images/Layer 683.png" alt="banner"></a>
+                                        <a href="{%IMGV2.itemImg.img.-1%}" data-fancybox="gallery" class="smooth" title="">
+                                            <img src="{%IMGV2.itemImg.img.-1%}" title="{%AIMGV2.itemImg.img.title%}" alt="{%AIMGV2.itemImg.img.alt%}">
+                                        </a>
                                     </div>
                                     <div class="content smooth text-center p-3">
-                                        <p class="fs-18">Hình ảnh bác sĩ đang tiến hành đo huyết áp và thân nhiệt người bệnh</p>
+                                        <p class="fs-18">{%AIMGV2.itemImg.img.alt%}</p>
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                        @endforeach
                     </div>
                 </div>
                 <div class="slider-controls">
@@ -51,30 +61,15 @@
                     </button>
                 </div>
             </div>
-            <p class="all-sub-title long wow fadeInUp mt-lg-3 mb-3">Bác sĩ cùng chuyên khoa</p>
+            <p class="all-sub-title small-text long wow fadeInUp mt-4 pt-xxl-2 mb-3">Bác sĩ cùng chuyên khoa</p>
             <div class="doctor-same-specialty position-relative wow fadeInUp">
                 <div class="swiper-container slide-doctor-same-specialty">
                     <div class="swiper-wrapper">
-                        <?php for ($i = 1; $i < 10; $i++) { ?>
+                       @foreach ($listRelateDoctor as $itemDoctor)
                             <div class="swiper-slide">
-                                <div class="item-doctor-same-specialty">
-                                    <div class="img shine-effect">
-                                        <a href="" class="smooth" title="">
-                                            <img src="theme/frontend/images/Untitled-1.png" alt="banner">
-                                        </a>
-                                    </div>
-                                    <div class="content smooth text-center">
-                                        <h3><a href="" class="smooth" title="">TTUT. Bác sĩ CKII NGUYỄN Văn Vũ</a></h3>
-                                        <h2><a href="" class="smooth" title="">Khoa khám bệnh</a></h2>
-                                        <div class="info-rating d-flex justify-content-center align-items-center mb-2">
-                                            <div class="rating-info">
-                                                <img src="theme/frontend/images/rating.png" title="" alt="" class="img-fluid smooth">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('doctors.item_same_specialty')
                             </div>
-                        <?php } ?>
+                        @endforeach
                     </div>
                 </div>
                 <div class="slider-controls">
@@ -95,5 +90,4 @@
         </div>
     </div>
 </section>
-<script src="theme/frontend/js/share-btn.js" defer></script>
 @stop
