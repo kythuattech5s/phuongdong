@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\HUserOnline as Modal;
+use Pusher;
 class HUserOnline implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -32,7 +33,7 @@ class HUserOnline implements ShouldBroadcast
      * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
-    {
+    {   
         return new Channel('HUserOnline');
     }
 }

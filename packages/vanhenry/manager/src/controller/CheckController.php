@@ -44,8 +44,12 @@ class CheckController extends BaseAdminController{
     }
 
     public function checkHasEdit(Request $request, $id){
+        $date = new \DateTime;
         $news_editing = NewsEditOnline::where('news_id', $id)->first();
-        if($news_editing == null){
+        if($news_editing == null || ($news_editing !== null && $news_editing->updated_at <= $date->modify('-15 minutes'))){
+            if($news_editing !== null){
+                $news_editing->delete();
+            }
             return response()->json([
                 'code' => 200
             ]);

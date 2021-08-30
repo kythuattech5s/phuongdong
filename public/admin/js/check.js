@@ -191,7 +191,7 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        var content = JSON.stringify('đang ở trang ' + doing?.innerText);
+        var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
 
         return content;
     }
