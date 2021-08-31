@@ -6,6 +6,9 @@ class BaseModel extends Model
 {
     use HasFactory;
     /*method join với table dịch của insance model hiện tại*/
+	public function scopePublish($q){
+		return $q->where('time_published','<=',new \DateTime());
+	}
 	public function scopeAct($q)
 	{
 		return $q->where('act', 1);

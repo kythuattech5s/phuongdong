@@ -14,7 +14,7 @@ if($source == 'normal'){
 	$value ="";
 	if($actionType=='edit'||$actionType=='copy'){
 		$value = FCHelper::er($dataItem,$name);
-		$dataMap = vanhenry\manager\DetailTableHelper::getAllDataOfTable($tableMap);
+		$dataMap = vanhenry\manager\Helpers\DetailTableHelper::getAllDataOfTable($tableMap);
 		$arrValue = explode(',', $value);
 		$intersectData1 = array_intersect($arrValue, array_keys($dataMapDefault));
 		$intersectData2 = array_intersect($arrValue, array_keys($dataMap));
@@ -35,8 +35,8 @@ if($source == 'normal'){
 			@endif
 		@else
 			<?php 
-				$arrData = vanhenry\manager\DetailTableHelper::recursiveDataTable($default_data['data']);
-				vanhenry\manager\DetailTableHelper::printOptionRecursiveData($arrData,0,$dataMapDefault,$intersectData1,$intersectData2);
+				$arrData = vanhenry\manager\Helpers\DetailTableHelper::recursiveDataTable($default_data['data']);
+				vanhenry\manager\Helpers\DetailTableHelper::printOptionRecursiveData($arrData,0,$dataMapDefault,$intersectData1,$intersectData2);
 			?>
 		@endif
 		</select>
