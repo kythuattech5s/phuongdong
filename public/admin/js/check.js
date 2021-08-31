@@ -138,6 +138,11 @@ var MAIN = (function(){
         }
     }
 
+    // var autoSave = function(){
+    //     $.form(function(){
+
+    //     })
+    // }
     return {
         load:(function(){
             document.addEventListener("readystatechange",function(){

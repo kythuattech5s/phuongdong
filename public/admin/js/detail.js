@@ -69,6 +69,7 @@ $(function() {
         $('#frmUpdate').append('<input name="is_draft" value="1">');
         $('#frmUpdate').submit();
     })
+
     $(function() {
         $(".iframe-btn").fancybox({
             'width': '75%',

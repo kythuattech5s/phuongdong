@@ -148,6 +148,7 @@ var COMMENT = (function(){
         main.innerHTML = response.html
         setRepComment();
     }
+	
 	return {
 		load:(function(){
 			repComment();
