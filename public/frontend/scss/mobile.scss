@@ -237,6 +237,11 @@ $cltext: #676767;
 			margin-top: 10px;
 		}
 	}
+	.all-sub-title{
+		&.small-text{
+			font-size: 19px!important;
+		}
+	}
 }
 @media (max-width: 767px) {
 	.fs-16-cv{

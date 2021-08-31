@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\{Banner,Partner};
+use App\Models\{Banner,Partner,Services,Doctor,News};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class HomeController extends Controller
@@ -21,6 +21,9 @@ class HomeController extends Controller
     public function index(){
         $listBanner = Banner::act()->Ord()->get();
         $listPartner = Partner::act()->get();
-        return view('home',compact('listBanner','listPartner'));
+        $listService = Services::where('home',1)->act()->get();
+        $listDoctor = Doctor::where('home',1)->act()->get();
+        $listNews = News::where('home',1)->act()->publish()->take(7)->get()->all();
+        return view('home',compact('listBanner','listPartner','listService','listDoctor','listNews'));
     }
 }
