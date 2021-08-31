@@ -26,4 +26,9 @@ class HomeController extends Controller
         $listNews = News::where('home',1)->act()->publish()->take(7)->get()->all();
         return view('home',compact('listBanner','listPartner','listService','listDoctor','listNews'));
     }
+
+    public function test(){
+        $posts = \App\Models\News::act()->get();
+        dd($posts);
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use App\Models\NewsNewsTag;
 use App\Models\NewsNewsCategory;
@@ -9,6 +9,14 @@ use App\Models\NewsNewsCategory;
 class News extends BaseModel
 {
 	protected $table = 'news';
+    
+    protected static function booted()
+    {
+        static::addGlobalScope('draft', function (Builder $q) {
+            $q->whereNull('is_draft');
+        });
+    }
+
     public function tags()
     {
     	return $this->belongsToMany('App\Models\NewsTag', 'news_news_tag', 'news_id', 'news_tag_id')->act()->ord();

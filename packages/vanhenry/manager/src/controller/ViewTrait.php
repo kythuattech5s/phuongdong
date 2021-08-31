@@ -421,18 +421,85 @@ trait ViewTrait{
 		return view('vh::view.viewtrash',$data);
 	}
 	public function view_normal($table,$tableData,$tableDetailData){
-		//Thông tin bảng
-		$data['tableData'] = collect($tableData);
-		$tmp = collect($tableDetailData);
-		$addDetailData = $this->_getTableProperties($data['tableData']->get("id"));
-		$merge = $tmp->merge($addDetailData);
-		//Thông tin chi tiết bảng
-		$data['tableDetailData'] = $tmp;
-		$listData = $this->getDataTable($table,$data);
-		$data['tableDetailData'] = $merge;
+        //Thông tin bảng
+        $data['tableData'] = collect($tableData);
+        $tmp = collect($tableDetailData);
+        $addDetailData = $this->_getTableProperties($data['tableData']->get("id"));
+        $merge = $tmp->merge($addDetailData);
+        //Thông tin chi tiết bảng
+        $data['tableDetailData'] = $tmp;
+		if ($tableData->default_data_tab !== null) {
+            $data['tab'] = json_decode($data['tableData']->get('default_data_tab', ''), true);
+			$listData = $this->getDataTableTab($table, $data);
+        }else{
+			$listData = $this->getDataTable($table, $data);
+		}
+        
+        $data['tableDetailData'] = $merge;
 		$data["listData"] = $this->_getDataFromTableProperties($table,$addDetailData,$listData);
 		$view = \View::exists('vh::view.view'.$tableData->type_show)?'vh::view.view'.$tableData->type_show:'vh::view.view_normal';
 		return view($view,$data);
+	}
+	public function getDataTableTab($table, $data){
+		// Lấy trường show
+        $dataTable = $data['tableData'];
+        $dataDetailTable = $data['tableDetailData'];
+        $tab = $data['tab'];
+
+        $paginate = $dataTable['rpp_admin'];
+
+		$fieldShow = $data['tableDetailData']->filter(function($q){
+            return $q->show == 1 || $q->type_show == 'PRIMARY_KEY';
+		});
+
+		$fieldShow = $fieldShow->filter(function($v, $k){
+			return !\Str::startsWith($v->name, 'pivot_');
+		});
+
+        $nameFiledShow = [];
+		foreach($fieldShow as $item){
+            $nameFiledShow[] = $item->name;
+		}
+        $dataList = [];
+		if($dataTable['has_draft']){
+            $nameFiledShow[] = 'is_draft';
+		}
+        $values = DB::table($table)->select($nameFiledShow);
+		foreach($tab as $key => $name){
+			switch($key){
+				case 'home':
+                    $home = clone $values;
+					if($dataTable['has_draft'] !== null){
+						$dataList['home'] = $home->where(function($q){
+                            $q->whereNull('is_draft')->orWhere('is_draft', 0);
+						})->where(function($q){
+                            $q->whereNull('trash')->orWhere('trash',0);
+						})->where('act',1)->paginate($paginate);
+					}else{
+						$dataList['home'] = $home->paginate($paginate);
+					}
+					break;
+				case 'draft':
+                    $draft = clone $values;
+					$dataList['draft'] = $draft->where('is_draft',1)->paginate($paginate);
+					break;
+				case 'scheduled':
+					$scheduled = clone $values;
+					$dataList['scheduled'] = $scheduled->where(function($q){
+						$q->whereNull('is_draft')->orWhere('is_draft', 0);
+					})->where(function($q){
+						$q->whereNull('trash')->orWhere('trash',0);
+					})->where(function($q){
+                        $q->whereNull('act')->orWhere('act', 0);
+					})->paginate($paginate);
+					break;
+				case 'trash':
+                    $trash = clone $values;
+					$dataList['trash'] = $trash->where('trash',1)->paginate($paginate);
+					break;
+			}
+		}
+        return $dataList;
 	}
 	public function view_user($userid){
 		$table="total_orders";

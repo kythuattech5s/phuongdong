@@ -52,6 +52,14 @@ var MAIN = (function(){
 
         function clickSave(){
             button.onclick = function(e){
+                if(pathname.indexOf('/esystem/edit/news') == 0){
+                    console.log('ok');
+                    if(!$('#frmUpdate').find('input[name="is_draft"]')){
+                        $('#frmUpdate').find('input[name="is_draft"]').val(0);
+                    }else{
+                        $('#frmUpdate').append(`<input name="is_draft" value="0">`);
+                    }
+                }
                 window.onbeforeunload = false;
             };
         }
@@ -143,14 +151,12 @@ var MAIN = (function(){
 
 var USERONLINE = (function(){
 	// Pusher.logToConsole = true;
-    
     var pusher = new Pusher('5ef77b79133276e49bce', {
         cluster: 'ap1'
     });
     var channel = pusher.subscribe('HUserOnline');
 
     channel.bind('App\\Events\\HUserOnline', loadUser);
-
     
     function loadUser(data){
         const main = document.querySelector('.h-user-online');
@@ -158,7 +164,7 @@ var USERONLINE = (function(){
         const html = users.map(function(user){
             return `<li>${user.h_user.name} - ${user.doing}</li>`;
         })
-        if(typeof main){
+        if(main !== null && typeof main ){
             main.querySelector('ul.h-user__list').innerHTML = html.slice(0,5).join('');
             main.querySelector('.count').innerHTML = users.length > 5 ? "5+" : users.length ;
             main.querySelector('ul.h-user__list-all').innerHTML = html.join('');
