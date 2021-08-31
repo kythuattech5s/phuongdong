@@ -63,7 +63,7 @@ var MAIN = (function(){
                     beforeUnload();
                 }
             }
-            window.addEventListener('unload',updateEditing);
+            window.addEventListener('unload',updateEditing,{passive: true});
         }
         
         function getParent(element, selector) {
@@ -136,7 +136,7 @@ var MAIN = (function(){
                 checkEdit();
                 checkHasEdit();
                 getLink();
-            });
+            },{passive: true});
         })()
     }
 })();
@@ -191,8 +191,31 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
-
-        return content;
+        var from = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
+        
+        if(pathname.indexOf('/esystem/edit/configs/0') == 0 && pathname.lastIndexOf('/esystem/edit/configs/0') == 0){
+            var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/media/manager') == 0 && pathname.lastIndexOf('/esystem/media/manager') == 0){
+            var content = JSON.stringify('đang ở trang trang Media');
+        }else if(pathname.indexOf('/esystem/editSitemap') == 0 && pathname.lastIndexOf('/esystem/editSitemap') == 0){
+            var content = JSON.stringify('đang ở trang trang Sitemap');
+        }else if(pathname.indexOf('/esystem/editRobot') == 0 && pathname.lastIndexOf('/esystem/editRobot') == 0){
+            var content = JSON.stringify('đang ở trang Robots.txt');
+        }else if (pathname.indexOf('/esystem/edit') == 0){
+            const inputName = document.querySelector('input[name="name"]');
+            var content = JSON.stringify('đang sửa ' + (inputName ? inputName.value : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/insert') == 0){
+            var content = JSON.stringify('đang thêm mới ' + (doing ? doing.innerText : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/copy') == 0){
+            const inputName = document.querySelector('input[name="name"]');
+            var content = JSON.stringify('đang copy ' + (inputName ? inputName.value : 'không xác định'));
+        }else if(pathname.indexOf('/esystem') == 0 && pathname.lastIndexOf('/esystem') == 0){
+            var content = JSON.stringify('đang ở trang chủ');
+        }
+        if(!content){
+            return from;
+        }else{
+            return content;
+        }
     }
 })();

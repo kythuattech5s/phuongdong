@@ -135,6 +135,7 @@ trait ViewTrait{
 		$view = \View::exists('vh::view.view'.$tableData->type_show)?'vh::view.'.$view_vouchers:'vh::view.view_normal';
 		return view($view,$data);
 	}
+
 	public function indexVoucher($table,$tableData,$tableDetailData){
 		$all=DB::table($table)->select('id')->orderBy('id','DESC')->pluck('id');
 		$arrProduct = [];
@@ -398,7 +399,7 @@ trait ViewTrait{
 	private function _view_trait_getListTrash($table,$data){
 		$tableData= $data['tableData'];
 		$tableDetailData= $data['tableDetailData'];
-		$rpp =$tableData['rpp_admin'];
+		$rpp = $tableData['rpp_admin'];
 		$rpp = \vanhenry\helpers\helpers\StringHelper::isNull($rpp)?10:$rpp;
 		$query = DB::table($table);
 		$fieldSelect = $this->getFieldSelectTable($table,$tableDetailData);
