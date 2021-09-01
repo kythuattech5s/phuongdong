@@ -54,11 +54,11 @@ label.star {
 
 label.star:before {
     color: var(--color-star-evalue);
-    content: '\f005';
-    font-family: "Font Awesome 5 Pro";
+    content: '\f006';
+    font-family: "FontAwesome";
 }
 input.star:checked ~ label.star:before {
-    content: '\f005';
+    content: '\f006';
     color: var(--color-star-checked);
     transition: all .25s;
 }
@@ -71,7 +71,7 @@ label.star:hover{
     color: var(--color-star-hover);
 }
 input.star:hover ~ label.star:before{
-    content: '\f005';
+    content: '\f006';
     color: var(--color-star-hover);
     transition: all .25s;
 }

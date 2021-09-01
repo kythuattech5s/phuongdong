@@ -48,16 +48,14 @@ class News extends BaseModel
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class, 'map_id', 'id')->where('map_table', 'news')->whereHas('comment',function($q){
-            $q->where('act',1);
-        });
+        return $this->hasMany(Rating::class, 'map_id', 'id')->where('map_table', 'news');
     }
 
     public function comments(){
         return $this->hasMany(Comment::class,'map_id','id')->where('map_table','news')->where('parent',0);
     }
 
-    public function getRating(String $type = 'percent'){
+    public function getRating(String $type = 'main'){
         $ratings = $this->ratings;
         $oneStar = 0;
         $twoStar = 0;
@@ -73,8 +71,11 @@ class News extends BaseModel
         $percentAll = 0;
         $scoreAll = 0;
         if($totalRating == 0){
-            if($type == 'percent'){
-                return 0;
+            if($type == 'main'){
+                return [
+                    'percentAll' => 0,
+                    'scoreAll' => 0
+                ];
             }
             return [
                 'oneStar' => 0,
@@ -108,10 +109,15 @@ class News extends BaseModel
         $fiveStar = $ratings->filter(function($value,$key){
             return (int) $value->rating === 5;
         })->count();
+
         $percentAll = round(($oneStar + $twoStar * 2 + $threeStar * 3 + $fourStar * 4 + $fiveStar * 5)/($totalRating*5)*100);
         
-        if($type == 'percent'){
-            return $percentAll;
+        $scoreAll = round($percentAll / 20,2);
+        if($type == 'main'){
+            return [
+                'percentAll' => $percentAll,
+                'scoreAll' => $scoreAll
+            ];
         }
         
         $percentOneStar   = round($oneStar  / $totalRating * 100);
@@ -119,7 +125,7 @@ class News extends BaseModel
         $percentThreeStar = round($threeStar/ $totalRating * 100);
         $percentFourStar  = round($fourStar / $totalRating * 100);
         $percentFiveStar  = round($fiveStar / $totalRating * 100);
-        $scoreAll = round($percentAll / 20,2);
+        
         
         return [
             'oneStar' => $oneStar,

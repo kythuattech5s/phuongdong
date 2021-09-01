@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/comment.css')}}">
+@endsection
 @section('content')
 <section class="container">
     <div class="row">
@@ -23,7 +26,10 @@
                         <img src="frontend/images/font-size.png" title="" alt="" class="img-fluid smooth">
                     </button>
                     <div class="rating-info">
-                        <img src="frontend/images/rating.png" title="" alt="" class="img-fluid smooth">
+                        @php
+                            $rating = $currentItem->getRating('main');
+                        @endphp
+                        @include('path.rating',['rating' => $rating['percentAll'].'%'])
                     </div>
                 </div>
             </div>
@@ -52,13 +58,15 @@
                 </div>
                 <p class="publisher fs-16">
                     <span>Tác giả:</span>
-                    <span class="robotob">{{}}</span>
+                    <span class="robotob"></span>
                 </p>
             </div>
             <div class="share-new d-flex flex-wrap justify-content-between wow fadeInUp">
                 <div class="rating-info mb-2">
                     <span class="me-2 fs-16">Đánh giá bài viết:</span>
-                    <img src="frontend/images/rating.png" title="" alt="" class="img-fluid smooth">
+                    <div class="rating-now" data-table="news" data-id="{{$currentItem->id}}">
+                        @include('path.selectStar')
+                    </div>
                 </div>
                 <div class="share">
                     <div class="a2a_kit a2a_kit_size_32 a2a_default_style mb-2">
@@ -175,4 +183,6 @@
 @stop
 @section('jsl')
     <script src="theme/frontend/js/share-btn.js" defer></script>
+    <script src="{{asset('frontend/js/comment/xhr.js')}}"></script>
+    <script src="{{asset('frontend/js/comment/comment.js')}}"></script>
 @stop
