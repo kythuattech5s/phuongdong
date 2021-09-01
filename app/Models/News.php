@@ -13,7 +13,9 @@ class News extends BaseModel
     protected static function booted()
     {
         static::addGlobalScope('draft', function (Builder $q) {
-            $q->whereNull('is_draft');
+            $q->where(function($q){
+                $q->whereNull('is_draft')->orWhere('is_draft', 0);
+            });
         });
     }
 

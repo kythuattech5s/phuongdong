@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Models\NewsEditOnline;
 use App\Models\HUserOnline;
 use App\Events\HUserOnline as EventOnline;
+use App\Models\NewsHistory;
 use Auth;
 use Session;
 class CheckController extends BaseAdminController{
@@ -18,7 +19,6 @@ class CheckController extends BaseAdminController{
     }
 
     public function checkEditing(Request $request, $id){
-        
         $auth = Auth::guard('h_users')->user();
         $new = News::find($id);
         $news_editing = NewsEditOnline::where('news_id', $id)->first();
@@ -32,6 +32,8 @@ class CheckController extends BaseAdminController{
             $news_editing->tab_time = $request->tab_time;
             $news_editing->save();
         }elseif($news_editing !== null && $news_editing->session_id == session()->getId() && $news_editing->h_user_id == $auth->id && $news_editing->tab_time == $request->tab_time){
+            $news_editing->updated_at = new \DateTime;
+            $news_editing->save();
             return response()->json('ok');
         }else{
             Session::flash('typeNotify','danger');
@@ -46,7 +48,7 @@ class CheckController extends BaseAdminController{
     public function checkHasEdit(Request $request, $id){
         $date = new \DateTime;
         $news_editing = NewsEditOnline::where('news_id', $id)->first();
-        if($news_editing == null || ($news_editing !== null && $news_editing->updated_at <= $date->modify('-15 minutes'))){
+        if($news_editing == null || ($news_editing !== null && $news_editing->updated_at <= $date->modify('-30 seconds'))){
             if($news_editing !== null){
                 $news_editing->delete();
             }
@@ -60,6 +62,22 @@ class CheckController extends BaseAdminController{
             ]);
         }
     }
+
+    
+
+    public function saveContent(Request $request, $id){
+        $user = Auth::guard('h_users')->user();
+        $news = News::withoutGlobalScope('draft')->find($id);
+        NewsHistory::insert([
+            'h_user_id' => $user->id,
+            'content_old' => $news->content,
+            'content' => $request->content,
+            'news_id' => $id,
+            'type' => $request->type,
+            'created_at' => new \DateTime
+        ]);
+    }
+
 
     public function userOnline(Request $request){
         HUserOnline::insertOrRemove($request);
