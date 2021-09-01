@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 use Auth;
 use Illuminate\Support\Facades\Cache as Cache;
 use Carbon\Carbon;
+use vanhenry\manager\model\HUser;
 class HUserOnline extends BaseModel
 {
     use HasFactory;

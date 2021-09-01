@@ -44,6 +44,7 @@ Route::group([
 		'middleware' => ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 		'namespace' => 'App\Http\Controllers'
 	], function(){
+        Route::get('/test', 'HomeController@test');
 		Route::get('/', 'HomeController@index')->name('home');
 		Route::get('cronimg', array('uses'=>'CronImgController@convertImg'));
 		Route::match(['get', 'post'],'/{link}',array('uses'=>'HomeController@direction'))->where('link', '^((?!esystem)[0-9a-zA-Z\?\.\-/])*$');

@@ -142,11 +142,12 @@
 							<span class="tooltiptext">{{isset($trash)?'Restore':'Thùng rác'}}</span>
 						</a>
 						@endif
-						@if($has_delete && $tableData->get('table_map','') != 'auctions')
-						<a href="{{$admincp}}/delete/{{$tableData->get('table_map','')}}" class="_vh_delete_permanent _vh_delete tooltipx {{trans('db::delete')}} {{$tableData->get('table_map','')}}"><i class="fa fa-times-circle" aria-hidden="true"></i>
-							<span class="tooltiptext">Xóa vĩnh viễn</span>
-						</a>
-						@endif
+						@include('vh::view.table.action_delete')
+						{{-- @if($has_delete)
+							<a href="{{$admincp}}/delete/{{$tableData->get('table_map','')}}" class="_vh_delete_permanent _vh_delete tooltipx {{trans('db::delete')}} {{$tableData->get('table_map','')}}"><i class="fa fa-times-circle" aria-hidden="true"></i>
+								<span class="tooltiptext">Xóa vĩnh viễn</span>
+							</a>
+						@endif --}}
 					</td>
 				</tr>
 				@endfor

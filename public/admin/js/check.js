@@ -52,6 +52,14 @@ var MAIN = (function(){
 
         function clickSave(){
             button.onclick = function(e){
+                if(pathname.indexOf('/esystem/edit/news') == 0){
+                    console.log('ok');
+                    if(!$('#frmUpdate').find('input[name="is_draft"]')){
+                        $('#frmUpdate').find('input[name="is_draft"]').val(0);
+                    }else{
+                        $('#frmUpdate').append(`<input name="is_draft" value="0">`);
+                    }
+                }
                 window.onbeforeunload = false;
             };
         }
@@ -63,7 +71,7 @@ var MAIN = (function(){
                     beforeUnload();
                 }
             }
-            window.addEventListener('unload',updateEditing);
+            window.addEventListener('unload',updateEditing,{passive: true});
         }
         
         function getParent(element, selector) {
@@ -130,27 +138,28 @@ var MAIN = (function(){
         }
     }
 
+    var autoSave = function(){
+       
+    }
     return {
         load:(function(){
             document.addEventListener("readystatechange",function(){
                 checkEdit();
                 checkHasEdit();
                 getLink();
-            });
+            },{passive: true});
         })()
     }
 })();
 
 var USERONLINE = (function(){
 	// Pusher.logToConsole = true;
-    
     var pusher = new Pusher('5ef77b79133276e49bce', {
         cluster: 'ap1'
     });
     var channel = pusher.subscribe('HUserOnline');
 
     channel.bind('App\\Events\\HUserOnline', loadUser);
-
     
     function loadUser(data){
         const main = document.querySelector('.h-user-online');
@@ -158,7 +167,7 @@ var USERONLINE = (function(){
         const html = users.map(function(user){
             return `<li>${user.h_user.name} - ${user.doing}</li>`;
         })
-        if(typeof main){
+        if(main !== null && typeof main ){
             main.querySelector('ul.h-user__list').innerHTML = html.slice(0,5).join('');
             main.querySelector('.count').innerHTML = users.length > 5 ? "5+" : users.length ;
             main.querySelector('ul.h-user__list-all').innerHTML = html.join('');
@@ -191,8 +200,30 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
-
+        var from = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
+        
+        if(pathname.indexOf('/esystem/edit/configs/0') == 0){
+            var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/media/manager') == 0){
+            var content = JSON.stringify('đang ở trang trang Media');
+        }else if(pathname.indexOf('/esystem/editSitemap') == 0){
+            var content = JSON.stringify('đang ở trang trang Sitemap');
+        }else if(pathname.indexOf('/esystem/editRobot') == 0){
+            var content = JSON.stringify('đang ở trang Robots.txt');
+        }else if (pathname.indexOf('/esystem/edit') == 0){
+            const inputName = document.querySelector('input[name="name"]');
+            var content = JSON.stringify('đang sửa ' + (inputName ? inputName.value : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/insert') == 0){
+            var content = JSON.stringify('đang thêm mới ' + (doing ? doing.innerText : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/copy') == 0){
+            const inputName = document.querySelector('input[name="name"]');
+            var content = JSON.stringify('đang copy ' + (inputName ? inputName.value : 'không xác định'));
+        }else if(pathname.indexOf('/esystem/view') == 0){
+            var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
+        }else{
+            var content = JSON.stringify('đang ở trang chủ');
+        }
+       
         return content;
     }
 })();

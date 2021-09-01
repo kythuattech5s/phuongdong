@@ -117,7 +117,7 @@ class Admin extends BaseAdminController
 	private function getDataTableThreeArg($query,$tableDetailData,$rpp,$table){
 		$fieldSelect = $this->getFieldSelectTable($table,$tableDetailData);
 		$ctrash = $tableDetailData->filter(function ($value, $key) {
-		    return $value->name=="trash";
+		    return $value->name == "trash";
 		});
 		/*Nếu có bảng dịch thì lấy thêm dữ liệu của bảng này*/
 		$transTable = FCHelper::getTranslationTable($table);
