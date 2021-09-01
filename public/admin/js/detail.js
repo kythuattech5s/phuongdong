@@ -56,7 +56,7 @@ $(function() {
         } catch (e) {}
         $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
         setTimeout(function(){
-            DRAFT.clickSaveHistory('SAVE');
+            DRAFT.clickSaveHistory('save');
             $('#frmUpdate').submit();
         },300);
         
@@ -67,10 +67,10 @@ $(function() {
         try {
             tinyMCE.triggerSave();
         } catch (e) {}
-        // $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
-        // $('#frmUpdate').append('<input name="is_draft" value="1">');
-        DRAFT.clickSaveHistory('SAVE');
-        // $('#frmUpdate').submit();
+        $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
+        $('#frmUpdate').append('<input name="is_draft" value="1">');
+        DRAFT.clickSaveHistory('save');
+        $('#frmUpdate').submit();
     })
 
     $(function() {

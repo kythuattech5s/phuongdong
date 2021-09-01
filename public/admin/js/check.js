@@ -170,25 +170,7 @@ var DRAFT = (function(){
         }
     }
 
-    function autoSave(){
-        const id = $('input[name="id"]');
-        if(id.length == 0 || !hasChangeContent) return;
-        const timeSave = 1000 * 60;
-        var setTime = setInterval(function(){
-            $.post({
-                url:'/esystem/news/save-content/'+id,
-                data:{
-                    id:id,
-                    content: myContent,
-                    type: 'auto'
-                }
-            });
-        }, timeSave);
-        clearInterval(setTime);
-    }
-
-    function clickSaveHistory(typeOfClick){
-        var clickType = typeOfClick;
+    function clickSaveHistory(clickType){
         const id = $('input[name="id"]');
         if(id.length == 0 || !hasChangeContent) return;
         saveContent(id.val(),clickType);
@@ -206,6 +188,27 @@ var DRAFT = (function(){
             }
         })
     }
+
+    // TỰ ĐỘNG KHÔNG LIÊN QUAN CÁI KHÁC
+    function autoSave(){
+        const id = $('input[name="id"]');
+        if(id.length == 0 || !hasChangeContent) return;
+        var myContent = $('textarea.editor').tinymce().getContent();
+        const timeSave = 1000 * 60;
+        setTime = setInterval(function(){
+            $.post({
+                url:'/esystem/news/save-content/'+id.val(),
+                data:{
+                    id:id.val(),
+                    content: myContent,
+                    type: 'auto'
+                }
+            }).done(function(){
+                clearInterval(setTime);
+            });
+        }, timeSave);
+    }
+
     return {
         load:(function(){
             document.addEventListener("readystatechange",function(){
