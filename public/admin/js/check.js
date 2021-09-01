@@ -138,11 +138,9 @@ var MAIN = (function(){
         }
     }
 
-    // var autoSave = function(){
-    //     $.form(function(){
-
-    //     })
-    // }
+    var autoSave = function(){
+       
+    }
     return {
         load:(function(){
             document.addEventListener("readystatechange",function(){
@@ -204,13 +202,13 @@ var USERONLINE = (function(){
         const doing = document.querySelector('.list-link');
         var from = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
         
-        if(pathname.indexOf('/esystem/edit/configs/0') == 0 && pathname.lastIndexOf('/esystem/edit/configs/0') == 0){
+        if(pathname.indexOf('/esystem/edit/configs/0') == 0){
             var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
-        }else if(pathname.indexOf('/esystem/media/manager') == 0 && pathname.lastIndexOf('/esystem/media/manager') == 0){
+        }else if(pathname.indexOf('/esystem/media/manager') == 0){
             var content = JSON.stringify('đang ở trang trang Media');
-        }else if(pathname.indexOf('/esystem/editSitemap') == 0 && pathname.lastIndexOf('/esystem/editSitemap') == 0){
+        }else if(pathname.indexOf('/esystem/editSitemap') == 0){
             var content = JSON.stringify('đang ở trang trang Sitemap');
-        }else if(pathname.indexOf('/esystem/editRobot') == 0 && pathname.lastIndexOf('/esystem/editRobot') == 0){
+        }else if(pathname.indexOf('/esystem/editRobot') == 0){
             var content = JSON.stringify('đang ở trang Robots.txt');
         }else if (pathname.indexOf('/esystem/edit') == 0){
             const inputName = document.querySelector('input[name="name"]');
@@ -220,13 +218,12 @@ var USERONLINE = (function(){
         }else if(pathname.indexOf('/esystem/copy') == 0){
             const inputName = document.querySelector('input[name="name"]');
             var content = JSON.stringify('đang copy ' + (inputName ? inputName.value : 'không xác định'));
-        }else if(pathname.indexOf('/esystem') == 0 && pathname.lastIndexOf('/esystem') == 0){
+        }else if(pathname.indexOf('/esystem/view') == 0){
+            var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
+        }else{
             var content = JSON.stringify('đang ở trang chủ');
         }
-        if(!content){
-            return from;
-        }else{
-            return content;
-        }
+       
+        return content;
     }
 })();
