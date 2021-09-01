@@ -11,6 +11,8 @@ class NewsController extends Controller
         $parent = $currentItem->category()->act()->first();
         $tags = $currentItem->tags()->act()->get();
         $newsRelateds = $currentItem->getRelatesCollection();
+        $ratingInfo = $currentItem->getRating();
+        // dd($ratingInfo);
         return view('news.view',compact('currentItem','tags','newsRelateds','parent','tags'));
     }
 }

@@ -15,6 +15,17 @@ class ManagerEventListener
             {
                 $tbl = $table->name;
             }
+
+            /* Xóa thông tin phân quyền user */
+            $arrIdSp = $id;
+            $userAdmin = \Auth::guard('h_users')->user();
+            if (is_array($arrIdSp)) {
+                \DB::table('h_user_record_maps')->where('table_name',$tbl)->where('h_user_id',$userAdmin->id)->whereIn('target_id',$arrIdSp)->delete();
+            }else {
+                \DB::table('h_user_record_maps')->where('table_name',$tbl)->where('h_user_id',$userAdmin->id)->where('target_id',$arrIdSp)->delete();
+            }
+            /* End xóa thông tin phân quyền user */
+
             $id = is_array($id) ? implode(",", $id) : $id;
             $name = "Delete " . $tbl;
             $content = "Delete " . $tbl . " id = " . $id;
@@ -30,6 +41,18 @@ class ManagerEventListener
             {
                 $tbl = $table->name;
             }
+
+            /* Thêm thông tin phân quyền */
+            $userAdmin = \Auth::guard('h_users')->user();
+            $dataCreate = [];
+            $dataCreate['h_user_id']    = $userAdmin->id;
+            $dataCreate['table_name']   = $table->table_map;
+            $dataCreate['target_id']    = $id;
+            $dataCreate['created_at']   = new \DateTime;
+            $dataCreate['updated_at']   = new \DateTime;
+            \DB::table('h_user_record_maps')->insert($dataCreate);
+            /* End thêm thông tin phân quyền */
+            
             $name = "Insert " . $tbl;
             $content = "Insert " . $tbl . " id = " . $id . (isset($data["name"]) ? " name " . $data["name"] : "");
             $this->insertHistory($name, $content);
