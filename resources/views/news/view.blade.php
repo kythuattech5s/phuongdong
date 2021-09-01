@@ -30,6 +30,7 @@
                             $rating = $currentItem->getRating('main');
                         @endphp
                         @include('path.rating',['rating' => $rating['percentAll'].'%'])
+                        {{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)
                     </div>
                 </div>
             </div>
@@ -66,6 +67,7 @@
                     <span class="me-2 fs-16">Đánh giá bài viết:</span>
                     <div class="rating-now" data-table="news" data-id="{{$currentItem->id}}">
                         @include('path.selectStar')
+                        {{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)
                     </div>
                 </div>
                 <div class="share">

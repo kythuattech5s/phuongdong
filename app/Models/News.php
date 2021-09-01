@@ -74,7 +74,8 @@ class News extends BaseModel
             if($type == 'main'){
                 return [
                     'percentAll' => 0,
-                    'scoreAll' => 0
+                    'scoreAll' => 0,
+                    'totalRating' => 0
                 ];
             }
             return [
@@ -116,7 +117,8 @@ class News extends BaseModel
         if($type == 'main'){
             return [
                 'percentAll' => $percentAll,
-                'scoreAll' => $scoreAll
+                'scoreAll' => $scoreAll,
+                'totalRating' => $totalRating
             ];
         }
         

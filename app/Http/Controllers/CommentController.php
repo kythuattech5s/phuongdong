@@ -58,7 +58,7 @@ class CommentController extends Controller{
             $comment->save();
     
             if(isset($request->rate)){
-                $this->addRating($request->rate, $comment);
+                $this->addRating($request, $user, $comment);
             }
             \DB::commit();
             
