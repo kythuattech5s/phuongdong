@@ -44,6 +44,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="list-time-pick">
+                        
+                    </div>
                     <textarea name="note" rows="2" placeholder="Nhu cầu khám bệnh (không bắt buộc)"></textarea>
                     <div class="text-center pb-xl-2">
                         <button class="btn-all btn-all-main btn-small text-uppercase robotob">
