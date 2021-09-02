@@ -11,5 +11,5 @@ if($actionType=='edit'||$actionType=='copy'){
  ?>
 <div class="form-group">
   <p class="form-title" for="">{{FCHelper::er($table,'note')}}</p>
-  <textarea placeholder="{{FCHelper::er($table,'note')}}" {{FCHelper::ep($table,'require')==1?'required':''}}  dt-height="{{$height}}" name="{{$name}}" class="form-control editor" rows="5" dt-type="{{FCHelper::er($table,'type_show')}}">{{$value}}</textarea>
+  <textarea placeholder="{{FCHelper::er($table,'note')}}" {{FCHelper::ep($table,'require')==1?'required':''}}  dt-height="{{$height}}" name="{{$name}}" id="{{$name}}" class="form-control editor" rows="5" dt-type="{{FCHelper::er($table,'type_show')}}">{{$value}}</textarea>
 </div>

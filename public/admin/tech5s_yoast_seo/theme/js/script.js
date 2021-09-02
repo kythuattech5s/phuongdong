@@ -29,11 +29,11 @@ var TECH5SYOAST = (function(){
 			<div class="row margin0">\
 			<div class="col-xs-12 col-md-6"><p class="yoast_seo_custom_title">ĐỘ CHUẨN SEO<span class="wpseo-score-icon seo"></span></p><div id="wpseo-pageanalysis"></div></div>\
 			<div class="col-xs-12 col-md-6"><p class="yoast_seo_custom_title">KHẢ NĂNG ĐỌC<span class="wpseo-score-icon read"></span></p><div id="yoast-seo-content-analysis"></div></div>');
-		$('table.toolbar tbody tr').prepend('\
-			<td align="center">\
+		$('.header-top .breadc').append('\
+			<div align="center">\
 				<p class="toolbar-score">Điểm Đọc: <span class="wpseo-score-icon read "></span></p>\
 				<p class="toolbar-score">Điểm SEO: <span class="wpseo-score-icon seo "></span></p>\
-			</td>\
+			</div>\
 			')
 		$('input#keyword_focus').val($('[name=seo_key]').val());
 		$(document).on('input', 'input#keyword_focus', function(event) {
@@ -184,14 +184,14 @@ var TECH5SYOAST = (function(){
 							primaryCategory: "",
 						};
 				},
-				// bindElementEvents: function() {
-				// 	console.log('bindElementEvents');
-				// 	console.log(arguments);
-				// },
-				// updateSnippetValues: function() {
-				// 	console.log('updateSnippetValues');
-				// 	console.log(arguments);
-				// },
+				/*bindElementEvents: function() {
+					console.log('bindElementEvents');
+					console.log(arguments);
+				},
+				updateSnippetValues: function() {
+					console.log('updateSnippetValues');
+					console.log(arguments);
+				},*/
 				saveScores: function() {
 					console.log('saveScores');
 					// console.log(arguments);
