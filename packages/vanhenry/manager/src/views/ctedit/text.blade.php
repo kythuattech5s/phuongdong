@@ -13,7 +13,7 @@ if($actionType=='edit'||$actionType=='copy'){
 ?>
 <div class="form-group" @if($tableMap=='orders' && $name=='val_order') style="display: none;" @endif>
 	<p class="form-title" for="">{{FCHelper::er($table,'note')}} <span class="count"></span></p>
-	<input  {{FCHelper::ep($table,'require')==1?'required':''}} type="text" name="{{$name}}" placeholder="{{FCHelper::ep($table,'note')}}"  class="form-control" dt-type="{{FCHelper::ep($table,'type_show')}}" value="{{$value}}" />
+	<input  {{FCHelper::ep($table,'require')==1?'required':''}} type="text" name="{{$name}}" placeholder="{{FCHelper::ep($table,'note')}}" id="{{$name}}"  class="form-control" dt-type="{{FCHelper::ep($table,'type_show')}}" value="{{$value}}" />
 </div>
 <script type="text/javascript">
 	$(function() {

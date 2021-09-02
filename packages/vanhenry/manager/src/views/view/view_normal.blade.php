@@ -1,4 +1,9 @@
 @extends('vh::master')
+@section('css')
+@if($tableData->get('has_yoast_seo','') == 1)
+<link rel="stylesheet" href="admin/tech5s_yoast_seo/theme/css/yoastseo.css" type="text/css">
+@endif
+@endsection
 @section('content')
 <a href="{{$admincp}}/editableajax/{{$tableData->get('table_map','')}}" class="hidden" id="editableajax"></a>
 <div class="header-top aclr">
