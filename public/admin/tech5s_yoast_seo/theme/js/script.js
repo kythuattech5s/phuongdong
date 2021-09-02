@@ -2,14 +2,10 @@ var TECH5SYOAST = (function(){
 	var blockSeo = null;
 	var globalApp = null;
 	var _initHiddenOldField = function(){
-		$('[role="tab"]').removeClass('ui-state-active');
-		$('[aria-controls="tabs-2"]').addClass('ui-state-active');
-		$('[id^=tabs-]').css({'display':'none'});
-		$('#tabs-2').css({'display':'block'});
-		var items = ['[name=s_title]','[name=s_des]','[name=s_key]'];
+		var items = ['[name=seo_title]','[name=seo_des]','[name=seo_key]'];
 		for (var i = 0; i < items.length; i++) {
 			var item = $(items[i]);
-			item.parents('.row').hide();
+			item.closest('.form-group').hide();
 		}
 	}
 	var _updateYoastSlug = function(){
@@ -24,7 +20,8 @@ var TECH5SYOAST = (function(){
 
 	}
 	var _initYoastSeoHtml = function(){
-		blockSeo = $('#tabs-3 .tableedit');
+		blockSeo = $('textarea[name="yoast_score"]').parent();
+		blockSeo.removeClass('none');
 		blockSeo.append('<div class="row margin0"><div id="wpseosnippet" class="wpseosnippet col-xs-12"></div></div>\
 			<div class="row margin0">\
 			<div class="col-xs-12 col-md-6"><label for="keyword_focus">Từ khóa Focus</label><input id="keyword_focus" placeholder="Keyword Focus" /></div><div class="col-xs-12 col-md-6"></div>\
@@ -38,18 +35,18 @@ var TECH5SYOAST = (function(){
 				<p class="toolbar-score">Điểm SEO: <span class="wpseo-score-icon seo "></span></p>\
 			</td>\
 			')
-		$('input#keyword_focus').val($('[name=s_key]').val());
+		$('input#keyword_focus').val($('[name=seo_key]').val());
 		$(document).on('input', 'input#keyword_focus', function(event) {
 			event.preventDefault();
-			$('[name=s_key]').val($(this).val());
+			$('[name=seo_key]').val($(this).val());
 		});
 	}
 	var _initTranslator = function  () {
-	   	fetch('theme/frontend/plugins/tech5s_yoast_seo/theme/json/vi.json').then(function(response){
+	   	fetch('admin/tech5s_yoast_seo/theme/json/vi.json').then(function(response){
 	   		return response.json();
 	   	}).then(function(json){
 	   		_initYoastSeoJs({
-	"js-text-analysis": {
+			"js-text-analysis": {
 		"": {}}});
 	   	}) .catch(function(error)  {
         	console.log("OMG! Error:");
@@ -58,7 +55,7 @@ var TECH5SYOAST = (function(){
 	}
 	var getTitle = function (){
 		var name = $("input[name=name]").val();
-		var s_title = $("input[name=s_title]").val();
+		var s_title = $("input[name=seo_title]").val();
 		return s_title.trim().length==0?name:s_title;
 	}
 	var getSlug = function (){
@@ -66,11 +63,11 @@ var TECH5SYOAST = (function(){
 		return slug;
 	}
 	var getDescSeo = function (){
-		var s_des = $("[name=s_des]").val();
+		var s_des = $("[name=seo_des]").val();
 		return s_des;
 	}
 	var getKeySeo = function (){
-		var s_key = $("[name=s_key]").val();
+		var s_key = $("[name=seo_key]").val();
 		return s_key;
 	}
 	var getText = function (){
@@ -96,8 +93,8 @@ var TECH5SYOAST = (function(){
 		var title = data.title;
 		var metaDesc = data.metaDesc;
 		var urlPath = data.urlPath;
-		$("input[name=s_title]").val(title);
-		$("[name=s_des]").val(metaDesc);
+		$("input[name=seo_title]").val(title);
+		$("[name=seo_des]").val(metaDesc);
 		$("[name=slug]").val(urlPath);
 	}
 	var saveScores = function  (score){

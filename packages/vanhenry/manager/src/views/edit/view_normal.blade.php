@@ -1,7 +1,7 @@
 @extends('vh::master')
 @section('css')
 @if($tableData->get('has_yoast_seo','') == 1)
-<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/css/yoastseo.css"></script>
+<link href="admin/tech5s_yoast_seo/theme/css/yoastseo.css">
 @endif
 @endsection
 @section('content')
@@ -148,8 +148,8 @@ else{
 <?php $tableYoastSeo = \Config::get('manager.table_yoast_seo'); ?>
 @section('js')
 @if($tableData->get('has_yoast_seo','') == 1)
-<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/yoastseo.js"></script>
-<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/script.js"></script>
+<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/yoastseo.js" defer></script>
+<script type="text/javascript" src="admin/tech5s_yoast_seo/theme/js/script.js" defer></script>
 @endif
 @if($tableData->get('has_cutom_js','') == 1)
 <script type="text/javascript" src="admin/custom/js/script.js"></script>
