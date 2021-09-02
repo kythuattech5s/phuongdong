@@ -20,7 +20,10 @@ var GUI = (function(){
         	autoclose: true, 
         	todayHighlight: true,
         	format:'d/m/yyyy',
-        	language: 'vi'
+        	language: 'vi',
+        	onClose: function () {
+        		alert('éc éc');
+        	}
   		}).datepicker('update', new Date());
   		$('#datepicker-medical input').val('');
   		$('#datepicker-medical input').val('Ngày đặt');
