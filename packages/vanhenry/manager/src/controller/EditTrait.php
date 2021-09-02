@@ -62,6 +62,12 @@ trait EditTrait{
 		return $dataitem;
 	}
 	public function edit($table,$id){
+		/* Check quyền user chỉ sửa được những bản ghi của group con hoặc do mình tạo thêm */
+		$check = \vanhenry\manager\helpers\RoleHelper::checkIdHUserCanInteractive($table,$id);
+		if (!$check) {
+			return view('vh::no_permission');
+		}
+		/* Check quyền user */
 		$tableData = self::__getListTable()[$table];
 		$type = $tableData->type_show;
 		$fnc = 'edit'.$type;
