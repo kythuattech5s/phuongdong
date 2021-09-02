@@ -131,6 +131,14 @@ class Admin extends BaseAdminController
 		if($ctrash->count()>0){
 			$query =$query->whereRaw("($table.trash <> 1 or $table.trash is null)");
 		}
+
+		/* Check quyền user chỉ xem những bản ghi của group con hoặc do mình tạo thêm */
+		list($checkId,$listInteractiveId) = \vanhenry\manager\helpers\RoleHelper::getListRecordCanInteractive($table);
+		if ($checkId) {
+			$query->whereIn("$table.id",$listInteractiveId);
+		}
+		/* Check quyền user */
+
 		return $query->orderBy("$table.id",'desc')->paginate($rpp);
 	}
 	/**
@@ -198,6 +206,14 @@ class Admin extends BaseAdminController
 	public function delete(Request $request,$table){
 		$inputs = $request->input();
 		if(@$inputs['id']){
+
+			/* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+			$check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table,$inputs['id']);
+			if (!$check) {
+				return JsonHelper::echoJson(100,'Bạn không có quyền xóa bản ghi này');
+			}
+			/* End check */
+
 			DB::beginTransaction();
           	try {
 				$x = \Event::dispatch('vanhenry.manager.delete.predelete', array($table,$inputs['id']));
@@ -278,6 +294,14 @@ class Admin extends BaseAdminController
 		if(@$inputs['id']){
 			$id = json_decode($inputs['id'],true);
 			$id = $id ==null?array():$id;
+
+			/* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+			$check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table,$id);
+			if (!$check) {
+				return JsonHelper::echoJson(100,'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
+			}
+			/* End check */
+
 			$x = \Event::dispatch('vanhenry.manager.delete.predelete', array($table,$id));
 			if(count($x)>0){
 				foreach ($x as $kx => $vx) {
@@ -308,6 +332,14 @@ class Admin extends BaseAdminController
 		if($request->isMethod('post')){
 			$post = $request->input();
 			$id = isset($post['id'])?$post["id"]:0;
+
+			/* Check thêm quyền chỉ được sửa những bản ghi do user hoặc user trong group con tạo ra */
+			$check = \vanhenry\manager\helpers\RoleHelper::checkIdHUserCanInteractive($table,$id);
+			if (!$check) {
+				return JsonHelper::echoJson(100,'Bạn không có quyền sửa bản ghi này');
+			}
+			/* End check */
+			
 			$prop = isset($post["prop"])?$post["prop"]:0;
 			$propid = isset($post["prop_id"])?$post["prop_id"]:0;
 			unset($post['id']);
