@@ -165,6 +165,7 @@ var DRAFT = (function(){
         if (document.readyState === 'complete') {
             $('textarea.editor').tinymce().on('change',function(e){
                 hasChangeContent = true;
+                $('textarea.editor').tinymce()
                 autoSave();
             });
         }
@@ -193,7 +194,13 @@ var DRAFT = (function(){
     function autoSave(){
         const id = $('input[name="id"]');
         if(id.length == 0 || !hasChangeContent) return;
+
+        try {
+            tinyMCE.triggerSave();
+        } catch (e) {}
+        
         var myContent = $('textarea.editor').tinymce().getContent();
+        clearInterval(setTime);
         const timeSave = 1000 * 60;
         setTime = setInterval(function(){
             $.post({
@@ -205,6 +212,7 @@ var DRAFT = (function(){
                 }
             }).done(function(){
                 clearInterval(setTime);
+                hasChangeContent = false;
             });
         }, timeSave);
     }
@@ -234,6 +242,12 @@ var USERONLINE = (function(){
 
     channel.bind('App\\Events\\HUserOnline', loadUser);
     
+    function autoUpdate(){
+        setInterval(() => {
+            ajaxAction('ADD');
+        }, 1000 * 60 * 4.5);
+    }
+
     function loadUser(data){
         const main = document.querySelector('.h-user-online');
         const users = data.users;
@@ -267,7 +281,6 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        var from = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
         
         if(pathname.indexOf('/esystem/edit/configs/0') == 0){
             var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
@@ -295,6 +308,9 @@ var USERONLINE = (function(){
     }
 
     return {
+        load:(function(){
+            autoUpdate();
+        })(),
         ajaxAction:function(action){
             ajaxAction(action);
         }
