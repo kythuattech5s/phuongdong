@@ -187,7 +187,7 @@
 			Route::post('check-editing/{id}',"CheckController@checkEditing");
 			Route::get('editing-done/{id}',"CheckController@editDone");
 			Route::post('check-has-edit/{id}',"CheckController@checkHasEdit");
-			Route::post('save-content/{id}',"CheckController@saveContent");
+            Route::post('save-content/{id}', "CheckController@saveContent");
 		});
 
         Route::post('user-online', "CheckController@userOnline");
