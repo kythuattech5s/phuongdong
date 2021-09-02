@@ -17,9 +17,7 @@
 		</ul>
 		@if($transTable != null)
 		<ul class="table-lang edit">
-			<?php $tableLangs = \Session::get('_table_lang') 
-
-			?>
+			<?php $tableLangs = \Session::get('_table_lang') ?>
 			@foreach($locales as $localeCode => $v)
 			<li><a href="{{$admincp}}/table-lang/{{$tableData->get('table_map','')}}/{{$localeCode}}" data-lang="{{$localeCode}}" class="{{!is_array($tableLangs) && $localeCode == Config::get('app.locale_origin') || is_array($tableLangs) && array_key_exists($tableData->get('table_map'), $tableLangs) && $tableLangs[$tableData->get('table_map')] == $localeCode ? 'active' : ''}}">{{$v}}</a></li>
 			@endforeach
@@ -31,34 +29,36 @@
 			<i class="fa fa-external-link" aria-hidden="true"></i>
 			<span  class="clfff">Xem website</span> 
 		</a> --}}
-		@if($actionType=='edit')
+		
+		@if($actionType == 'edit')
 			{{-- <a class="pull-right bgmain viewsite" href="#">
 				<i class="fa fa-copy" aria-hidden="true"></i>
 				<span  class="clfff">Copy</span> 
 			</a> --}}
-			
 			{{-- <a class="pull-right bgmain viewsite _vh_delete" href="{{$admincp}}/delete/{{$tableMap}}">
 				<i class="fa fa-trash" aria-hidden="true"></i>
 				<span  class="clfff">Xóa</span> 
 			</a> --}}
-			<a class="pull-right bgmain viewsite _vh_save" href="#">
-				<i class="fa fa-save" aria-hidden="true"></i>
-				<span  class="clfff">Lưu</span> 
-			</a>
 			{{-- <a class="pull-right bgmain viewsite _vh_update" href="#">
 				<i class="fa fa-pencil" aria-hidden="true"></i>
 				<span  class="clfff">Cập nhật</span> 
 			</a> --}}
-			@else
-			<a class="pull-right bgmain viewsite _vh_save" href="#">
-				<i class="fa fa-save" aria-hidden="true"></i>
-				<span  class="clfff">Lưu</span> 
+		@endif
+		<a class="pull-right bgmain viewsite _vh_save" href="#">
+			<i class="fa fa-save" aria-hidden="true"></i>
+			<span  class="clfff">Lưu</span> 
+		</a>
+		@if($tableData->get('has_draft','') == 1)
+			<a class="pull-right btn-warning viewsite save_draft" href="#">
+				<i class="fa fa-file-o" aria-hidden="true"></i>
+				<span  class="clfff">Lưu nháp</span> 
 			</a>
 		@endif
 		<a class="pull-right bgmain1 viewsite" href="{{base64_decode(\Request::input('returnurl'))}}">
 			<i class="fa fa-backward" aria-hidden="true"></i>
 			<span  class="clfff">Back</span> 
 		</a>
+	
 	</div>
 </div>
 <?php 

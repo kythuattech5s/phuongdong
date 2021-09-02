@@ -8,6 +8,14 @@ use App\Helpers\MediaHelper;
 use App\Models\Rating;
 use Auth;
 class CommentController extends Controller{
+    public function ratingNow(Request $request){
+        $this->addRating($request);
+        return response()->json([
+            'code' => 200,
+            'message'=> "Đánh giá bài viết thành công"
+        ]);
+    }
+    
     public function commentNow(Request $request){
         if(!Auth::check()){
             return response([
@@ -50,7 +58,7 @@ class CommentController extends Controller{
             $comment->save();
     
             if(isset($request->rate)){
-                $this->addRating($request->rate, $comment);
+                $this->addRating($request, $user, $comment);
             }
             \DB::commit();
             
@@ -68,13 +76,17 @@ class CommentController extends Controller{
     }
 
     
-    private function addRating($star, $comment){
+    private function addRating($request,$user = null,  $comment = null){
         $rating = new Rating;
-        $rating->map_table = $comment->map_table;
-        $rating->map_id = $comment->map_id;
-        $rating->user_id = $comment->user_id;
-        $rating->comment_id = $comment->id;
-        $rating->rating = $star;
+        $rating->map_table = $request->map_table;
+        $rating->map_id = $request->map_id;
+        if($user !== null){
+            $rating->user_id = $comment->user_id;
+        }
+        if($comment !== null){
+            $rating->comment_id = $comment->id;
+        }
+        $rating->rating = $request->rate;
         $rating->save();
     }
 

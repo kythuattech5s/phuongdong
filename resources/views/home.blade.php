@@ -112,7 +112,7 @@
     <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 mb-xxl-4">
             <p class="all-title wow fadeInUp">Dịch vụ của chúng tôi</p>
-            <a href="" class="hv-icon fs-16 btn-view-all d-none d-md-inline-block mt-3 wow fadeInUp" data-wow-delay="0.2s" title="">
+            <a href="dich-vu-y-te" class="hv-icon fs-16 btn-view-all d-none d-md-inline-block mt-3 wow fadeInUp" data-wow-delay="0.2s" title="Dịch vụ của chúng tôi">
                 <span class="text-uppercase smooth">Xem tất cả</span>
                 <i class="fa fa-plus-circle fs-20 ms-1" aria-hidden="true"></i>
             </a>
@@ -126,26 +126,11 @@
         </div>
         <div class="swiper-container slide-our-service wow fadeInUp" data-wow-delay="0.6s">
             <div class="swiper-wrapper">
-                <?php for ($i = 1; $i < 10; $i++) { ?>
+                @foreach ($listService as $item)
                     <div class="swiper-slide">
-                        <div class="item-our-service">
-                            <div class="img">
-                                <a href="" class="smooth c-img zoom-effect img-box-show" title="">
-                                    <img src="frontend/images/Layer 811.png" alt="banner">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h2><a href="" class="smooth fs-24-cv robotob hv-sp" title="Tư vấn và tiêm chủng vắc xin">Tư vấn và tiêm chủng vắc xin</a></h2>
-                                <div class="fs-16 my-2">
-                                    Trung tâm Tiêm chủng Bệnh viện Đa khoa Phương Đông được thành lập với mục tiêu “Tiêm chủng cho một tương lai khỏe mạnh” ...
-                                </div>
-                                <a href="" class="hv-icon fs-20 btn-view-all d-inline-block">
-                                    <i class="fa fa-plus-circle fs-28 ms-1" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
+                        @include('services.item_home')
                     </div>
-                <?php } ?>
+                @endforeach
             </div>
         </div>
         <div class="slider-pagination d-none d-md-block mt-3 mt-xxl-4 wow fadeInUp" data-wow-delay="0.8s">
@@ -166,17 +151,17 @@
         <div class="main-slide position-relative">
             <div class="swiper-container slide-expert-team wow fadeInUp" data-wow-delay="0.6s">
                 <div class="swiper-wrapper">
-                    <?php for ($i = 1; $i < 10; $i++) { ?>
+                    @foreach ($listDoctor as $item)
                         <div class="swiper-slide">
                             <div class="item-expert-team">
                                 <div class="row">
                                     <div class="col-9 col-md-5 mx-auto">
                                         <div class="img text-center">
-                                            <img src="frontend/images/Untitled-1.png" alt="banner">
+                                            <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
                                         </div>
                                         <div class="name text-center mt-2 mt-xxl-3">
-                                            <p class="fs-22 clmain robotob">Hoàng Văn Tuyết</p>
-                                            <p class="fs-16">TTND.TS. Bác sĩ - Trưởng khoa Khám Bệnh</p>
+                                            <p class="fs-22 clmain robotob">{{$item->name}}</p>
+                                            <p class="fs-16">{{$item->academic_rank}} - {{$item->position}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-7 mt-3 mt-md-0">
@@ -215,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    @endforeach
                 </div>
             </div>
             <div class="slider-controls">
@@ -229,19 +214,19 @@
         </div>
         <div class="swiper-container slide-expert-team-thumb pt-0 pt-md-2 mt-3 mt-xxl-4 wow fadeInUp" data-wow-delay="0.8s">
             <div class="swiper-wrapper">
-                <?php for ($i = 1; $i < 10; $i++) { ?>
+                @foreach ($listDoctor as $item)
                     <div class="swiper-slide">
                         <div class="item-expert-team-thumb cspoint">
                             <div class="img text-center">
-                                <img src="frontend/images/Untitled-1.png" alt="banner">
+                                <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
                             </div>
                             <div class="text text-center mt-2 pt-2">
-                                <p>TTND.TS. Bác sĩ</p>
-                                <p class="fs-18">Hoàng Văn Tuyết</p>
+                                <p>{{$item->academic_rank}}</p>
+                                <p class="fs-18">{{$item->name}}</p>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                @endforeach
             </div>
         </div>
     </div>
@@ -263,68 +248,7 @@
 <section class="new-home py-4 py-xxl-5">
     <div class="container">
         <p class="all-title wow fadeInUp mb-3 mb-xxl-4">Tin tức và sự kiện</p>
-        <div class="row gx-4 gx-xxl-5 new-module">
-            <div class="big-col col wow fadeInUp">
-                <div class="item-new-big">
-                    <div class="img">
-                        <a href="" class="c-img shine-effect" title="">
-                            <img src="frontend/images/Layer 811.png" title="" alt="" class="img-fluid smooth">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <h3 class="mt-2">
-                            <a href="" class="smooth robotob fs-22-cv hv-main-sp" title="">Cuộc thi ảnh bầu "Thai kỳ hạnh phúc" tổng giải thưởng trị giá 450 triệu đồng</a>
-                        </h3>
-                        <div class="short-content fs-16 mt-1 mt-lg-2">
-                            Cuộc thi ảnh “THAI KỲ HẠNH PHÚC” chính là món quà ý nghĩa, Phương Đông muốn gửi tặng tới các mẹ bầu cùng lời nhắn nhủ:,...
-                        </div>
-                        <div class="item-time d-block d-lg-none mt-1">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span>06/09/2021</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="medium-col col wow fadeInUp" data-wow-delay="0.3s">
-                <?php for ($k = 0; $k < 2; $k++) { ?>
-                    <div class="item-new-medium">
-                        <div class="img">
-                            <a href="" class="c-img shine-effect" title="">
-                                <img src="frontend/images/Layer 811.png" title="" alt="" class="img-fluid smooth">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h3 class="mt-2">
-                                <a href="" class="smooth robotob fs-16-cv hv-main-sp" title="">Các hãng bảo hiểm bảo lãnh liên kết với Bệnh viện Phương Đông</a>
-                            </h3>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <div class="small-col col mt-3 mt-lg-0 wow fadeInUp" data-wow-delay="0.6s">
-                <?php for ($k = 0; $k < 4; $k++) { ?>
-                    <div class="item-new-small d-flex">
-                        <div class="img order-lg-2">
-                            <a href="" class="c-img shine-effect" title="">
-                                <img src="frontend/images/Layer 811.png" title="" alt="" class="img-fluid smooth">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h3>
-                                <a href="" class="smooth robotob fs-16 hv-main-sp" title="">Bị sỏi thận uống nước cam được không? Lưu ý khi sử dụng</a>
-                            </h3>
-                            <div class="item-time d-block d-lg-none mt-1">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <span>06/09/2021</span>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <div class="col-12 mt-3">
-                <div class="border-bottom"></div>
-            </div>
-        </div>
+        @include('news.news_module',['listNews'=>$listNews])
     </div>
 </section>
 <section class="partner-home">

@@ -1,5 +1,4 @@
 $(function() {
-
     $('.datepicker').datetimepicker({
         format: 'd/m/Y H:i:s',
         formatTime: 'H:i:s',
@@ -21,6 +20,7 @@ $(function() {
             }
         }
     });
+
     $('.boxtitle .btnshow').click(function(event) {
         var boxedit = $(this).closest('.boxedit');
         var boxhide = boxedit.find('.boxhide');
@@ -45,6 +45,7 @@ $(function() {
         frmClone.submit();
         frmClone.remove();
     });
+
     $('._vh_save').click(function(event) {
         event.preventDefault();
         if (!validateForm('#frmUpdate')) {
@@ -54,8 +55,24 @@ $(function() {
             tinyMCE.triggerSave();
         } catch (e) {}
         $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
-        $('#frmUpdate').submit();
+        setTimeout(function(){
+            DRAFT.clickSaveHistory('save');
+            $('#frmUpdate').submit();
+        },300);
+        
     });
+
+    $('.save_draft').click(function(event){
+        event.preventDefault();
+        try {
+            tinyMCE.triggerSave();
+        } catch (e) {}
+        $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
+        $('#frmUpdate').append('<input name="is_draft" value="1">');
+        DRAFT.clickSaveHistory('save');
+        $('#frmUpdate').submit();
+    })
+
     $(function() {
         $(".iframe-btn").fancybox({
             'width': '75%',

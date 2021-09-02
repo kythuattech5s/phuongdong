@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\BaseModel;
 use App\Models\NewsNewsTag;
 use App\Models\NewsNewsCategory;
@@ -9,6 +9,16 @@ use App\Models\NewsNewsCategory;
 class News extends BaseModel
 {
 	protected $table = 'news';
+    
+    protected static function booted()
+    {
+        static::addGlobalScope('draft', function (Builder $q) {
+            $q->where(function($q){
+                $q->whereNull('is_draft')->orWhere('is_draft', 0);
+            });
+        });
+    }
+
     public function tags()
     {
     	return $this->belongsToMany('App\Models\NewsTag', 'news_news_tag', 'news_id', 'news_tag_id')->act()->ord();
@@ -38,16 +48,14 @@ class News extends BaseModel
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class, 'map_id', 'id')->where('map_table', 'news')->whereHas('comment',function($q){
-            $q->where('act',1);
-        });
+        return $this->hasMany(Rating::class, 'map_id', 'id')->where('map_table', 'news');
     }
 
     public function comments(){
         return $this->hasMany(Comment::class,'map_id','id')->where('map_table','news')->where('parent',0);
     }
 
-    public function getRating(String $type = 'percent'){
+    public function getRating(String $type = 'main'){
         $ratings = $this->ratings;
         $oneStar = 0;
         $twoStar = 0;
@@ -63,8 +71,12 @@ class News extends BaseModel
         $percentAll = 0;
         $scoreAll = 0;
         if($totalRating == 0){
-            if($type == 'percent'){
-                return 0;
+            if($type == 'main'){
+                return [
+                    'percentAll' => 0,
+                    'scoreAll' => 0,
+                    'totalRating' => 0
+                ];
             }
             return [
                 'oneStar' => 0,
@@ -98,10 +110,16 @@ class News extends BaseModel
         $fiveStar = $ratings->filter(function($value,$key){
             return (int) $value->rating === 5;
         })->count();
+
         $percentAll = round(($oneStar + $twoStar * 2 + $threeStar * 3 + $fourStar * 4 + $fiveStar * 5)/($totalRating*5)*100);
         
-        if($type == 'percent'){
-            return $percentAll;
+        $scoreAll = round($percentAll / 20,2);
+        if($type == 'main'){
+            return [
+                'percentAll' => $percentAll,
+                'scoreAll' => $scoreAll,
+                'totalRating' => $totalRating
+            ];
         }
         
         $percentOneStar   = round($oneStar  / $totalRating * 100);
@@ -109,7 +127,7 @@ class News extends BaseModel
         $percentThreeStar = round($threeStar/ $totalRating * 100);
         $percentFourStar  = round($fourStar / $totalRating * 100);
         $percentFiveStar  = round($fiveStar / $totalRating * 100);
-        $scoreAll = round($percentAll / 20,2);
+        
         
         return [
             'oneStar' => $oneStar,

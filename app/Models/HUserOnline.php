@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\BaseModel;
 use Auth;
 use Illuminate\Support\Facades\Cache as Cache;
-
+use Carbon\Carbon;
+use vanhenry\manager\model\HUser;
 class HUserOnline extends BaseModel
 {
     use HasFactory;
@@ -29,11 +30,11 @@ class HUserOnline extends BaseModel
             $h_user_online->delete();
         }
 
-        $cacheUser = Cache::get('TIME_CHECK_ONLINE');
-        if(!$cacheUser){
+        if(!Cache::has('TIME_CHECK_ONLINE')){
             $date = new \DateTime;
             static::where('updated_at','<=',$date->modify('-5 minutes'))->delete();
-            Cache::put('TIME_CHECK_ONLINE','YES', 300);
+            $expiresAt = Carbon::now()->addMinutes(5);
+            Cache::put('TIME_CHECK_ONLINE',$expiresAt, $expiresAt);
             static::whereNull('tab_session')->delete();
         }
     }
