@@ -7,6 +7,9 @@
         Bệnh viện Đa khoa Phương Đông quy tụ đội ngũ chuyên gia, giáo sư, bác sĩ đầu ngành, có nhiều năm kinh nghiệm công tác tại các bệnh viện tuyến đầu trong cả nước và tu nghiệp tại các trung tâm chăm sóc sức khỏe, bệnh viện lớn ở nước ngoài.
     </div>
 </section>
+<section class="hot-galley container">
+    
+</section>
 <section class="container pt-3 pb-lg-4">
     @foreach ($listItems as $itemCate)
         @php
