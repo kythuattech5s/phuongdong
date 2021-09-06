@@ -15,8 +15,7 @@ class NewsTagController extends Controller
     	if ($currentItem == null) {
     		abort(404);
     	}
-    	$listItems = $currentItem->news()->ord()->paginate(8);
-        $listNewsCate = NewsCategory::act()->with(['news'])->ord()->get();
+    	$listItems = $currentItem->news()->act()->orderBy('time_published','desc')->paginate(12);
     	return view('news_tags.view', compact('currentItem', 'listItems'));
     }
 }

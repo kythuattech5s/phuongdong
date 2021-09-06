@@ -43,7 +43,7 @@ class News extends BaseModel
     }
     public function getRelatesCollection(){
         $relate = $this->getRelates();
-        return $relate?$relate->act()->ord()->take(4)->get():collect();
+        return $relate?$relate->act()->ord()->take(5)->get():collect();
     }
 
     public function ratings()
@@ -144,5 +144,9 @@ class News extends BaseModel
             'percentAll' => $percentAll,
             'scoreAll' => $scoreAll,
         ];
+    }
+    public function getDoctor()
+    {
+        return Doctor::find($this->doctor_id);
     }
 }

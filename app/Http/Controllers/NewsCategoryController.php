@@ -14,8 +14,7 @@ class NewsCategoryController extends Controller
         }
         $listCateChild = NewsCategory::where('parent',$currentItem->id)->act()->get();
         $listCateChildShow = NewsCategory::where('parent',$currentItem->id)->act()->Ord()->take(5)->get();
-        $listItems = $currentItem->news()->act()->ord()->paginate(10);
-        $hotItems = News::act()->where('hot',1)->limit(4)->orderBy('id','desc')->get()->all();
+        $listItems = $currentItem->news()->act()->orderBy('time_published','desc')->paginate(12);
         return view('news_categories.view', compact('currentItem','listItems','listCateChild','listCateChildShow'));
     }
 }

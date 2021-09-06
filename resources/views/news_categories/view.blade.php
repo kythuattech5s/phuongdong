@@ -1,12 +1,12 @@
 @extends('index')
 @section('content')
-<section class="container mt-xl-2">
-    {{\Breadcrumbs::render('news_category',$currentItem)}}
-</section>
-<section class="container">
-    <h1 class="fs-30-cv robotob mb-1">{{$currentItem->name}}</h1>
-    <p class="fs-16">{{$currentItem->short_content}}</p>
-    @if (count($listCateChild) > 0)
+@if (count($listCateChild) > 0)
+	<section class="container mt-xl-2">
+	    {{\Breadcrumbs::render('news_category',$currentItem)}}
+	</section>
+	<section class="container">
+	    <h1 class="fs-30-cv robotob mb-1">{{$currentItem->name}}</h1>
+	    <p class="fs-16">{{$currentItem->short_content}}</p>
     	<div class="position-relative list-pathology-cate pt-4 px-4">
 	        <div class="swiper-container slide-pathology wow fadeInUp">
 	            <div class="swiper-wrapper">
@@ -31,16 +31,58 @@
 	            </button>
 	        </div>
 	    </div>
-    @endif
-</section>
-<section class="shadow-box-top py-4 mt-4">
-    <div class="container">
-        @foreach ($listCateChildShow as $itemCate)
-            <div class="py-2 py-xxl-3">
-                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="{{$itemCate->slug}}" class="smooth" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
-                @include('news.news_module',['news_list'=>$itemCate->news()->act()->Ord()->take(7)->get()])
-            </div>
-        @endforeach
-    </div>
-</section>
+	</section>
+	<section class="shadow-box-top py-4 mt-4">
+	    <div class="container">
+	        @foreach ($listCateChildShow as $itemCate)
+	            <div class="py-2 py-xxl-3">
+	                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="{{$itemCate->slug}}" class="smooth" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
+	                @include('news.news_module',['listNews'=>$itemCate->news()->publish()->act()->Ord()->take(7)->get()->all()])
+	            </div>
+	        @endforeach
+	    </div>
+	</section>
+@else
+	<div class="container">
+		<div class="row">
+		    <div class="col-lg-8 shadow-box-right py-3 py-md-4 pe-lg-4">
+		        {{\Breadcrumbs::render('news_category',$currentItem)}}
+		        <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">{{$currentItem->name}}</h1>
+		        <p class="fs-16 wow fadeInUp">{{$currentItem->short_content}}</p>
+		        @foreach ($listItems as $key => $item)
+		            @if ($key < 1)
+		                <div class="new-big d-flex flex-wrap py-3 py-xxl-4 wow fadeInUp">
+		                    <div class="img">
+		                        <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+		                            <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+		                        </a>
+		                    </div>
+		                    <div class="content">
+		                        <h3>
+		                            <a href="{{$item->slug}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+		                        </h3>
+		                        <p class="fs-16-cv my-2 my-xl-3">{{Str::words($item->short_content,'50')}}</p>
+		                        <div class="item-time mt-1">
+		                            <i class="fa fa-calendar" aria-hidden="true"></i>
+		                            <span>{{\Support::showDate($item->created_at)}}</span>
+		                        </div>
+		                    </div>
+		                </div>
+		            @endif
+		        @endforeach
+		        @foreach ($listItems as $key => $item)
+		            @if ($key >= 1)
+		                @include('news.item')
+		            @endif
+		        @endforeach
+		        <div class="pagenigation mb-2 mt-3 mt-xl-4">
+		            {{$listItems->withQueryString()->links('vendor.pagination.pagination')}}
+		        </div>
+		    </div>
+		    <div class="col-lg-4 ps-lg-4">
+		        @include('news_categories.sidebar')
+		    </div>
+		</div>
+	</div>
+@endif
 @stop

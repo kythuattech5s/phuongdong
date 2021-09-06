@@ -19,7 +19,11 @@
             </div>
         @endif
         <div class="rating-info">
-            <img src="frontend/images/rating.png" title="" alt="" class="img-fluid smooth">
+            @php
+                $rating = $itemDoctor->getRating('main');
+            @endphp
+            @include('path.rating',['rating' => $rating['percentAll'].'%'])
+            <p class="fs-12">{{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)</p>
         </div>
     </div>
     <div class="content">

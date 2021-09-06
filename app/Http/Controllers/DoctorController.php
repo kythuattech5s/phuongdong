@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\{Doctor,Specialist};
+use App\Models\{Doctor,Specialist,News};
 use \View;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -26,6 +26,7 @@ class DoctorController extends Controller
         if ($currentItem == null) { abort(404); }
         $listRelateDoctor = Doctor::where('specialist_id',$currentItem->specialist_id)->where('id','!=',$currentItem->id)->act()->get();
         $specialists = Specialist::find($currentItem->specialist_id);
-        return view('doctors.view',compact('currentItem','specialists','listRelateDoctor'));
+        $listNews = News::where('doctor_id',$currentItem->id)->act()->publish()->get()->all();
+        return view('doctors.view',compact('currentItem','specialists','listRelateDoctor','listNews'));
     }
 }

@@ -1,3 +1,90 @@
+jQuery.fn.highlight = function(pat) {
+    function innerHighlight(node, pat) {
+        var skip = 0;
+        if (node.nodeType == 3) {
+            var pos = node.data.toUpperCase().indexOf(pat);
+            pos -= (node.data.substr(0, pos).toUpperCase().length - node.data.substr(0, pos).length);
+            if (pos >= 0) {
+                var spannode = document.createElement('span');
+                spannode.className = 'highlight';
+                var middlebit = node.splitText(pos);
+                var endbit = middlebit.splitText(pat.length);
+                var middleclone = middlebit.cloneNode(true);
+                spannode.appendChild(middleclone);
+                middlebit.parentNode.replaceChild(spannode, middlebit);
+                skip = 1;
+            }
+        }
+        else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+            for (var i = 0; i < node.childNodes.length; ++i) {
+                i += innerHighlight(node.childNodes[i], pat);
+            }
+        }
+        return skip;
+    }
+    return this.length && pat && pat.length ? this.each(function() {
+        innerHighlight(this, pat.toUpperCase());
+    }) : this;
+};
+jQuery.fn.removeHighlight = function() {
+    return this.find("span.highlight").each(function() {
+        this.parentNode.firstChild.nodeName;
+        with (this.parentNode) {
+            replaceChild(this.firstChild, this);
+            normalize();
+        }
+    }).end();
+};
+var SEARCH = (function(){
+    var autoclose= function(){
+        $(window).click(function(e){
+            if($('.form-search-autocomplete').has(e.target).length == 0 && !$('.top_search').is(e.target) && $('.auto_complete_result').has(e.target).length == 0 && !$('.auto_complete_result').is(e.target)){
+                $('.auto_complete_result').css({"display":"none"});
+            }
+        });
+    };
+    var autoComplete =function(){
+        var getAuto = null;
+        $(document).on('input', ".form-search-autocomplete input", function (){
+            var val = $(this).val();
+            clearTimeout(getAuto);
+            var rong = '';
+            $('.auto_complete_result .text_result').html(rong);
+            if (val != '') {
+                $('.auto_complete_result .lds-spinner').css('display','block');
+                $('.auto_complete_result').css('display','block');
+            }
+            var _this = $(this);
+            getAuto = setTimeout(function(){ 
+                if (val == "") {
+                    $('.auto_complete_result').css({"display":"none"});
+                }else {
+                    $.ajax({
+                        url: _this.closest('.form-search-autocomplete').attr('action'),
+                        type: 'POST',
+                        global: false,
+                        data: {val: val},
+                    })
+                    .done(function(data) {
+                        $('.auto_complete_result .lds-spinner').css('display','none');
+                        $('.auto_complete_result .text_result').html(data);
+                        if (val.trim().length > 1 ) {
+                            var arrKeys = val.split(" ");
+                            for (var i = arrKeys.length - 1; i >= 0; i--) {
+                                $('.auto_complete_result .text_result').highlight(arrKeys[i]);
+                            }
+                        }
+                    })
+                };
+            },300);
+        })
+    }
+    return {_:function(){
+        autoclose();
+        autoComplete();
+    }
+};
+})();
 var GUI = (function(){
 	var initWow = function() {
 		var wow = new WOW();
@@ -22,7 +109,7 @@ var GUI = (function(){
         	format:'d/m/yyyy',
         	language: 'vi'
   		}).datepicker('update', new Date()).on('changeDate', function(ev) {
-		    
+		    $(ev.currentTarget).closest('.form-book-medical-examination').find('.list-time-pick').slideDown(300);
 		});
   		$('#datepicker-medical input').val('');
   		$('#datepicker-medical input').val('Ngày đặt');
@@ -93,6 +180,29 @@ var GUI = (function(){
 			})
 		} 
 	}
+	var scrollIntoViewNew = function () {
+        if ($(".toc_list").length == 0) return;
+        $(document).on("click", '.toc_list a[href^="#"]', function (e) {
+            e.preventDefault();
+            var id = $(this).attr("href");
+            var $id = $(id);
+            if ($id.length === 0) {
+                return;
+            }
+            var pos = $id.offset().top;
+            $("body, html").animate({ scrollTop: pos }, 400);
+        });
+        $(document).on('click', '.toggle-content-toc', function(event) {
+        	event.preventDefault();
+        	$(this).toggleClass('active');
+        	var tocList = $(this).closest('#toc_container').find('.toc_list');
+        	if ($(this).hasClass('active')) {
+        		tocList.slideDown(300);
+        	}else {
+        		tocList.slideUp(300);
+        	}
+        });
+    }
 	return {
 		_:function(){
 			flashNotification();
@@ -102,6 +212,7 @@ var GUI = (function(){
 			initSearch();
 			initMenuShow();
 			backToTop();
+			scrollIntoViewNew();
 		}
 	};
 })();
@@ -296,6 +407,61 @@ var SLIDER = (function(){
 			}
 		});
 	}
+	var sliderTtbHome = function(){
+		if ($('.slide-ttb-home').length == 0) return;
+		if ($('.slide-ttb-content-home').length == 0) return;
+		const swiperThumb = new Swiper('.slide-ttb-content-home', {
+			slidesPerView: 1,
+			loop: false,
+			disableOnInteraction: true,
+			speed: 600,
+			effect: "coverflow",
+		});
+		const swiper = new Swiper('.slide-ttb-home', {
+			slidesPerView: 1.3,
+			speed: 1000,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			spaceBetween: 15,
+			pagination: {
+				el: ".pagination-ttb-home",
+				clickable: true,
+			},
+			thumbs: {
+				swiper: swiperThumb,
+			},
+			breakpoints: {
+				768: {
+					slidesPerView: 2.5,
+				},
+				991: {
+					slidesPerView: 1,
+					spaceBetween: 0,
+					effect: "coverflow"
+				}
+			}
+		});
+	}
+	var sliderGalley = function(){
+		if ($('.slide-galley').length == 0) return;
+		const swiper = new Swiper('.slide-galley', {
+			slidesPerView: 1.5,
+			loop: false,
+			disableOnInteraction: true,
+			speed:600,
+			pagination: {
+				el: ".pagination-galley",
+				clickable: true,
+			},
+			spaceBetween: 15,
+			breakpoints: {
+				768: {
+					slidesPerView: 2,
+					spaceBetween: 25
+				}
+			}
+		});
+	}
 	return {
 		_:function(){
 			sliderBannerHome();
@@ -306,11 +472,80 @@ var SLIDER = (function(){
 			sliderHotService();
 			sliderDoctorSameSpecialty();
 			sliderDoctorImage();
+			sliderTtbHome();
+			sliderGalley();
 		}
 	};
 })();
-
+var AJAX_SP = (function(){
+    var paginateAjax = function(){
+        var main_content = $('.module-paginate-ajax');
+        if ($('.module-paginate-ajax').length > 0) {
+            main_content.each(function(index, el) {
+                var _this = $(this);
+                $.ajax({
+                    url: _this.data('action'),
+                    type: 'GET',
+                    dataType: 'html',
+                    data: {info:_this.data('info')},
+                })
+                .done(function(data) {
+                    _this.html(data);
+                })
+            });
+        }
+        $(document).on('click', '.module-paginate-ajax .pagenigation a', function(event) {
+            event.preventDefault();
+            var resultBox = $(this).closest('.module-paginate-ajax');
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET',
+                dataType: 'html'
+            })
+            .done(function(data) {
+                resultBox.html(data);
+                var offsettop = resultBox.offset().top - $('header').innerHeight() - 50;
+                $('html,body').animate({
+                    scrollTop: offsettop
+                }, 700);
+            })
+        });
+    }
+    var sendContact =  function(){
+    	$('.form-send-contact').submit(function(event) {
+    		event.preventDefault();
+    		var _this = $(this);
+		    _this.addClass('in-loading-form');
+		    $.ajax({
+		    	url: _this.attr('action'),
+		    	type: 'POST',
+		    	dataType: 'json',
+		    	data: _this.serialize()
+		    })
+		    .done(function(json) {
+		    	if (json.code == 200) {
+		    		toastr.success(json.message);
+		    		setTimeout(function(){
+				        window.location.reload();
+				    }, 1500);
+		    	}else {
+		    		toastr.error(json.message);
+		    	}
+		    	setTimeout(function(){
+			        _this.removeClass('in-loading-form');
+			    }, 300);
+		    })
+    	});
+    }
+    return {_:function(){
+        paginateAjax();
+        sendContact();
+    }
+};
+})();
 $(document).ready(function(){
 	GUI._();
 	SLIDER._();
+	SEARCH._();
+	AJAX_SP._();
 })

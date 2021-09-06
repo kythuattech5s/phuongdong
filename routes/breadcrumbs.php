@@ -51,6 +51,7 @@ Breadcrumbs::for('news', function ($trail, $currentItem, $parent) {
 Breadcrumbs::for('service_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
+		$trail->push('Dịch vụ ý tế',VRoute::get('dich-vu-y-te'));
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\ServiceCategory::where('service_category.id', $currentItem->parent)->first();
@@ -67,6 +68,52 @@ Breadcrumbs::for('services', function ($trail, $currentItem, $parent) {
     }
     else{
     	$trail->parent('service_category', $parent);
+    	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+});
+Breadcrumbs::for('question_category', function ($trail, $currentItem, $level = 0) {
+	if ($level == 0) {
+		$trail->parent('home');
+		$trail->push('Hỏi đáp chuyên gia',VRoute::get('hoi-dap-chuyen-gia'));
+	}
+	if ($currentItem->parent > 0) {
+		$parent = App\Models\QuestionCategory::where('question_category.id', $currentItem->parent)->first();
+	    if ($parent != null) {
+    		$trail->parent('question_category', $parent, $level += 1);
+	    }	
+	}
+    $trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('question', function ($trail, $currentItem, $parent) {
+    if ($parent == null) {
+		$trail->parent('home');
+   		$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+    else{
+    	$trail->parent('question_category', $parent);
+    	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+});
+Breadcrumbs::for('image_gallery_category', function ($trail, $currentItem, $level = 0) {
+	if ($level == 0) {
+		$trail->parent('home');
+		$trail->push('Thư viện ảnh',VRoute::get('thu-vien-anh'));
+	}
+	if ($currentItem->parent > 0) {
+		$parent = App\Models\QuestionCategory::where('image_gallery_categories.id', $currentItem->parent)->first();
+	    if ($parent != null) {
+    		$trail->parent('image_gallery_category', $parent, $level += 1);
+	    }	
+	}
+    $trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('image_gallery', function ($trail, $currentItem, $parent) {
+    if ($parent == null) {
+		$trail->parent('home');
+   		$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+    else{
+    	$trail->parent('image_gallery_category', $parent);
     	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
     }
 });

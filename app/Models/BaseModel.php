@@ -30,4 +30,22 @@ class BaseModel extends Model
 		}
 		return $q->where("$table.slug", $slug);
 	}
+	protected function fullTextWildcards($term)
+    {
+        $reservedSymbols = ['-', '+', '<', '>', '@', '(', ')', '~'];
+        $term = str_replace($reservedSymbols, '', $term);
+        $words = explode(' ', $term);
+        foreach ($words as $key => $word) {
+            if (strlen($word) >= 1) {
+                $words[$key] = '+' . $word  . '*';
+            }
+        }
+        $searchTerm = implode(' ', $words);
+        return $searchTerm;
+    }
+	public function scopeFullTextSearch($query, $columns, $term)
+    {
+        $query->select('*', \DB::raw("MATCH ({$columns}) AGAINST ('".$this->fullTextWildcards($term)."' IN NATURAL LANGUAGE MODE) as score"))->whereRaw("MATCH ({$columns}) AGAINST (? IN NATURAL LANGUAGE MODE)", $this->fullTextWildcards($term))->orderBy('score', 'desc');
+        return $query;
+    }
 }

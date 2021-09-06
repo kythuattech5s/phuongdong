@@ -137,6 +137,9 @@ $cltext: #676767;
 			width: 230px;
 		}
 	}
+	.item-content-equipment{
+		padding: 10px;
+	}
 }
 @media (max-width: 991px) {
 	.fs-16-cv{
@@ -240,6 +243,57 @@ $cltext: #676767;
 	.all-sub-title{
 		&.small-text{
 			font-size: 19px!important;
+		}
+	}
+	.modern-equipment-home-img{
+		padding-left: 0;
+		.slider-pagination{
+			display: none!important;
+		}
+	}
+	.modern-equipment-home{
+		.px-mobile{
+			padding-left: 0!important;
+			padding-right: 0!important;
+		}
+		.container-sp{
+			max-width: 100%;
+			background: #f3f3f3;
+			margin-top: 200px;
+		}
+		.all-title-wrapper{
+			padding:10px 0.75rem;
+			background: rgba(255,255,255,0.8);
+		}
+		.all-title{
+			color: #555555;
+			&:after{
+				background: $main!important;
+			}
+		}
+	}
+	.item-img-equipment{
+		padding: 0px;
+		.c-img{
+			background: rgba(255,255,255,0.8);
+			box-shadow: none;
+		}
+	}
+	.modern-equipment-home-wraper{
+		top: -70px;
+	}
+	.new-home{
+		margin-top: -60px;
+		background: white;
+	}
+	.gallery-big{
+		.img{
+			width: 100%;
+		}
+		.content{
+			width: 100%;
+			padding-left: 0;
+			margin-top: 10px;
 		}
 	}
 }

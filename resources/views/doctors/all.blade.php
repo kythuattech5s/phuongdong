@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/comment.css')}}">
+@endsection
 @section('content')
 <section class="container">
     {{\Breadcrumbs::render('static','Đội ngũ bác sĩ','doi-ngu-bac-si')}}

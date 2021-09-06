@@ -1096,4 +1096,39 @@ class Support
 	    }
 	    return $result;
     }
+    public static function createdTocContent($content){
+    	include('simple_html_dom.php');
+		if($content == ''){
+			return ['toc'=>'','content'=>''];
+		}
+		$html = str_get_html($content, true, true, DEFAULT_TARGET_CHARSET, false);
+		$toc = '<div id="toc_container" class="no_bullets">';
+		$last_level = 0;
+		$i = 0;
+		$headings = $html->find('h2,h3,h4,h5');
+		$toc .= '<div class="toc-header"><span class="icon"><i class="fa fa-list-ol" aria-hidden="true"></i></span>Nội dung chính <span class="toggle-content-toc"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>';
+		foreach($headings != null ? $headings : [] as $h){
+			$innerTEXT = trim($h->innertext);
+			$text = $h->plaintext;
+			$id1 = \Str::slug($text);
+			$id =  \Str::slug($text);
+	        $h->id= $id;
+	        $level = intval($h->tag[1]);
+	        if($level > $last_level)
+	        $toc .= "<ul".($i == 0 ? ' class="toc_list"' : '').">";
+	        else{
+	        $toc .= str_repeat('</li></ul>', $last_level - $level);
+	        $toc .= '</li>';
+	        }
+	        $toc .= "<li><a href='#{$id}' data-href='#{$id1}'>{$innerTEXT}</a>";
+	        $last_level = $level;
+	        $i++;
+	    }
+	    $toc .= str_repeat('</li></ul>', $last_level);
+	    $toc .= '</div>';
+	    $toc = $i === 0 ? '' : $toc;
+	    $data['toc'] = $toc;
+	    $data['content'] = $html;
+	    return $data;
+	}
 }

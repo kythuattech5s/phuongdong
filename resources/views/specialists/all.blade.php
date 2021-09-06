@@ -45,7 +45,7 @@
                                 <span>{{\Support::showDate($item->created_at)}}</span>
                             </div>
                         </div>
-                    </div>}
+                    </div>
                 @endif
             @endforeach
             <div class="pagenigation mb-2 mt-3 mt-xl-4">

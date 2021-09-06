@@ -20,12 +20,17 @@
 				</a>
 			</div>
 			<div class="search-box">
-				<form class="form-search-header" action="" method="GET" accept-charset="utf8" autocomplete="off">
+				<form class="form-search-header form-search-autocomplete" action="{{VRoute::get('search')}}" method="GET" accept-charset="utf8" autocomplete="off">
 					<div class="position-relative">
 						<input class="fs-16-cv" type="text" name="q" placeholder="Tìm kiếm thông tin, hỏi đáp, bác sĩ...">
 						<button class="smooth" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
+						<div class="auto_complete_result">
+							<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+							<div class="text_result">
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -39,14 +44,14 @@
 				</div>
 			</a>
 			<div class="header-action d-none d-md-flex align-items-center justify-content-between">
-				<a href="" class="btn-all btn-all-main" title="Gửi câu hỏi"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Gửi câu hỏi</a>
+				<a href="" class="btn-all btn-all-main me-2" title="Gửi câu hỏi"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Gửi câu hỏi</a>
 				<a href="" class="btn-all btn-all-sp" title=""><i class="fa fa-commenting-o" aria-hidden="true"></i> Đặt lịch khám</a>
 			</div>
 			<div class="d-flex d-xl-none align-items-center ms-2">
 				<button class="btn-show-search-form me-3">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</button>
-				<button class="btn-lang me-3">
+				<button class="btn-lang me-3" onclick="doGTranslate('vi|en');return false;">
 					<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
 				</button>
 				<button class="d-flex justify-content-center align-items-center cspoint btn-menu-mobile" type="button">
@@ -67,7 +72,7 @@
 					@endphp
 					{{Support::showMenuRecursive($menu)}}
 				</nav>
-				<button class="btn-lang">
+				<button class="btn-lang" onclick="doGTranslate('vi|en');return false;">
 					<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
 				</button>
 				<button class="d-flex align-items-center btn-sp-menu cspoint" type="button">
