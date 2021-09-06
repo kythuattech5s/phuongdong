@@ -34,6 +34,7 @@
         var typeNotify = "{{Session::get('typeNotify', '')}}";
         var messageNotify = "{{Session::get('messageNotify', '')}}";
     </script>
+    <script src="admin/js/textdiff.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="admin/plug/select2/select2.min.js"></script>
     <script src="admin/plug/toast/toast.js"></script>

@@ -79,7 +79,6 @@
                         <div class="modal-body__compare">
                             @foreach($classify as $content)
                             <div class="compare-item {{$loop->first ? 'active' : ''}}" data-item="{{$content->id}}">
-                                
                                 <div class="compare-item__old">
                                     <b class="compare-item__item">Nội dung</b>
                                     <div class="s-content">
@@ -92,6 +91,9 @@
                                         {!! $content->content !!}
                                     </div>
                                 </div>
+                            </div>
+                            <div id="output">
+                                    
                             </div>
                             @endforeach
                         </div>
@@ -107,6 +109,18 @@
     @endforeach
 </div>
 <script>
+    @foreach($classifies as $type => $classify)
+        $('#{{$type.'-'.$name}}').on('shown.bs.modal', function () {
+            loadContent();
+        })
+    @endforeach
+    function loadContent(){
+        var new_html = $('.compare-item.active .compare-item__new .s-content');
+        var old_html = $('.compare-item.active .compare-item__old .s-content').html();
+        let output = htmldiff(old_html, new_html.html());
+        new_html.html(output);
+    }
+    
     function changeItem(){
         $('.history select').change(function(){
             const _this = $(this);
@@ -119,6 +133,7 @@
                     $(e).addClass('active');
                 };
             })
+            loadContent();
         })
     }
     changeItem();

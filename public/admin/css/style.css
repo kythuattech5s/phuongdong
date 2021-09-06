@@ -2736,3 +2736,14 @@ table {
     box-shadow: 0px 1px 6px 0.5px #ebebeb;
     border-radius: 5px;
 }
+
+ins {
+    text-decoration: none;
+    background-color: #d4fcbc;
+}
+
+del {
+    text-decoration: line-through;
+    background-color: #fbb6c2;
+    color: #555;
+}

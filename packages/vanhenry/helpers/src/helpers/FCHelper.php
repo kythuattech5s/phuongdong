@@ -448,7 +448,7 @@ class FCHelper{
 	}
 
 	public static function getHistories($arrayKey,$dataItem){
-        return DB::table($arrayKey['data_tables'])->where($arrayKey['origin_field'], $dataItem->id)->get();
+        return DB::table($arrayKey['data_tables'])->where($arrayKey['origin_field'], $dataItem->id)->orderBy('id','DESC')->get();
 	}
 
 	public static function getHUserById($id){
