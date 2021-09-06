@@ -57,7 +57,7 @@ var MAIN = (function(){
 
         function clickSave(){
             button.onclick = function(e){
-                if(pathname.indexOf('/esystem/edit/news') == 0){
+                if(pathname.indexOf('/esystem/edit/news/') == 0){
                     if(!$('#frmUpdate').find('input[name="is_draft"]')){
                         $('#frmUpdate').find('input[name="is_draft"]').val(0);
                     }else{
