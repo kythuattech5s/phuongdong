@@ -9,8 +9,8 @@ class ImageGalleryCategoryController extends Controller
 	public function all($request, $route, $link)
 	{
         $currentItem = $route;
-		$listItems = ServiceCategory::act()->Ord()->paginate(12);
-		return View::make('service_categories.all',compact('currentItem','listItems'));	
+		$listItems = ImageGalleryCategory::act()->Ord()->paginate(12);
+		return View::make('image_gallery_categories.all',compact('currentItem','listItems'));	
 	}
     public function view($request, $route, $link){
         $currentItem = ImageGalleryCategory::slug($link)->act()->first();

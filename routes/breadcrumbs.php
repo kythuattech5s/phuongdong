@@ -51,7 +51,7 @@ Breadcrumbs::for('news', function ($trail, $currentItem, $parent) {
 Breadcrumbs::for('service_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
-		$trail->push('Dịch vụ ý tế',VRoute::get('dich-vu-y-te'));
+		$trail->push('Dịch vụ y tế',VRoute::get('dich-vu-y-te'));
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\ServiceCategory::where('service_category.id', $currentItem->parent)->first();

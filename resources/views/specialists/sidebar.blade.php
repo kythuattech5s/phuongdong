@@ -38,7 +38,7 @@
                                 <h2><a href="{{$item->slug}}" class="smooth fs-16 robotob hv-main-sp" title="{{$item->name}}">{{$item->name}}</a></h2>
                                 <div class="text-right d-flex flex-wrap justify-content-between">
                                     <div class="short-content fs-12">{{Str::words($item->short_content,'4')}}</div>
-                                    <a href="{{$item->name}}" class="smooth hv-icon btn-all btn-all-main d-inline-block" title="Xem thêm">
+                                    <a href="{{$item->slug}}" class="smooth hv-icon btn-all btn-all-main d-inline-block" title="Xem thêm">
                                         <span class="me-1">XEM THÊM</span>
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     </a>

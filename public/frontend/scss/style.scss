@@ -252,6 +252,9 @@ input,textarea{
 .fs-20,.fs-20-cv{
 	font-size: 20px !important;
 }
+.fs-21,.fs-21-cv{
+	font-size: 21px !important;
+}
 .fs-22,.fs-22-cv{
 	font-size: 22px !important;
 }
@@ -2557,5 +2560,30 @@ input.star:checked ~ label.star:before{
 	.c-img{
 		border-radius: 10px;
 		box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.1);
+	}
+}
+.item-gallery-category{
+	.view-more{
+		a{
+			display: inline-block;
+			position: relative;
+			z-index: 2;
+			padding: 8px 35px;
+			border-radius: 50px;
+			background: #ebebeb;
+			&:hover{
+				background: #555555;
+				color: #ebebeb;
+			}
+		}
+		&:before{
+			content:'';
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			top: 50%;
+			left: 0;
+			background: #ebebeb;
+		}
 	}
 }
