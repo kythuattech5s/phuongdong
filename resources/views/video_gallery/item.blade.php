@@ -3,8 +3,8 @@
         <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
             <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
         </a>
-        <div class="icon">
-        	<i class="fa fa-camera" aria-hidden="true"></i>
+        <div class="icon big">
+        	<i class="fa fa-caret-right" aria-hidden="true"></i>
         </div>
     </div>
     <div class="content mt-2">
