@@ -1,12 +1,8 @@
 @extends('index')
 @section('content')
-<section class="container">
-    <section class="container pt-2 pb-4">
-    <ul class="breadcrumb">
-        <li><a href="" title="">Trang chủ</a></li>
-        <li><a href="" title="" class="active">Hiểu về cơ thể bạn</a></li>
-    </ul>
-    <h1 class="fs-30-cv robotob wow fadeInUp">Tìm hiểu về cơ thể bạn theo bảng chữ cái</h1>
+<section class="container pt-2 pb-4">
+    {{\Breadcrumbs::render('static','Tra cứu thuốc','tra-cuu-thuoc')}}
+    <h1 class="fs-30-cv robotob wow fadeInUp">Tìm hiểu về các loại thuốc theo bảng chữ cái</h1>
     <div class="list-character px-xl-5 ms-3 mt-3 mt-xl-4 wow fadeInUp">
         @foreach (range('A', 'Z') as $item)
             <div class="item-character" data-key="{{$item}}">
@@ -38,6 +34,5 @@
             </ul>
         </div>
     @endforeach
-</section>
 </section>
 @stop
