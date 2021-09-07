@@ -37,7 +37,7 @@
 					</ul>
 				</li>
 			@endif
-			@if($tableData->get('has_draft','') == 1)
+			@if($tableData->get('has_draft','') == 1 && isset($tab))
 				@foreach($tab as $key => $detailTab)
 				<li>
 					<li class="{{$loop->first ? 'active' : ''}}"><a class="pull-right bgmain" data-toggle="pill" href="#{{$key}}">{{$detailTab['name']}}</a></li>
