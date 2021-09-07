@@ -223,7 +223,34 @@
   .gallery-big .content {
     width: 100%;
     padding-left: 0;
-    margin-top: 10px; } }
+    margin-top: 10px; }
+
+  .item-hot-galley {
+    padding-bottom: 20px; }
+    .item-hot-galley .img {
+      width: 100%;
+      padding-left: 3px; }
+    .item-hot-galley .content {
+      width: 100%;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      margin-top: 10px; }
+      .item-hot-galley .content .all-sub-title {
+        margin-left: 0px;
+        margin-bottom: 10px; }
+    .item-hot-galley .content-wrapper {
+      padding: 15px; }
+
+  .hot-galley-module {
+    background: #f2f2f2; }
+    .hot-galley-module .slider-controls .prev-btn, .hot-galley-module .slider-controls .next-btn {
+      top: 30%;
+      width: 40px;
+      height: 40px; }
+    .hot-galley-module .slider-controls .prev-btn {
+      left: -12px; }
+    .hot-galley-module .slider-controls .next-btn {
+      right: -12px; } }
 @media (max-width: 767px) {
   .fs-16-cv {
     font-size: 14px !important; }

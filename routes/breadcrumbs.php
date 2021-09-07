@@ -117,6 +117,34 @@ Breadcrumbs::for('image_gallery', function ($trail, $currentItem, $parent) {
     	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
     }
 });
+Breadcrumbs::for('video_gallery_category', function ($trail, $currentItem, $level = 0) {
+	if ($level == 0) {
+		$trail->parent('home');
+		$trail->push('Thư viện video',VRoute::get('thu-vien-video'));
+	}
+	if ($currentItem->parent > 0) {
+		$parent = App\Models\QuestionCategory::where('video_gallery_categories.id', $currentItem->parent)->first();
+	    if ($parent != null) {
+    		$trail->parent('video_gallery_category', $parent, $level += 1);
+	    }	
+	}
+    $trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('video_gallery', function ($trail, $currentItem, $parent) {
+    if ($parent == null) {
+		$trail->parent('home');
+   		$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+    else{
+    	$trail->parent('video_gallery_category', $parent);
+    	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+});
+Breadcrumbs::for('drug_lookup', function ($trail, $currentItem) {
+	$trail->parent('home');
+	$trail->push('Tra cứu thuốc', VRoute::get('tra-cuu-thuoc'));
+	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
 Breadcrumbs::for('news_tag', function ($trail, $currentItem) {
 	$trail->parent('home');
 	$trail->push($currentItem->name);

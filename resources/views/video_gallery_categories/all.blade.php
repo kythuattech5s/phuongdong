@@ -1,8 +1,8 @@
 @extends('index')
 @section('content')
 <section class="container pt-3 pb-4">
-    {{\Breadcrumbs::render('static','Thư viện ảnh','thu-vien-anh')}}
-    <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Thư viện ảnh</h1>
+    {{\Breadcrumbs::render('static','Thư viện video','thu-vien-video')}}
+    <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Thư viện video</h1>
     <div class="fs-16 wow fadeInUp">
         Bệnh viện Đa khoa Phương Đông quy tụ đội ngũ chuyên gia, giáo sư, bác sĩ đầu ngành, có nhiều năm kinh nghiệm công tác tại các bệnh viện tuyến đầu trong cả nước và tu nghiệp tại các trung tâm chăm sóc sức khỏe, bệnh viện lớn ở nước ngoài.
     </div>
@@ -14,13 +14,13 @@
                 <div class="swiper-wrapper">
                     @foreach (array_slice($listHotItems,0,1) as $item)
                         <div class="swiper-slide">
-                            @include('image_gallery.item_hot')
+                            @include('video_gallery.item_hot')
                         </div>
                     @endforeach
                     @foreach (array_slice($listHotItems,0,1) as $key => $item)
                         @if ($key > 4)
                             <div class="swiper-slide">
-                                @include('image_gallery.item_hot')
+                                @include('video_gallery.item_hot')
                             </div>
                         @endif
                     @endforeach
@@ -38,7 +38,7 @@
         <div class="row gx-3 gx-lg-4">
             @foreach (array_slice($listHotItems,1,4) as $item)
                 <div class="col-6 col-lg-3 mb-3 wow fadeInUp">
-                    @include('image_gallery.item')
+                    @include('video_gallery.item')
                 </div>
             @endforeach
         </div>
@@ -47,7 +47,7 @@
 <section class="container pt-3 pt-xl-4 pb-lg-4">
     @foreach ($listItems as $itemCate)
         @php
-            $listItemGallery = $itemCate->imageGallery()->act()->take(3)->get();
+            $listItemGallery = $itemCate->videoGallery()->act()->take(3)->get();
         @endphp
         @if ($listItemGallery->count() > 0)
             <div class="item-gallery-category mb-4 wow fadeInUp">
@@ -55,7 +55,7 @@
                 <div class="row mt-2">
                     @foreach ($listItemGallery as $item)
                         <div class="col-sm-6 col-lg-4 mb-3">
-                            @include('image_gallery.item')
+                            @include('video_gallery.item')
                         </div>
                     @endforeach
                 </div>
