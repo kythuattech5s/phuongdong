@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-8 col-xl-72 shadow-box-right pt-1 pb-md-4 pb-xxl-5 pe-xxl-5">
             <ul class="breadcrumb">
-                {{\Breadcrumbs::render('image_gallery',$currentItem,$parent)}}
+                {{\Breadcrumbs::render('video_gallery',$currentItem,$parent)}}
             </ul>
             <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
             <div class="title-info-new d-flex flex-wrap my-3 pb-0 pb-xl-2 fs-15 wow fadeInUp" data-wow-delay="0.2s">
@@ -18,40 +18,23 @@
                    <span class="clmain">{{$currentItem->publish_by}}</span>
                </p>
             </div>
+            <div class="c-img my-3 my-xl-4" style="padding-top: 56%">
+                {!!$currentItem->iframe_video!!}
+            </div>
             <div class="short-content-new fs-16 wow fadeInUp" data-wow-delay="0.3s">
                 {{$currentItem->short_content}}
             </div>
             <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
                 {!!$currentItem->content!!}
             </div>
-            <p class="fs-18 robotob wow fadeInUp mt-4 mb-2 text-uppercase pt-xl-2">Hình ảnh {{$currentItem->name}}</p>
-            <div class="row gx-2 wow fadeInUp">
-                @php
-                    $imgs = json_decode($currentItem->imgs, true);
-                    $imgs = $imgs !== null ? $imgs : [json_decode($currentItem->img,true)];
-                @endphp
-                @foreach ($imgs as $img)
-                    @php
-                        $itemImg = new \Stdclass;
-                        $itemImg->img = json_encode($img);
-                    @endphp
-                    <div class="col-6 col-lg-4">
-                        <div class="item-image-gallery mb-2">
-                            <a href="{%IMGV2.itemImg.img.-1%}" data-fancybox="gallery" data-animation-effect="fade" class="smooth c-img" title="">
-                                <img src="{%IMGV2.itemImg.img.-1%}" title="{%AIMGV2.itemImg.img.title%}" alt="{%AIMGV2.itemImg.img.alt%}">
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            @if (count($imageRelateds) > 0)
-                <p class="all-sub-title black robotob wow fadeInUp mt-4 mb-3 mb-xl-4 text-uppercase pt-xl-2">Xem thêm ảnh</p>
+            @if (count($videoRelateds) > 0)
+                <p class="all-sub-title black robotob wow fadeInUp mt-4 mb-3 mb-xl-4 text-uppercase pt-xl-2">Xem thêm video khác</p>
                 <div class="galley-slider position-relative wow fadeInUp">
                     <div class="swiper-container slide-galley">
                         <div class="swiper-wrapper">
-                            @foreach ($imageRelateds as $item)
+                            @foreach ($videoRelateds as $item)
                                 <div class="swiper-slide">
-                                    @include('image_gallery.item')
+                                    @include('video_gallery.item')
                                 </div>
                             @endforeach
                         </div>

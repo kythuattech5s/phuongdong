@@ -10,7 +10,8 @@ class ImageGalleryCategoryController extends Controller
 	{
         $currentItem = $route;
 		$listItems = ImageGalleryCategory::act()->Ord()->paginate(12);
-		return View::make('image_gallery_categories.all',compact('currentItem','listItems'));	
+        $listHotItems = ImageGallery::where('hot',1)->act()->get()->all();
+		return View::make('image_gallery_categories.all',compact('currentItem','listItems','listHotItems'));	
 	}
     public function view($request, $route, $link){
         $currentItem = ImageGalleryCategory::slug($link)->act()->first();

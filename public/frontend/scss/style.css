@@ -376,6 +376,9 @@ button:focus, input:focus {
 input:focus, textarea:focus {
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1); }
 
+.wow {
+  visibility: hidden; }
+
 .clmain {
   color: #2891cc; }
 
@@ -2600,6 +2603,9 @@ input.star:checked ~ label.star:before {
   padding: 5px 10px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 3px; }
+  .item-gallery .icon.big {
+    font-size: 20px;
+    padding: 2px 15px; }
 .item-gallery .sp-time {
   color: #b3b3b3; }
 
@@ -2611,6 +2617,17 @@ input.star:checked ~ label.star:before {
 .gallery-big .c-img {
   border-radius: 10px;
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1); }
+.gallery-big .icon {
+  position: absolute;
+  color: white;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 3px; }
+  .gallery-big .icon.big {
+    font-size: 20px;
+    padding: 2px 15px; }
 
 .item-gallery-category .view-more a {
   display: inline-block;
@@ -2630,5 +2647,55 @@ input.star:checked ~ label.star:before {
   top: 50%;
   left: 0;
   background: #ebebeb; }
+
+.hot-galley-module {
+  background: #f2f2f2; }
+  .hot-galley-module .slider-controls .prev-btn, .hot-galley-module .slider-controls .next-btn {
+    font-size: 26px;
+    background: white;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
+    color: #555555;
+    border-radius: 5px; }
+    .hot-galley-module .slider-controls .prev-btn:hover, .hot-galley-module .slider-controls .next-btn:hover {
+      background: #555555;
+      color: white; }
+  .hot-galley-module .slider-controls .prev-btn {
+    left: -15px; }
+  .hot-galley-module .slider-controls .next-btn {
+    right: -15px; }
+
+.item-hot-galley {
+  padding-bottom: 60px; }
+  .item-hot-galley .img {
+    width: 58%;
+    position: relative;
+    z-index: 2;
+    padding-left: 3px; }
+    .item-hot-galley .img .c-img {
+      padding-top: 60%;
+      border-radius: 10px;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1); }
+  .item-hot-galley .content {
+    width: calc(42% + 30px);
+    margin-left: -30px;
+    margin-bottom: -60px; }
+    .item-hot-galley .content .all-sub-title {
+      margin-left: 60px;
+      margin-bottom: 30px; }
+  .item-hot-galley .content-wrapper {
+    padding: 35px 60px 80px 60px;
+    border-radius: 20px;
+    border: solid 1px #d7d7d7; }
+  .item-hot-galley .icon {
+    position: absolute;
+    color: white;
+    left: 10px;
+    bottom: 10px;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px; }
+    .item-hot-galley .icon.big {
+      font-size: 20px;
+      padding: 2px 15px; }
 
 /*# sourceMappingURL=style.css.map */

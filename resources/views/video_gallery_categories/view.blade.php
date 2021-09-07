@@ -3,7 +3,7 @@
 <section class="container">
     <div class="row">
         <div class="col-lg-8 shadow-box-right py-3 py-md-4 pe-xxl-5">
-            {{\Breadcrumbs::render('image_gallery_category',$currentItem)}}
+            {{\Breadcrumbs::render('video_gallery_category',$currentItem)}}
             <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">{{$currentItem->name}}</h1>
             <p class="fs-16-cv wow fadeInUp">{{$currentItem->short_content}}</p>
             @foreach ($listItems as $key => $item)
@@ -13,8 +13,8 @@
                             <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
                                 <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
                             </a>
-                            <div class="icon">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
+                            <div class="icon big">
+                                <i class="fa fa-caret-right" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="content">
