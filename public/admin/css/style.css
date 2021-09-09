@@ -1540,8 +1540,8 @@ td.action i {
     align-items: center;
     justify-content: center;
     padding: 3px 10px;
-    width: 30px;
-    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
     font-size: 14px;
     font-family: robo;
     color: #272727;
