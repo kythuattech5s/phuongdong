@@ -48,7 +48,7 @@ class CheckController extends BaseAdminController{
     public function checkHasEdit(Request $request, $id){
         $date = new \DateTime;
         $news_editing = NewsEditOnline::where('news_id', $id)->first();
-        if($news_editing == null || ($news_editing !== null && $news_editing->updated_at <= $date->modify('-30 seconds'))){
+        if($news_editing == null || ($news_editing !== null && $news_editing->updated_at <= $date->modify('-8 seconds'))){
             if($news_editing !== null){
                 $news_editing->delete();
             }
@@ -67,15 +67,17 @@ class CheckController extends BaseAdminController{
 
     public function saveContent(Request $request, $id){
         $user = Auth::guard('h_users')->user();
-        $news = News::withoutGlobalScope('draft')->find($id);
-        NewsHistory::insert([
-            'h_user_id' => $user->id,
-            'content_old' => $news->content,
-            'content' => $request->content,
-            'news_id' => $id,
-            'type' => $request->type,
-            'created_at' => new \DateTime
-        ]);
+        $news = News::withoutGlobalScope('draft')->withoutGlobalScope('trash')->find($id);
+        if($news !== null){
+            NewsHistory::create([
+                'h_user_id' => $user->id,
+                'content_old' => $news->content,
+                'content' => $request->content,
+                'news_id' => $id,
+                'type' => $request->type,
+                'created_at' => new \DateTime
+            ]);
+        }
     }
 
 

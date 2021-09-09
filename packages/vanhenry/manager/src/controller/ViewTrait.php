@@ -440,13 +440,14 @@ trait ViewTrait{
 		$view = \View::exists('vh::view.view'.$tableData->type_show)?'vh::view.view'.$tableData->type_show:'vh::view.view_normal';
 		return view($view,$data);
 	}
-	public function getDataTableTab($table, $data){
+	public function getDataTableTab($table, $data, $q = null, $inputs = null){
+		
 		// Lấy trường show
         $dataTable = $data['tableData'];
         $dataDetailTable = $data['tableDetailData'];
         $tab = $data['tab'];
 
-        $paginate = $dataTable['rpp_admin'];
+        $paginate = $inputs !== null ? $inputs['limit'] : $dataTable['rpp_admin'];
 
 		$fieldShow = $data['tableDetailData']->filter(function($q){
             return $q->show == 1 || $q->type_show == 'PRIMARY_KEY';
@@ -464,7 +465,11 @@ trait ViewTrait{
 		if($dataTable['has_draft']){
             $nameFiledShow[] = 'is_draft';
 		}
-        $values = DB::table($table)->select($nameFiledShow);
+		if($q !== null){
+			$values = $q;
+		}else{
+			$values = DB::table($table)->select($nameFiledShow)->orderBy('id','DESC');
+		}
 		foreach($tab as $key => $name){
 			switch($key){
 				case 'home':
@@ -490,7 +495,7 @@ trait ViewTrait{
 					})->where(function($q){
 						$q->whereNull('trash')->orWhere('trash',0);
 					})->where(function($q){
-                        $q->whereNull('act')->orWhere('act', 0);
+                        $q->whereNull('act')->orWhere('act', 0)->orWhere('time_published','>',new \DateTime);
 					})->paginate($paginate);
 					break;
 				case 'trash':

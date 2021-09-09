@@ -17,6 +17,12 @@ class News extends BaseModel
                 $q->whereNull('is_draft')->orWhere('is_draft', 0);
             });
         });
+
+        static::addGlobalScope('trash', function (Builder $q) {
+            $q->where(function($q){
+                $q->whereNull('trash')->orWhere('trash', 0);
+            });
+        });
     }
 
     public function tags()
