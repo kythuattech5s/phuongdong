@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/comment.css')}}">
 @endsection
 @section('content')
-<section class="container">
+<section class="container pt-xl-2">
     {{\Breadcrumbs::render('static','Đội ngũ bác sĩ','doi-ngu-bac-si')}}
     <div class="border-top mt-2">
     </div>

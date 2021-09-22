@@ -5,6 +5,9 @@ class VRoute
 {
 	public static function get($code, $lang = null)
 	{
+		if ($code == 'home') {
+			return route('home');
+		}
 		$route = \Cache::remember('v_route_static', 10 * 60, function () {
     	return \DB::table('v_routes')->where('is_static', 1)->get();
 		});
@@ -14,7 +17,6 @@ class VRoute
 		});
 
 		$route = $route->first();
-
 		if($lang == null){
 			$lang = App::getLocale();
 		}
@@ -22,7 +24,6 @@ class VRoute
 		if ($route == null) {
 			return route('home');
 		}
-
-		return route('home').'/'.$route->{$lang.'_link'};
+		return route('home').'/'.$route->{$lang.'_link'}.'/';
 	}
 }

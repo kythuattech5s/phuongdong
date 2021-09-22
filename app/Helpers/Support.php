@@ -3,6 +3,7 @@ namespace App\Helpers;
 use DB;
 use Carbon\Carbon;
 use App\Models\Menu;
+use App\Models\MenuSitemap;
 use App\Models\MenuCategory;
 use App\Helpers\Media;
 use App\Models\Comment;
@@ -137,7 +138,7 @@ class Support
 				return Currency::showMoney($value);
 				break;
 			case 'slug':
-				return route('home').'/'.$value;
+				return route('home').'/'.$value.'/';
 				break;
 			case 'link':
 				return self::language($value);
@@ -268,6 +269,14 @@ class Support
 		}
 		return $menus->get();
 	}
+	public static function getMenuSitemapRecursive($group = null,int $take = null)
+	{
+		$menus = MenuSitemap::where('parent', 0)->act()->ord()->with('recursiveChilds');
+		if ($take != null) {
+			return $menus->take($take)->get();
+		}
+		return $menus->get();
+	}
 	
 	public static function showMenuRecursive($menus)
 	{
@@ -276,7 +285,7 @@ class Support
 				foreach ($menus as $menu) {
 					$active = url()->current() == url($menu->link) ? "active" : " ";
 					echo '<li>';
-						echo '<a href="'.$menu->link.'" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
+						echo '<a href="'.$menu->link.'/" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
 								if($menu->icon != ''){
 									echo '<img src="'.\FCHelper::eimg2($menu,'icon','200x0').'" alt="'.\Support::show($menu, 'name').'" title="'.\Support::show($menu, 'name').'"/>';
 								}

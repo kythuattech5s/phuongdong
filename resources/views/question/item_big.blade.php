@@ -1,7 +1,7 @@
 <div class="question-big d-flex flex-wrap pb-3 pb-xxl-4 mt-2 pt-1 wow fadeInUp">
     <div class="img">
-        <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
-            <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+        <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+            @include('image_loader.big',['itemImage'=>$item])
         </a>
     </div>
     <div class="content">
@@ -20,10 +20,10 @@
             $parent = $item->category()->act()->first();
         @endphp
         @if (isset($parent))
-            <h2><a href="{{$parent->slug}}" class="smooth theme-question-name text-uppercase" title="{{$parent->name}}">{{$parent->name}}</a></h2>
+            <h2><a href="{{Support::show($parent, 'slug')}}" class="smooth theme-question-name text-uppercase" title="{{$parent->name}}">{{$parent->name}}</a></h2>
         @endif
         <h3>
-            <a href="{{$item->slug}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+            <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
         </h3>
         <div class="fs-16-cv my-2 my-xl-3">{{$item->short_content}}</div>
     </div>

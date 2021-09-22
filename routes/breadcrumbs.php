@@ -19,7 +19,9 @@ Breadcrumbs::for('all-doctors-sub', function ($trail,$specialists) {
 Breadcrumbs::for('doctors', function ($trail,$currentItem,$specialists) {
 	$trail->push('Trang chủ', VRoute::get('home'));
 	$trail->push('Đội ngũ bác sĩ', VRoute::get('doi-ngu-bac-si'));
-	$trail->push($specialists->name, \Support::show($specialists, 'slug'));
+	if (isset($specialists)) {
+		$trail->push($specialists->name, \Support::show($specialists, 'slug'));
+	}
 	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
 });
 Breadcrumbs::for('page', function ($trail,$currentItem) {
@@ -140,9 +142,19 @@ Breadcrumbs::for('video_gallery', function ($trail, $currentItem, $parent) {
     	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
     }
 });
-Breadcrumbs::for('drug_lookup', function ($trail, $currentItem) {
+Breadcrumbs::for('drug_lookups', function ($trail, $currentItem) {
 	$trail->parent('home');
 	$trail->push('Tra cứu thuốc', VRoute::get('tra-cuu-thuoc'));
+	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('body_lookups', function ($trail, $currentItem) {
+	$trail->parent('home');
+	$trail->push('Tra cứu cơ thể', VRoute::get('tra-cuu-co-the'));
+	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('disease_lookups', function ($trail, $currentItem) {
+	$trail->parent('home');
+	$trail->push('Tra cứu bệnh', VRoute::get('tra-cuu-benh'));
 	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
 });
 Breadcrumbs::for('news_tag', function ($trail, $currentItem) {

@@ -1,3 +1,7 @@
+function updateTextInputFontsize(val){
+	$('.current-fontsize').html(val);
+	$('.new-content-main').css('fontSize',val+'px');
+}
 jQuery.fn.highlight = function(pat) {
     function innerHighlight(node, pat) {
         var skip = 0;
@@ -59,22 +63,27 @@ var SEARCH = (function(){
                 if (val == "") {
                     $('.auto_complete_result').css({"display":"none"});
                 }else {
-                    $.ajax({
-                        url: _this.closest('.form-search-autocomplete').attr('action'),
-                        type: 'POST',
-                        global: false,
-                        data: {val: val},
-                    })
-                    .done(function(data) {
-                        $('.auto_complete_result .lds-spinner').css('display','none');
-                        $('.auto_complete_result .text_result').html(data);
-                        if (val.trim().length > 1 ) {
-                            var arrKeys = val.split(" ");
-                            for (var i = arrKeys.length - 1; i >= 0; i--) {
-                                $('.auto_complete_result .text_result').highlight(arrKeys[i]);
-                            }
-                        }
-                    })
+                	if (val.length < 3) {
+                		$('.auto_complete_result .lds-spinner').css('display','none');
+	                    $('.auto_complete_result .text_result').html('<p class="text-center py-2">Vui lòng nhập từ khóa it nhất 3 kí tự</p>');
+                	}else {
+                		$.ajax({
+	                        url: _this.closest('.form-search-autocomplete').attr('action'),
+	                        type: 'POST',
+	                        global: false,
+	                        data: {val: val},
+	                    })
+	                    .done(function(data) {
+	                        $('.auto_complete_result .lds-spinner').css('display','none');
+	                        $('.auto_complete_result .text_result').html(data);
+	                        if (val.trim().length > 1 ) {
+	                            var arrKeys = val.split(" ");
+	                            for (var i = arrKeys.length - 1; i >= 0; i--) {
+	                                $('.auto_complete_result .text_result').highlight(arrKeys[i]);
+	                            }
+	                        }
+	                    })	
+                	}
                 };
             },300);
         })
@@ -87,12 +96,40 @@ var SEARCH = (function(){
 })();
 var GUI = (function(){
 	var initWow = function() {
-		var wow = new WOW();
-		wow.init();
+		if ($(window).width() > 575) {
+			var wow = new WOW();
+			wow.init();
+		}
 	}
+	var initNumberUp = function(){
+        if($('.list_count_top').length > 0) {
+            var capacityStatus=0;
+            var win = $(window);
+            var heiwin = win.height();
+            win.scroll(function() {  
+                if(capacityStatus==0 && win.scrollTop() > ($('.list_count_top').offset().top) - heiwin){
+                    if($('.item_count').length>0){
+                        $('.item_count').each(function () {
+                            $(this).prop('Counter',0).animate({
+                                Counter: $(this).text().replace(/\D/g, '').replace(/ /g,'')
+                            }, {
+                                duration: 3000,
+                                easing: 'swing',
+                                step: function (now) {
+                                    $(this).text(Math.ceil(now));
+                                }
+                            });
+                        });
+                    }
+                    capacityStatus=1; 
+                }
+            });
+        }
+    }
  	var flashNotification = function(){
  		$('.flash-notification .close-icon').click(function(event) {
  			$(this).closest('.flash-notification').slideUp(300);
+ 			sessionStorage.setItem('read_notification', 1);
  		});
 	}
 	var initMenuChild = function(){
@@ -109,10 +146,19 @@ var GUI = (function(){
         	format:'d/m/yyyy',
         	language: 'vi'
   		}).datepicker('update', new Date()).on('changeDate', function(ev) {
-		    $(ev.currentTarget).closest('.form-book-medical-examination').find('.list-time-pick').slideDown(300);
+		    $(ev.currentTarget).closest('form').find('.list-time-pick').slideDown(300);
 		});
   		$('#datepicker-medical input').val('');
-  		$('#datepicker-medical input').val('Ngày đặt');
+
+  		var datetimepicker2 = $("#datepicker-medical2").datepicker({ 
+        	autoclose: true, 
+        	todayHighlight: true,
+        	format:'d/m/yyyy',
+        	language: 'vi'
+  		}).datepicker('update', new Date()).on('changeDate', function(ev) {
+		    $(ev.currentTarget).closest('form').find('.list-time-pick').slideDown(300);
+		});
+  		$('#datepicker-medical2 input').val('');
 	}
 	var initSearch = function(argument) {
 		$('.btn-show-search-form').click(function(event) {
@@ -212,8 +258,41 @@ var GUI = (function(){
     		if ($(this).hasClass('active')) {
     			$('.section-item-search').not($('#'+idKey)).addClass('d-none');
     			$('#'+idKey).removeClass('d-none');
+    		}else {
+    			$('.section-item-search').removeClass('d-none');
     		}
     	});
+    	$(document).on('click', '.section-item-search .back-first-page', function(event) {
+    		event.preventDefault();
+    		$('.section-item-search').removeClass('d-none');
+    		$('.list-character .item-character')	.removeClass('active');
+    	});
+    }
+    var showQuickNotification =  function () {
+    	if ($('.flash-notification').length > 0) {
+    		let check = parseInt(sessionStorage.getItem('read_notification'));
+    		if (check !== 1) {
+	    		setTimeout(function(){
+	    			$('.flash-notification').slideDown(500);
+	    		}, 1500);
+    		}
+    	}
+    }
+    var showChangeFontSizeUser = function (){
+    	$('.btn-show-change-fontsize').click(function(event) {
+    		event.preventDefault();
+    		$(this).toggleClass('active');
+    		if ($(this).hasClass('active')) {
+    			$('.show-change-font-size').slideDown(300);
+    		}else {
+    			$('.show-change-font-size').slideUp(300);
+    		}
+    	});
+    	$(window).click(function(e){
+            if($('.btn-show-change-fontsize').has(e.target).length == 0 && !$('.btn-show-change-fontsize').is(e.target) && $('.show-change-font-size').has(e.target).length == 0 && !$('.show-change-font-size').is(e.target)){
+                $('.show-change-font-size').slideUp(300);
+            }
+        });
     }
 	return {
 		_:function(){
@@ -226,6 +305,9 @@ var GUI = (function(){
 			backToTop();
 			scrollIntoViewNew();
 			showActiveCharacter();
+			showQuickNotification();
+			showChangeFontSizeUser();
+			initNumberUp();
 		}
 	};
 })();
@@ -488,6 +570,71 @@ var SLIDER = (function(){
 			}
 		});
 	}
+	var sliderGreenHospitalModel = function(){
+		if ($('.slider-green-hospital-model').length == 0) return;
+		const swiper = new Swiper('.slider-green-hospital-model', {
+			slidesPerView: 1,
+			loop: false,
+			disableOnInteraction: true,
+			speed: 1000,
+			effect: "coverflow",
+			pagination: {
+				el: ".pagination-green-hospital-model",
+				clickable: true,
+			},
+		});
+	}
+	var sliderIntroTtb = function(){
+		if ($('.slide-ttb-intrduce').length == 0) return;
+		const swiper = new Swiper('.slide-ttb-intrduce', {
+			slidesPerView: 1.5,
+			loop: false,
+			disableOnInteraction: true,
+			speed:600,
+			pagination: {
+				el: ".pagination-ttb-intrduce",
+				clickable: true,
+			},
+			spaceBetween: 10,
+			breakpoints: {
+				768: {
+					slidesPerView: 2,
+				}
+			}
+		});
+	}
+	var slideHistoryBegin = function(){
+		if ($('.slide-history-begin-thumb').length == 0) return;
+		const swiperThumb = new Swiper('.slide-history-begin-thumb', {
+			slidesPerView: 2.8,
+			speed: 1000,
+			freeMode: true,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			spaceBetween: 0,
+			breakpoints: {
+				768: {
+					slidesPerView: 4.5
+				},
+				991: {
+					slidesPerView: 5
+				},
+				1200: {
+					slidesPerView: 6
+				}
+			}
+		});
+		if ($('.slide-history-begin-main').length == 0) return;
+		const swiper = new Swiper('.slide-history-begin-main', {
+			slidesPerView: 1,
+			loop: false,
+			disableOnInteraction: true,
+			speed: 1000,
+			thumbs: {
+				swiper: swiperThumb,
+			}
+		});
+	}
 	return {
 		_:function(){
 			sliderBannerHome();
@@ -501,6 +648,9 @@ var SLIDER = (function(){
 			sliderTtbHome();
 			sliderGalley();
 			sliderHotGallery();
+			sliderGreenHospitalModel();
+			sliderIntroTtb();
+			slideHistoryBegin();
 		}
 	};
 })();
@@ -531,7 +681,7 @@ var AJAX_SP = (function(){
             })
             .done(function(data) {
                 resultBox.html(data);
-                var offsettop = resultBox.offset().top - $('header').innerHeight() - 50;
+                var offsettop = resultBox.offset().top - 50;
                 $('html,body').animate({
                     scrollTop: offsettop
                 }, 700);
@@ -564,9 +714,39 @@ var AJAX_SP = (function(){
 		    })
     	});
     }
+    var ratingUsfulNew = function(){
+    	$('.rating-new-info button').click(function(event) {
+    		event.preventDefault();
+    		var _this = $(this);
+    		var parent = _this.closest('.rating-new-info');
+    		if (parent.find('.active').length > 0) {
+    			toastr.success('Bạn đã đánh giá bài viết này rồi!');
+    			return;
+    		}
+    		_this.addClass('active');
+    		$.ajax({
+    			url: parent.data('action'),
+    			type: 'POST',
+    			dataType: 'json',
+    			data: {
+    				new: parent.data('new'),
+    				type: _this.data('type')
+    			}
+    		})
+    		.done(function(json) {
+    			if (json.code == 200) {
+		    		toastr.success(json.message);
+		    	}else {
+		    		_this.removeClass('active');
+		    		toastr.error(json.message);
+		    	}
+    		})
+    	});
+    }
     return {_:function(){
         paginateAjax();
         sendContact();
+        ratingUsfulNew();
     }
 };
 })();

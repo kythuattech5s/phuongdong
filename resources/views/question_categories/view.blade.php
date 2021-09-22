@@ -1,7 +1,9 @@
 @extends('index')
 @section('content')
 <section class="container">
-    {{\Breadcrumbs::render('question_category',$currentItem)}}
+    <div class="mb-2 pt-xl-2">
+        {{\Breadcrumbs::render('question_category',$currentItem)}}
+    </div>
     <div class="row">
         <div class="col-lg-8 col-xl-72 mb-4 order-lg-2">
             <h1 class="fs-30-cv robotob wow fadeInUp">{{$currentItem->name}}</h1>

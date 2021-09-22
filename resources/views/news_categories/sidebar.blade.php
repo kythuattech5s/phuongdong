@@ -6,13 +6,13 @@
     @foreach (array_slice($listNews,0,1) as $item)
         <div class="new-side-bar-big py-3 wow fadeInUp" data-wow-delay="0.2s">
             <div class="img">
-                <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
-                    <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+                    @include('image_loader.big',['itemImage'=>$item])
                 </a>
             </div>
             <div class="content mt-2 mt-xl-3">
                 <h3>
-                    <a href="{{$item->slug}}" class="smooth hv-main-sp fs-18-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+                    <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-18-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                 </h3>
                 <div class="item-time mt-1">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -25,13 +25,13 @@
     @foreach (array_slice($listNews,1,4) as $item)
         <div class="new-side-bar-small d-flex py-3 wow fadeInUp" data-wow-delay="0.3s">
             <div class="img">
-                <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
-                    <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+                    @include('image_loader.small',['itemImage'=>$item])
                 </a>
             </div>
             <div class="content ps-3">
                 <h3>
-                    <a href="{{$item->slug}}" class="smooth hv-main-sp fs-18-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+                    <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-18-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                 </h3>
                 <div class="item-time mt-1">
                     <i class="fa fa-calendar" aria-hidden="true"></i>

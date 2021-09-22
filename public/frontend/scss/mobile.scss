@@ -1,6 +1,11 @@
 $main: #2891cc;
 $sp: #e57709;
 $cltext: #676767;
+@media (min-width: 575px) {
+	.wow{
+		visibility: hidden;
+	}
+}
 @media (min-width: 991px) {
 	.shine-effect {
 		overflow: hidden;
@@ -33,6 +38,33 @@ $cltext: #676767;
 	}
 }
 
+@media (min-width: 1200px) {
+	.col-xl-28{
+		width: 28%;
+	}
+	.col-xl-72{
+		width: 72%;
+	}
+}
+@media (min-width: 1400px) {
+	.container{
+		max-width: 1170px;
+	}
+}
+@media (min-width: 1599px) {
+	.geographical-advantage{
+		.sp-col{
+			padding-right: 100px!important;
+		}
+	}
+}
+@media (min-width: 1900px) {
+	.geographical-advantage{
+		.sp-col{
+			padding-right: 225px!important;
+		}
+	}
+}
 @media (max-width: 1400px) {
 	.btn-sp-menu{
 		right: -80px;
@@ -43,21 +75,6 @@ $cltext: #676767;
 	.fs-36-cv{
 		font-size: 30px !important;
 	}
-}
-@media (min-width: 1400px) {
-	.container{
-		max-width: 1170px;
-	}
-}
-@media (min-width: 1200px) {
-	.col-xl-28{
-		width: 28%;
-	}
-	.col-xl-72{
-		width: 72%;
-	}
-}
-@media (max-width: 1400px) {
 	.all-title{
 		font-size: 28px;
 		padding-bottom: 10px;
@@ -98,7 +115,7 @@ $cltext: #676767;
 	}
 	.header-top{
 		.search-box{
-			width: auto;
+			width: auto!important;
 			.form-search-header{
 				-webkit-transition: all 0.3s ease 0s;
 				-moz-transition: all 0.3s ease 0s;
@@ -123,7 +140,7 @@ $cltext: #676767;
 			}
 		}
 		.header-action{
-			width: 265px;
+			min-width: 265px;
 		}
 	}
 	.item-doctor{
@@ -139,6 +156,9 @@ $cltext: #676767;
 	}
 	.item-content-equipment{
 		padding: 10px;
+	}
+	.vision-and-mission{
+		margin-top: -3rem;
 	}
 }
 @media (max-width: 991px) {
@@ -547,6 +567,15 @@ $cltext: #676767;
 	.list-question{
 		li{
 			margin-bottom: 15px;
+		}
+	}
+	.expert-team{
+		.list-info-doctor-content{
+			.item{
+				&:not(:first-child){
+					display: none;
+				}
+			}
 		}
 	}
 }

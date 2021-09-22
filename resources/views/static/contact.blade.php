@@ -2,7 +2,7 @@
 @section('content')
 <section class="container">
     <div class="row">
-        <div class="col-lg-8 shadow-box-right pb-4 pt-2 pe-xl-5">
+        <div class="col-lg-8 shadow-box-right pb-4 pt-xl-2 pe-xl-5">
             {{\Breadcrumbs::render('static','Liên hệ','lien-he')}}
             <h1 class="fs-30-cv robotob wow fadeInUp">Liên hệ</h1>
             <div class="short-content fs-16 mt-3 wow fadeInUp">

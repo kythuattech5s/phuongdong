@@ -1,14 +1,14 @@
 @extends('index')
 @section('content')
 <section class="container">
-    <div class="my-2">
+    <div class="mb-2 pt-xl-2">
         {{\Breadcrumbs::render('question',$currentItem,$parent)}}
     </div>
     <div class="row">
         <div class="col-lg-8 col-xl-72 mb-4 order-lg-2">
             <h1 class="fs-30-cv robotob wow fadeInUp">{{$currentItem->name}}</h1>
             <div class="question-main-image position-relative mt-4 pt-xl-2 mb-3 mx-auto wow fadeInUp">
-                <img src="{%IMGV2.currentItem.img.-1%}" title="{%AIMGV2.currentItem.img.title%}" alt="{%AIMGV2.currentItem.img.alt%}">
+                @include('image_loader.big',['itemImage'=>$currentItem])
                 <a href="{%IMGV2.currentItem.img.-1%}" data-fancybox class="smooth icon" title="{{$currentItem->name}}">
                     <i class="fa fa-search-plus" aria-hidden="true"></i>
                 </a>
@@ -17,7 +17,7 @@
             <div class="item-question mt-4 wow fadeInUp pt-xl-2 mb-3">
                 <div class="title-question d-flex flex-wrap align-items-center mb-2">
                     @if (isset($parent))
-                        <a href="{{$parent->slug}}" class="theme me-4 mb-1" title="{{$parent->name}}">
+                        <a href="{{Support::show($parent, 'slug')}}" class="theme me-4 mb-1" title="{{$parent->name}}">
                             <i class="fa fa-question-circle fs-16 me-1" aria-hidden="true"></i>
                             <span>Hỏi về: <span class="text-uppercase">{{$parent->name}}</span></span>
                         </a>
@@ -50,7 +50,7 @@
                     @endif
                     <p class="fs-15">Đã trả lời: Ngày {{\Support::showDate($currentItem->time_reply)}}
                         @if (isset($parent))
-                            / Chủ đề: <a href="{{$parent->slug}}" class="robotob hv-sp" title="{{$parent->name}}">{{$parent->name}}</a>
+                            / Chủ đề: <a href="{{Support::show($parent, 'slug')}}" class="robotob hv-sp" title="{{$parent->name}}">{{$parent->name}}</a>
                         @endif
                      </p>
                 </div>
@@ -66,19 +66,19 @@
                 @foreach (array_slice($questionRelateds,0,1) as $item)
                     <div class="question-big d-flex flex-wrap pb-3 pb-xxl-4 mt-3 pt-xl-2 wow fadeInUp">
                         <div class="img">
-                            <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
-                                <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                            <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+                                @include('image_loader.big',['itemImage'=>$item])
                             </a>
                         </div>
                         <div class="content">
                             <h3>
-                                <a href="{{$item->slug}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+                                <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                             </h3>
                             @php
                                 $parentItem = $item->category()->act()->first();
                             @endphp
                             @if (isset($parentItem))
-                                <h2 class="my-2"><a href="{{$parentItem->slug}}" class="smooth theme-question-name text-uppercase" title="{{$parentItem->name}}">{{$parentItem->name}}</a></h2>
+                                <h2 class="my-2"><a href="{{Support::show($parentItem, 'slug')}}" class="smooth theme-question-name text-uppercase" title="{{$parentItem->name}}">{{$parentItem->name}}</a></h2>
                             @endif
                             <p class="fs-16-cv">{{$item->short_content}}</p>
                             <div class="time fs-15 mt-2">
@@ -91,19 +91,19 @@
                     @foreach (array_slice($questionRelateds,1,4) as $item)
                         <div class="relate-new-small d-flex flex-wrap py-3 wow fadeInUp">
                             <div class="img order-lg-2">
-                                <a href="{{$item->slug}}" class="smooth c-img shine-effect" title="{{$item->name}}">
-                                    <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                                <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
+                                    @include('image_loader.big',['itemImage'=>$item])
                                 </a>
                             </div>
                             <div class="content">
                                  <h3>
-                                    <a href="{{$item->slug}}" class="smooth hv-main-sp fs-20-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
+                                    <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-20-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                                 </h3>
                                 @php
                                     $parentItem = $item->category()->act()->first();
                                 @endphp
                                 @if (isset($parentItem))
-                                    <h2 class="my-1"><a href="{{$parentItem->slug}}" class="smooth theme-question-name text-uppercase" title="{{$parentItem->name}}">{{$parentItem->name}}</a></h2>
+                                    <h2 class="my-1"><a href="{{Support::show($parentItem, 'slug')}}" class="smooth theme-question-name text-uppercase" title="{{$parentItem->name}}">{{$parentItem->name}}</a></h2>
                                 @endif
                                 <p class="fs-16-cv lg-13">{{$item->short_content}}</p>
                                 <div class="time fs-15 mt-2">

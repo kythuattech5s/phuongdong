@@ -6,7 +6,7 @@
                 $listCate = \App\Models\QuestionCategory::act()->get();
             @endphp
             @foreach ($listCate as $item)
-                <li><a href="{{$item->slug}}" class="smooth" title="{{$item->name}}"><i class="fa fa-angle-double-right me-2" aria-hidden="true"></i>{{$item->name}}</a></li>
+                <li><a href="{{Support::show($item, 'slug')}}" class="smooth" title="{{$item->name}}"><i class="fa fa-angle-double-right me-2" aria-hidden="true"></i>{{$item->name}}</a></li>
             @endforeach
         </ul>
     </div>
@@ -21,7 +21,7 @@
                     <div class="number">
                         {{$key+1}}
                     </div>
-                    <a href="{{$item->slug}}" class="smooth link" title="{{$item->name}}">{{$item->name}}</a>
+                    <a href="{{Support::show($item, 'slug')}}" class="smooth link" title="{{$item->name}}">{{$item->name}}</a>
                 </li>
             @endforeach
         </ul>

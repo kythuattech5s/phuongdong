@@ -3,13 +3,13 @@
         @foreach (array_slice($listNews,0,1) as $item)
             <div class="item-new-big">
                 <div class="img">
-                    <a href="{{$item->slug}}" class="c-img shine-effect" title="{{$item->name}}">
-                        <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                    <a href="{{Support::show($item, 'slug')}}" class="c-img shine-effect" title="{{$item->name}}">
+                       @include('image_loader.big',['itemImage'=>$item])
                     </a>
                 </div>
                 <div class="content">
                     <h3 class="mt-2">
-                        <a href="{{$item->slug}}" class="smooth robotob fs-22-cv hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
+                        <a href="{{Support::show($item, 'slug')}}" class="smooth robotob fs-22-cv hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
                     </h3>
                     <div class="short-content fs-16 mt-1 mt-lg-2">
                         {{Str::words($item->short_content,'28')}}
@@ -26,13 +26,13 @@
          @foreach (array_slice($listNews,1,2) as $item)
             <div class="item-new-medium">
                 <div class="img">
-                    <a href="{{$item->slug}}" class="c-img shine-effect" title="{{$item->name}}">
-                        <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                    <a href="{{Support::show($item, 'slug')}}" class="c-img shine-effect" title="{{$item->name}}">
+                        @include('image_loader.big',['itemImage'=>$item])
                     </a>
                 </div>
                 <div class="content">
                     <h3 class="mt-2">
-                        <a href="{{$item->slug}}" class="smooth robotob fs-16-cv hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
+                        <a href="{{Support::show($item, 'slug')}}" class="smooth robotob fs-16-cv hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
                     </h3>
                 </div>
             </div>
@@ -42,13 +42,13 @@
         @foreach (array_slice($listNews,3,4) as $item)
             <div class="item-new-small d-flex">
                 <div class="img order-lg-2">
-                    <a href="{{$item->slug}}" class="c-img shine-effect" title="{{$item->name}}">
-                        <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                    <a href="{{Support::show($item, 'slug')}}" class="c-img shine-effect" title="{{$item->name}}">
+                        @include('image_loader.small',['itemImage'=>$item])
                     </a>
                 </div>
                 <div class="content">
                     <h3>
-                        <a href="{{$item->slug}}" class="smooth robotob fs-16 hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
+                        <a href="{{Support::show($item, 'slug')}}" class="smooth robotob fs-16 hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
                     </h3>
                     <div class="item-time d-block d-lg-none mt-1">
                         <i class="fa fa-calendar" aria-hidden="true"></i>

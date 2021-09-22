@@ -13,6 +13,14 @@ class Controller extends BaseController
     public function __construct() 
     {
         $listTimePick = \App\Models\TimePick::get();
+        $listDoctor = \App\Models\Doctor::act()->get();
+        $listService = \App\Models\Services::act()->get();
+        $listSpecialist = \App\Models\Specialist::act()->get();
+        $itemFlashNotifcation = \App\Models\FlashNotification::act()->get()->first();
         \View::share('listTimePick', $listTimePick);
+        \View::share('itemFlashNotifcation', $itemFlashNotifcation);
+        \View::share('listDoctor', $listDoctor);
+        \View::share('listService', $listService);
+        \View::share('listSpecialist', $listSpecialist);
     }
 }

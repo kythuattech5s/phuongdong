@@ -15,7 +15,6 @@
 	<div class="form-group" @if($tableMap=='orders' && $name=='val_order') style="display: none;" @endif>
 		<p class="form-title" for="">{{FCHelper::er($table,'note')}} <span class="count"></span></p>
 		<textarea class="hidden" name="{{$name}}"><?php echo $value;  ?></textarea>
-
 		<div class="textv2-{{$name}}">
 			@foreach($jsons as $key => $json)
 			<div class="item">
@@ -24,15 +23,15 @@
 					<label>Tiêu đề</label>
 					</div>
 					<div class="col-md-9">
-					<input class="name-{{$name}}" value="{{isset($json['name'])?$json['name'] :''}}">
+						<input class="name-{{$name}}" value="{{isset($json['name'])?$json['name'] :''}}">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-					<label>Số liệu</label>
+						<label>Nội dung</label>
 					</div>
 					<div class="col-md-9">
-					<input class="number-{{$name}}" value="{{isset($json['number'])?$json['number'] :''}}">
+						<input class="content-{{$name}}" value="{{isset($json['content'])?$json['content'] :''}}">
 					</div>
 				</div>
 				<div class="text-right">
@@ -41,14 +40,14 @@
 			</div>
 			@endforeach
 		</div>
-		<div class="text-center" style="width: 80%;">
+		<div class="text-center" style="width: 100%;">
 			<button type="button" class="add-{{$name}}">Thêm</button>
 		</div>
 	</div>
 	<style type="text/css">
 		.textv2-<?php echo $name; ?>{
 		    border: 1px solid #00923f;
-			width: 80%;
+			width: 100%;
 			margin: 10px 0px;
 		}
 		.textv2-<?php echo $name; ?> .item{
@@ -81,16 +80,27 @@
 				for (var i = 0; i < textv2.length; i++) {
 					var tmp = {};
 					var textv22 =$(textv2[i]) ;
-					tmp.img=textv22.find('.img-<?php echo $name; ?>').val();
-					tmp.number = textv22.find('.number-<?php echo $name; ?>').val();
+					// var img = textv22.find(".ti_img");
+					tmp.content = textv22.find('.content-<?php echo $name; ?>').val();
 					tmp.name = textv22.find('.name-<?php echo $name; ?>').val();
+					// try{
+					// 	var json = JSON.parse(img.val());
+					// 	tmp.img = json.path +json.file_name;
+					// }
+					// catch(e){
+					// 	tmp.img = img.val();
+					// }
 					ret.push(tmp);	
 				}
 				$('textarea[name=<?php echo $name; ?>]').val(JSON.stringify(ret));
 			}
-			$(document).on('input', '.number-<?php echo $name; ?>,.name-<?php echo $name; ?>', function(event) {
+			$(document).on('input', '.title-<?php echo $name; ?>,.content-<?php echo $name; ?>,.name-<?php echo $name; ?>', function(event) {
 				event.preventDefault();
 				calculate<?php echo $name; ?>();
+			});
+			$(document).on('input', '.textv2-{{$name}} .item .ti_img', function(event) {
+				event.preventDefault();
+				calculate{{$name}}();
 			});
 			$(document).on('click', '.textv2-<?php echo $name; ?> .item .delete', function(event) {
 				event.preventDefault();
@@ -108,22 +118,23 @@
 			$(".add-<?php echo $name; ?>").click(function(event) {
 				event.preventDefault();
 				var name = Math.random().toString(36).substring(7);
+				var idxti = 'idxti<?php echo $name; ?>'+$(".textv2-{{$name}} .item").length;
+				console.log(idxti);
 				var str = '<div class="item">'
-					
 					+'<div class="row">'
 						+'<div class="col-md-3">'
 						+'<label>Tiêu đề</label>'
 						+'</div>'
 						+'<div class="col-md-9">'
-						+'<input class="name-<?php echo $name ?>"></input>'
+						+'<input class="name-<?php echo $name ?>"/>'
 						+'</div>'
 					+'</div>'
 					+'<div class="row">'
 						+'<div class="col-md-3">'
-						+'<label>Số liệu</label>'
+						+'<label>Nội dung</label>'
 						+'</div>'
 						+'<div class="col-md-9">'
-						+'<input class="number-<?php echo $name ?>"></input>'
+						+'<textarea class="content-<?php echo $name ?>"></textarea>'
 						+'</div>'
 					+'</div>'
 					
@@ -133,5 +144,6 @@
 				+'</div>';
 				$('.textv2-<?php echo $name ?>').append(str);
 			});
+			
 		});
 	</script>

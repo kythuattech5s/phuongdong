@@ -1,3 +1,6 @@
+@media (min-width: 575px) {
+  .wow {
+    visibility: hidden; } }
 @media (min-width: 991px) {
   .shine-effect {
     overflow: hidden; }
@@ -21,6 +24,21 @@
     transition-property: left, top, opacity;
     transition-duration: 0.7s, 0.7s, 0.25s;
     transition-timing-function: ease; } }
+@media (min-width: 1200px) {
+  .col-xl-28 {
+    width: 28%; }
+
+  .col-xl-72 {
+    width: 72%; } }
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1170px; } }
+@media (min-width: 1599px) {
+  .geographical-advantage .sp-col {
+    padding-right: 100px !important; } }
+@media (min-width: 1900px) {
+  .geographical-advantage .sp-col {
+    padding-right: 225px !important; } }
 @media (max-width: 1400px) {
   .btn-sp-menu {
     right: -80px; }
@@ -29,17 +47,8 @@
     font-size: 26px !important; }
 
   .fs-36-cv {
-    font-size: 30px !important; } }
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1170px; } }
-@media (min-width: 1200px) {
-  .col-xl-28 {
-    width: 28%; }
+    font-size: 30px !important; }
 
-  .col-xl-72 {
-    width: 72%; } }
-@media (max-width: 1400px) {
   .all-title {
     font-size: 28px;
     padding-bottom: 10px; }
@@ -72,7 +81,7 @@
     margin-top: 20px; }
 
   .header-top .search-box {
-    width: auto; }
+    width: auto !important; }
     .header-top .search-box .form-search-header {
       -webkit-transition: all 0.3s ease 0s;
       -moz-transition: all 0.3s ease 0s;
@@ -94,7 +103,7 @@
         pointer-events: all;
         visibility: unset; }
   .header-top .header-action {
-    width: 265px; }
+    min-width: 265px; }
 
   .item-doctor .content-img {
     width: 130px; }
@@ -104,7 +113,10 @@
     width: 230px; }
 
   .item-content-equipment {
-    padding: 10px; } }
+    padding: 10px; }
+
+  .vision-and-mission {
+    margin-top: -3rem; } }
 @media (max-width: 991px) {
   .fs-16-cv {
     font-size: 16px; }
@@ -418,6 +430,9 @@
     margin-bottom: 10px; }
 
   .list-question li {
-    margin-bottom: 15px; } }
+    margin-bottom: 15px; }
+
+  .expert-team .list-info-doctor-content .item:not(:first-child) {
+    display: none; } }
 
 /*# sourceMappingURL=mobile.css.map */

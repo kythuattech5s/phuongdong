@@ -6,7 +6,7 @@
         	@foreach ($listBanner as $itemBanner)
                 <div class="swiper-slide">
                 	<a href="{{$itemBanner->link}}" class="smooth" title="{{$itemBanner->name}}">
-                    	<img src="{%IMGV2.itemBanner.img.-1%}" title="{%AIMGV2.itemBanner.img.title%}" alt="{%AIMGV2.itemBanner.img.alt%}">
+                    	@include('image_loader.all',['itemImage'=>$itemBanner])
                 	</a>
                 </div>
             @endforeach
@@ -33,11 +33,11 @@
                     <input type="text" name="fullname" placeholder="Họ và tên (*)">
                     <div class="row gx-2">
                     <div class="col-md-6">
-                            <input type="text" name="phone" placeholder="Số điện thoại (*)">
+                        <input type="text" name="phone" placeholder="Số điện thoại (*)">
                         </div>
                         <div class="col-md-6">
                             <div id="datepicker-medical" class="input-group date" data-date-format="mm-dd-yyyy">
-                                <input class="form-control" name="day_book" type="text">
+                                <input class="form-control" name="day_book" type="text" placeholder="Ngày đặt">
                                 <span class="input-group-addon">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </span>
@@ -78,7 +78,7 @@
                         <div class="item col">
                             <a href="{{$itemForcustomer->link}}" class="item-wrapper d-block">
                                 <div class="icon mx-auto">
-                                    <img src="{%IMGV2.itemForcustomer.img.-1%}" title="{%AIMGV2.itemForcustomer.img.title%}" alt="{%AIMGV2.itemForcustomer.img.alt%}">
+                                    @include('image_loader.small',['itemImage'=>$itemForcustomer])
                                 </div>
                                 <div class="text text-uppercase mt-2">
                                     <span>{{$itemForcustomer->name}}</span>
@@ -97,7 +97,7 @@
     <div class="for-customer-block mx-auto">
         <div class="row">
             <div class="col-md-6 mt-0 mt-lg-3 order-md-2">
-                <p class="all-title wow fadeInUp lh-13">{[title_home_system]}</p>
+                <div class="all-title wow fadeInUp lh-13">{[title_home_system]}</div>
                 <div class="content fs-16 mt-3 mt-xxl-4 wow fadeInUp" data-wow-delay="0.3s">{[content_home_system]}</div>
                 <a href="{[link_home_system]}" class="hv-icon fs-16 btn-view-all d-inline-block mt-3 wow fadeInUp" data-wow-delay="0.6s" title="Xem tất cả">
                     <i class="fa fa-plus-circle fs-20 me-1" aria-hidden="true"></i>
@@ -107,7 +107,7 @@
             <div class="col-md-6 mt-3 mt-md-0 mt-lg-3">
                 <div class="img-box wow fadeInUp">
                     <a href="{[link_you_home_system]}" data-fancybox="gallery" class="smooth c-img zoom-effect img-box-show" title="">
-                        <img src="{Iimg_home_system.imgI}" title="{Iimg_home_system.titleI}" alt="{Iimg_home_system.altI}" class="img-fluid">
+                        <img loading="lazy" src="{Iimg_home_system.imgI}" title="{Iimg_home_system.titleI}" alt="{Iimg_home_system.altI}" class="img-fluid">
                         <div class="icon-play-video">
                             <span>
                                 <i class="fa fa-caret-right" aria-hidden="true"></i>
@@ -166,48 +166,35 @@
                                 <div class="row">
                                     <div class="col-9 col-md-5 mx-auto">
                                         <div class="img text-center">
-                                            <a href="{{$item->slug}}" title="{{$item->name}}">
-                                                <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                                            <a href="{{Support::show($item, 'slug')}}" title="{{$item->name}}">
+                                                @include('image_loader.big',['itemImage'=>$item])
                                             </a>
                                         </div>
                                         <div class="name text-center mt-2 mt-xxl-3">
                                             <h3 class="fs-22 clmain robotob">
-                                                <a href="{{$item->slug}}" class="smooth hv-sp" title="{{$item->name}}">{{$item->name}}</a>
+                                                <a href="{{Support::show($item, 'slug')}}" class="smooth hv-sp" title="{{$item->name}}">{{$item->name}}</a>
                                             </h3>
                                             <p class="fs-16">{{$item->academic_rank}} - {{$item->position}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-7 mt-3 mt-md-0">
                                         <div class="list-info-doctor-content">
-                                            <div class="item">
-                                                <div class="header-item mb-2 d-flex align-items-center">
-                                                    <div class="icon me-2">
-                                                        <img src="frontend/images/icon_team1.png" title="" alt="" class="img-fluid smooth">
+                                            @php
+                                                $shotContentHome = json_decode($item->short_content_home,true);
+                                            @endphp
+                                            @if (is_array($shotContentHome))
+                                                @foreach ($shotContentHome as $itemContent)
+                                                    <div class="item">
+                                                        <div class="header-item mb-2 d-flex align-items-center">
+                                                            <div class="icon me-2">
+                                                                <img loading="lazy" src="{{$itemContent['img']}}" class="img-fluid smooth">
+                                                            </div>
+                                                            <p class="fs-22-cv clmain">{{$itemContent['name']}}</p>
+                                                        </div>
+                                                        <div class="content-item s-content fs-16">{!!$itemContent['content']!!}</div>
                                                     </div>
-                                                    <p class="fs-22-cv clmain">Giới thiệu</p>
-                                                </div>
-                                                <div class="content-item fs-16">
-                                                    Gần 40 năm trong nghề, TTND.TS.BS Hoàng Văn Tuyết đã tham gia vào công tác khám chữa bệnh, phòng bệnh ở các bệnh viện tuyến Trung ương như: Bệnh viện Bạch Mai; Bệnh viện Nhiệt Đới Trung ương,...
-                                                </div>
-                                            </div>
-                                            <div class="item d-none d-md-block">
-                                                <div class="header-item mb-2 d-flex align-items-center">
-                                                    <div class="icon me-2">
-                                                        <img src="frontend/images/icon_team2.png" title="" alt="" class="img-fluid smooth">
-                                                    </div>
-                                                    <p class="fs-22-cv clmain">Kink nghiệm</p>
-                                                </div>
-                                                <div class="content-item fs-16">Bác sĩ Hoàng Văn Tuyết là người có nhiều kinh nghiệm trong các công tác phòng chống dịch quốc gia, như: dịch cúm AH5N1 năm 2005, dịch tiêu chảy cấp năm 2007, dịch H1N1 năm 2009, dịch Ebola, ...</div>
-                                            </div>
-                                            <div class="item d-none d-md-block">
-                                                <div class="header-item mb-2 d-flex align-items-center">
-                                                    <div class="icon me-2">
-                                                        <img src="frontend/images/icon_team3.png" title="" alt="" class="img-fluid smooth">
-                                                    </div>
-                                                    <p class="fs-22-cv clmain">Thành tựu</p>
-                                                </div>
-                                                <div class="content-item fs-16">Thầy thuốc nhân dân (2017), Huân chương Lao động hạng III, Bằng khen của Thủ tướng Chính phủ, Bằng khen của Bộ Y tế, Lưu niệm chương Vì sự nghiệp chăm sóc sức khỏe nhân dân ...</div>
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +218,7 @@
                     <div class="swiper-slide">
                         <div class="item-expert-team-thumb cspoint">
                             <div class="img text-center">
-                                <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                                @include('image_loader.small',['itemImage'=>$item])
                             </div>
                             <div class="text text-center mt-2 pt-2">
                                 <p>{{$item->academic_rank}}</p>
@@ -267,7 +254,7 @@
                                 <div class="swiper-slide">
                                     <div class="item-img-equipment">
                                         <div class="c-img zoom-effect">
-                                            <img src="{%IMGV2.itemEquipment.img.-1%}" title="{%AIMGV2.itemEquipment.img.title%}" alt="{%AIMGV2.itemEquipment.img.alt%}">
+                                            @include('image_loader.all',['itemImage'=>$itemEquipment])
                                         </div>
                                         <div class="d-block d-lg-none py-3">
                                             <p class="all-sub-title small-text">{{$itemEquipment->name}}</p>
@@ -329,7 +316,7 @@
                         <div class="item-partner cspoint">
                             <div class="img text-center">
                                 <a href="{{$itemPartner->link}}" class="smooth" title="{{$itemPartner->name}}">
-                                    <img src="{%IMGV2.itemPartner.img.-1%}" title="{%AIMGV2.itemPartner.img.title%}" alt="{%AIMGV2.itemPartner.img.alt%}">
+                                    @include('image_loader.small',['itemImage'=>$itemPartner])
                                 </a>
                             </div>
                         </div>

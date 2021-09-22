@@ -8,7 +8,7 @@
                 {!!$item->banner_content!!}
             @else
                 <a href="{{$item->link}}" class="smooth" title="{{$item->name}}">
-                   <img src="{%IMGV2.item.img.-1%}" title="{%AIMGV2.item.img.title%}" alt="{%AIMGV2.item.img.alt%}">
+                   @include('image_loader.all',['itemImage'=>$item])
                 </a>
             @endif
         </div>

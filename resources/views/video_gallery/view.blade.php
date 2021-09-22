@@ -2,10 +2,8 @@
 @section('content')
 <section class="container">
     <div class="row">
-        <div class="col-lg-8 col-xl-72 shadow-box-right pt-1 pb-md-4 pb-xxl-5 pe-xxl-5">
-            <ul class="breadcrumb">
-                {{\Breadcrumbs::render('video_gallery',$currentItem,$parent)}}
-            </ul>
+        <div class="col-lg-8 col-xl-72 shadow-box-right pt-xl-2  pb-md-4 pb-xxl-5 pe-xxl-5">
+            {{\Breadcrumbs::render('video_gallery',$currentItem,$parent)}}
             <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
             <div class="title-info-new d-flex flex-wrap my-3 pb-0 pb-xl-2 fs-15 wow fadeInUp" data-wow-delay="0.2s">
                <p class="me-4">

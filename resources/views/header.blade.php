@@ -1,21 +1,23 @@
-<div class="flash-notification" style="display: block">
-	<div class="container d-flex align-items-center fs-16-cv">
-		<div class="content">
-			<a href="" class="smooth" title="Triệu chứng, chẩn đoán , điều trị v& tiêm chủng">
-				<span class=robotob>Các thông tin bạn cần biết về covit-19:</span>
-				<span>Triệu chứng, chẩn đoán , điều trị v& tiêm chủng</span>
-			</a>
-		</div>
-		<div class="close-icon hv-icon">
-			<i class="fa fa-times" aria-hidden="true"></i>
+@if (isset($itemFlashNotifcation))
+	<div class="flash-notification" style="display: none">
+		<div class="container d-flex align-items-center fs-16-cv">
+			<div class="content">
+				<a href="{{$itemFlashNotifcation->link}}" class="smooth" title="{{$itemFlashNotifcation->name}}">
+					<span class=robotob>{{$itemFlashNotifcation->title}}:</span>
+					<span>{{$itemFlashNotifcation->name}}</span>
+				</a>
+			</div>
+			<div class="close-icon hv-icon">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</div>
 		</div>
 	</div>
-</div>
+@endif
 <header class="header">
 	<div class="header-top">
-		<div class="container position-relative d-flex flex-wrap align-items-center justify-content-between">
+		<div class="container position-relative d-flex align-items-center justify-content-between">
 			<div class="logo">
-				<a href="" class="smooth" title="{[site_name]}">
+				<a href="{{VRoute::get('home')}}" class="smooth" title="{[site_name]}">
 					<img src="{Ilogo.imgI}" title="{Ilogo.titleI}" alt="{Ilogo.altI}" class="img-fluid">
 				</a>
 			</div>
@@ -34,7 +36,7 @@
 					</div>
 				</form>
 			</div>
-			<a href="tel:{[hotline]}" class="phone-header d-none d-md-flex hv-sp-main align-items-center" title="Hotline">
+			<a href="tel:{[hotline]}" class="phone-header d-none d-lg-flex hv-sp-main align-items-center" title="Hotline">
 				<div class="icon d-inline-block">
 					<img src="frontend/images/support-phone.png" title="" alt="" class="img-fluid smooth">
 				</div>
@@ -44,15 +46,18 @@
 				</div>
 			</a>
 			<div class="header-action d-none d-md-flex align-items-center justify-content-between">
-				<a href="" class="btn-all btn-all-main me-2" title="Gửi câu hỏi"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Gửi câu hỏi</a>
-				<a href="" class="btn-all btn-all-sp" title=""><i class="fa fa-commenting-o" aria-hidden="true"></i> Đặt lịch khám</a>
+				<a href="{{VRoute::get('makeQuestion')}}" class="btn-all btn-all-main me-2" title="Gửi câu hỏi"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Gửi câu hỏi</a>
+				<a href="#" data-bs-toggle="modal" data-bs-target="#orderExaminationSchedule" class="btn-all btn-all-sp" title="Đặt lịch khám"><i class="fa fa-commenting-o" aria-hidden="true"></i> Đặt lịch khám</a>
 			</div>
 			<div class="d-flex d-xl-none align-items-center ms-2">
 				<button class="btn-show-search-form me-3">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</button>
-				<button class="btn-lang me-3" onclick="doGTranslate('vi|en');return false;">
+				<button class="btn-lang btn-lang-en me-3" onclick="doGTranslate('vi|en');return false;">
 					<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
+				</button>
+				<button class="btn-lang btn-lang-vi me-3" onclick="doGTranslate('en|vi');return false;">
+					<img src="frontend/images/lang_vi.png" title="Tiếng việt" alt="Tiếng việt" class="img-fluid smooth">
 				</button>
 				<button class="d-flex justify-content-center align-items-center cspoint btn-menu-mobile" type="button">
 					<div class="animated-icon"><span></span><span></span><span></span></div>
@@ -72,8 +77,11 @@
 					@endphp
 					{{Support::showMenuRecursive($menu)}}
 				</nav>
-				<button class="btn-lang" onclick="doGTranslate('vi|en');return false;">
+				<button class="btn-lang btn-lang-en" onclick="doGTranslate('vi|en');return false;">
 					<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
+				</button>
+				<button class="btn-lang btn-lang-vi" onclick="doGTranslate('en|vi');return false;">
+					<img src="frontend/images/lang_vi.png" title="Tiếng việt" alt="Tiếng việt" class="img-fluid smooth">
 				</button>
 				<button class="d-flex align-items-center btn-sp-menu cspoint" type="button">
 					<span class="me-2">Tất cả</span>
@@ -89,24 +97,22 @@
 							<i class="fa fa-times fs-20" aria-hidden="true"></i>
 						</button>
 					</div>
-					<ul>
-						<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Tin tức</a>
-							<ul>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-								<li><a href="#" class="smooth" title="" alt="">Trang chủ</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="smooth" title="" alt="">Liên hệ</a>
-						</li>	
-					</ul>
+					@php
+						$menu = Support::getMenuSitemapRecursive();
+					@endphp
+					{{Support::showMenuRecursive($menu)}}
 				</div>
 			</div>
 		</div>
 	</div>
 </header>
+<div class="modal fade" id="orderExaminationSchedule" tabindex="-1"  aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body p-0">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+				@include('static.form_order_examination_schedule',['datepick_2'=>2])
+			</div>
+		</div>
+	</div>
+</div>

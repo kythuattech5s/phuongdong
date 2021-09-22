@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-<section class="container pt-3 pb-4">
+<section class="container pt-xl-2 pb-4">
     {{\Breadcrumbs::render('static','Thư viện video','thu-vien-video')}}
     <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Thư viện video</h1>
     <div class="fs-16 wow fadeInUp">
@@ -51,7 +51,7 @@
         @endphp
         @if ($listItemGallery->count() > 0)
             <div class="item-gallery-category mb-4 wow fadeInUp">
-                <h2><a href="{{$itemCate->slug}}" class="smooth fs-21-cv robotob text-uppercase" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
+                <h2><a href="{{Support::show($itemCate, 'slug')}}" class="smooth fs-21-cv robotob text-uppercase" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
                 <div class="row mt-2">
                     @foreach ($listItemGallery as $item)
                         <div class="col-sm-6 col-lg-4 mb-3">
@@ -60,7 +60,7 @@
                     @endforeach
                 </div>
                 <div class="view-more position-relative text-center mt-2">
-                    <a href="{{$itemCate->slug}}" class="smooth" title="Xem tất cả">Xem tất cả</a>
+                    <a href="{{Support::show($itemCate, 'slug')}}" class="smooth" title="Xem tất cả">Xem tất cả</a>
                 </div>
             </div>
         @endif
