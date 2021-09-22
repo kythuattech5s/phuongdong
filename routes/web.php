@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,6 @@ Route::get('/video/key/{key}',function($key){
 	return \Storage::disk('videos')->download('out/'.$key);
 })->name('video.key');
 
-
 Route::group([
 		'prefix' => LaravelLocalization::setLocale(),
 		'middleware' => ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
@@ -47,5 +47,6 @@ Route::group([
         Route::get('/test', 'HomeController@test');
 		Route::get('/', 'HomeController@index')->name('home');
 		Route::get('cronimg', array('uses'=>'CronImgController@convertImg'));
+		Route::get('cronmail', array('uses'=>'CronMailController@cronmail'));
 		Route::match(['get', 'post'],'/{link}',array('uses'=>'HomeController@direction'))->where('link', '^((?!esystem)[0-9a-zA-Z\?\.\-/])*$');
 });

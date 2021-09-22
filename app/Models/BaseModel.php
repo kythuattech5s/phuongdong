@@ -30,6 +30,10 @@ class BaseModel extends Model
 		}
 		return $q->where("$table.slug", $slug);
 	}
+	public static function getNameById($id){
+    	$itemService = static::find($id);
+    	return isset($itemService) ? $itemService->name:'';
+    }
 	protected function fullTextWildcards($term)
     {
         $reservedSymbols = ['-', '+', '<', '>', '@', '(', ')', '~'];

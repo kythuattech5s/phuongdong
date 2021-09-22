@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\{News,Services,Specialist,Doctor,RegisterAdvise,BookApointment,BookApointmentDoctor,TimePick,Question};
+use App\Models\{News,Services,Specialist,Doctor,RegisterAdvise,BookApointment,BookApointmentDoctor,TimePick,Question,QueueEmail};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use \View;
+use App\Helpers\Utm;
 class StaticController extends Controller
 {
     public function contact($request, $route, $link)
@@ -74,7 +75,8 @@ class StaticController extends Controller
             'phone' => 'Số điện thoại',
         ]);
     }
-    public function bookApointment ($request, $route, $link){
+    public function bookApointment ($request, $route, $link)
+    {
         $validator = $this->validatorSendBookApointment($request->all());
         if ($validator->fails()) {
             return \Support::response([
@@ -85,26 +87,111 @@ class StaticController extends Controller
         }
         $itemTimePick = TimePick::find($request->input('time_pick'));
         $timePickText = isset($itemTimePick) ? $itemTimePick->name:'';
-        $dataCreate = [
+        $data = [
             'fullname'  => $request->input('fullname'),
+            'service_id'=> (int)$request->input('service'),
+            'age'       => $request->input('age'),
             'phone'     => $request->input('phone'),
+            'email'     => $request->input('email'),
             'day_book'  => $request->input('day_book'),
             'time_pick' => $request->input('time_pick'),
             'time_pick_text' => $timePickText,
+            'status' => 1,
+            'created_at' => new \DateTime,
+            'updated_at' => new \DateTime,
+            'note' => $request->input('note'),
+            'doctor_id' => (int)$request->input('doctor')
+        ];
+        $utmInfo = Utm::get();
+        $dataCreate = array_merge($data,$utmInfo);
+        // BookApointment::insert($dataCreate);
+        $this->sendEmailNoficationContact($dataCreate,'bookApointment');
+        return \Support::response([
+            'code' => 200,
+            'message' => 'Đặt lịch khám thành công'
+        ]);
+    }
+    protected function validatorSendResgisterAdvise(array $data)
+    {
+        return Validator::make($data, [
+            'fullname' => ['required'],
+            'phone' => ['required'],
+            'email' => ['required','email'],
+        ],[
+            'required' => 'Vui lòng nhập/chọn :attribute',
+            'email' => 'Vui lòng nhập Email đúng định dạng'
+        ],[
+            'fullname' => 'Họ và tên',  
+            'phone' => 'Số điện thoại',
+        ]);
+    }
+    public function resgisterAdvise($request, $route, $link){
+        $validator = $this->validatorSendResgisterAdvise($request->all());
+        if ($validator->fails()) {
+            return \Support::response([
+                'code' => 100,
+                'message' => $validator->errors()->first(),
+                'redirect' => url()->previous()
+            ]);
+        }
+        $data = [
+            'fullname'  => $request->input('fullname'),
+            'phone'     => $request->input('phone'),
+            'email'     => $request->input('email'),
             'act' => 0,
             'created_at' => new \DateTime,
             'updated_at' => new \DateTime,
             'note' => $request->input('note')
         ];
-        BookApointment::insert($dataCreate);
-        $this->sendEmailNoficationContact($dataCreate,'bookApointment');
+        $utmInfo = Utm::get();
+        $dataCreate = array_merge($data,$utmInfo);
+        // RegisterAdvise::insert($dataCreate);
+        $this->sendEmailNoficationContact($dataCreate,'resgisterAdvise');
         return \Support::response([
             'code' => 200,
-            'message' => 'Gửi thông tin thành công'
+            'message' => 'Đăng ký thành công'
         ]);
     }
     public function sendEmailNoficationContact($data,$type){
-        // Phân quyền email nhận thông tin liên hệ
+        switch ($type) {
+            case 'bookApointment':
+                $title = $_SERVER['SERVER_NAME'].' Khách hàng gửi thông tin đặt lịch khám.';
+                $content = view('queue_emails.book_apointment',compact('data'))->render();
+                $listEmail = \DB::table('email_receive_informations')->whereRaw("FIND_IN_SET(1,group_email)")->get()->all();
+                break;
+            case 'resgisterAdvise':
+                $title = $_SERVER['SERVER_NAME'].' Khách hàng gửi thông tin đăng ký tư vấn.';
+                $content = view('queue_emails.resgister_advise',compact('data'))->render();
+                $listEmail = \DB::table('email_receive_informations')->whereRaw("FIND_IN_SET(2,group_email)")->get()->all();
+                break;
+            default:
+                return true;
+                break;
+        }
+        if (count($listEmail) > 0) {
+            $mainEmail = $listEmail[0]->email;
+            $arrEmailCc = [];
+            if (count($listEmail) > 1) {
+                foreach ($listEmail as $key => $emailInfo) {
+                    if ($key > 0) {
+                        array_push($arrEmailCc, $emailInfo->email);
+                    }
+                }
+            }
+            $listEmailCc = count($arrEmailCc) > 0 ? json_encode($arrEmailCc):'';
+            $dataCreate = [
+                "title"         => $title,
+                "content"       => $content,
+                "to"            => $mainEmail,
+                "created_at"    => new \DateTime,
+                "updated_at"    => new \DateTime,
+                "status"        => 0,
+                "count_error"   => 0,
+                "is_sms"        => 0,
+                "cc"            => $listEmailCc
+            ];
+            QueueEmail::insert($dataCreate);
+        }
         return true;
     }
     public function ratingUsefulNews($request, $route, $link){

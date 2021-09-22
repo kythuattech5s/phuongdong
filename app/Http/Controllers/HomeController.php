@@ -14,11 +14,6 @@ class HomeController extends Controller
         if ($route == null) {
             abort(404);
         }
-        $currentUrl = $request->getPathInfo();
-        if ($currentUrl == '/'.$link) {
-            $redirectLink = str_replace($currentUrl,$currentUrl.'/',$_SERVER['REQUEST_URI']);
-            // return redirect($redirectLink);
-        }
         Utm::check();
         $controllers = explode('@', $route->controller);
         $controller = $controllers[0];

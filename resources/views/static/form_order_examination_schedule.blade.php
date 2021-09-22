@@ -1,4 +1,4 @@
-<form class="form-contact-main form-send-contact h-100" action="{{VRoute::get('resgisterAdvise')}}" method="post" accept-charset="utf8" autocomplete="off">
+<form class="form-contact-main form-send-contact h-100" action="{{VRoute::get('bookApointment')}}" method="post" accept-charset="utf8" autocomplete="off">
     <div class="header-form text-center py-2 py-lg-4">
         <p class="fs-30-cv text-uppercase robotob">Đặt lịch khám chữa bệnh</p>
         <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">Quý khách sử dụng dịch vụ Đặt hẹn trực tuyến, xin vui lòng đặt trước ít nhất là 24 giờ trước khi đến khám.</p>
@@ -6,7 +6,7 @@
     <div class="form-content p-3 pt-xl-4 p-xl-4">
         <input type="text" name="fullname" placeholder="Họ và tên (*)">
         <input type="text" name="phone" placeholder="Số điện thoại (*)">
-        <input type="email" name="email" placeholder="Email (*)">
+        <input type="email" name="email" placeholder="Email">
         <div id="datepicker-medical{{isset($datepick_2) ? $datepick_2:''}}" class="input-group date" data-date-format="mm-dd-yyyy">
             <input class="form-control" name="day_book" type="text" placeholder="Ngày đặt">
             <span class="input-group-addon">
@@ -27,13 +27,13 @@
             </div>
         </div>
         <select name="service">
-        	<option value="0">Chọn dịch vụ khám (*)</option>
+        	<option value="0">Chọn dịch vụ khám</option>
         	@foreach ($listService as $item)
         		<option value="{{$item->id}}">{{$item->name}}</option>
         	@endforeach
         </select>
         <select name="doctor">
-        	<option value="0">Chọn bác sĩ (*)</option>
+        	<option value="0">Chọn bác sĩ</option>
         	@foreach ($listDoctor as $item)
         		<option value="{{$item->id}}">{{$item->name}}</option>
         	@endforeach
