@@ -11,6 +11,6 @@ class BaseCrawl
 	}
     public function crawl()
     {
-
+    	dd('Chưa có hàm crawl chi tiết');
     }
 }
