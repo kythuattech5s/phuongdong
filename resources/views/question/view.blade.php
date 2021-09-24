@@ -58,9 +58,14 @@
                     {!!$currentItem->answer!!}
                 </div>
             </div>
-            <div class="message wow fadeInUp">
-                <img src="theme/frontend/images/message.png" title="" alt="" class="img-fluid smooth">
-            </div>
+            {{-- <div class="message wow fadeInUp">
+                @php
+                    $ratings = $currentItem->getRating('all');
+                @endphp
+                <div class="comment-box">
+                    @include('path.comment_box',['map_table' => 'questions'])
+                </div>
+            </div> --}}
             @if (count($questionRelateds) > 0)
                 <p class="side-bar-title robotob wow fadeInUp mt-4 pt-xl-2">CÂU HỎI CÙNG CHỦ ĐỀ</p>
                 @foreach (array_slice($questionRelateds,0,1) as $item)

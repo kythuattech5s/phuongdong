@@ -386,10 +386,12 @@ $cltext: #676767;
 	}
 	.footer-menu{
 		border-top: dashed 1px #afafaf;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
 		padding-top: 12px;
+		ul{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
 		li{
 			margin-bottom: 3px;
 			position: relative;

@@ -7,7 +7,7 @@
             <form class="form-contact-main form-send-contact h-100 wow fadeInUp" action="{{VRoute::get('resgisterAdvise')}}" method="post" accept-charset="utf8" autocomplete="off">
 			    <div class="header-form text-center py-2 py-lg-4">
 			        <p class="fs-30-cv text-uppercase robotob">Đặt câu hỏi</p>
-			        <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">Mọi thắc mắc của Quý khách sẽ được chuyên gia của chúng tôi giải đáp nhanh nhất</p>
+			        <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">{[form_question_content]}</p>
 			    </div>
 			    <div class="form-content p-3 pt-xl-4 p-xl-4">
 			        <div class="row">

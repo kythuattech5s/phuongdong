@@ -3,9 +3,7 @@
 <section class="container pt-xl-2 pb-4">
     {{\Breadcrumbs::render('static','Thư viện ảnh','thu-vien-anh')}}
     <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Thư viện ảnh</h1>
-    <div class="fs-16 wow fadeInUp">
-        Bệnh viện Đa khoa Phương Đông quy tụ đội ngũ chuyên gia, giáo sư, bác sĩ đầu ngành, có nhiều năm kinh nghiệm công tác tại các bệnh viện tuyến đầu trong cả nước và tu nghiệp tại các trung tâm chăm sóc sức khỏe, bệnh viện lớn ở nước ngoài.
-    </div>
+    <div class="fs-16 wow fadeInUp">{[image_gallery_page_content]}</div>
 </section>
 <section class="hot-galley-module pt-4 pb-3">
     <div class="container mt-xl-2">
@@ -54,7 +52,7 @@
                 <h2><a href="{{Support::show($itemCate, 'slug')}}" class="smooth fs-21-cv robotob text-uppercase" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
                 <div class="row mt-2">
                     @foreach ($listItemGallery as $item)
-                        <div class="col-sm-6 col-lg-4 mb-3">
+                        <div class="col-sm-6 col-lg-4 mb-3 mx-auto">
                             @include('image_gallery.item')
                         </div>
                     @endforeach

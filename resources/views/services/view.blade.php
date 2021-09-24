@@ -25,7 +25,7 @@
             <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
                 {!!$dataContent['content']!!}
             </div>
-            <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase pt-xl-2">Một số hình ảnh hoạt động của dịch vụ</p>
+            <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase">Một số hình ảnh hoạt động của dịch vụ</p>
             <div class="doctor-image position-relative wow fadeInUp">
                 <div class="swiper-container slide-doctor-image">
                     <div class="swiper-wrapper">
@@ -62,18 +62,25 @@
                     </button>
                 </div>
             </div>
-            <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase pt-xl-2">Bảng giá và danh mục {{$currentItem->name}}</p>
-            <div class="my-4 wow fadeInUp">
-                <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Video giới thiệu {{$currentItem->name}}</p>
-                <div class="video-youtybe-container-new mx-auto mt-3 mt-xl-4">
-                    <div class="video-youtybe-container ">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/8ZH2zG-ruMI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+            @if ($currentItem->quote != '')
+                <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase">Bảng giá và danh mục {{$currentItem->name}}</p>
+                <div class="s-content my-3 new-content-main wow fadeInUp">
+                    {!!$currentItem->quote!!}
                 </div>
-                <h3 class="mt-2 text-center">
-                    <a href="" class="smooth fs-16 hv-main-sp" title="">Video giới thiệu {{$currentItem->name}}</a>
-                </h3>
-            </div>
+            @endif
+            @if (isset($videoIntro))
+                <div class="my-4 wow fadeInUp">
+                    <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Video giới thiệu {{$currentItem->name}}</p>
+                    <div class="video-youtybe-container-new mx-auto mt-3 mt-xl-4">
+                        <div class="video-youtybe-container ">
+                            {!!$videoIntro->iframe_video!!}
+                        </div>
+                    </div>
+                    <h3 class="mt-2 text-center">
+                        <a href="{{Support::show($videoIntro,'slug')}}" class="smooth fs-16 hv-main-sp" title="{{$videoIntro->name}}">{{$videoIntro->name}}</a>
+                    </h3>
+                </div>
+            @endif
             <div class="my-4 fs-16 robotob">{!!$currentItem->end_content!!}</div>
             @if (count($listNews) > 0)
                 <p class="all-sub-title small-text long wow fadeInUp mb-3 text-uppercase">Bài viết về ung thư</p>

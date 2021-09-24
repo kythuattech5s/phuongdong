@@ -6,7 +6,7 @@
     <div class="form-content p-3 pt-xl-4">
         <input type="text" name="fullname" placeholder="Họ và tên (*)">
         <input type="text" name="phone" placeholder="Số điện thoại (*)">
-        <input type="email" name="email" placeholder="Email (*)">
+        <input type="email" name="email" placeholder="Email">
         <textarea name="note" rows="2" placeholder="Nội dung"></textarea>
         <div class="text-center">
             <button type="submit" class="btn-all btn-all-main btn-small text-uppercase robotob py-2">Gửi yêu cầu</button>

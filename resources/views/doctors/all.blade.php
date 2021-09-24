@@ -9,8 +9,8 @@
     </div>
     <div class="row">
         <div class="col-lg-8 shadow-box-right py-3 py-md-4 pe-lg-4">
-            <h1 class="fs-30-cv robotob wow fadeInUp">Đội ngũ Bác sĩ Bệnh viện Đa Khoa Phương Đông</h1>
-            <p class="fs-16-cv wow fadeInUp">Bệnh viện Đa khoa Phương Đông quy tụ đội ngũ chuyên gia, giáo sư, bác sĩ đầu ngành, có nhiều năm kinh nghiệm công tác tại các bệnh viện tuyến đầu trong cả nước và tu nghiệp tại các trung tâm chăm sóc sức khỏe, bệnh viện lớn ở nước ngoài.</p>
+            <h1 class="fs-30-cv robotob wow fadeInUp">{[doctor_page_title]}</h1>
+            <p class="fs-16-cv wow fadeInUp">{[doctor_page_content]}</p>
             <div class="list-doctor mt-3 mt-lg-4">
                 @foreach ($listItems as $itemDoctor)
                     @include('doctors.item')

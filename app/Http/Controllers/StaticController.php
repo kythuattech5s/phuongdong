@@ -34,7 +34,7 @@ class StaticController extends Controller
     public function searchItem($request, $route, $link){
     	$q = $request->input('q');
     	$type = $request->input('type');
-    	if (!isset($q) || !isset($type)) {
+    	if (!isset($type)) {
     		echo 'Không có kết quả nào phù hợp';
     	}
     	switch ($type) {
@@ -62,6 +62,18 @@ class StaticController extends Controller
     			return '';
     			break;
     	}
+    }
+    public function searchDoctor($request, $route, $link){
+        $q = $request->input('q');
+        $currentItem = $route;
+        $listItems = Doctor::act()->FullTextSearch('name',$q)->paginate(12);
+        return view('search.view_search_doctor',compact('listItems','q','currentItem'));
+    }
+    public function searchQuestion($request, $route, $link){
+        $q = $request->input('q');
+        $currentItem = $route;
+        $listItems = Question::act()->FullTextSearch('name',$q)->paginate(12);
+        return view('search.view_search_question',compact('listItems','q','currentItem'));
     }
     protected function validatorSendBookApointment(array $data)
     {
@@ -104,7 +116,7 @@ class StaticController extends Controller
         ];
         $utmInfo = Utm::get();
         $dataCreate = array_merge($data,$utmInfo);
-        // BookApointment::insert($dataCreate);
+        BookApointment::insert($dataCreate);
         $this->sendEmailNoficationContact($dataCreate,'bookApointment');
         return \Support::response([
             'code' => 200,
@@ -115,8 +127,7 @@ class StaticController extends Controller
     {
         return Validator::make($data, [
             'fullname' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required','email'],
+            'phone' => ['required']
         ],[
             'required' => 'Vui lòng nhập/chọn :attribute',
             'email' => 'Vui lòng nhập Email đúng định dạng'
@@ -145,7 +156,7 @@ class StaticController extends Controller
         ];
         $utmInfo = Utm::get();
         $dataCreate = array_merge($data,$utmInfo);
-        // RegisterAdvise::insert($dataCreate);
+        RegisterAdvise::insert($dataCreate);
         $this->sendEmailNoficationContact($dataCreate,'resgisterAdvise');
         return \Support::response([
             'code' => 200,

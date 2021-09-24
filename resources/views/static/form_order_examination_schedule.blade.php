@@ -1,7 +1,7 @@
 <form class="form-contact-main form-send-contact h-100" action="{{VRoute::get('bookApointment')}}" method="post" accept-charset="utf8" autocomplete="off">
     <div class="header-form text-center py-2 py-lg-4">
         <p class="fs-30-cv text-uppercase robotob">Đặt lịch khám chữa bệnh</p>
-        <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">Quý khách sử dụng dịch vụ Đặt hẹn trực tuyến, xin vui lòng đặt trước ít nhất là 24 giờ trước khi đến khám.</p>
+        <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">{[form_book_content]}</p>
     </div>
     <div class="form-content p-3 pt-xl-4 p-xl-4">
         <input type="text" name="fullname" placeholder="Họ và tên (*)">

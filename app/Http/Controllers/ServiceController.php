@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\{Services,ServiceCategory,News};
+use App\Models\{Services,ServiceCategory,News,VideoGallery};
 class ServiceController extends Controller
 {	
     public function view($request, $route, $link){
@@ -14,6 +14,7 @@ class ServiceController extends Controller
         if (count($arrRelateNewId) > 0) {
         	$listNews = News::whereIn('id',$arrRelateNewId)->act()->publish()->get()->all();
         }
-        return view('services.view',compact('currentItem','parent','dataContent','listNews'));
+        $videoIntro = VideoGallery::find($currentItem->video_intro);
+        return view('services.view',compact('currentItem','parent','dataContent','listNews','videoIntro'));
     }
 }

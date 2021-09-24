@@ -212,7 +212,7 @@
                 </button>
             </div>
         </div>
-        <div class="swiper-container slide-expert-team-thumb pt-0 pt-md-2 mt-3 mt-xxl-4 wow fadeInUp" data-wow-delay="0.8s">
+        <div class="swiper-container slide-expert-team-thumb pt-0 pt-md-2 mt-3 mt-xxl-4 wow fadeInUp" data-wow-delay="0.3s">
             <div class="swiper-wrapper">
                 @foreach ($listDoctor as $item)
                     <div class="swiper-slide">

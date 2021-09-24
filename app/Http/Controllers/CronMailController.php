@@ -9,7 +9,6 @@ class CronMailController extends Controller
     public function cronmail()
     {
         set_time_limit(0);
-        // file_put_contents('cron_test.txt', 'alo');
         $hLock=fopen("cronmail.lock", "w+");
         if(!flock($hLock, LOCK_EX | LOCK_NB)){
             die("Already running. Exiting...");
@@ -25,7 +24,7 @@ class CronMailController extends Controller
                 $attachments = json_decode($mail->attach_file,true);
                 $attachments = is_array($attachments)?$attachments:[];
                 try {
-                    app('MailHelper')->setEmail($mail->to)
+                    $ret = app('MailHelper')->setEmail($mail->to)
                     ->setSubject($mail->title)
                     ->setBcc(is_array($bcc = json_decode($mail->bcc)) ? $bcc : [])
                     ->setCc(is_array($cc = json_decode($mail->cc)) ? $cc : [])
@@ -33,9 +32,9 @@ class CronMailController extends Controller
                         return $mail->content;
                     })
                     ->send();
-                    $result = 'Good Job!.';
+                    $result = $ret['message'];
                 } catch (Exception $e) {
-                    $result = 'Lỗi';
+                    $result = 'Đã lỗi';
                 }
                 $mail->status = 2;
                 $mail->result = $result;

@@ -39,6 +39,11 @@ Route::get('/video/key/{key}',function($key){
 	return \Storage::disk('videos')->download('out/'.$key);
 })->name('video.key');
 
+Route::get('/crawl-data/{table}', function ($table) {
+    return (new \App\Http\Controllers\CrawlController)->doCrawl($table);
+});
+
+
 Route::group([
 		'prefix' => LaravelLocalization::setLocale(),
 		'middleware' => ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],

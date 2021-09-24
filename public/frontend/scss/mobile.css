@@ -296,10 +296,11 @@
 
   .footer-menu {
     border-top: dashed 1px #afafaf;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     padding-top: 12px; }
+    .footer-menu ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; }
     .footer-menu li {
       margin-bottom: 3px;
       position: relative;

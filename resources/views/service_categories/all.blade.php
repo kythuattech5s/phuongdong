@@ -3,7 +3,7 @@
 <section class="container pt-xl-2 pb-4 pb-xl-5">
     {{\Breadcrumbs::render('static','Dịch vụ y tế','dich-vu-y-te')}}
     <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Dịch vụ khám chữa bệnh</h1>
-    <p class="fs-16 wow fadeInUp">Với sứ mệnh “Nâng niu từng sự sống”, Bệnh viện Đa khoa Phương Đông mang đến những dịch vụ chăm sóc sức khỏe tốt nhất cùng chính sách giá cả hợp lý tạo nên sự an tâm và hài lòng cho mỗi khách hàng.</p>
+    <p class="fs-16 wow fadeInUp">{[service_page_content]}</p>
     <div class="row gx-3 gx-lg-4 mt-4 pt-xl-2">
         @foreach ($listItems as $item)
             <div class="col-6 col-lg-4 mb-3 mb-lg-4">

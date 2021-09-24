@@ -35,10 +35,15 @@
 	<section class="shadow-box-top py-4 mt-4">
 	    <div class="container">
 	        @foreach ($listCateChildShow as $itemCate)
-	            <div class="py-2 py-xxl-3">
-	                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="{{Support::show($itemCate, 'slug')}}" class="smooth" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
-	                @include('news.news_module',['listNews'=>$itemCate->news()->publish()->act()->Ord()->take(7)->get()->all()])
-	            </div>
+	        	@php
+	        		$listNews = $itemCate->news()->publish()->act()->Ord()->take(7)->get()->all();
+	        	@endphp
+	        	@if (count($listNews) > 0)
+		            <div class="py-2 py-xxl-3">
+		                <h2 class="all-sub-title wow fadeInUp mb-3"><a href="{{Support::show($itemCate, 'slug')}}" class="smooth" title="{{$itemCate->name}}">{{$itemCate->name}}</a></h2>
+		                @include('news.news_module',['listNews'=>$listNews])
+		            </div>
+	        	@endif
 	        @endforeach
 	    </div>
 	</section>

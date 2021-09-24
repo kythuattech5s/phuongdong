@@ -73,7 +73,7 @@
 			<div class="container d-flex align-items-center justify-content-between position-relative">
 				<nav class="main-menu d-none d-md-inline-block">
 					@php
-						$menu = Support::getMenuRecursive();
+						$menu = Support::getMenuRecursive(1);
 					@endphp
 					{{Support::showMenuRecursive($menu)}}
 				</nav>

@@ -129,7 +129,7 @@ input,textarea{
 		background: #0c9849;
 		top: 50%;
 		left: 0;
-		margin-top: -11px;
+		@include translateY(-50%);
 	}
 }
 .hv-main{
@@ -812,16 +812,24 @@ html[lang='vi'],html[lang='auto']{
 		margin-bottom: 6px;
 		position: relative;
 		padding-left: 15px;
+		@include smooth(.3s);
 		&:before{
 			content:'';
 			position: absolute;
 			top: 50%;
+			@include smooth(.3s);
 			@include translateY(-50%);
 			background: #a8a8a8;
 			width: 8px;
 			height: 8px;
 			left: 0;
 			border-radius: 50%;
+		}
+		&:hover{
+			color: $sp;
+			&:before{
+				background: $sp;
+			}
 		}
 	}
 }
@@ -2779,6 +2787,38 @@ html[lang='vi'],html[lang='auto']{
 		color: #FFA901;
 	}
 }
+.module-form-search-question{
+	background: #ebebeb;
+	padding: 0px 10px;
+	border-radius: 10px;
+	.form-search-question{
+		max-width: 500px;
+	}
+}
+.form-search-question{
+	width: 100%;
+	input{
+		@include smooth(.3s);
+		width: 100%;
+		height: 40px;
+		background: white!important;
+		border-radius: 40px;
+		border: solid 1px #e6e6e6;
+		padding-right: 50px;
+	}
+	button{
+		position: absolute;
+		top: 0;
+		right: 5px;
+		width: 40px;
+		height: 40px;
+		color: #959595;
+		font-size: 20px;
+		&:hover{
+			color: $sp;
+		}
+	}
+}	
 #orderExaminationSchedule{
 	.modal-content{
 		border-radius: 10px;

@@ -756,3 +756,10 @@ $(document).ready(function(){
 	SEARCH._();
 	AJAX_SP._();
 })
+
+
+var str = '';
+$('.list-categories-tbody tr').each(function(index, el) {
+	var idCate = $(this).attr('class').trim().replace('treegrid','');
+	console.log('https://benhvienphuongdong.vn/admin/category/edit-categories/'+idCate+'?type=news');
+});

@@ -457,7 +457,6 @@ div[data-menu=off] .nav-trigger {
 .header-top.aclr {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
 }
 
 .header-top.aclr ul.list-link li a {
@@ -2264,8 +2263,12 @@ span.tooltiptext:after {
 }
 
 .top_menu {
+    padding: 5px;
     display: flex;
     justify-content: space-between;
+}
+.top_menu .nav-top{
+    padding-left: 10px;
 }
 
 .header_table {
@@ -2746,4 +2749,37 @@ del {
     text-decoration: line-through;
     background-color: #fbb6c2;
     color: #555;
+}
+td.action[data-title="Chức năng"], #no-more-tables table tr th:last-child {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100px;
+    right: -5px;
+    background: #fff !important;
+    z-index: 15;
+}
+td.action[data-title="Chức năng"] {
+    background: #e1e1e1 !important;
+}
+.doubleScroll-scroll-wrapper{
+    position: sticky;
+    top: 34px;
+    z-index: 50;
+}
+.doubleScroll-scroll-wrapper::-webkit-scrollbar-track,.double-scroll::-webkit-scrollbar-track{
+  background-color: #f7f7f7;
+  width: 12px;
+  height: 12px; 
+}
+.doubleScroll-scroll-wrapper::-webkit-scrollbar,.double-scroll::-webkit-scrollbar {
+  background-color: #0E426A;
+  margin: 12px;
+  width: 12px;
+  height: 12px; 
+}
+.doubleScroll-scroll-wrapper::-webkit-scrollbar-thumb,.double-scroll::-webkit-scrollbar-thumb {
+  background-color: #0E426A;
+  border-radius: 3px;
+  width: 12px;
+  height: 12px; 
 }

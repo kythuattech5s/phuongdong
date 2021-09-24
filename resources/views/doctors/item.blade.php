@@ -15,7 +15,7 @@
         @if (isset($specialist))
             <div class="mb-1">
                 <span class="me-1">Chuyên khoa:</span>
-                <a href="doi-ngu-bac-si/{{Support::show($specialist, 'slug')}}" class="smooth robotob hv-main-sp" title="{{$specialist->name}}">{{$specialist->name}}</a>
+                <a href="doi-ngu-bac-si/{{$specialist->slug}}/" class="smooth robotob hv-main-sp" title="{{$specialist->name}}">{{$specialist->name}}</a>
             </div>
         @endif
         <div class="rating-info">

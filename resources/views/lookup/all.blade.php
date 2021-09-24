@@ -2,7 +2,25 @@
 @section('content')
 <section class="container pt-xl-2 pb-4">
     {{\Breadcrumbs::render('static',$currentItem->vi_name,$currentItem->vi_link)}}
-    <h1 class="fs-30-cv robotob wow fadeInUp">Tìm hiểu về các loại thuốc theo bảng chữ cái</h1>
+    <h1 class="fs-30-cv robotob wow fadeInUp">
+        Tìm hiểu về các loại 
+        <?php
+            switch ($currentItem->table) {
+                case 'drug_lookups':
+                    echo 'thuốc';
+                    break;
+                case 'body_lookups':
+                    echo 'cơ thể';
+                    break;
+                case 'disease_lookups':
+                    echo 'bệnh';
+                    break;
+                default:
+                    break;
+            }
+        ?>
+        theo bảng chữ cái
+    </h1>
     <div class="list-character px-xl-5 ms-3 mt-3 mt-xl-4 wow fadeInUp">
         @foreach (range('A', 'Z') as $item)
             <div class="item-character" data-key="{{$item}}">
@@ -10,7 +28,7 @@
             </div>
         @endforeach
     </div>
-    <p class="fs-18 robotob py-3 wow fadeInUp">Cơ thể được tìm kiếm nhiều nhất</p>
+    <p class="fs-18 robotob py-3 wow fadeInUp">Được tìm kiếm nhiều nhất</p>
     <ul class="list-item-search wow fadeInUp">
         @foreach ($listHots as $item)
             <li><a href="{{Support::show($item, 'slug')}}" class="smooth" title="{{$item->name}}">{{$item->name}}</a></li>

@@ -59,6 +59,7 @@
     <script type="text/javascript" src="admin/plug/contextmenu/jquery.contextMenu.js"></script>
     <script type="text/javascript" src="admin/plug/jqueryui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="admin/media/fancybox/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="admin/js/jquery.doubleScroll.js"></script>
     <script type="text/javascript" src="admin/js/webhooks.js"></script>
     @yield('css')
 </head>

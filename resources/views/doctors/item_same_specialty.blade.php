@@ -9,7 +9,9 @@
         @php
             $specialist = $itemDoctor->getSpecialist();
         @endphp
-        <p><a href="doi-ngu-bac-si/{{Support::show($specialist,'slug')}}" class="smooth robotob hv-main-sp" title="{{$specialist->name}}">{{$specialist->name}}</a></p>
+        @if (isset($specialist))
+            <p><a href="doi-ngu-bac-si/{{Support::show($specialist,'slug')}}" class="smooth robotob hv-main-sp" title="{{$specialist->name}}">{{$specialist->name}}</a></p>
+        @endif
         <div class="info-rating d-flex justify-content-center align-items-center mb-2">
             <div class="rating-info">
                 @php

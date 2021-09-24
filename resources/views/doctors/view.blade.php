@@ -11,41 +11,47 @@
         <div class="col-lg-4 col-xl-28">
             <div class="px-lg-3">
                 <div class="sidebar-all py-4">
-                    <div class="item-doctor-siderbar wow fadeInUp">
-                        <div class="border">
-                            <div class="img px- shine-effect">
-                                @include('image_loader.big',['itemImage'=>$currentItem])
-                            </div>
-                            <div class="content text-uppercase fs-12 text-center">
-                                {{$currentItem->academic_rank}}: <span class="robotob">{{$currentItem->name}}</span>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="item-doctor-siderbar wow fadeInUp">
+                                <div class="border">
+                                    <div class="img px- shine-effect">
+                                        @include('image_loader.big',['itemImage'=>$currentItem])
+                                    </div>
+                                    <div class="content text-uppercase fs-12 text-center">
+                                        {{$currentItem->academic_rank}}: <span class="robotob">{{$currentItem->name}}</span>
+                                    </div>
+                                </div>
+                                <div class="rating-info text-center d-flex flex-wrap justify-content-center align-items-center my-2">
+                                    @php
+                                        $rating = $currentItem->getRating('main');
+                                    @endphp
+                                    <div class="rating-now d-flex align-items-center flex-wrap" data-table="doctors" data-id="{{$currentItem->id}}">
+                                        @include('path.selectStar')
+                                        <span class="ms-2">{{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="rating-info text-center d-flex flex-wrap justify-content-center align-items-center my-2">
-                            @php
-                                $rating = $currentItem->getRating('main');
-                            @endphp
-                            <div class="rating-now d-flex align-items-center flex-wrap" data-table="doctors" data-id="{{$currentItem->id}}">
-                                @include('path.rating',['rating' => $rating['percentAll'].'%'])
-                                <span class="ms-2">{{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)</span>
-                            </div>
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <form class="form-contact-sidebar form-send-contact mt-3 mt-xl-4 wow fadeInUp" action="{{VRoute::get('bookApointment')}}" method="post" accept-charset="utf8" autocomplete="off">
+                                <div class="header-form text-center py-2 py-lg-3">
+                                    <p class="fs-16 px-3 mb-1">Đặt lịch hẹn với: {{$currentItem->academic_rank}} </p>
+                                    <p class="fs-18 text-uppercase robotob">{{$currentItem->name}}</p>
+                                </div>
+                                <div class="form-content p-3 pt-xl-4">
+                                    <input type="hidden" name="doctor" value="{{$currentItem->id}}">
+                                    <input type="text" name="fullname" placeholder="Họ và tên (*)">
+                                    <input type="text" name="phone" placeholder="Số điện thoại">
+                                    <input type="email" name="email" placeholder="Email">
+                                    <textarea name="note" rows="2" placeholder="Nội dung"></textarea>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn-all btn-all-main btn-small text-uppercase robotob py-2">Gửi yêu cầu</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <form class="form-contact-sidebar form-send-contact mt-3 mt-xl-4 wow fadeInUp" action="{{VRoute::get('bookApointmentDoctor')}}" method="post" accept-charset="utf8" autocomplete="off">
-                        <div class="header-form text-center py-2 py-lg-3">
-                            <p class="fs-16 px-3 mb-1">Đặt lịch hẹn với: {{$currentItem->academic_rank}} </p>
-                            <p class="fs-18 text-uppercase robotob">{{$currentItem->name}}</p>
-                        </div>
-                        <div class="form-content p-3 pt-xl-4">
-                            <input type="hidden" name="doctor" value="{{$currentItem->id}}">
-                            <input type="text" name="fullname" placeholder="Họ và tên (*)">
-                            <input type="text" name="phone" placeholder="Số điện thoại">
-                            <input type="email" name="email" placeholder="Email">
-                            <textarea name="note" rows="2" placeholder="Nội dung"></textarea>
-                            <div class="text-center">
-                                <button type="submit" class="btn-all btn-all-main btn-small text-uppercase robotob py-2">Gửi yêu cầu</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

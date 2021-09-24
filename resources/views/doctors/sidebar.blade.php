@@ -1,5 +1,5 @@
 <div class="sidebar-all py-4">
-    <form class="form-search-doctor mt-xl-2 mb-4 fs-16 position-relative wow fadeInUp">
+    <form class="form-search-doctor mt-xl-2 mb-4 fs-16 position-relative wow fadeInUp" action="{{VRoute::get('searchDoctor')}}" method="get" accept-charset="utf8">
         <input type="text" name="q" placeholder="Tìm bác sĩ">
         <button type="submit" class="smooth"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>

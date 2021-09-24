@@ -5,7 +5,7 @@
         <div class="col-lg-8 shadow-box-right pb-3 pb-md-4 pt-xl-2 pe-lg-4">
             {{\Breadcrumbs::render('static','Chuyên khoa','chuyen-khoa')}}
             <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Chuyên khoa</h1>
-            <p class="fs-16-cv wow fadeInUp">Danh sách toàn bộ các Khoa & Chuyên khoa tại Bệnh viện Đa Khoa Phương Đông</p>
+            <p class="fs-16-cv wow fadeInUp">{[specialist_page_content]}</p>
             @foreach ($listItems as $key => $item)
                 @if ($key < 1)
                     <div class="new-big d-flex flex-wrap py-3 py-xxl-4 wow fadeInUp">

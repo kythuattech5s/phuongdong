@@ -19,7 +19,12 @@
 		<a href="#" title="Xóa khỏi danh mục cha" data-toggle="modal" data-target="#addToParent" class="_vh_remove_from_parent"><i class="fa fa-chain-broken" aria-hidden="true">Xóa khỏi danh mục cha</i></a>
 		@endif
 	</div>
-	<div class="main_table">
+	<script type="text/javascript">
+		$(document).ready(function() {
+		   $('.double-scroll').doubleScroll();
+		});
+	</script>
+	<div class="main_table double-scroll">
 		<table class="col-md-12 table-bordered table-striped table-condensed cf p0 table-data-view">
 			<thead class="cf">
 				<tr>

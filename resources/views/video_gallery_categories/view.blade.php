@@ -8,7 +8,7 @@
             <p class="fs-16-cv wow fadeInUp">{{$currentItem->short_content}}</p>
             @foreach ($listItems as $key => $item)
                 @if ($key < 1)
-                    <div class="gallery-big d-flex flex-wrap pt-3 pt-xxl-4 wow fadeInUp">
+                    <div class="gallery-big d-flex flex-wrap align-items-start pt-3 pt-xxl-4 wow fadeInUp">
                         <div class="img position-relative">
                             <a href="{{Support::show($item, 'slug')}}" class="smooth c-img shine-effect" title="{{$item->name}}">
                                 @include('image_loader.big',['itemImage'=>$item])
@@ -21,7 +21,7 @@
                             <h3>
                                 <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                             </h3>
-                            <p class="fs-16-cv my-2 my-xl-3">{{Str::words($item->short_content,'50')}}</p>
+                            <p class="fs-16-cv my-2 my-xl-3">{{Str::words($item->short_content,'35')}}</p>
                             <div class="item-time mt-1">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 <span>{{\Support::showDate($item->created_at)}}</span>

@@ -9,6 +9,7 @@
         @endforeach
     </ul>
     @include('register_advise_form')
+    @include('banner_gdn_sidebar')
     <div class="service-slider wow fadeInUp mt-3 mt-xxl-4">
         <div class="header-item d-flex justify-content-between flex-wrap">
             <p class="text-uppercase fs-18 robotob me-2 clmain">Các dịch vụ nổi bật</p>

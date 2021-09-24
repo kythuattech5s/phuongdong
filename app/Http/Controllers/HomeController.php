@@ -26,7 +26,7 @@ class HomeController extends Controller
         $listPartner = Partner::act()->get();
         $listService = Services::where('home',1)->act()->get();
         $listDoctor = Doctor::where('home',1)->act()->get();
-        $listNews = News::where('home',1)->where('time_show_home','>=',new \DateTime())->act()->publish()->take(7)->get()->all();
+        $listNews = News::where('home',1)->where('time_show_home','>=',new \DateTime())->act()->publish()->orderBy('created_at','desc')->take(7)->get()->all();
         $listForcustomer = ForCustomer::act()->get();
         $listEquipment = Equipment::act()->get();
         return view('home',compact('listBanner','listPartner','listService','listDoctor','listNews','listForcustomer','listEquipment'));
