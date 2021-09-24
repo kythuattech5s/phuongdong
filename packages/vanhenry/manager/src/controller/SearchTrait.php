@@ -34,7 +34,12 @@ trait SearchTrait{
 		$data['dataSearch'] = $inputs;
 		$data['dataReuse'] = $this->dataReuse($inputs);
 		$data['tableDetailData'] =  new Collection($tableDetailData);
-		$data['listData'] = $this->getDataTable($q,$data['tableDetailData'],$inputs['limit'],$table);
+		if ($tableData->default_data_tab !== null) {
+            $data['tab'] = json_decode($data['tableData']->get('default_data_tab', ''), true);
+			$data['listData'] = $this->getDataTableTab($table, $data, $q, $inputs);
+        }else{
+			$data['listData'] = $this->getDataTable($q,$data['tableDetailData'],$inputs['limit'],$table);
+		}
 		if(!$request->isMethod('post')){
 			if(array_key_exists("trash", $inputs)){
 				return view('vh::view.viewtrash',$data);		

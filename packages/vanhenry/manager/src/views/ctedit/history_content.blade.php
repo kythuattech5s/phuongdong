@@ -117,6 +117,7 @@
     function loadContent(){
         var new_html = $('.compare-item.active .compare-item__new .s-content');
         var old_html = $('.compare-item.active .compare-item__old .s-content').html();
+        new_html.attr('data-content',new_html.html());
         let output = htmldiff(old_html, new_html.html());
         new_html.html(output);
     }
@@ -155,7 +156,7 @@
                 },
                 callback: function (result) {
                     if(result){
-                        $('textarea.editor').tinymce().setContent($('.compare-item.active .compare-item__new .s-content').html());
+                        $('textarea.editor').tinymce().setContent($('.compare-item.active .compare-item__new .s-content').attr('data-content'));
                         $('.modal').modal('hide');
                     }
                 }

@@ -143,7 +143,7 @@
 							<div class="orderby aclr">
 								<div class="pull-left">
 									<h4 class="pull-left">{{trans('db::orderby')}} </h4>
-									<select name="orderkey" class="select2 pull-left">
+									<select name="orderkey" class="select2 pull-left" onchange="this.form.submit()">
 										{%FILTER.simpleSort.filterSimpleSort.tableDetailData%}
 										@foreach($simpleSort as $ss)
 										@if(!isset($dataSearch) || $dataSearch['orderkey'] == 'id')
@@ -153,7 +153,7 @@
 										@endif
 										@endforeach
 									</select>
-									<select name="ordervalue" class="select2 pull-left">
+									<select name="ordervalue" class="select2 pull-left" onchange="this.form.submit()">
 										@if(isset($dataSearch['ordervalue']))
 										<option {{$dataSearch['ordervalue'] == 'desc' ? 'selected' : ''}} value="desc">{{trans('db::from')}} Z->A</option>
 										<option {{$dataSearch['ordervalue'] == 'asc' ? 'selected' : ''}} value="asc">{{trans('db::from')}} A->Z</option>
@@ -165,7 +165,7 @@
 								</div>
 								<div class="pull-left">
 									<h4 class="pull-left">{{trans('db::show')}}</h4>
-									<select name="limit" class="select2 pull-left">
+									<select name="limit" class="select2 pull-left" onchange="this.form.submit()">
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 10 ? 'selected' : ''}} value="10">10</option>
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 20 ? 'selected' : ''}} value="20">20</option>
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 50 ? 'selected' : ''}} value="50">50</option>
@@ -235,7 +235,7 @@
 							<div class="orderby aclr">
 								<div class="pull-left">
 									<h4 class="pull-left">{{trans('db::orderby')}} </h4>
-									<select name="orderkey" class="select2 pull-left">
+									<select name="orderkey" class="select2 pull-left" onchange="this.form.submit()">
 										{%FILTER.simpleSort.filterSimpleSort.tableDetailData%}
 										@foreach($simpleSort as $ss)
 										@if(!isset($dataSearch) || $dataSearch['orderkey'] == 'id')
@@ -245,7 +245,7 @@
 										@endif
 										@endforeach
 									</select>
-									<select name="ordervalue" class="select2 pull-left">
+									<select name="ordervalue" class="select2 pull-left" onchange="this.form.submit()">
 										@if(isset($dataSearch['ordervalue']))
 										<option {{$dataSearch['ordervalue'] == 'desc' ? 'selected' : ''}} value="desc">{{trans('db::from')}} Z->A</option>
 										<option {{$dataSearch['ordervalue'] == 'asc' ? 'selected' : ''}} value="asc">{{trans('db::from')}} A->Z</option>
@@ -257,7 +257,7 @@
 								</div>
 								<div class="pull-left">
 									<h4 class="pull-left">{{trans('db::show')}}</h4>
-									<select name="limit" class="select2 pull-left">
+									<select name="limit" class="select2 pull-left" onchange="this.form.submit()">
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 10 ? 'selected' : ''}} value="10">10</option>
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 20 ? 'selected' : ''}} value="20">20</option>
 										<option {{isset($dataSearch) && $dataSearch['limit'] == 50 ? 'selected' : ''}} value="50">50</option>

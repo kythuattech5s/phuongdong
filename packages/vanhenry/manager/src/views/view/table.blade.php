@@ -12,7 +12,27 @@
 </div>
 <div id="no-more-tables" class="row m0">
 	<div class="tablecontrol none" >
-		<a class="_vh_delete_all" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i>{{trans('db::delete_all')}}</a>
+		@php
+			if(isset($check)){
+				$user = Auth::guard('h_users')->user()->with('hGroupUser')->find(Auth::guard('h_users')->id());
+				if($user->hGroupUser !== null && $user->hGroupUser->hActions->count() > 0){
+					$deleted = $user->hGroupUser->hActions->filter(function($v){
+						return $v->key == "DELETE";
+					});
+
+					$deleted_now = $user->hGroupUser->hActions->filter(function($v){
+						return $v->key == "DELETE_NOW";
+					});
+				}
+			}
+		@endphp
+		@if(isset($check))
+			@if(isset($deleted_now) && $deleted_now->count() > 0)
+				<a class="_vh_delete_all" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i>{{trans('db::delete_all')}}</a>
+			@endif
+		@else
+			<a class="_vh_delete_all" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i>{{trans('db::delete_all')}}</a>
+		@endif
 		@if($tableData->get('table_parent','')!='')
 		<a href="#" data-toggle="modal" data-target="#addToParent" class="_vh_add_to_parent" title="Thêm vào danh mục cha"><i class="fa fa-puzzle-piece" aria-hidden="true">Thêm vào danh mục cha</i>
 		</a>
