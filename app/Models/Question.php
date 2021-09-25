@@ -31,7 +31,7 @@ class Question extends BaseModel
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class,'map_id','id')->where('map_table','questions')->where('parent',0);
+        return $this->hasMany(Comment::class,'map_id','id')->where('map_table','questions')->whereNull('parent')->where('act',1);
     }
 
     public function getRating(String $type = 'main'){

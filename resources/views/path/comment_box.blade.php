@@ -1,8 +1,14 @@
 <div class="comment-box__content">
-    <p class="comment-box__title">Đánh giá</p>
-    <div class="comment-box__percent">
-        @include('path.ratingScore')
-        @include('path.ratingList')
+    <div class="comment-box__form">
+        <form action="binh-luan" method="POST" data-clear class="formValidation overflow-hidden" data-parent=".form-group" data-success="COMMENT.receivedComment">
+            @csrf
+            <input type="hidden" value="{{$map_table}}" name="map_table">
+            <input type="hidden" value="{{ Support::show($currentItem,'id') }}" name="map_id">
+            <div class="form-group">
+                <textarea id="comment" class="form-control" name="content" rules="required" m-required="Vui lòng để lại bình luận" rows="5" onchange="console.log(this.value)" placeholder="Trở thành người đầu tiên bình luận cho bài viết này"></textarea>
+            </div>
+            <button type="submit" class="btn-all btn-all-main mt-2 float-end"> Bình luận</button>
+        </form>
     </div>
     <p class="comment-box__title">Bình luận</p>
     <div class="comment-box__list">
@@ -11,38 +17,5 @@
     @if($comments->lastPage() > $comments->currentPage())
         <button type="button" class="more-comment" page-table="{{$map_table}}" page-id="{-currentItem.id-}" page-current="{{$comments->currentPage()}}">Xem thêm</button>
     @endif
-    @if (Auth::check())
-        <p class="comment-box__title mt-4">Đánh giá và bình luận</p>
-        <div class="comment-box__form">
-            @php
-                $user = Auth::user();
-            @endphp
-            <div class="comment-box__form-img"
-                style="background-image:url('{%IMGV2.user.img.390x0%}')">
-            </div>
-            <form action="/binh-luan" data-clear method="POST" class="formComment formValidation" data-parent="form-validate" data-file enctype="multipart/form-data" data-success="COMMENT.receivedComment" data-check>
-                @csrf
-                <div class="flex">
-                    <div class="form-validate">
-                        @include('path.selectStar')
-                    </div>
-                    <ul class="gallery-preview" data-gallery>
-                    </ul>
-                </div>
-                <input type="hidden" name="map_id" value="{-currentItem.id-}">
-                <input type="hidden" name="map_table" value="{{$map_table}}">
-                <div class="form-validate mb-3">
-                    <textarea name="content" placeholder="Bình luận" m-required="Hãy để lại bình luận" cols="26" rules="required"></textarea>
-                </div>
-                <div class="formComment__action">
-                    <button class="btn btn--orange" type="submit">Bình luận ngay</button>
-                    <label for="formComment__file" class="formComment__label formComment__label--upload">
-                        <i class="fa fa-upload" aria-hidden="true"></i>
-                        <span>Upload</span>
-                        <input type="file" id="formComment__file" name="img" multiple input-file>
-                    </label>
-                </div>
-            </form>
-        </div>
-    @endif
+    
 </div>

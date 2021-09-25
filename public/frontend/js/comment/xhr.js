@@ -31,7 +31,7 @@ var XHR = (function () {
                     var status = xhr.status;
                     buttonDone(options);
                     if (status === 0 || (status >= 200 && status < 400)) {
-                        resolve(checkJson(xhr.responseText) ? JSON.parse(xhr.responseText) : true);
+                        resolve(isJson(xhr.responseText) ? JSON.parse(xhr.responseText) : true);
                     } else {
                         reject({
                             status: this.status,
@@ -122,14 +122,15 @@ var XHR = (function () {
     }
 
     var buttonStyle = function(button){
+        const buttonRect = button.getBoundingClientRect();
         Object.assign(button.style, {
-            width: `${button.offsetWidth}px`,
-            height: `${button.offsetHeight}px`,
+            width: `${buttonRect.width}px`,
+            height: `${buttonRect.height}px`,
             position: `relative`,
         });
         button.setAttribute("content-old", button.innerHTML);
         button.disabled = true;
-        button.innerHTML = `<div class="r-s-loader"></div><style>.r-s-loader{position:absolute;left:50%;top:50%;border:5px solid #f3f3f3;border-radius:50%;border-top:5px solid #fff;border-bottom:5px solid #fff;border-left:5px solid transparent;border-right:5px solid transparent;width:${button.offsetHeight - 16}px;height:${button.offsetHeight - 16}px;-webkit-animation:spin 2s linear infinite;animation:spin 2s linear infinite}@-webkit-keyframes spin{0%{-webkit-transform:translate(-50%,-50%) rotate(0)}100%{-webkit-transform:translate(-50%,-50%) rotate(360deg)}}@keyframes spin{0%{transform:translate(-50%,-50%) rotate(0)}100%{transform:translate(-50%,-50%) rotate(360deg)}}</style>`;
+        button.innerHTML = `<div class="r-s-loader"></div><style>.r-s-loader{position:absolute;left:50%;top:50%;border:5px solid #f3f3f3;border-radius:50%;border-top:5px solid #fff;border-bottom:5px solid #fff;border-left:5px solid transparent;border-right:5px solid transparent;width:${buttonRect.height - 16}px;height:${buttonRect.height - 16}px;-webkit-animation:spin 2s linear infinite;animation:spin 2s linear infinite}@-webkit-keyframes spin{0%{-webkit-transform:translate(-50%,-50%) rotate(0)}100%{-webkit-transform:translate(-50%,-50%) rotate(360deg)}}@keyframes spin{0%{transform:translate(-50%,-50%) rotate(0)}100%{transform:translate(-50%,-50%) rotate(360deg)}}</style>`;
     }
 
     var buttonDone = function(options){
@@ -144,14 +145,22 @@ var XHR = (function () {
         }
     }
 
-    var checkJson = function(string){
-        if (/^[\],:{}\s]*$/.test(string.replace(/\\["\\\/bfnrtu]/g, '@').
-        replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-        replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-            return true;
-        }else{
+    function isJson(item) {
+        item = typeof item !== "string"
+            ? JSON.stringify(item)
+            : item;
+    
+        try {
+            item = JSON.parse(item);
+        } catch (e) {
             return false;
         }
+    
+        if (typeof item === "object" && item !== null) {
+            return true;
+        }
+    
+        return false;
     }
 
     return {

@@ -162,6 +162,7 @@ var DRAFT = (function(){
     var changeContent = function(){
         const myContent = $('textarea.editor');
         if(myContent.length == 0) return;
+        if(pathname.indexOf('esystem/edit/news') == -1) return;
         if (document.readyState === 'complete') {
             $('textarea.editor').tinymce().on('change',function(e){
                 hasChangeContent = true;

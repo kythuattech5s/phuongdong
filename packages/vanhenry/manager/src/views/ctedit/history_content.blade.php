@@ -27,6 +27,7 @@
     .compare-item .compare-item__new{
         height: 70vh;
         overflow: auto;
+        word-break: break-all;
         padding:8px 12px;
         width: 50%;
         box-shadow: inset 0 0 3px black

@@ -1,28 +1,30 @@
 @forelse($comments as $comment)
     <div class="comment-item">
         <div class="comment-item__top">
-            @php 
-                $user = $comment->user;
-            @endphp 
-            <div class="comment-item__img" style="background-image:url({%IMGV2.user.img.390x0%})">
+            {{-- 
+                @php 
+                    $user = $comment->user;
+                @endphp 
+            --}}
+            <div class="comment-item__img" style="background-image:url({IAVATAR_DEFAULT.imgI})">
             </div>
             <div class="comment-item__info">
-                <div class="comment-user__info">
+                <div class="comment-user__info {{$comment->is_admin == 1 ? 'admin' : ''}}">
                     <strong class="user-info__name">
-                        {{ $user->name }}
+                        Khách hàng
                     </strong>
-                <span class="comment-item__datetime"><i class="fa fa-clock-o" aria-hidden="true"></i> {-comment.created_at-}</span>
+                    <span class="comment-item__datetime"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ Support::showTime($comment) }}</span>
                 </div>
-                <span class="comment-item__type">Student</span>
-                @if($comment->rating !== null)
-                    @include('path.raitngPercen',['rating'=>$comment->rating->rating * 20 . '%'])
-                @endif
+                {{-- @if($comment->rating !== null)
+                    @include('comment.rating',['rating'=>$comment->rating->rating * 20 . '%'])
+                @endif --}}
             </div>
+            
         </div>
         <div class="comment-item__content">
-            {-comment.content-}
+            {{Support::show($comment,'content')}}
         </div>
-        <div class="comment-item__imgs">
+        {{-- <div class="comment-item__imgs">
             @php
                 $imgs = json_decode($comment->imgs,true);
             @endphp
@@ -36,22 +38,33 @@
                 </div>
                 @endforeach
             @endif
+        </div> --}}
+        <div class="comment-action">
+            {{-- @php
+                $user_like = $comment->likes->filter(function($q){
+                    return $q->user->id == Auth::id();
+                });
+            @endphp --}}
+            {{-- <button class="btn-like-comment {{$user_like->count() > 0 ? 'like' : ''}}" data-id="{-comment.id-}">@include('comment.icon.like') Like (<span>{{$comment->likes->count()}}</span>)</button> --}}
+            <div class="rep-comment" action="/reply-comment" method="POST">
+                @csrf
+                <input type="hidden" name="parent" value="{-comment.id-}">
+                <input type="hidden" name="map_table" value="{-comment.map_table-}">
+                <input type="hidden" name="map_id" value="{-comment.map_id-}">
+                <div class="group-form"></div>
+                <button type="button" data-placeholder="Trả lời bình luận">Trả lời</button>
+            </div>
         </div>
-        <div class="rep-comment" action="/tra-loi-binh-luan" method="POST">
-            @csrf
-            <input type="hidden" name="parent" value="{-comment.id-}">
-            <input type="hidden" name="map_table" value="{-comment.map_table-}">
-            <input type="hidden" name="map_id" value="{-comment.map_id-}">
-            <div class="group-form"></div>
-            <button type="button" data-placeholder="Trả lời bình luận">Trả lời</button>
-        </div>
-        @if(($childs = $comment->childs()->where('act', 1)->paginate(5))->count() > 0)
+        @php
+            $childs = $comment->childs;
+        @endphp
+        @if($childs->count() > 0)
             <div class="comment-childs">
                 @include('path.comment_child')
             </div>
-            @if($childs->lastPage() > $childs->currentPage())
+            {{-- @if($childs->lastPage() > $childs->currentPage())
                 <button type="button" class="more-comment--child" page-current="{{$childs->currentPage()}}">Xem thêm</button>
-            @endif
+            @endif --}}
         @endif
     </div>
 @empty 

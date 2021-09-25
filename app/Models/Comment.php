@@ -14,7 +14,7 @@ class Comment extends Model
     }
 
     public function childs(){
-        return $this->hasMany(Comment::class,'parent');
+        return $this->hasMany(Comment::class,'parent')->where('act',1);
     }
 
     public function rating(){

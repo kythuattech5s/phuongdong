@@ -33,7 +33,6 @@ class HomeController extends Controller
     }
 
     public function test(){
-        $posts = \App\Models\News::act()->get();
-        dd($posts);
+        dd(session()->getId());
     }
 }

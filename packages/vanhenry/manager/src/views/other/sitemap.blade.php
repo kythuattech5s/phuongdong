@@ -11,17 +11,17 @@
 			</div>
 		</div>
 		@foreach($listSitemaps as $sitemap)
-		<div class="col-xs-12 item-sitemap">
-			<div class="col-xs-8">
-				<h4>{{$sitemap->table}}</h4>
+			<div class="col-xs-12 item-sitemap">
+				<div class="col-xs-8">
+					<h4>{{$sitemap->vi_name}}</h4>
+				</div>
+				<div class="col-xs-2 textcenter">
+					<button data-from="{{$sitemap->table}}" data-type="2" >Cập nhật tháng này</button>
+				</div>
+				<div class="col-xs-2 textcenter">
+					<button data-from="{{$sitemap->table}}" data-type="1">Cập nhật tất cả</button>
+				</div>
 			</div>
-			<div class="col-xs-2 textcenter">
-				<button data-from="{{$sitemap->table}}" data-type="2" >Cập nhật tháng này</button>
-			</div>
-			<div class="col-xs-2 textcenter">
-				<button data-from="{{$sitemap->table}}" data-type="1">Cập nhật tất cả</button>
-			</div>
-		</div>
 		@endforeach
 	</div>
 <style type="text/css">

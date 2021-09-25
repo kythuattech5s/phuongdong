@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/comment.css') }}">
+@endsection
 @section('content')
 <section class="container">
     <div class="mb-2 pt-xl-2">
@@ -58,14 +61,14 @@
                     {!!$currentItem->answer!!}
                 </div>
             </div>
-            {{-- <div class="message wow fadeInUp">
+            <div class="message wow fadeInUp">
                 @php
                     $ratings = $currentItem->getRating('all');
                 @endphp
-                <div class="comment-box">
+                <div class="comment-box mt-4">
                     @include('path.comment_box',['map_table' => 'questions'])
                 </div>
-            </div> --}}
+            </div>
             @if (count($questionRelateds) > 0)
                 <p class="side-bar-title robotob wow fadeInUp mt-4 pt-xl-2">CÂU HỎI CÙNG CHỦ ĐỀ</p>
                 @foreach (array_slice($questionRelateds,0,1) as $item)
@@ -126,3 +129,9 @@
     </div>
 </section>
 @stop
+@section('js')
+    <script src="{{ asset('frontend/js/comment/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/comment/xhr.js') }}"></script>
+    <script src="{{ asset('frontend/js/comment/comment.js') }}"></script>
+    <script src="{{ asset('frontend/js/comment/validatorIMG.js') }}"></script>
+@endsection
