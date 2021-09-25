@@ -2761,11 +2761,6 @@ td.action[data-title="Chức năng"], #no-more-tables table tr th:last-child {
 td.action[data-title="Chức năng"] {
     background: #e1e1e1 !important;
 }
-.doubleScroll-scroll-wrapper{
-    position: sticky;
-    top: 34px;
-    z-index: 50;
-}
 .doubleScroll-scroll-wrapper::-webkit-scrollbar-track,.double-scroll::-webkit-scrollbar-track{
   background-color: #f7f7f7;
   width: 12px;

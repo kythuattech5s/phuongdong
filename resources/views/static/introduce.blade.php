@@ -298,4 +298,48 @@
         <div class="py-xl-5"></div>
     </div>
 </section>
+<section class="leadership-module py-5">
+    <div class="container">
+        <p class="robotob all-title center mb-3 mt-xl-3 mb-xl-4 wow fadeInUp">Ban lãnh đạo bệnh viện</p>
+        <div class="row">
+            @foreach ($listLeadership as $item)
+                <div class="col-md-6 col-lg-4  mx-auto">
+                    <div class="item-leadership">
+                        <div class="img c-img">
+                            @include('image_loader.big',['itemImage'=>$item])
+                        </div>
+                        <div class="content text-center px-3 pb-3">
+                            <p class="name robotob fs-24">{{$item->name}}</p>
+                            <p class="job fs-16 my-2">{{$item->job}}</p>
+                            <p class="text-uppercase fs-12 robotob">Bệnh viện đa khoa Phương đông</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<section class="certifications-module py-5">
+    <div class="container">
+        <p class="robotob all-title center mb-3 mt-xl-3 mb-xl-4 wow fadeInUp">Chứng nhận & giải thưởng</p>
+        <div class="swiper-container slide-certifications wow fadeInUp pt-xl-3">
+            <div class="swiper-wrapper">
+                @foreach ($listCertification as $itemCertification)
+                    <div class="swiper-slide p-1">
+                        <div class="item-certifications cspoint">
+                            <div class="img text-center">
+                                <a href="{{$itemCertification->link}}" class="smooth" title="{{$itemCertification->name}}">
+                                    @include('image_loader.small',['itemImage'=>$itemCertification])
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="slider-pagination position-static mt-3 mt-lg-4">
+            <div class="pagination-certifications"></div>
+        </div>
+    </div>
+</section>
 @stop

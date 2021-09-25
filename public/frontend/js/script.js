@@ -635,6 +635,30 @@ var SLIDER = (function(){
 			}
 		});
 	}
+	var sliderCertifications = function(){
+		if ($('.slide-certifications').length == 0) return;
+		const swiperThumb = new Swiper('.slide-certifications', {
+			slidesPerView: 2.2,
+			loop: false,
+			disableOnInteraction: true,
+			speed:600,
+			freeMode: true,
+			pagination: {
+				el: ".pagination-certifications",
+				clickable: true,
+			},
+			spaceBetween: 15,
+			breakpoints: {
+				768: {
+					slidesPerView: 3,
+					spaceBetween: 20
+				},
+				1200: {
+					slidesPerView: 4,
+				}
+			}
+		});
+	}
 	return {
 		_:function(){
 			sliderBannerHome();
@@ -651,6 +675,7 @@ var SLIDER = (function(){
 			sliderGreenHospitalModel();
 			sliderIntroTtb();
 			slideHistoryBegin();
+			sliderCertifications();
 		}
 	};
 })();

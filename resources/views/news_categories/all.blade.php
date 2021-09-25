@@ -3,8 +3,8 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-lg-8 shadow-box-right pb-3 pb-md-4 pt-xl-2 pe-lg-4">
-	        {{\Breadcrumbs::render('static','Tin tức','tin-tuc')}}
-	        <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Tin tức</h1>
+	        {{\Breadcrumbs::render('static',$currentItem->vi_name,$currentItem->vi_link)}}
+	        <h1 class="fs-30-cv robotob mb-1 wow fadeInUp text-uppercase">{{$currentItem->vi_name}}</h1>
 	        @foreach ($listItems as $key => $item)
 	            @if ($key < 1)
 	                <div class="new-big d-flex flex-wrap py-3 py-xxl-4 wow fadeInUp">
