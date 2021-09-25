@@ -29,7 +29,8 @@ class CurlHelper
 			$params[CURLOPT_POSTFIELDS] = $data;
 		}
 		if($type == 'POST' && is_array($data)){
-			$params[CURLOPT_POSTFIELDS] = 'data[User][username]=admin1&data[User][password]=phuongdong@@';
+			// $params[CURLOPT_POSTFIELDS] = 'data[User][username]=admin1&data[User][password]=phuongdong@@';
+			$params[CURLOPT_POSTFIELDS] = http_build_query($data);
 		}
 		if ($type == 'GET' && is_array($data)) {
 			$params[CURLOPT_URL] = $url.'?'.http_build_query($data);

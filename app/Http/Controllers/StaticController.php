@@ -243,6 +243,8 @@ class StaticController extends Controller
         $currentItem = $route;
         $listEquipment = \App\Models\Equipment::act()->get();
         $historyBegin = \App\Models\HistoryBegin::act()->get();
-        return View::make('static.introduce',compact('currentItem','listEquipment','historyBegin'));
+        $listCertification = \App\Models\Certification::act()->get();
+        $listLeadership = \App\Models\Leadership::act()->get();
+        return View::make('static.introduce',compact('currentItem','listEquipment','historyBegin','listCertification','listLeadership'));
     }
 }
