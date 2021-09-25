@@ -3098,14 +3098,21 @@ html[lang='vi'],html[lang='auto']{
 	background-attachment: fixed;
 }
 .leadership-module,.certifications-module{
-	background: #f4f5f6;
+	background: #f9f9f9;
 }
 .item-leadership{
+	.c-img{
+		z-index: 2;
+		width: calc(100% - 30px);
+		border-radius: 10px;
+		overflow: hidden;
+		box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.1);
+	}
 	.job{
 		color: #0A9949
 	}
 	.content{
-		padding-top: 150px;
+		padding-top: 140px;
 		margin-top: -120px;
 		position: relative;
 		background: white;
@@ -3113,6 +3120,7 @@ html[lang='vi'],html[lang='auto']{
 		border-radius: 5px;		
 		&:before{
 			content:'';
+			position: absolute;
 			width: 35%;
 			height: 3px;
 			background: #0A9949;
@@ -3122,6 +3130,7 @@ html[lang='vi'],html[lang='auto']{
 		}
 		&:after{
 			content:'';
+			position: absolute;
 			width: 100%;
 			height: 3px;
 			background: linear-gradient(124.29deg, #18A1F0 2.15%, #006AA7 109.31%);

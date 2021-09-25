@@ -24,7 +24,7 @@
     <div class="list-character px-xl-5 ms-3 mt-3 mt-xl-4 wow fadeInUp">
         @foreach (range('A', 'Z') as $item)
             <div class="item-character" data-key="{{$item}}">
-                <span>{{$item}}</span>
+                <span class="notranslate">{{$item}}</span>
             </div>
         @endforeach
     </div>
@@ -37,7 +37,7 @@
     @foreach (range('A', 'Z') as $item)
         <div class="section-item-search mt-3 mt-xl-4 pt-2" id="{{$item}}">
             <div class="header-item-search d-flex justify-content-between align-items-end mb-4">
-                <span class="fs-30-cv mb-1">{{$item}}</span>
+                <span class="fs-30-cv mb-1 notranslate">{{$item}}</span>
                 <button href="" class="smooth mb-1 hv-main-sp back-first-page" title="">
                     <span class="me-1">Trở về trang đầu</span>
                     <i class="fa fa-arrow-circle-up fs-18 clmain" aria-hidden="true"></i>
