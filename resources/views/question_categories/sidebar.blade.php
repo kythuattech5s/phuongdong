@@ -18,7 +18,7 @@
             @endphp
             @foreach ($listQuestion as $key => $item)
                 <li class="d-flex align-items-center">
-                    <div class="number">
+                    <div class="number notranslate">
                         {{$key+1}}
                     </div>
                     <a href="{{Support::show($item, 'slug')}}" class="smooth link" title="{{$item->name}}">{{$item->name}}</a>

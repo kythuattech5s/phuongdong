@@ -93,9 +93,7 @@
         <div class="col-12 col-lg-6 px-0 pe-lg-4">
             <div class="img-360 position-relative wow fadeInUp">
                 <div class="c-img">
-                    <? /* ?>
                     <iframe src="{[introduce_ga_link]}"></iframe>
-                    <? */ ?>
                 </div>
                 <div class="icon-360-play">
                     <img src="frontend/images/360-image.png" title="" alt="" class="img-fluid">
@@ -302,15 +300,15 @@
     <div class="container">
         <p class="robotob all-title center mb-3 mt-xl-3 mb-xl-4 wow fadeInUp">Ban lãnh đạo bệnh viện</p>
         <div class="row">
-            @foreach ($listLeadership as $item)
-                <div class="col-md-6 col-lg-4  mx-auto">
-                    <div class="item-leadership">
-                        <div class="img c-img">
+            @foreach ($listLeadership as $key => $item)
+                <div class="col-md-6 col-lg-4 mx-auto">
+                    <div class="item-leadership wow flipInY" data-wow-delay="{{$key*0.15}}s">
+                        <div class="img mx-auto c-img">
                             @include('image_loader.big',['itemImage'=>$item])
                         </div>
-                        <div class="content text-center px-3 pb-3">
-                            <p class="name robotob fs-24">{{$item->name}}</p>
-                            <p class="job fs-16 my-2">{{$item->job}}</p>
+                        <div class="content text-center px-3 pb-3 pb-xl-4 lh-13">
+                            <p class="name robotob fs-22">{{$item->name}}</p>
+                            <p class="job fs-16 mt-1 mt-xl-2 mb-2">{{$item->job}}</p>
                             <p class="text-uppercase fs-12 robotob">Bệnh viện đa khoa Phương đông</p>
                         </div>
                     </div>
