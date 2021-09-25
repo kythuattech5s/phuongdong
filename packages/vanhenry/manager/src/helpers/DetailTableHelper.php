@@ -107,7 +107,7 @@ class DetailTableHelper
 			if(isset($fValue) && $fValue!="-1"){
 				$q = $q->where($fRoot,$fValue);
 			}
-			$arr = $q->orderBy("name","asc")->get();
+			$arr = $q->orderBy($select[1] ?? 'name',"asc")->get();
 			foreach ($arr as $key => $value) {
 				if(property_exists($value, $fBase))
 				{
