@@ -183,7 +183,7 @@ class SysController extends BaseAdminController
         return view("vh::other.robot",compact("content"));
     }
     public function editSitemap(){
-        $listSitemaps = \DB::select("select created_at, `table`,vi_name from v_routes where is_static <> 1 or is_static is null group by `table`");
+        $listSitemaps = \DB::select("select r.created_at, r.`table`, t.`name` from v_routes r join v_tables t on r.`table`= t.`table_map` where r.is_static <> 1 or r.is_static is null group by r.`table`");
         return view("vh::other.sitemap",compact("listSitemaps"));
     }
     public function updateSitemap(Request $request){

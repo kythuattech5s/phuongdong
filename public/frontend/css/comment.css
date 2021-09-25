@@ -155,15 +155,15 @@ input.star:hover ~ label.star:before{
     }
 }
 .comment-box__list .comment-item:not(:last-child){
-    border-bottom: 1px solid var(--color-hr);
+    /* border-bottom: 1px solid var(--color-hr); */
 }
 .comment-box__list .no-result{
     padding: 16px 0;
 }
 .comment-box__list{
     margin: 24px 0;
-    border-top: 1px solid var(--color-hr);
-    border-bottom: 1px solid var(--color-hr);
+    /* border-top: 1px solid var(--color-hr); */
+    /* border-bottom: 1px solid var(--color-hr); */
 }
 .comment-box__content{
     background: var(--color-btn);
