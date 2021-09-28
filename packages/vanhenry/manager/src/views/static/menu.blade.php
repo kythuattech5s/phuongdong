@@ -15,7 +15,7 @@
                          </span>
                     </a>
                     <button class="menu-show-icon">
-                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                     </button>
                </div>
                <ul class="sub none">

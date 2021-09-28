@@ -74,6 +74,9 @@
                         <i class="fa fa-plus me-1" aria-hidden="true"></i>
                         <span>Nguồn tham khảo</span>
                     </p>
+                    <div class="mt-1">
+                        {!!$currentItem->reference_source!!}
+                    </div>
                 </div>
                 <p class="publisher fs-16">
                     <span>Tác giả:</span>
