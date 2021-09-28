@@ -2,7 +2,7 @@ var _VH_MAIN = {};
 $(function() {
     _VH_MAIN.initOption();
     _VH_MAIN.initScrollbar();
-    _VH_MAIN.initFixedMenu();
+    // _VH_MAIN.initFixedMenu();
     _VH_MAIN.initSelect2();
     _VH_MAIN.setupAjaxDone();
     _VH_MAIN.initCheckbox();
