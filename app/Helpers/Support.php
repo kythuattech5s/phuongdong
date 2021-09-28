@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use App\Models\Menu;
 use App\Models\MenuSitemap;
 use App\Models\MenuCategory;
-use App\Helpers\Media;
+use App\Helpers\{Media,TwoLevelSlug};
 use App\Models\Comment;
 use App\Models\Province;
 use App\Models\District;
@@ -138,6 +138,13 @@ class Support
 				return Currency::showMoney($value);
 				break;
 			case 'slug':
+				if (method_exists($object,'getTable')) {
+					$listTableTwoLevelSlug = TwoLevelSlug::getArrTable();
+					$currentItemTable = $object->getTable();
+					if (isset($listTableTwoLevelSlug[$currentItemTable])) {
+						return route('home').'/'.$listTableTwoLevelSlug[$currentItemTable].'/'.$value.'/';
+					}
+				}
 				return route('home').'/'.$value.'/';
 				break;
 			case 'link':
@@ -1136,6 +1143,11 @@ class Support
 	    $toc .= str_repeat('</li></ul>', $last_level);
 	    $toc .= '</div>';
 	    $toc = $i === 0 ? '' : $toc;
+	    $listImg = $html->find('img');
+	    foreach ($listImg as $itemImg) {
+	    	$itemImg->parent()->innertext = "<a href='".$itemImg->src."'' data-fancybox='gallery' data-animation-effect='fade'>".$itemImg->outertext."</a>";
+	    }
+	    $html->save();
 	    $data['toc'] = $toc;
 	    $data['content'] = $html;
 	    return $data;

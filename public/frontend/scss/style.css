@@ -2559,6 +2559,11 @@ html[lang='vi'] .header-top .search-box, html[lang='auto'] .header-top .search-b
 #google_translate_element2 {
   display: none; }
 
+.toc-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 2; }
+
 #toc_container {
   background: #f3f3f3;
   border: 1px solid #eeeeee;

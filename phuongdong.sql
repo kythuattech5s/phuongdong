@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 25/09/2021 07:16:25
+ Date: 25/09/2021 12:48:58
 */
 
 SET NAMES utf8mb4;
@@ -358,147 +358,18 @@ CREATE TABLE `custom_media_images`  (
   `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT 'Ngày tạo',
   `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT 'Ngày cập nhật',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of custom_media_images
 -- ----------------------------
-INSERT INTO `custom_media_images` VALUES (1, 'public/uploads/demo/ico-supporter.png', 1, '2021-09-03 21:36:58', '2021-09-03 21:36:58');
-INSERT INTO `custom_media_images` VALUES (2, 'public/uploads/demo/i-banggia.png', 1, '2021-09-03 21:36:58', '2021-09-03 21:36:58');
-INSERT INTO `custom_media_images` VALUES (3, 'public/uploads/demo/i-calendar.png', 1, '2021-09-03 21:36:59', '2021-09-03 21:36:59');
-INSERT INTO `custom_media_images` VALUES (4, 'public/uploads/demo/i-tracuu.png', 1, '2021-09-03 21:36:59', '2021-09-03 21:36:59');
-INSERT INTO `custom_media_images` VALUES (5, 'public/uploads/demo/i-tour.png', 1, '2021-09-03 21:37:00', '2021-09-03 21:37:00');
-INSERT INTO `custom_media_images` VALUES (6, 'public/uploads/demo/layer-573.jpg', 1, '2021-09-04 00:50:51', '2021-09-04 00:50:51');
-INSERT INTO `custom_media_images` VALUES (7, 'public/uploads/demo/01-index-recovered.jpg', 1, '2021-09-04 01:03:14', '2021-09-04 01:03:14');
-INSERT INTO `custom_media_images` VALUES (8, 'public/uploads/demo/layer-524-copy.jpg', 1, '2021-09-04 01:14:19', '2021-09-04 01:14:19');
-INSERT INTO `custom_media_images` VALUES (9, 'public/uploads/demo/layer-660_2.png', 1, '2021-09-04 22:31:27', '2021-09-04 22:31:27');
-INSERT INTO `custom_media_images` VALUES (10, 'public/uploads/demo/1583477097-855623315-t-v-n-va-tiem-vacxin.png', 1, '2021-09-06 02:04:13', '2021-09-06 02:04:13');
-INSERT INTO `custom_media_images` VALUES (11, 'public/uploads/demo/1583477153-1164604985-cac-goi-kham-s-c-kh-e.png', 1, '2021-09-06 02:06:40', '2021-09-06 02:06:40');
-INSERT INTO `custom_media_images` VALUES (12, 'public/uploads/demo/1596442753-1793739837-custom-1.png', 1, '2021-09-06 02:17:28', '2021-09-06 02:17:28');
-INSERT INTO `custom_media_images` VALUES (13, 'public/uploads/demo/phu-nu-mang-thai.jpg', 1, '2021-09-06 07:58:23', '2021-09-06 07:58:23');
-INSERT INTO `custom_media_images` VALUES (14, 'public/uploads/demo/12-24.jpg', 1, '2021-09-06 07:58:24', '2021-09-06 07:58:24');
-INSERT INTO `custom_media_images` VALUES (15, 'public/uploads/demo/0-24.jpg', 1, '2021-09-06 07:58:25', '2021-09-06 07:58:25');
-INSERT INTO `custom_media_images` VALUES (16, 'public/uploads/demo/0-12.jpg', 1, '2021-09-06 07:58:26', '2021-09-06 07:58:26');
-INSERT INTO `custom_media_images` VALUES (17, 'public/uploads/demo/6-12.jpg', 1, '2021-09-06 07:58:27', '2021-09-06 07:58:27');
-INSERT INTO `custom_media_images` VALUES (18, 'public/uploads/demo/0-6.jpg', 1, '2021-09-06 07:58:42', '2021-09-06 07:58:42');
-INSERT INTO `custom_media_images` VALUES (19, 'public/uploads/demo/bac-si-tu-van.jpg', 1, '2021-09-06 08:09:54', '2021-09-06 08:09:54');
-INSERT INTO `custom_media_images` VALUES (20, 'public/uploads/demo/phong-mo-vo-khuan-1-chieu.jpg', 1, '2021-09-06 08:09:55', '2021-09-06 08:09:55');
-INSERT INTO `custom_media_images` VALUES (21, 'public/uploads/demo/khong-gian-benh-vien-phuong-dong.jpg', 1, '2021-09-06 08:09:56', '2021-09-06 08:09:56');
-INSERT INTO `custom_media_images` VALUES (22, 'public/uploads/demo/kham-benh-tai-nha-1.jpg', 1, '2021-09-06 08:16:17', '2021-09-06 08:16:17');
-INSERT INTO `custom_media_images` VALUES (23, 'public/uploads/demo/kham-benh-tai-nha.jpg', 1, '2021-09-06 08:17:07', '2021-09-06 08:17:07');
-INSERT INTO `custom_media_images` VALUES (24, 'public/uploads/demo/bang-gia-dich-vu-kham-benh-tai-nha.jpg', 1, '2021-09-06 08:17:48', '2021-09-06 08:17:48');
-INSERT INTO `custom_media_images` VALUES (25, 'public/uploads/doi-ngu-bac-si/untitled-2.jpg', 1, '2021-09-06 12:05:19', '2021-09-06 12:05:19');
-INSERT INTO `custom_media_images` VALUES (26, 'public/uploads/doi-ngu-bac-si/untitled-1.jpg', 1, '2021-09-06 13:50:14', '2021-09-06 13:50:14');
-INSERT INTO `custom_media_images` VALUES (27, 'public/uploads/doi-ngu-bac-si/1.jpg', 1, '2021-09-06 13:52:17', '2021-09-06 13:52:17');
-INSERT INTO `custom_media_images` VALUES (28, 'public/uploads/chuyen-khoa/tin-tuc.jpg', 1, '2021-09-06 14:18:15', '2021-09-06 14:18:15');
-INSERT INTO `custom_media_images` VALUES (29, 'public/uploads/doi-ngu-bac-si/nguyen-van-vu.jpg', 1, '2021-09-06 16:04:39', '2021-09-06 16:04:39');
-INSERT INTO `custom_media_images` VALUES (30, 'public/uploads/doi-ngu-bac-si/1.png', 1, '2021-09-06 16:09:57', '2021-09-06 16:09:57');
-INSERT INTO `custom_media_images` VALUES (31, 'public/uploads/doi-tac/logo-doi-tac.png', 1, '2021-09-06 16:29:11', '2021-09-06 16:29:11');
-INSERT INTO `custom_media_images` VALUES (32, 'public/uploads/doi-tac/logo-2.png', 1, '2021-09-06 16:31:57', '2021-09-06 16:31:57');
-INSERT INTO `custom_media_images` VALUES (33, 'public/uploads/doi-tac/doi-tac.png', 1, '2021-09-06 16:33:29', '2021-09-06 16:33:29');
-INSERT INTO `custom_media_images` VALUES (34, 'public/uploads/doi-tac/dai.png', 1, '2021-09-06 16:35:25', '2021-09-06 16:35:25');
-INSERT INTO `custom_media_images` VALUES (35, 'public/uploads/doi-tac/dt2.png', 1, '2021-09-06 16:39:13', '2021-09-06 16:39:13');
-INSERT INTO `custom_media_images` VALUES (36, 'public/uploads/doi-tac/dt3.png', 1, '2021-09-06 16:41:05', '2021-09-06 16:41:05');
-INSERT INTO `custom_media_images` VALUES (37, 'public/uploads/tin-tuc/danh-muc/xet-nghiem.png', 1, '2021-09-06 16:49:56', '2021-09-06 16:49:56');
-INSERT INTO `custom_media_images` VALUES (38, 'public/uploads/tin-tuc/danh-muc/xetnghiem.png', 1, '2021-09-06 16:53:06', '2021-09-06 16:53:06');
-INSERT INTO `custom_media_images` VALUES (39, 'public/uploads/tin-tuc/danh-muc/co-xuong-khop.png', 1, '2021-09-06 17:01:11', '2021-09-06 17:01:11');
-INSERT INTO `custom_media_images` VALUES (40, 'public/uploads/tin-tuc/danh-muc/ung-buou.png', 1, '2021-09-06 17:10:00', '2021-09-06 17:10:00');
-INSERT INTO `custom_media_images` VALUES (41, 'public/uploads/tin-tuc/danh-muc/ho-hap.png', 1, '2021-09-06 17:21:05', '2021-09-06 17:21:05');
-INSERT INTO `custom_media_images` VALUES (42, 'public/uploads/tin-tuc/danh-muc/noi-tiet.png', 1, '2021-09-06 17:21:05', '2021-09-06 17:21:05');
-INSERT INTO `custom_media_images` VALUES (43, 'public/uploads/doi-ngu-bac-si/10-bs-nguyen-thi-thu-yen-0.jpg', 1, '2021-09-06 17:48:15', '2021-09-06 17:48:15');
-INSERT INTO `custom_media_images` VALUES (44, 'public/uploads/tin-tuc/bai-viet/kham-phu-khoa-o-tr.jpg', 1, '2021-09-07 08:40:37', '2021-09-07 08:40:37');
-INSERT INTO `custom_media_images` VALUES (45, 'public/uploads/tin-tuc/bai-viet/sinh-mo-5-thang-chua-co-kinh.jpg', 1, '2021-09-07 08:48:04', '2021-09-07 08:48:04');
-INSERT INTO `custom_media_images` VALUES (46, 'public/uploads/tin-tuc/bai-viet/tham-kham-phu-khoa.jpg', 1, '2021-09-07 08:50:48', '2021-09-07 08:50:48');
-INSERT INTO `custom_media_images` VALUES (47, 'public/uploads/tin-tuc/bai-viet/di-kham-phu-khoa-thoi-diem-nao-tot-nhat-5-min.jpg', 1, '2021-09-07 09:08:45', '2021-09-07 09:08:45');
-INSERT INTO `custom_media_images` VALUES (48, 'public/uploads/tin-tuc/bai-viet/an-dam-2.jpg', 1, '2021-09-07 09:13:58', '2021-09-07 09:13:58');
-INSERT INTO `custom_media_images` VALUES (49, 'public/uploads/tin-tuc/bai-viet/vitamin-c-1-min.jpg', 1, '2021-09-07 09:23:26', '2021-09-07 09:23:26');
-INSERT INTO `custom_media_images` VALUES (50, 'public/uploads/tin-tuc/bai-viet/mam-dau-nanh-1.jpg', 1, '2021-09-07 09:25:34', '2021-09-07 09:25:34');
-INSERT INTO `custom_media_images` VALUES (51, 'public/uploads/tin-tuc/bai-viet/cach-nau-bot-an-dam-1-1.jpg', 1, '2021-09-07 09:27:08', '2021-09-07 09:27:08');
-INSERT INTO `custom_media_images` VALUES (52, 'public/uploads/tin-tuc/bai-viet/che-do-an-cho-nguoi-tieu-duong-1.jpg', 1, '2021-09-07 09:28:48', '2021-09-07 09:28:48');
-INSERT INTO `custom_media_images` VALUES (53, 'public/uploads/tin-tuc/bai-viet/sau-mo-ruot-thua-nen-an-gi.jpg', 1, '2021-09-07 09:30:26', '2021-09-07 09:30:26');
-INSERT INTO `custom_media_images` VALUES (54, 'public/uploads/tin-tuc/bai-viet/tre-may-thang-an-duoc-vang-sua-10-thang.jpg', 1, '2021-09-07 09:32:11', '2021-09-07 09:32:11');
-INSERT INTO `custom_media_images` VALUES (55, 'public/uploads/tin-tuc/bai-viet/che-do-an-cho-tre-suy-dinh-duong-1.jpg', 1, '2021-09-07 09:34:26', '2021-09-07 09:34:26');
-INSERT INTO `custom_media_images` VALUES (56, 'public/uploads/tin-tuc/bai-viet/trao-nguoc-da-day-uong-tinh-bot-nghe-1.jpg', 1, '2021-09-07 09:36:28', '2021-09-07 09:36:28');
-INSERT INTO `custom_media_images` VALUES (57, 'public/uploads/tin-tuc/bai-viet/trao-nguoc-da-day-co-nen-an-sua-chua-2.jpg', 1, '2021-09-07 09:40:05', '2021-09-07 09:40:05');
-INSERT INTO `custom_media_images` VALUES (58, 'public/uploads/tin-tuc/bai-viet/trao-nguoc-da-day-o-ba-bau-2.jpg', 1, '2021-09-07 09:42:08', '2021-09-07 09:42:08');
-INSERT INTO `custom_media_images` VALUES (59, 'public/uploads/tin-tuc/bai-viet/mo-ruot-thua-bao-lau-thi-lanh.jfif', 1, '2021-09-07 09:44:39', '2021-09-07 09:44:39');
-INSERT INTO `custom_media_images` VALUES (60, 'public/uploads/chuyen-khoa/khoa-nhi-phuong-dong-1.jpg', 1, '2021-09-07 09:48:42', '2021-09-07 09:48:42');
-INSERT INTO `custom_media_images` VALUES (61, 'public/uploads/chuyen-khoa/khoa-kham-benh-phuong-dong-1-1.jpg', 1, '2021-09-07 09:51:42', '2021-09-07 09:51:42');
-INSERT INTO `custom_media_images` VALUES (62, 'public/uploads/chuyen-khoa/doi-ngu-y-bac-si-khoa-phu-san-benh-vien-phuong-dong.jpg', 1, '2021-09-07 09:54:08', '2021-09-07 09:54:08');
-INSERT INTO `custom_media_images` VALUES (63, 'public/uploads/chuyen-khoa/bac-si-nguyen-huy-bao.jpg', 1, '2021-09-07 09:54:56', '2021-09-07 09:54:56');
-INSERT INTO `custom_media_images` VALUES (64, 'public/uploads/chuyen-khoa/kiem-soat-nhiem-khuan-3.jfif', 1, '2021-09-07 09:55:45', '2021-09-07 09:55:45');
-INSERT INTO `custom_media_images` VALUES (65, 'public/uploads/chuyen-khoa/khoa-xet-nghiem-phuong-dong.jpg', 1, '2021-09-07 09:57:42', '2021-09-07 09:57:42');
-INSERT INTO `custom_media_images` VALUES (66, 'public/uploads/dich-vu/bac-si-tu-van.jpg', 1, '2021-09-07 10:08:21', '2021-09-07 10:08:21');
-INSERT INTO `custom_media_images` VALUES (67, 'public/uploads/dich-vu/kham-benh-tai-nha-1.jpg', 1, '2021-09-07 10:15:45', '2021-09-07 10:15:45');
-INSERT INTO `custom_media_images` VALUES (68, 'public/uploads/cau-hoi/cach-chua-dau-bung-o-tre-em-1-1.jpg', 1, '2021-09-07 10:27:31', '2021-09-07 10:27:31');
-INSERT INTO `custom_media_images` VALUES (69, 'public/uploads/cau-hoi/trao-nguoc-da-day-nam-nghieng-ben-nao-2-5.jpg', 1, '2021-09-07 10:31:22', '2021-09-07 10:31:22');
-INSERT INTO `custom_media_images` VALUES (70, 'public/uploads/banner/banner.jpg', 1, '2021-09-07 10:41:56', '2021-09-07 10:41:56');
-INSERT INTO `custom_media_images` VALUES (71, 'public/uploads/banner/banner-1.jpg', 1, '2021-09-07 10:41:57', '2021-09-07 10:41:57');
-INSERT INTO `custom_media_images` VALUES (72, 'public/uploads/banner/banner-3.jpg', 1, '2021-09-07 10:41:59', '2021-09-07 10:41:59');
-INSERT INTO `custom_media_images` VALUES (73, 'public/uploads/logo/favicon.png', 1, '2021-09-07 10:50:09', '2021-09-07 10:50:09');
-INSERT INTO `custom_media_images` VALUES (74, 'public/uploads/doi-ngu-bac-si/nguyen-trung-chinh.png', 1, '2021-09-07 11:10:11', '2021-09-07 11:10:11');
-INSERT INTO `custom_media_images` VALUES (75, 'public/uploads/doi-ngu-bac-si/chinh.png', 1, '2021-09-07 11:40:29', '2021-09-07 11:40:29');
-INSERT INTO `custom_media_images` VALUES (76, 'public/uploads/doi-ngu-bac-si/chinh-1.png', 1, '2021-09-07 11:43:38', '2021-09-07 11:43:38');
-INSERT INTO `custom_media_images` VALUES (77, 'public/uploads/doi-ngu-bac-si/tran-kim-trang.png', 1, '2021-09-07 11:50:20', '2021-09-07 11:50:20');
-INSERT INTO `custom_media_images` VALUES (78, 'public/uploads/chuyen-khoa/khoa-ngoai-phong-mo-1.jpg', 1, '2021-09-07 11:53:25', '2021-09-07 11:53:25');
-INSERT INTO `custom_media_images` VALUES (79, 'public/uploads/doi-ngu-bac-si/bs-han-van-ba-1.png', 1, '2021-09-07 11:56:28', '2021-09-07 11:56:28');
-INSERT INTO `custom_media_images` VALUES (80, 'public/uploads/chuyen-khoa/7-khoa-lien-chuyen-khoa-1-1024x683.jpg', 1, '2021-09-07 11:58:34', '2021-09-07 11:58:34');
-INSERT INTO `custom_media_images` VALUES (81, 'public/uploads/doi-ngu-bac-si/img-1990-removebg-preview.png', 1, '2021-09-07 12:00:55', '2021-09-07 12:00:55');
-INSERT INTO `custom_media_images` VALUES (82, 'public/uploads/doi-ngu-bac-si/bs-bao.png', 1, '2021-09-07 12:04:39', '2021-09-07 12:04:39');
-INSERT INTO `custom_media_images` VALUES (83, 'public/uploads/thu-vien-anh/rectangle-5058-1.png', 1, '2021-09-07 14:03:18', '2021-09-07 14:03:18');
-INSERT INTO `custom_media_images` VALUES (84, 'public/uploads/thu-vien-anh/rectangle-5058-2.png', 1, '2021-09-07 14:03:18', '2021-09-07 14:03:18');
-INSERT INTO `custom_media_images` VALUES (85, 'public/uploads/thu-vien-anh/rectangle-5058.png', 1, '2021-09-07 14:03:19', '2021-09-07 14:03:19');
-INSERT INTO `custom_media_images` VALUES (86, 'public/uploads/thu-vien-anh/rectangle-5058-3.png', 1, '2021-09-07 14:08:32', '2021-09-07 14:08:32');
-INSERT INTO `custom_media_images` VALUES (87, 'public/uploads/thu-vien-anh/rectangle-5058-4.png', 1, '2021-09-07 14:08:32', '2021-09-07 14:08:32');
-INSERT INTO `custom_media_images` VALUES (88, 'public/uploads/thu-vien-anh/rectangle-5058-5.png', 1, '2021-09-07 14:08:33', '2021-09-07 14:08:33');
-INSERT INTO `custom_media_images` VALUES (89, 'public/uploads/thu-vien-anh/rectangle-5058-6.png', 1, '2021-09-07 14:08:33', '2021-09-07 14:08:33');
-INSERT INTO `custom_media_images` VALUES (90, 'public/uploads/thu-vien-anh/rectangle-5058-7.png', 1, '2021-09-07 14:13:49', '2021-09-07 14:13:49');
-INSERT INTO `custom_media_images` VALUES (91, 'public/uploads/thu-vien-anh/rectangle-5058-8.png', 1, '2021-09-07 14:13:49', '2021-09-07 14:13:49');
-INSERT INTO `custom_media_images` VALUES (92, 'public/uploads/thu-vien-anh/rectangle-5058-9.png', 1, '2021-09-07 14:13:50', '2021-09-07 14:13:50');
-INSERT INTO `custom_media_images` VALUES (93, 'public/uploads/thu-vien-anh/rectangle-5058-10.png', 1, '2021-09-07 14:13:50', '2021-09-07 14:13:50');
-INSERT INTO `custom_media_images` VALUES (94, 'public/uploads/tin-tuc/bai-viet/bang-gia-chup-cat-lop-vi-tinh.jpg', 1, '2021-09-07 15:59:44', '2021-09-07 15:59:44');
-INSERT INTO `custom_media_images` VALUES (95, 'public/uploads/tin-tuc/bai-viet/bang-gia-chup-cong-huong-tu.jpg', 1, '2021-09-07 15:59:44', '2021-09-07 15:59:44');
-INSERT INTO `custom_media_images` VALUES (96, 'public/uploads/tin-tuc/bai-viet/bang-gia-dich-vu-xet-nghiem-hoa-sinh.jpg', 1, '2021-09-07 15:59:46', '2021-09-07 15:59:46');
-INSERT INTO `custom_media_images` VALUES (97, 'public/uploads/tin-tuc/bai-viet/bang-gia-kham-benh.jpg', 1, '2021-09-07 15:59:46', '2021-09-07 15:59:46');
-INSERT INTO `custom_media_images` VALUES (98, 'public/uploads/tin-tuc/bai-viet/bang-gia-noi-soi-xet-nghiem-dien-tim.jpg', 1, '2021-09-07 15:59:48', '2021-09-07 15:59:48');
-INSERT INTO `custom_media_images` VALUES (99, 'public/uploads/tin-tuc/bai-viet/bang-gia-xet-nghiem-hoa-sinh.jpg', 1, '2021-09-07 15:59:48', '2021-09-07 15:59:48');
-INSERT INTO `custom_media_images` VALUES (100, 'public/uploads/tin-tuc/bai-viet/bang-gia-xet-nghiem-vi-sinh-ky-sinh-trung.jpg', 1, '2021-09-07 15:59:49', '2021-09-07 15:59:49');
-INSERT INTO `custom_media_images` VALUES (101, 'public/uploads/tin-tuc/bai-viet/bao-hiem-2.jpg', 1, '2021-09-07 16:08:49', '2021-09-07 16:08:49');
-INSERT INTO `custom_media_images` VALUES (102, 'public/uploads/tin-tuc/bai-viet/bao-hiem-3.jpg', 1, '2021-09-07 16:08:49', '2021-09-07 16:08:49');
-INSERT INTO `custom_media_images` VALUES (103, 'public/uploads/tin-tuc/bai-viet/tam-soat-ung-thu-1.jpg', 1, '2021-09-07 16:08:50', '2021-09-07 16:08:50');
-INSERT INTO `custom_media_images` VALUES (104, 'public/uploads/thu-vien-anh/rectangle-4771.png', 1, '2021-09-07 16:41:18', '2021-09-07 16:41:18');
-INSERT INTO `custom_media_images` VALUES (105, 'public/uploads/trang-thiet-bi/rectangle-5004.png', 1, '2021-09-07 16:50:15', '2021-09-07 16:50:15');
-INSERT INTO `custom_media_images` VALUES (106, 'public/uploads/doi-tac/doitac.jpg', 1, '2021-09-09 09:43:26', '2021-09-09 09:43:26');
-INSERT INTO `custom_media_images` VALUES (107, 'public/uploads/doi-tac/dtt.jpg', 1, '2021-09-09 09:43:26', '2021-09-09 09:43:26');
-INSERT INTO `custom_media_images` VALUES (108, 'public/uploads/doi-tac/dai.png', 1, '2021-09-11 10:51:58', '2021-09-11 10:51:58');
-INSERT INTO `custom_media_images` VALUES (109, 'public/uploads/doi-tac/doitac.jpg', 1, '2021-09-11 10:51:58', '2021-09-11 10:51:58');
-INSERT INTO `custom_media_images` VALUES (110, 'public/uploads/doi-tac/doi-tac.png', 1, '2021-09-11 10:51:58', '2021-09-11 10:51:58');
-INSERT INTO `custom_media_images` VALUES (111, 'public/uploads/doi-tac/dtt.jpg', 1, '2021-09-11 10:51:59', '2021-09-11 10:51:59');
-INSERT INTO `custom_media_images` VALUES (112, 'public/uploads/doi-tac/layer-1.png', 1, '2021-09-11 10:53:26', '2021-09-11 10:53:26');
-INSERT INTO `custom_media_images` VALUES (113, 'public/uploads/doi-ngu-bac-si/icon-dn.png', 1, '2021-09-14 09:33:53', '2021-09-14 09:33:53');
-INSERT INTO `custom_media_images` VALUES (114, 'public/uploads/doi-ngu-bac-si/kinh-nghiem-dt.png', 1, '2021-09-14 09:37:36', '2021-09-14 09:37:36');
-INSERT INTO `custom_media_images` VALUES (115, 'public/uploads/doi-ngu-bac-si/qua-trinh.png', 1, '2021-09-14 09:37:36', '2021-09-14 09:37:36');
-INSERT INTO `custom_media_images` VALUES (116, 'public/uploads/demo/bg-hotline.png', 1, '2021-09-16 16:09:26', '2021-09-16 16:09:26');
-INSERT INTO `custom_media_images` VALUES (117, 'public/uploads/demo/rectangle-4991.jpg', 1, '2021-09-16 16:09:26', '2021-09-16 16:09:26');
-INSERT INTO `custom_media_images` VALUES (118, 'public/uploads/demo/mask-group.jpg', 1, '2021-09-16 16:11:54', '2021-09-16 16:11:54');
-INSERT INTO `custom_media_images` VALUES (119, 'public/uploads/demo/group.png', 1, '2021-09-16 16:18:24', '2021-09-16 16:18:24');
-INSERT INTO `custom_media_images` VALUES (120, 'public/uploads/demo/customer-service-1.png', 1, '2021-09-16 16:18:24', '2021-09-16 16:18:24');
-INSERT INTO `custom_media_images` VALUES (121, 'public/uploads/demo/certificate-1.png', 1, '2021-09-16 16:18:24', '2021-09-16 16:18:24');
-INSERT INTO `custom_media_images` VALUES (122, 'public/uploads/demo/xmlid-1364.png', 1, '2021-09-16 16:18:24', '2021-09-16 16:18:24');
-INSERT INTO `custom_media_images` VALUES (123, 'public/uploads/demo/image-620.png', 1, '2021-09-17 09:02:20', '2021-09-17 09:02:20');
-INSERT INTO `custom_media_images` VALUES (124, 'public/uploads/demo/rectangle-5525.png', 1, '2021-09-17 09:02:20', '2021-09-17 09:02:20');
-INSERT INTO `custom_media_images` VALUES (125, 'public/uploads/demo/mask-group.png', 1, '2021-09-17 09:02:21', '2021-09-17 09:02:21');
-INSERT INTO `custom_media_images` VALUES (126, 'public/uploads/demo/rectangle-5625.png', 1, '2021-09-17 09:02:21', '2021-09-17 09:02:21');
-INSERT INTO `custom_media_images` VALUES (127, 'public/uploads/demo/fountain-pen-written-page-1.png', 1, '2021-09-17 09:02:22', '2021-09-17 09:02:22');
-INSERT INTO `custom_media_images` VALUES (128, 'public/uploads/demo/mask-group_2.png', 1, '2021-09-17 09:05:03', '2021-09-17 09:05:03');
-INSERT INTO `custom_media_images` VALUES (129, 'public/uploads/ban-lanh-dao/lanh-dao.png', 1, '2021-09-21 08:12:57', '2021-09-21 08:12:57');
-INSERT INTO `custom_media_images` VALUES (130, 'public/uploads/ban-lanh-dao/lanh-dao-2.png', 1, '2021-09-21 08:12:57', '2021-09-21 08:12:57');
-INSERT INTO `custom_media_images` VALUES (131, 'public/uploads/ban-lanh-dao/1583296713-15162-custom.jpg', 1, '2021-09-21 08:18:13', '2021-09-21 08:18:13');
-INSERT INTO `custom_media_images` VALUES (132, 'public/uploads/giai-thuong/chung-nhan.png', 1, '2021-09-21 08:29:21', '2021-09-21 08:29:21');
-INSERT INTO `custom_media_images` VALUES (133, 'public/uploads/giai-thuong/giai-thuong-cn.png', 1, '2021-09-21 08:29:21', '2021-09-21 08:29:21');
-INSERT INTO `custom_media_images` VALUES (134, 'public/uploads/giai-thuong/image-832.png', 1, '2021-09-21 08:31:23', '2021-09-21 08:31:23');
-INSERT INTO `custom_media_images` VALUES (135, 'public/uploads/demo/thong-bao-website-voi-bo-cong-thuong-grande.png', 1, '2021-09-23 12:06:01', '2021-09-23 12:06:01');
-INSERT INTO `custom_media_images` VALUES (136, 'public/uploads/demo/thong-bao-website-voi-bo-cong-thuong-grande.png', 1, '2021-09-23 17:22:48', '2021-09-23 17:22:48');
+INSERT INTO `custom_media_images` VALUES (1, 'public/uploads/tin-tuc/xet-nghiem-pcr.jpg', 0, '2021-09-25 11:40:56', '2021-09-25 11:40:56');
+INSERT INTO `custom_media_images` VALUES (2, 'public/uploads/tin-tuc/phong-xet-nghiem-tach-mau-covid-19.jpg', 0, '2021-09-25 11:40:57', '2021-09-25 11:40:57');
+INSERT INTO `custom_media_images` VALUES (3, 'public/uploads/tin-tuc/xet-nghiem-pcr.jpg', 0, '2021-09-25 11:40:57', '2021-09-25 11:40:57');
+INSERT INTO `custom_media_images` VALUES (4, 'public/uploads/tin-tuc/nhap-lieu-xet-nghiem-covid-19.jpg', 0, '2021-09-25 11:40:57', '2021-09-25 11:40:57');
+INSERT INTO `custom_media_images` VALUES (5, 'public/uploads/tin-tuc/ky-thuat-vien-lay-mau-xet-nghiem.jpg', 0, '2021-09-25 11:40:57', '2021-09-25 11:40:57');
+INSERT INTO `custom_media_images` VALUES (6, 'public/uploads/tin-tuc/cong-tac-tiem-chung-tai-benh-vien-phuong-dong.jpg', 0, '2021-09-25 11:40:58', '2021-09-25 11:40:58');
+INSERT INTO `custom_media_images` VALUES (7, 'public/uploads/tin-tuc/tiem-chung-vac-xin-covid-19_1.jpg', 0, '2021-09-25 11:40:58', '2021-09-25 11:40:58');
 
 -- ----------------------------
 -- Table structure for disease_lookups
@@ -2919,12 +2790,7 @@ CREATE TABLE `h_user_onlines`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT 'Ngày cập nhật',
   `tab_session` bigint(20) NULL DEFAULT NULL COMMENT 'Session',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of h_user_onlines
--- ----------------------------
-INSERT INTO `h_user_onlines` VALUES (5, 1, 'đang ở trang Chứng nhận và giải thưởng', '2021-09-25 06:42:38', '2021-09-25 06:43:55', 1632526583110);
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h_user_record_maps
@@ -3320,7 +3186,7 @@ CREATE TABLE `media`  (
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `trash` tinyint(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 190 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of media
@@ -3350,7 +3216,7 @@ INSERT INTO `media` VALUES (22, 'layer-573.jpg', NULL, NULL, NULL, NULL, '2021-0
 INSERT INTO `media` VALUES (23, '01-index-recovered.jpg', NULL, NULL, NULL, NULL, '2021-09-04 01:03:14', 1, 1, 'public/uploads/demo/', '01-index-recovered.jpg', '{\"extension\":\"jpg\",\"size\":\"1.12 MB\",\"date\":1630692193,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/01-index-recovered.jpg\",\"width\":1920,\"height\":633,\"thumb\":\"public\\/uploads\\/demo\\/01-index-recovered.jpg\"}', '2021-09-04 01:03:14', 0);
 INSERT INTO `media` VALUES (24, 'layer-524-copy.jpg', NULL, NULL, NULL, NULL, '2021-09-04 01:14:20', 1, 1, 'public/uploads/demo/', 'layer-524-copy.jpg', '{\"extension\":\"jpg\",\"size\":\"234.83 KB\",\"date\":1630692858,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/layer-524-copy.jpg\",\"width\":748,\"height\":403,\"thumb\":\"public\\/uploads\\/demo\\/layer-524-copy.jpg\"}', '2021-09-04 01:14:20', 0);
 INSERT INTO `media` VALUES (25, 'layer-660_2.png', NULL, NULL, NULL, NULL, '2021-09-04 22:31:27', 1, 1, 'public/uploads/demo/', 'layer-660_2.png', '{\"extension\":\"png\",\"size\":\"168.77 KB\",\"date\":1630769486,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/layer-660_2.png\",\"width\":419,\"height\":272,\"thumb\":\"public\\/uploads\\/demo\\/layer-660_2.png\"}', '2021-09-04 22:31:27', 0);
-INSERT INTO `media` VALUES (26, '1583477097-855623315-t-v-n-va-tiem-vacxin.png', NULL, NULL, NULL, NULL, '2021-09-06 02:04:13', 1, 1, 'public/uploads/demo/', '1583477097-855623315-t-v-n-va-tiem-vacxin.png', '{\"extension\":\"png\",\"size\":\"230.36 KB\",\"date\":1630868653,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/1583477097-855623315-t-v-n-va-tiem-vacxin.png\",\"width\":702,\"height\":343,\"thumb\":\"public\\/uploads\\/demo\\/1583477097-855623315-t-v-n-va-tiem-vacxin.png\"}', '2021-09-06 02:04:13', 0);
+INSERT INTO `media` VALUES (26, '1583477097-855623315-t-v-n-va-tiem-vacxin.png', '', '', '1', '', '2021-09-06 02:04:13', 1, 1, 'public/uploads/demo/', '1583477097-855623315-t-v-n-va-tiem-vacxin.png', '{\"extension\":\"png\",\"size\":\"230.36 KB\",\"date\":1630868653,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/1583477097-855623315-t-v-n-va-tiem-vacxin.png\",\"width\":702,\"height\":343,\"thumb\":\"public\\/uploads\\/demo\\/1583477097-855623315-t-v-n-va-tiem-vacxin.png\"}', '2021-09-25 11:08:20', 0);
 INSERT INTO `media` VALUES (27, '1583477153-1164604985-cac-goi-kham-s-c-kh-e.png', NULL, NULL, NULL, NULL, '2021-09-06 02:06:40', 1, 1, 'public/uploads/demo/', '1583477153-1164604985-cac-goi-kham-s-c-kh-e.png', '{\"extension\":\"png\",\"size\":\"344.64 KB\",\"date\":1630868800,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/1583477153-1164604985-cac-goi-kham-s-c-kh-e.png\",\"width\":702,\"height\":343,\"thumb\":\"public\\/uploads\\/demo\\/1583477153-1164604985-cac-goi-kham-s-c-kh-e.png\"}', '2021-09-06 02:06:40', 0);
 INSERT INTO `media` VALUES (28, '1596442753-1793739837-custom-1.png', NULL, NULL, NULL, NULL, '2021-09-06 02:17:28', 1, 1, 'public/uploads/demo/', '1596442753-1793739837-custom-1.png', '{\"extension\":\"png\",\"size\":\"305.69 KB\",\"date\":1630869448,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/1596442753-1793739837-custom-1.png\",\"width\":702,\"height\":345,\"thumb\":\"public\\/uploads\\/demo\\/1596442753-1793739837-custom-1.png\"}', '2021-09-06 02:17:28', 0);
 INSERT INTO `media` VALUES (29, 'phu-nu-mang-thai.jpg', NULL, NULL, NULL, NULL, '2021-09-06 07:58:23', 1, 1, 'public/uploads/demo/', 'phu-nu-mang-thai.jpg', '{\"extension\":\"jpg\",\"size\":\"172.54 KB\",\"date\":1630889903,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/phu-nu-mang-thai.jpg\",\"width\":600,\"height\":439,\"thumb\":\"public\\/uploads\\/demo\\/phu-nu-mang-thai.jpg\"}', '2021-09-06 07:58:23', 0);
@@ -3490,6 +3356,13 @@ INSERT INTO `media` VALUES (162, 'chung-nhan.png', NULL, NULL, NULL, NULL, '2021
 INSERT INTO `media` VALUES (163, 'giai-thuong-cn.png', NULL, NULL, NULL, NULL, '2021-09-21 08:29:21', 161, 1, 'public/uploads/giai-thuong/', 'giai-thuong-cn.png', '{\"extension\":\"png\",\"size\":\"160.86 KB\",\"date\":1632187761,\"isfile\":1,\"dir\":\"public\\/uploads\\/giai-thuong\\/\",\"path\":\"public\\/uploads\\/giai-thuong\\/giai-thuong-cn.png\",\"width\":496,\"height\":354,\"thumb\":\"public\\/uploads\\/giai-thuong\\/giai-thuong-cn.png\"}', '2021-09-21 08:29:21', 0);
 INSERT INTO `media` VALUES (164, 'image-832.png', NULL, NULL, NULL, NULL, '2021-09-21 08:31:23', 161, 1, 'public/uploads/giai-thuong/', 'image-832.png', '{\"extension\":\"png\",\"size\":\"103.22 KB\",\"date\":1632187883,\"isfile\":1,\"dir\":\"public\\/uploads\\/giai-thuong\\/\",\"path\":\"public\\/uploads\\/giai-thuong\\/image-832.png\",\"width\":405,\"height\":281,\"thumb\":\"public\\/uploads\\/giai-thuong\\/image-832.png\"}', '2021-09-21 08:31:23', 0);
 INSERT INTO `media` VALUES (166, 'thong-bao-website-voi-bo-cong-thuong-grande.png', NULL, NULL, NULL, NULL, '2021-09-23 17:22:48', 1, 1, 'public/uploads/demo/', 'thong-bao-website-voi-bo-cong-thuong-grande.png', '{\"extension\":\"png\",\"size\":\"13.99 KB\",\"date\":1632392568,\"isfile\":1,\"dir\":\"public\\/uploads\\/demo\\/\",\"path\":\"public\\/uploads\\/demo\\/thong-bao-website-voi-bo-cong-thuong-grande.png\",\"width\":600,\"height\":227,\"thumb\":\"public\\/uploads\\/demo\\/thong-bao-website-voi-bo-cong-thuong-grande.png\"}', '2021-09-23 17:22:48', 0);
+INSERT INTO `media` VALUES (183, 'xet-nghiem-pcr.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:56', 56, 1, 'public/uploads/tin-tuc/', 'xet-nghiem-pcr.jpg', '{\"extension\":\"\",\"size\":\"34.64 KB\",\"date\":1632544856,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":400,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/xet-nghiem-pcr.jpg\"}', '2021-09-25 11:40:56', 0);
+INSERT INTO `media` VALUES (184, 'phong-xet-nghiem-tach-mau-covid-19.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:57', 56, 1, 'public/uploads/tin-tuc/', 'phong-xet-nghiem-tach-mau-covid-19.jpg', '{\"extension\":\"\",\"size\":\"66.60 KB\",\"date\":1632544857,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":400,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/phong-xet-nghiem-tach-mau-covid-19.jpg\"}', '2021-09-25 11:40:57', 0);
+INSERT INTO `media` VALUES (185, 'xet-nghiem-pcr.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:57', 56, 1, 'public/uploads/tin-tuc/', 'xet-nghiem-pcr.jpg', '{\"extension\":\"\",\"size\":\"74.77 KB\",\"date\":1632544857,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":400,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/xet-nghiem-pcr.jpg\"}', '2021-09-25 11:40:57', 0);
+INSERT INTO `media` VALUES (186, 'nhap-lieu-xet-nghiem-covid-19.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:57', 56, 1, 'public/uploads/tin-tuc/', 'nhap-lieu-xet-nghiem-covid-19.jpg', '{\"extension\":\"\",\"size\":\"77.03 KB\",\"date\":1632544857,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":400,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/nhap-lieu-xet-nghiem-covid-19.jpg\"}', '2021-09-25 11:40:57', 0);
+INSERT INTO `media` VALUES (187, 'ky-thuat-vien-lay-mau-xet-nghiem.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:57', 56, 1, 'public/uploads/tin-tuc/', 'ky-thuat-vien-lay-mau-xet-nghiem.jpg', '{\"extension\":\"\",\"size\":\"81.81 KB\",\"date\":1632544857,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":395,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/ky-thuat-vien-lay-mau-xet-nghiem.jpg\"}', '2021-09-25 11:40:57', 0);
+INSERT INTO `media` VALUES (188, 'cong-tac-tiem-chung-tai-benh-vien-phuong-dong.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:58', 56, 1, 'public/uploads/tin-tuc/', 'cong-tac-tiem-chung-tai-benh-vien-phuong-dong.jpg', '{\"extension\":\"\",\"size\":\"75.96 KB\",\"date\":1632544858,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":391,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/cong-tac-tiem-chung-tai-benh-vien-phuong-dong.jpg\"}', '2021-09-25 11:40:58', 0);
+INSERT INTO `media` VALUES (189, 'tiem-chung-vac-xin-covid-19_1.jpg', NULL, NULL, NULL, NULL, '2021-09-25 11:40:58', 56, 1, 'public/uploads/tin-tuc/', 'tiem-chung-vac-xin-covid-19_1.jpg', '{\"extension\":\"\",\"size\":\"86.04 KB\",\"date\":1632544858,\"isfile\":0,\"dir\":\"public\\/uploads\",\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"width\":600,\"height\":395,\"thumb\":\"public\\/uploads\\/tin-tuc\\/thumbs\\/def\\/tiem-chung-vac-xin-covid-19_1.jpg\"}', '2021-09-25 11:40:58', 0);
 
 -- ----------------------------
 -- Table structure for menu_categories
@@ -3666,7 +3539,12 @@ CREATE TABLE `news`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `act`(`act`) USING BTREE,
   FULLTEXT INDEX `fulltextName`(`name`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2804 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of news
+-- ----------------------------
+INSERT INTO `news` VALUES (2803, 'Những đêm trắng chạy đua bóc tách F0 trong cộng đồng', 'nhung-dem-trang-chay-dua-boc-tach-f0-trong-cong-dong', '{\"id\":183,\"name\":\"xet-nghiem-pcr.jpg\",\"title\":\"\",\"caption\":\"\",\"alt\":\"\",\"description\":\"\",\"created_at\":\"2021-09-25 11:40:56\",\"parent\":56,\"is_file\":1,\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"file_name\":\"xet-nghiem-pcr.jpg\",\"extra\":\"{\\\"extension\\\":\\\"\\\",\\\"size\\\":\\\"34.64 KB\\\",\\\"date\\\":1632544856,\\\"isfile\\\":0,\\\"dir\\\":\\\"public\\\\\\/uploads\\\",\\\"path\\\":\\\"public\\\\\\/uploads\\\\\\/tin-tuc\\\\\\/\\\",\\\"width\\\":600,\\\"height\\\":400,\\\"thumb\\\":\\\"public\\\\\\/uploads\\\\\\/tin-tuc\\\\\\/thumbs\\\\\\/def\\\\\\/xet-nghiem-pcr.jpg\\\"}\",\"updated_at\":\"2021-09-25 11:40:56\"}', '<p style=\"text-align: justify;\"><strong><em>19h hàng ngày là lúc nhiều người được quây quần bên gia đình ăn bữa cơm tối, được nghỉ ngơi sau một ngày dài làm việc, nhưng với hàng trăm cán bộ nhân viên, kỹ thuật viên xét nghiệm tại Bệnh viện Đa khoa Phương Đông, đây là lúc bắt đầu một ca làm việc mới.</em></strong></p>', '<p style=\"text-align: justify;\"><strong><em>19h hàng ngày là lúc nhiều người được quây quần bên gia đình ăn bữa cơm tối, được nghỉ ngơi sau một ngày dài làm việc, nhưng với hàng trăm cán bộ nhân viên, kỹ thuật viên xét nghiệm tại Bệnh viện Đa khoa Phương Đông, đây là lúc bắt đầu một ca làm việc mới.</em></strong></p> <h2 style=\"text-align: justify;\"><strong>Từ khoa xét nghiệm - nơi ánh đèn không bao giờ tắt</strong></h2> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Giai đoạn chạy đua xét nghiệm bóc tách F0 khỏi cộng đồng và phủ rộng tiêm chủng theo chỉ đạo của chính quyền, áp lực đổ dồn lên hệ thống y tế, không chỉ tuyến đầu mà ngay cả những cán bộ nhân viên y tế trong vùng xanh cũng chịu áp lực gấp 2, thậm chí gấp 3 lần.</span></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Từ vài tháng nay, đội ngũ bác sĩ, kỹ thuật viên <a href=\"../../../xet-nghiem\"><strong>Khoa Xét nghiệm</strong></a> Bệnh viện Đa khoa Phương Đông đã thực hiện 4 tại chỗ, tập trung cao độ làm việc để đảm bảo phân loại mẫu bệnh phẩm, trả kết quả trong vòng 24 giờ theo quy định của Sở Y tế nhằm kịp thời đánh giá nguy cơ, khoanh vùng, truy vết F0 trên địa bàn thành phố.</span></p> <p style=\"text-align: center;\"><span style=\"font-weight: 400;\"><img src=\"public/uploads/tin-tuc/phong-xet-nghiem-tach-mau-covid-19.jpg\" alt=\"Đội kỹ thuật viên làm việc tại phòng xét nghiệm tách mẫu Bệnh viện Đa khoa Phương Đông \" width=\"600\" height=\"400\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Đội kỹ thuật viên làm việc tại phòng xét nghiệm tách mẫu Bệnh viện Đa khoa Phương Đông </span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Với chỉ tiêu từ Sở Y tế là hoàn thành hàng trăm nghìn mẫu xét nghiệm chỉ trong thời gian ngắn, Phương Đông đã khẩn trương cùng CDC phối hợp với các Ban Ngành đoàn thể lấy mẫu xét nghiệm theo khu vực đã được phân công, trong đó có nhiều nơi là “điểm nóng” dịch bệnh. Không chỉ vậy, bệnh viện còn hỗ trợ xét nghiệm cho các quận, huyện khác trên địa bàn thành phố như Đống Đa, Hai Bà Trưng, Hà Đông, Thường Tín,...</span></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Dưới ánh đèn không bao giờ tắt tại Khoa Xét nghiệm, hàng chục nhân lực chia làm các ca trực xoay vần liên tục, căng mình làm việc không kể ngày đêm. Hàng nghìn mẫu liên tiếp được chuyển về phòng xét nghiệm, có lúc bàn giao vào 2-3 giờ sáng cũng là “chuyện thường ngày ở huyện”.</span></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Thông thường, khoa tiếp nhận các mẫu bệnh phẩm vào buổi tối. Các thùng chứa mẫu sau khi được vào sổ giao nhận, được xịt khử khuẩn và đưa thẳng vào phòng tách chiết. Đây là công đoạn khá quan trọng, kỹ thuật viên khi xử lý mẫu sẽ phải ngồi liên tục nhiều tiếng đồng hồ, trong bộ bảo hộ bí kín, tập trung cao độ và không được phép xảy ra bất kỳ sai sót nào. Trong thời gian này, họ hạn chế trò chuyện, không được ăn uống, đi vệ sinh giữa chừng để tránh lây nhiễm.</span></p> <p style=\"text-align: center;\"><span style=\"font-weight: 400;\"><img src=\"public/uploads/tin-tuc/xet-nghiem-pcr.jpg\" alt=\"Công tác xử lý mẫu xét nghiệm luôn được đảm bảo an toàn theo quy định của Bộ Y tế\" width=\"600\" height=\"400\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Công tác xử lý mẫu xét nghiệm luôn được đảm bảo an toàn theo quy định của Bộ Y tế</span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Đã 2 tháng kể từ khi chị Dung, khoa Xét nghiệm Bệnh viện Đa khoa Phương Đông không được về thăm nhà, cũng là từng ấy thời gian chị không được gặp mặt có cô con gái nhỏ đang tuổi bi bô tập nói. “Dịch bùng, chị em khoa mình có hôm hoạt động hết công suất trọn vẹn 24h không ngủ. Có những bạn vừa kết thúc 8 tiếng làm việc hành chính, ăn vội bữa tối xong đã quay trở lại tiếp tục phân loại, chiết tách mẫu đến 7 giờ sáng hôm sau. Nhìn ai cũng bơ phờ, mệt mỏi nhưng tụi mình đều động viên nhau cố gắng vượt qua giai đoạn này”.</span></p> <h2 style=\"text-align: justify;\"><strong>Đến bên bàn giấy dày những chồng phiếu nhập liệu</strong></h2> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Bên cạnh công tác xét nghiệm mẫu bệnh phẩm, hàng trăm cán bộ nhân viên Tổ hợp Y tế Phương Đông cũng được huy động tổng lực để thực hiện các công việc khác trong quy trình. Trong đó, nhập liệu là mắt xích đóng vai trò quan trọng, đảm bảo việc bóc tách F0 trong cộng đồng, trả kết quả chính xác đến người dân. </span></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Công việc tưởng chừng nhẹ nhàng nhưng đòi hỏi sự cẩn thận, tỉ mỉ và chính xác tuyệt đối. Chị Kiều Hằng - Trưởng bộ phận Chăm sóc khách hàng Bệnh viện Phương Đông cho biết, mỗi ngày có hàng chục nghìn phiếu xét nghiệm SARS-CoV-2 được chuyển về do đó đội nhập liệu phải liên tục tăng ca đến khuya muộn mới hoàn thành. </span></p> <p style=\"text-align: center;\"><span style=\"font-weight: 400;\"><img src=\"public/uploads/tin-tuc/nhap-lieu-xet-nghiem-covid-19.jpg\" alt=\"Nhập liệu xét nghiệm Covid-19 tại Bệnh viện Phương Đông\" width=\"600\" height=\"400\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Bà Trần Thị Lan - Trưởng bộ phận hành chính nhân sự Tổ hợp Y tế Phương Đông bên bàn giấy dày những chồng phiếu nhập liệu</span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Sáng nhập liệu, chiều hướng dẫn người dân đến tiêm vắc xin, tối đến lại hỗ trợ phân loại mẫu, đó là công việc hàng ngày của chị Hương - bộ phận Bảo hiểm mấy tuần nay. Chị cho biết bản thân muốn góp dù chỉ một phần nhỏ công sức cho y bác sĩ tuyến đầu tập trung chống dịch. “Có trực tiếp bắt tay vào làm mới thấy công việc tốn công tốn sức như thế nào, vậy mà các y bác sĩ tuyến đầu đã phải thực hiện bao lâu nay, dưới áp lực không tưởng, vì vậy chút đóng góp nhỏ bé của mình chỉ hy vọng có thể phần nào làm vơi đi gánh nặng cho các chiến sĩ áo trắng, vì một Việt Nam chiến thắng đại dịch.” - chị Hương chia sẻ.</span></p> <h2 style=\"text-align: justify;\"><strong>Và tại khu vực sàng lọc - nơi nguy cơ lây nhiễm luôn cận kề</strong></h2> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Dưới cái nắng gay gắt của mùa hè, những gương mặt trẻ, nhiệt huyết của đội kỹ thuật viên <a href=\"../../../\"><strong>Bệnh viện Đa khoa Phương Đông</strong></a> vẫn miệt mài thực hiện công tác sàng lọc, lấy mẫu xét nghiệm SARS-CoV-2 cho người dân. Dù không trực tiếp thăm khám, điều trị nhưng công việc của họ góp phần không nhỏ trong phát hiện, khoanh vùng và đẩy lùi đại dịch. </span></p> <p style=\"text-align: center;\"><span style=\"font-weight: 400;\"><img src=\"public/uploads/tin-tuc/ky-thuat-vien-lay-mau-xet-nghiem.jpg\" alt=\"Những gương mặt trẻ, nhiệt huyết của đội kỹ thuật viên lấy mẫu xét nghiệm bệnh viện Phương Đông\" width=\"600\" height=\"395\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Những gương mặt trẻ, nhiệt huyết của đội kỹ thuật viên lấy mẫu xét nghiệm bệnh viện Phương Đông</span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Họ được người dân gọi là “các chiến sĩ sàng lọc” hay các chiến sĩ tuyến đầu bởi nguy cơ tiếp xúc F0 khi lấy mẫu xét nghiệm luôn thường trực. Không chỉ lấy mẫu sàng lọc tại bệnh viện, dưới sự chỉ đạo từ Sở Y tế, các chiến sĩ áo xanh của Bệnh viện Phương Đông còn có mặt trên khắp nẻo đường. Theo tình hình thực tế địa phương, chỉ cần có địa bàn là lập điểm lấy mẫu ngay, dù là đường phố, vỉa hè hay dựng lều bạt tạm thời.</span></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Các kỹ thuật viên luôn phải đảm bảo tuân thủ đúng các nguyên tắc an toàn phòng chống dịch, nhanh chóng trả kết quả để phục vụ xét nghiệm diện rộng. Cảm giác nóng bức, khó thở, mồ hôi thấm ướt hết quần áo, tấm kính ngăn giọt bắn mờ hơi thở… có khi khiến công việc của các kỹ thuật viên gặp nhiều khó khăn. Chưa kể do tính chất an toàn mà mỗi khi đi vệ sinh, ăn uống phải thay mới toàn bộ trang phục bảo hộ, nhiều kỹ thuật viên tự nguyện hạn chế bớt các nhu cầu của mình vì “tiếc”. Thế nhưng dưới lớp khẩu trang in hằn trên mặt, trong cái nóng bức bí bách của bộ đồ bảo hộ... vẫn vẹn nguyên nụ cười nhiệt thành và sự tận tâm với nghề của các “chiến sĩ”. </span></p> <p><span style=\"font-weight: 400;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"public/uploads/tin-tuc/cong-tac-tiem-chung-tai-benh-vien-phuong-dong.jpg\" alt=\"Công tác tiêm chủng tại Bệnh viện Đa khoa Phương Đông\" width=\"600\" height=\"391\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Dù ngày hay đêm, các kỹ thuật viên vẫn miệt mài làm việc để phục vụ công tác phòng chống dịch</span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Bên cạnh công tác truy vết bóc tách F0 ngoài cộng đồng, Bệnh viện Đa khoa Phương Đông còn phối hợp với UBND <a title=\"quận Bắc Từ Liêm\" href=\"https://bactuliem.hanoi.gov.vn/\" rel=\"nofollow\">quận Bắc Từ Liêm</a> đã thực hiện tiêm Vắc-xin Covid-19 cho người dân sinh sống trên địa bàn quận, người cao tuổi, có bệnh lý nền, phụ nữ mang thai đang sinh sống trên địa bàn quận và những mẹ bầu đã đăng ký sinh tại Phương Đông… Đó cũng là cuộc đua thần tốc mà các chiến sĩ áo xanh, áo trắng thầm lặng cống hiến nhằm nhanh chóng tạo miễn dịch trong cộng đồng. </span></p> <p style=\"text-align: center;\"><span style=\"font-weight: 400;\"><img src=\"public/uploads/tin-tuc/tiem-chung-vac-xin-covid-19_1.jpg\" alt=\"Xét nghiệm, truy vết, tiêm chủng không ngơi nghỉ, các “chiến sĩ” Phương Đông vẫn luôn giữ vững tinh thần trách nhiệm và sự tận tâm với nghề\" width=\"600\" height=\"395\" /></span></p> <p style=\"text-align: center;\"><em><span style=\"font-weight: 400;\">Xét nghiệm, truy vết, tiêm chủng không ngơi nghỉ, các “chiến sĩ” Phương Đông vẫn luôn giữ vững tinh thần trách nhiệm và sự tận tâm với nghề</span></em></p> <p style=\"text-align: justify;\"><span style=\"font-weight: 400;\">Họ mệt không? Mệt chứ, cỗ máy còn mệt huống chi con người, nhưng giữa ranh giới chiến thắng - thất bại của cả dân tộc, họ chọn lựa lợi ích chung mà hi sinh lợi ích riêng của mình. Những khó khăn, vất vả không cản được tinh thần của các y bác sĩ tại Bệnh viện Đa khoa Phương Đông, tất cả vì mục tiêu cao nhất là góp sức đẩy lùi dịch bệnh, mang lại cuộc sống bình yên cho người dân.</span></p>', 5, 2, 2803, NULL, 1, '2021-09-23 16:26:00', '2021-09-25 11:41:54', 'Những đêm trắng chạy đua bóc tách F0 trong cộng đồng', 'xét nghiệm', '19h hàng ngày là lúc nhiều người được quây quần bên gia đình ăn bữa cơm tối, được nghỉ ngơi sau một ngày dài làm việc, nhưng với hàng trăm cán bộ nhân viên, kỹ thuật viên xét nghiệm tại Bệnh viện Đa khoa Phương Đông, đây là lúc bắt đầu một ca làm việc mới', NULL, '2021-09-23 16:26:36', NULL, NULL, NULL, NULL, 0, 11, 0, 0, NULL, NULL, NULL, 'Những đêm trắng chạy đua bóc tách F0 trong cộng đồng', '19h hàng ngày là lúc nhiều người được quây quần bên gia đình ăn bữa cơm tối, được nghỉ ngơi sau một ngày dài làm việc, nhưng với hàng trăm cán bộ nhân viên, kỹ thuật viên xét nghiệm tại Bệnh viện Đa khoa Phương Đông, đây là lúc bắt đầu một ca làm việc mới.', '{\"id\":183,\"name\":\"xet-nghiem-pcr.jpg\",\"title\":\"\",\"caption\":\"\",\"alt\":\"\",\"description\":\"\",\"created_at\":\"2021-09-25 11:40:56\",\"parent\":56,\"is_file\":1,\"path\":\"public\\/uploads\\/tin-tuc\\/\",\"file_name\":\"xet-nghiem-pcr.jpg\",\"extra\":\"{\\\"extension\\\":\\\"\\\",\\\"size\\\":\\\"34.64 KB\\\",\\\"date\\\":1632544856,\\\"isfile\\\":0,\\\"dir\\\":\\\"public\\\\\\/uploads\\\",\\\"path\\\":\\\"public\\\\\\/uploads\\\\\\/tin-tuc\\\\\\/\\\",\\\"width\\\":600,\\\"height\\\":400,\\\"thumb\\\":\\\"public\\\\\\/uploads\\\\\\/tin-tuc\\\\\\/thumbs\\\\\\/def\\\\\\/xet-nghiem-pcr.jpg\\\"}\",\"updated_at\":\"2021-09-25 11:40:56\"}', 'https://benhvienphuongdong.vn/admin/news/edit-news/2803', 2803);
 
 -- ----------------------------
 -- Table structure for news_categories
@@ -3692,7 +3570,7 @@ CREATE TABLE `news_categories`  (
   `root_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `act`(`act`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of news_categories
@@ -3745,7 +3623,7 @@ CREATE TABLE `news_edit_onlines`  (
   `created_at` datetime(0) NULL DEFAULT NULL COMMENT 'Ngày tạo',
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT 'Ngày cập nhật',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for news_histories
@@ -3776,6 +3654,11 @@ CREATE TABLE `news_news_category`  (
   INDEX `news_id`(`news_id`) USING BTREE,
   INDEX `news_category_id`(`news_category_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of news_news_category
+-- ----------------------------
+INSERT INTO `news_news_category` VALUES (2803, 13, '2021-09-23 16:26:00', '2021-09-23 16:26:00');
 
 -- ----------------------------
 -- Table structure for news_news_tag
@@ -5401,7 +5284,7 @@ CREATE TABLE `v_routes`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `code`(`code`) USING BTREE,
   INDEX `static`(`is_static`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of v_routes
@@ -5466,6 +5349,7 @@ INSERT INTO `v_routes` VALUES (57, 'Hội thảo - Sự kiện', NULL, 'App\\Htt
 INSERT INTO `v_routes` VALUES (58, 'Báo chí nói về Phương Đông', NULL, 'App\\Http\\Controllers\\NewsCategoryController@view', 'news_categories', 31, 0, 0, NULL, 'bao-chi-noi-ve-phuong-dong', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-09-25 04:12:33', '2021-09-25 04:12:33');
 INSERT INTO `v_routes` VALUES (59, 'Câu chuyện khách hàng', NULL, 'App\\Http\\Controllers\\NewsCategoryController@view', 'news_categories', 32, 0, 0, NULL, 'cau-chuyen-khach-hang', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-09-25 04:12:34', '2021-09-25 04:12:34');
 INSERT INTO `v_routes` VALUES (60, 'Chương trình ưu đãi', NULL, 'App\\Http\\Controllers\\NewsCategoryController@view', 'news_categories', 33, 0, 0, NULL, 'chuong-trinh-uu-dai', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-09-25 04:12:34', '2021-09-25 04:12:34');
+INSERT INTO `v_routes` VALUES (61, 'Những đêm trắng chạy đua bóc tách F0 trong cộng đồng', NULL, 'App\\Http\\Controllers\\NewsController@view', 'news_categories', 2803, 0, 0, NULL, 'nhung-dem-trang-chay-dua-boc-tach-f0-trong-cong-dong', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-09-23 16:26:00', '2021-09-25 09:37:00');
 
 -- ----------------------------
 -- Table structure for v_tables

@@ -438,6 +438,9 @@ var onlyRating = (function(){
 
 var Tiny = (function(){
 	const textarea = document.querySelector('#comment');
+	if (typeof tinymce == 'undefined') {
+		return;
+	}
 	tinymce.init({
 		selector: '#comment',
 		menubar: false,

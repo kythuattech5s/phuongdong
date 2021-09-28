@@ -4,9 +4,9 @@
 	<url>
 		<loc>
 		@if($locale != Config::get('app.locale_origin'))
-		{{ url('/')."/$locale/".$item->{$locale.'_link'} }}
+			{{ url('/')."/$locale/".\App\Helpers\TwoLevelSlug::convertLink($item->table,$item->{$locale.'_link'}) }}
 		@else
-		{{ url('/').'/'.$item->{$locale.'_link'} }}
+			{{ url('/').'/'.\App\Helpers\TwoLevelSlug::convertLink($item->table,$item->{$locale.'_link'}) }}
 		@endif
 		</loc>
 		<lastmod>{{date_create_from_format("Y-m-d H:i:s",$item->created_at)->format("Y-m-d\TH:i:sP")}}</lastmod>

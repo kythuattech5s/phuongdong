@@ -3,15 +3,23 @@ namespace App\Http\Controllers;
 use App\Models\{Banner,Partner,Services,Doctor,News,ForCustomer,Equipment};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Helpers\Utm;
+use App\Helpers\{Utm,TwoLevelSlug};
 class HomeController extends Controller
 {
     public function direction(Request $request, $link)
     {
         $lang  = \App::getLocale();
         $link  = \Support::getSegment($request, 1);
+        $listTableTwoLevelSlug = TwoLevelSlug::getArrTable();
+        if (in_array($link,$listTableTwoLevelSlug) && \Support::getSegment($request, 2) != '') {
+            $tableAccess = array_search($link, $listTableTwoLevelSlug);
+            $link = \Support::getSegment($request, 2);
+        }
         $route = \DB::table('v_routes')->select('*')->where($lang.'_link', $link)->first();
         if ($route == null) {
+            abort(404);
+        }
+        if (isset($tableAccess) && $route->is_static == 0 && $tableAccess != $route->table) {
             abort(404);
         }
         Utm::check();

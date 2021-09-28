@@ -214,17 +214,17 @@ class SysController extends BaseAdminController
         return redirect()->back()->with("status","Cập nhật thành công");
     }
     private function updateSitemapItem($table,$year,$month){
-        $path = 'sitemap/'.$table;
+        $path = public_path('sitemap/'.$table);
         if(!file_exists($path)){
-            mkdir($path);
+            mkdir($path,0755, true);
         }
-        $listItems = \DB::select("select vi_link, en_link, vi_name, en_name, created_at from v_routes WHERE `table` = :t and month(created_at) = :m and year(created_at) = :y",["t"=>$table,"y"=>$year,"m"=>$month]);
+        $listItems = \DB::select("select vi_link, en_link, vi_name,`table`,en_name, created_at from v_routes WHERE `table` = :t and month(created_at) = :m and year(created_at) = :y",["t"=>$table,"y"=>$year,"m"=>$month]);
         $html = \View::make('vh::more.template_sitemap_item', compact("listItems"))->render();
         file_put_contents($path."/".$year."-".$month.".xml",$html);
     }
     private function updateSitemapStatic(){
-        $listItems = \DB::select("select vi_link, en_link, vi_name, en_name, created_at from v_routes WHERE is_static=1 and in_sitemap = 1");
-         $html = \View::make('vh::more.template_sitemap_item', compact("listItems"))->render();
-          file_put_contents("sitemap/static.xml",$html);
+        $listItems = \DB::select("select vi_link, en_link, vi_name,`table`,en_name, created_at from v_routes WHERE is_static=1 and in_sitemap = 1");
+        $html = \View::make('vh::more.template_sitemap_item', compact("listItems"))->render();
+        file_put_contents(public_path("sitemap/static.xml"),$html);
     }
 }

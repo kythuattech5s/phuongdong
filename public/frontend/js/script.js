@@ -236,7 +236,12 @@ var GUI = (function(){
                 return;
             }
             var pos = $id.offset().top;
-            $("body, html").animate({ scrollTop: pos }, 400);
+            var tocList = $(this).closest('.toc_list');
+        	tocList.slideUp(300);
+        	$("body, html").animate({scrollTop: pos - 200}, 400);
+        	setTimeout(function(){
+        		$('.toggle-content-toc').removeClass('active');
+        	}, 400);
         });
         $(document).on('click', '.toggle-content-toc', function(event) {
         	event.preventDefault();

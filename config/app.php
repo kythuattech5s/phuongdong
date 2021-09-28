@@ -81,7 +81,7 @@ return [
     */
 
     'locale' => 'vi',
-    'locales' => ['vi' => 'Tiếng Việt', 'en' => 'Tiếng Anh'],
+    'locales' => ['vi' => 'Tiếng Việt'],
     'locale_origin' => 'vi',
 
     /*

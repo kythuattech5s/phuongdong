@@ -51,7 +51,7 @@
             </div>
             <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.4s"> {{$currentItem->short_content}}
             </div>
-            <div class="my-3 wow fadeInUp">
+            <div class="my-3 wow fadeInUp toc-wrapper">
                 {!!$dataContent['toc']!!}
             </div>
             <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
