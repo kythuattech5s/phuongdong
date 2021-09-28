@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="admin/css/order.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="admin/css/cssloader.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="admin/media/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ asset('admin/css/style_menu_vertical.css') }}" type="text/css">
     
     <script type="text/javascript">
         var SUCCESS=200;
@@ -41,8 +40,7 @@
     <script src="admin/plug/toast/toast.js"></script>
     <script type="text/javascript" src="admin/js/main.js"></script>
     <script type="text/javascript" src="admin/js/check.js"></script>
-    {{-- <script type="text/javascript" src="admin/js/menu.js"></script> --}}
-    <script type="text/javascript" src="admin/js/menu_new.js"></script>
+    <script type="text/javascript" src="admin/js/menu.js"></script>
     <script type="text/javascript" src="admin/js/cate.js"></script>
     <script type="text/javascript" src="admin/js/detail.js"></script>
     <script type="text/javascript" src="admin/js/jquery.form.js"></script>
@@ -66,20 +64,13 @@
     @yield('css')
 </head>
 <body>
-    <div class="root" >
-        <div class="root-left">
-            @include('vh::static.menu')
-        </div>
-        <div class="root-right">
-            @include('vh::static.header_main')
-            <div class="main_admin">
-                @if(Auth::guard('h_users')->user()->group == 1)
-                    @include('vh::view.user_online')
-                @endif
-                <div class="container-fluid site-wrap" data-menu="<?php echo session('menu_status', 'off'); ?>">
-                    @yield('content')
-                </div>
-            </div>
+    @include('vh::static.menu2')
+    <div class="main_admin">
+        @if(Auth::guard('h_users')->user()->group == 1)
+            @include('vh::view.user_online')
+        @endif
+        <div class="container-fluid site-wrap" data-menu="<?php echo session('menu_status','off') ?>">
+            @yield('content')
         </div>
     </div>
     @include('vh::loading')

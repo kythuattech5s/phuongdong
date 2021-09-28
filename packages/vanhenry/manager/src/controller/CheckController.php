@@ -85,6 +85,10 @@ class CheckController extends BaseAdminController{
         HUserOnline::insertOrRemove($request);
         event(new EventOnline);
     }
+
+    public function test(Request $request){
+        return view('vh::view.test');
+    }
 }
 
 ?>

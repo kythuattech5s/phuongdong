@@ -254,7 +254,7 @@ a:hover {
 .main-menu {
     align-items: center;
     display: flex;
-    background: #108d35;
+    background: #263238 !important;
     transition: .1s;
     flex-wrap: wrap;
 }
@@ -320,7 +320,7 @@ a:hover {
 }
 
 .sub {
-    background: #fa430f;
+    background: #202b30;
 }
 
 .subhover {

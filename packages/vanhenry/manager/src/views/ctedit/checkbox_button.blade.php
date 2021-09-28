@@ -6,12 +6,15 @@
 		});
 	}
 	$name = FCHelper::er($table,'name');
+	// if(session()->getId() == 's9j9ibxLoHOYqKzsDn6xIoHMKbHB40JuLuSVnKSP'){
+	// 	dd();
+	// }
 	$value ="";
 	if($actionType=='edit'||$actionType=='copy'){
 		$value = FCHelper::ep($dataItem,$name);
 	}
 ?>
-@if(isset($active) || $name !== 'act')
+@if((isset($active) && count($active) > 0) || $name !== 'act')
 <div class="form-group">
   <p class="form-title" for="">{{FCHelper::ep($table,'note')}} <span class="count"></span></p>
   <input placeholder="{{FCHelper::er($table,'note')}}" {{FCHelper::ep($table,'require')==1?'required':''}}  class="ccb _{{$name}}" type="checkbox" data-off-label="false" data-on-label="false" data-off-icon-cls="glyphicon-remove" {{$value == 1?'checked':''}} data-on-icon-cls="glyphicon-ok">
