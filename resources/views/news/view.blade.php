@@ -78,10 +78,15 @@
                         {!!$currentItem->reference_source!!}
                     </div>
                 </div>
-                <p class="publisher fs-16">
-                    <span>Tác giả:</span>
-                    <span class="robotob">{{$currentItem->publish_by}}</span>
-                </p>
+                @php
+                    $author = $currentItem->getAuthor('create_by');
+                @endphp
+                @if (isset($author))
+                    <p class="publisher fs-16">
+                        <span>Tác giả:</span>
+                        <span class="robotob">{{$author->name}}</span>
+                    </p>
+                @endif
             </div>
             <div class="share-new d-flex flex-wrap justify-content-between wow fadeInUp">
                 <div class="rating-info d-flex align-items-center flex-wrap mb-2">

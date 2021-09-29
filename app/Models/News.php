@@ -153,6 +153,6 @@ class News extends BaseModel
     }
     public function getDoctor()
     {
-        return Doctor::find($this->doctor_id);
+        return Doctor::where('id',$this->id)->act()->first();
     }
 }

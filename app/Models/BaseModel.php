@@ -52,4 +52,11 @@ class BaseModel extends Model
         $query->select('*', \DB::raw("MATCH ({$columns}) AGAINST ('".$this->fullTextWildcards($term)."' IN NATURAL LANGUAGE MODE) as score"))->whereRaw("MATCH ({$columns}) AGAINST (? IN NATURAL LANGUAGE MODE)", $this->fullTextWildcards($term))->orderBy('score', 'desc');
         return $query;
     }
+    public function getAuthor($key)
+    {
+    	if (!isset($this->$key)) {
+    		return null;
+    	}
+    	return \vanhenry\manager\model\HUser::find($this->$key);
+    }
 }

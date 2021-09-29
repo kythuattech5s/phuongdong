@@ -12,12 +12,13 @@ if (is_array($defaultData)) {
 		$columns[] = $value;
 	}
 	$dataPivots = FCHelper::getDataPivot($pivotTable, $originField, $targetTable, $targetField, $columns, $dataItem->id);
+	$baseUrlSearch = $admincp.'/search/'.$tableData->get('table_map','').'?';
 }
 ?>
 <td data-title="{{$show->note}}">
 	@if(in_array('parent', $columns))
-		{{FCHelper::viewRecursivePivotPrint($dataPivots, 0)}}
+		{{FCHelper::viewRecursivePivotPrint($show,$baseUrlSearch,$dataPivots, 0)}}
 	@else
-		{{FCHelper::viewPivotPrint($dataPivots)}}
+		{{FCHelper::viewPivotPrint($show,$baseUrlSearch,$dataPivots)}}
 	@endif
 </td>

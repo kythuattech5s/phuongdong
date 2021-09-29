@@ -185,7 +185,8 @@ class Admin extends BaseAdminController
 			$results->join($transTable->table_map, 'id', '=', 'map_id');
 		}
 		if (\Support::checkStr($inputs['q'])) {
-			$results->where('name', 'like', '%'.$inputs['q'].'%')->where('language_code', $langChoose);
+			// $results->where('name', 'like', '%'.$inputs['q'].'%')->where('language_code', $langChoose);
+			$results->where('name', 'like', '%'.$inputs['q'].'%');
 		}
 		$results = $results->where('act', 1)->groupBy('id')->paginate($perpage);
 		$arr = ['results' => $results->getCollection(), 'pagination' => ['more' => $perpage * $page < $results->total()]];

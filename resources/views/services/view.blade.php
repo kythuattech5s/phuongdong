@@ -10,11 +10,16 @@
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <span>{{\Support::showDate($currentItem->created_at)}}</span>
                </p>
-               <p>
-                   <i class="fa fa-user-o" aria-hidden="true"></i>
-                   <span>Tác giả:</span>
-                   <span class="clmain">{{$currentItem->publish_by}}</span>
-               </p>
+                @php
+                    $author = $currentItem->getAuthor('create_by');
+                @endphp
+                @if (isset($author))
+                    <p>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <span>Tác giả:</span>
+                        <span class="robotob">{{$author->name}}</span>
+                    </p>
+                @endif
             </div>
             <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.3s">
                 {{$currentItem->short_content}}
