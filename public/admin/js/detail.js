@@ -58,22 +58,21 @@ $(function() {
         setTimeout(function(){
             if(window.location.pathname.indexOf('esystem/edit/news/') !== -1){
                 DRAFT.clickSaveHistory('save');
+            }else{
+                $('#frmUpdate').submit();
             }
-            $('#frmUpdate').submit();
         },300);
         
     });
-
+    
     $('.save_draft').click(function(event){
         event.preventDefault();
         try {
             tinyMCE.triggerSave();
         } catch (e) {}
         $('#frmUpdate').attr('action', $('#frmUpdate').attr('dt-normal'));
-        if(window.location.pathname.indexOf('esystem/edit/news/') !== -1){
             $('#frmUpdate').append('<input name="is_draft" value="1">');
             DRAFT.clickSaveHistory('save');
-        };
         $('#frmUpdate').submit();
     })
 

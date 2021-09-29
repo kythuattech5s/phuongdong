@@ -9,6 +9,7 @@ if(!timeTab){
 var MAIN = (function(){
     var checkEdit = function(){
         const button = document.querySelector('._vh_save');
+        const buttonSaveDraft = document.querySelector('.save_draft');
         if(pathname.indexOf('/esystem/edit/news') == 0){
             button.style.pointerEvents = 'none';
             var id = pathname.split('/')[pathname.split('/').length - 1];
@@ -27,12 +28,15 @@ var MAIN = (function(){
             });
         }else if(document.querySelector('.has_warning')?.value == 1){
             runWarning();
+        }else if(buttonSaveDraft){
+            clickSave();
         }   
 
         function ajaxEditing(){
             return $.ajax({
                 url:'esystem/news/check-editing/'+id,
                 method:"POST",
+                global:false,
                 data:{
                     id: id,
                     _token: $('meta[name="csrf-token"]').attr('content'),
@@ -57,7 +61,7 @@ var MAIN = (function(){
 
         function clickSave(){
             button.onclick = function(e){
-                if(pathname.indexOf('/esystem/edit/news/') == 0){
+                if(buttonSaveDraft){
                     if(!$('#frmUpdate').find('input[name="is_draft"]')){
                         $('#frmUpdate').find('input[name="is_draft"]').val(0);
                     }else{
@@ -174,21 +178,37 @@ var DRAFT = (function(){
 
     function clickSaveHistory(clickType){
         const id = $('input[name="id"]');
-        if(id.length == 0 || !hasChangeContent) return;
-        saveContent(id.val(),clickType);
+        if(id.length == 0 || !hasChangeContent){
+            return $('#frmUpdate').submit();
+        };
+        bootbox.prompt({
+            title: "Lý do sửa bài viết",
+            inputType: 'textarea',
+            callback: function (result) {
+                if(result !== null){
+                    saveContent(id.val(),clickType,result);
+                }
+            }
+        });
+        
     }
     
-    function saveContent(id,clickType){
-        hasChangeContent = false;
+    function saveContent(id,clickType,result){
         var myContent = $('textarea.editor').tinymce().getContent();
+
         $.post({
             url:'/esystem/news/save-content/'+id,
             data:{
                 id:id,
+                reason: result,
                 content: myContent,
                 type: clickType
             }
-        })
+        }).done(function(){
+            hasChangeContent = false;
+            window.onbeforeunload = false;
+            $('#frmUpdate').submit();
+        });
     }
 
     // TỰ ĐỘNG KHÔNG LIÊN QUAN CÁI KHÁC
@@ -282,7 +302,6 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        
         if(pathname.indexOf('/esystem/edit/configs/0') == 0){
             var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
         }else if(pathname.indexOf('/esystem/media/manager') == 0){
@@ -337,50 +356,32 @@ var TABLE = (function(){
                     elTh.onclick = function() {
                         var rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
                         switching = true;
-                        //Set the sorting direction to ascending:
                         dir = "asc"; 
-                        /*Make a loop that will continue until
-                        no switching has been done:*/
                         while (switching) {
-                          //start by saying: no switching is done:
                           switching = false;
                           rows = table.rows;
                           console.log(rows);
-                          /*Loop through all table rows (except the
-                          first, which contains table headers):*/
                           for (i = 1; i < (rows.length - 1); i++) {
-                            //start by saying there should be no switching:
                             shouldSwitch = false;
-                            /*Get the two elements you want to compare,
-                            one from current row and one from the next:*/
                             x = rows[i].getElementsByTagName("TD")[n];
                             y = rows[i + 1].getElementsByTagName("TD")[n];
-                            /*check if the two rows should switch place,
-                            based on the direction, asc or desc:*/
                             if (dir == "asc") {
                               if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                                //if so, mark as a switch and break the loop:
                                 shouldSwitch= true;
                                 break;
                               }
                             } else if (dir == "desc") {
                               if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                                //if so, mark as a switch and break the loop:
                                 shouldSwitch = true;
                                 break;
                               }
                             }
                           }
                           if (shouldSwitch) {
-                            /*If a switch has been marked, make the switch
-                            and mark that a switch has been done:*/
                             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                             switching = true;
-                            //Each time a switch is done, increase this count by 1:
                             switchcount ++;      
                           } else {
-                            /*If no switching has been done AND the direction is "asc",
-                            set the direction to "desc" and run the while loop again.*/
                             if (switchcount == 0 && dir == "asc") {
                               dir = "desc";
                               switching = true;

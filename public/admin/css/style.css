@@ -2669,7 +2669,8 @@ table {
 
 .h-user-online ul.h-user__list{
     display: flex;
-    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
     margin-right: 60px;
 }
 
@@ -2738,6 +2739,11 @@ table {
     justify-content: space-between;
     box-shadow: 0px 1px 6px 0.5px #ebebeb;
     border-radius: 5px;
+}
+
+.h-user-online h5{
+    margin-right: 50px;
+    white-space: nowrap;
 }
 
 ins {
