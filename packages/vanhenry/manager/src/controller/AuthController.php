@@ -99,6 +99,7 @@ class AuthController extends BaseAdminController
     public function authenticate()
     {
         $credentials = request()->only('username', 'password');
+        $credentials['act'] = 1;
         if (Auth::guard($this->guard)->attempt($credentials)) {
             return $this->authenticated(request(), Auth::guard($this->guard)->user());
         }

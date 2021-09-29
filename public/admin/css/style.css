@@ -220,7 +220,7 @@ a:hover {
 }
 
 .main-menu li a {
-    padding: 10px;
+    padding: 9px 0px 9px 9px;
     display: block;
 }
 
@@ -247,7 +247,7 @@ a:hover {
 
 .main-menu>li li>a {
     color: #108d35;
-    padding-left: 15px;
+    padding-left: 32px;
     font-size: 13px;
 }
 
@@ -260,8 +260,8 @@ a:hover {
 }
 
 .navigation span.txt {
-    color: white;
-    font-size: 16px;
+    color: rgba(163,175,183,.9);
+    font-size: 14px;
 }
 
 
@@ -376,13 +376,8 @@ a:hover {
 .navigation[data-menu=off] .main-menu .nav-item a i {
     font-size: 14px;
     text-align: center;
-    margin: 0px 5px 0px 5px;
-    color: white;
-}
-
-.navigation[data-menu=off] .main-menu .nav-item a:hover i,
-.navigation[data-menu=off] .main-menu .nav-item a.active i {
-    color: #fff;
+    margin: 0px 10px 0px 0px;
+    color: rgba(163,175,183,.9);
 }
 
 .navigation .main-menu .nav-item a i {
@@ -897,7 +892,6 @@ ul.sub.none {
 }
 
 #no-more-tables tr td {
-    min-width: 50px;
     max-width: 1000px;
     word-break: break-word;
 }
@@ -1581,7 +1575,7 @@ td.action i {
 /*Edit zone*/
 
 #mainedit {
-    margin-top: 33px;
+    margin-top: 10px;
 }
 
 #mainedit .boxedit {
@@ -1594,7 +1588,11 @@ td.action i {
     text-transform: uppercase;
     font-family: robo;
     margin: 10px 0px;
-    color: #ccc;
+
+    font-size: 14px;
+    background-color: #ccd5db;
+    padding: 10px 12px;
+    font-weight: 700;
 }
 
 #mainedit .boxtitle button {
@@ -1750,8 +1748,7 @@ table th {
 .table-condensed>tfoot>tr>th,
 .table-condensed>thead>tr>td,
 .table-condensed>thead>tr>th {
-    padding: 15px 10px;
-    min-height: 40px;
+    padding: 9px 8px;
 }
 
 table td.action {

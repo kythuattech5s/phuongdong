@@ -257,22 +257,24 @@ class FCHelper{
 			echo $str.'</li>';
 		}
 	}
-	public static function viewRecursivePivotPrint($results, $parent = 0, $level = 0)
+	public static function viewRecursivePivotPrint($show , $baseUrlSearch ,$results, $parent = 0, $level = 0)
 	{
 		if(array_key_exists($parent, $results) && count($results[$parent])>0){
 			foreach ($results[$parent] as $k => $item) {
 				if($item['parent']==$parent){
-					echo '<p class="select" data-id="'.$item['id'].'">'.($level>0?"└--- ":'').$item['name'].'</p>';
+					$linkFillter = $baseUrlSearch.vsprintf('search-%s=none&type-%s=%s&%s=%s',[$show->name,$show->name,$show->type_show,$show->name,$item['id']]);
+					echo '<p class="select" data-id="'.$item['id'].'"><a href="'.$linkFillter.'?">'.($level>0?"└--- ":'').$item['name'].'</a></p>';
 					$nextlevel = $level +1;
-					self::viewRecursivePivotPrint($results,$item['id'],$nextlevel);
+					self::viewRecursivePivotPrint($show , $baseUrlSearch,$results,$item['id'],$nextlevel);
 				}
 			}
 		}
 	}
-	public static function viewPivotPrint($results)
+	public static function viewPivotPrint($show,$baseUrlSearch,$results)
 	{
 		foreach ($results as $k => $item) {
-			echo '<p class="select" data-id="'.$item['id'].'">'.$item['name'].'</p>';
+			$linkFillter = $baseUrlSearch.vsprintf('search-%s=none&type-%s=%s&%s=%s',[$show->name,$show->name,$show->type_show,$show->name,$item['id']]);
+			echo '<p class="select" data-id="'.$item['id'].'"><a href="'.$linkFillter.'?">'.$item['name'].'</a></p>';
 		}
 	}
 	public static function getDataPivot($pivotTable, $originField, $targetTable, $targetField, $columns, $originId = null)

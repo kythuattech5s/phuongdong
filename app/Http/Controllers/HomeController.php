@@ -22,6 +22,9 @@ class HomeController extends Controller
         if (isset($tableAccess) && $route->is_static == 0 && $tableAccess != $route->table) {
             abort(404);
         }
+        if (!isset($tableAccess) && isset($listTableTwoLevelSlug[$route->table])) {
+            return \Redirect::to('/'.$listTableTwoLevelSlug[$route->table].'/'.$link.'/');
+        }
         Utm::check();
         $controllers = explode('@', $route->controller);
         $controller = $controllers[0];
