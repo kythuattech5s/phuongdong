@@ -10,14 +10,7 @@ var MAIN = (function(){
     var checkEdit = function(){
         const button = document.querySelector('._vh_save');
         const buttonSaveDraft = document.querySelector('.save_draft');
-<<<<<<< HEAD
         const hasWarning = document.querySelector('.has_warning');
-=======
-<<<<<<< HEAD
-        const hasWarning = document.querySelector('.has_warning');
-=======
->>>>>>> c760de4cdc944968525b427782aeed5b84778ec2
->>>>>>> fbf823acb65b3d0c13d3a0eadd48107a8caf87c4
         if(pathname.indexOf('/esystem/edit/news') == 0){
             button.style.pointerEvents = 'none';
             var id = pathname.split('/')[pathname.split('/').length - 1];
