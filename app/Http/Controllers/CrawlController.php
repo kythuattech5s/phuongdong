@@ -8,6 +8,14 @@ class CrawlController extends Controller
     {
         $crawlProvider = new CrawlProvider;
         $itemCrawl = $crawlProvider->getCrawler($table);
-        $itemCrawl->crawl();
+        $type = request()->input('type');
+        switch ($type) {
+        	case 'db':
+        		$itemCrawl->crawlDb();
+        		break;
+        	default:
+        		$itemCrawl->crawl();
+        		break;
+        }
     }
 }

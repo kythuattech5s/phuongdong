@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.4s"> {{$currentItem->short_content}}
+            <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.4s"> {!!$currentItem->short_content!!}
             </div>
             <div class="my-3 wow fadeInUp toc-wrapper">
                 {!!$dataContent['toc']!!}
@@ -142,7 +142,7 @@
                                 <h3>
                                     <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                                 </h3>
-                                <p class="fs-16-cv my-1 my-xl-2">{{Str::words($item->short_content,'28')}}</p>
+                                <p class="fs-16-cv my-1 my-xl-2">{{Str::words($item->seo_des,'28')}}</p>
                                 <div class="d-flex flex-wrap align-items-center">
                                     <div class="item-time mt-1 me-3">
                                         <span>{{\Support::showDate($item->time_published,'d/m/Y H:i')}}</span>
@@ -168,7 +168,7 @@
                                     <h3>
                                         <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-20-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
                                     </h3>
-                                    <p class="fs-16-cv my-1">{{Str::words($item->short_content,'28')}}</p>
+                                    <p class="fs-16-cv my-1">{{Str::words($item->seo_des,'28')}}</p>
                                     <div class="d-flex flex-wrap align-items-center">
                                         <div class="item-time mt-1 me-3">
                                             <span>{{\Support::showDate($item->time_published,'d/m/Y H:i')}}</span>

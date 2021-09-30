@@ -10,7 +10,7 @@ class NewsCategoryController extends Controller
     public function all($request, $route, $link)
     {
         $currentItem = $route;
-        $listItems = News::act()->publish()->paginate(10);
+        $listItems = News::act()->ord()->publish()->paginate(10);
         return view('news_categories.all',compact('currentItem','listItems')); 
     }
     public function view($request, $route, $link){

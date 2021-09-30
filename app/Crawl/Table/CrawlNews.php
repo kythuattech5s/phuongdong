@@ -7,9 +7,24 @@ class CrawlNews extends BaseCrawl
 {
     public function crawl()
     {
+    	var_dump(1);die();
     	set_time_limit(0);
 		$urlListNews = 'https://benhvienphuongdong.vn/admin/news/list-news';
-		$html = $this->curlHelper->exeCurl($urlListNews);
+    	$dataFillter = [
+			'keyword'=>'', 
+			'category_filter'=>'',
+			'user_id'=>'',
+			'up_by'=>'',
+			'featured'=>'',
+			'status'=>'',
+			'language'=>'vie',
+			'sort'=>'News.position',
+			'direction'=>'DESC',
+			'position'=>'1138',
+			'limit'=>'20',
+			'page'=> 53
+		];
+		$html = $this->curlHelper->exeCurl($urlListNews,'POST',$dataFillter);
 		if (!isset($html['res'])) {
 			return;
 		}
@@ -46,6 +61,9 @@ class CrawlNews extends BaseCrawl
     public function convertHtmlListNew($html)
     {
     	$listItem = $html->find('.list-tbody tr');
+    	if (!is_object($html)) {
+			return;
+		}
     	foreach ($listItem as $item) {
     		$listTd = $item->find('td');
     		$itemNews = new News;
@@ -62,11 +80,12 @@ class CrawlNews extends BaseCrawl
 
     		$itemNews->count_view 		= (int)$this->htmlHelper->getAttributeDom($listTd[9]->find('p',0),'innertext');
     		$newRootLink 				= $this->htmlHelper->getAttributeDom($listTd[12]->find('a',0),'href');
-    		$itemNews->root_url 		= $newRootLink;
-    		$itemNews->root_id 			= str_replace('https://benhvienphuongdong.vn/admin/news/edit-news/','',$newRootLink);
-    		$itemNews->id 				= $itemNews->root_id;
+    		$itemNews->id 				= (int)str_replace('https://benhvienphuongdong.vn/admin/news/edit-news/','',$newRootLink);
+    		if ($itemNews->id >= 869) {
+    			continue;
+    		}
 
-    		$html = $this->curlHelper->exeCurl($itemNews->root_url);
+    		$html = $this->curlHelper->exeCurl('https://benhvienphuongdong.vn/admin/news/edit-news/'.$itemNews->id);
 			if (!isset($html['res'])) {
 				continue;
 			}
@@ -90,14 +109,16 @@ class CrawlNews extends BaseCrawl
 
 			$imgSource 					= $this->htmlHelper->getAttributeDom($html->find('div[id=url-img-thumbnails] img',0),'src');
 			if ($imgSource != '') {
-				$imgInfo = $this->mediaHelper->crawlImage($imgSource,'tin-tuc');
+				$imgInfo = $this->mediaHelper->crawlImage($imgSource,'tin-tuc/bai-viet');
 				$itemNews->img 			= $imgInfo;
-				$itemNews->share_image_facebook = $imgInfo;
 			}
-
-			$itemNews->content = $this->convertHtmlContent($itemNews->content,'tin-tuc');
-			$itemNews->short_content = $this->convertHtmlContent($itemNews->short_content,'tin-tuc');
-
+			$imgShareSource 			= $this->htmlHelper->getAttributeDom($html->find('input[name=share_image_facebook]',0),'value');
+			if ($imgShareSource != '') {
+				$imgShareInfo = $this->mediaHelper->crawlImage($imgShareSource,'tin-tuc/bai-viet');
+				$itemNews->share_image_facebook = $imgShareInfo;
+			}
+			$itemNews->content = $this->convertHtmlContent($itemNews->content,'tin-tuc/bai-viet');
+			$itemNews->short_content = $this->convertHtmlContent($itemNews->short_content,'tin-tuc/bai-viet');
 
 			$listCateId = $this->htmlHelper->getAttributeDom($html->find('input[name=categories_id]',0),'value');
 			$this->createPivot($listCateId,$itemNews);
@@ -106,16 +127,18 @@ class CrawlNews extends BaseCrawl
     		$dataVroutes = [
 				'vi_name' => $itemNews->name,
 				'controller' => 'App\Http\Controllers\NewsController@view',
-				'table' => 'news_categories',
+				'table' => 'news',
 				'map_id' => $itemNews->id,
 				'is_static' => 0,
 				'in_sitemap' => 0,
 				'vi_link' => $itemNews->slug,
 				'created_at' => $itemNews->created_at,
-				'updated_at' => $itemNews->updated_at
+				'updated_at' => $itemNews->updated_at,
+				'vi_seo_title' => $itemNews->seo_title,
+				'vi_seo_key' => $itemNews->seo_key,
+				'vi_seo_des' => $itemNews->seo_des
 			];
 			Vroutes::insert($dataVroutes);
-			var_dump(1);die();
     	}
     }
     public function createPivot($listCateId,$itemNews){

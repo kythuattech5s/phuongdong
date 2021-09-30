@@ -53,29 +53,55 @@ class SEOHelper{
 		return $br;
 	}
 	
+	// private static function getFieldSeoByLang($key,$dataitem,$def){
+	// 	if(!@$dataitem) return $def;
+	// 	if(is_array($dataitem)){
+	// 		$dataitem = (object)$dataitem;
+	// 	}
+	// 	$lang =CT::getLanguage(false);
+	// 	$tmplang = $lang."_";
+	// 	$tmpkey = $tmplang.$key;
+	// 	if(isset($dataitem->$tmpkey)&& !StringHelper::isNull($dataitem->$tmpkey)){
+	// 		return $dataitem->$tmpkey;
+	// 	}
+	// 	else{
+	// 		if($lang =="vi"){
+	// 			if(isset($dataitem->$key)&& !StringHelper::isNull($dataitem->$key)){
+	// 				return $dataitem->$key;
+	// 			}
+	// 		}
+	// 	}
+	// 	if($key =="seo_title" || $key =="seo_des"){
+	// 		return static::getFieldSeoByLang("name",$dataitem,$def);
+	// 	}
+		
+	// 	return $def;
+	// }
 	private static function getFieldSeoByLang($key,$dataitem,$def){
 		if(!@$dataitem) return $def;
 		if(is_array($dataitem)){
 			$dataitem = (object)$dataitem;
 		}
-		$lang =CT::getLanguage(false);
-		$tmplang = $lang."_";
-		$tmpkey = $tmplang.$key;
-		if(isset($dataitem->$tmpkey)&& !StringHelper::isNull($dataitem->$tmpkey)){
-			return $dataitem->$tmpkey;
-		}
-		else{
-			if($lang =="vi"){
-				if(isset($dataitem->$key)&& !StringHelper::isNull($dataitem->$key)){
-					return $dataitem->$key;
+		switch ($key) {
+			case 'seo_title':
+				if (isset($dataitem->share_title_facebook) && $dataitem->share_title_facebook != '') {
+					return $dataitem->share_title_facebook;
 				}
-			}
+				break;
+			case 'seo_des':
+				if (isset($dataitem->share_description_facebook) && $dataitem->share_description_facebook != '') {
+					return $dataitem->share_description_facebook;
+				}
+				break;
+			default:
+				break;
 		}
-		if($key =="seo_title" || $key =="seo_des"){
-			return static::getFieldSeoByLang("name",$dataitem,$def);
+		// $lang = CT::getLanguage(false);
+		$lang = \App::getLocale();
+		if ($dataitem instanceof \vanhenry\manager\model\VRoute) {
+			return StringHelper::isNull($dataitem->{$lang.'_'.$key}) ? $def : $dataitem->{$lang.'_'.$key};
 		}
-		
-		return $def;
+		return isset($dataitem->$key) && !StringHelper::isNull($dataitem->$key) ? $dataitem->$key : $def;
 	}
 	public static function HEADER_SEO($dataitem){
 		$ret=  "<base href='".asset('/')."'/>";
@@ -131,6 +157,10 @@ class SEOHelper{
 				}
 			}else{
 				$img = json_decode($img,true);
+				$img =@$img? $img["path"].$img["file_name"]:"";
+			}
+			if (isset($dataitem->share_image_facebook) && $dataitem->share_image_facebook != ''){
+				$img = json_decode($dataitem->share_image_facebook,true);
 				$img =@$img? $img["path"].$img["file_name"]:"";
 			}
 			$pos = strpos($img , 'http');

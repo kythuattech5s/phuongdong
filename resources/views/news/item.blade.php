@@ -8,7 +8,7 @@
         <h3>
             <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
         </h3>
-        <p class="fs-16-cv my-1 my-xl-2">{{Str::words($item->short_content,'35')}}</p>
+        <p class="fs-16-cv my-1 my-xl-2">{{Str::words($item->seo_des,'35')}}</p>
         <div class="item-time mt-1">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <span>{{\Support::showDate($item->time_published)}}</span>

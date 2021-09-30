@@ -12,6 +12,9 @@ class BaseCrawl
 	}
 	public function convertHtmlContent($content,$pathSave){
 		$html = str_get_html($content);
+		if (!is_object($html)) {
+			return $content;
+		}
 		$imgs = $html->find('img');
 		foreach ($imgs as $item) {
 			$fullSrc = str_replace('../../..','https://benhvienphuongdong.vn',$this->htmlHelper->getAttributeDom($item,'src'));

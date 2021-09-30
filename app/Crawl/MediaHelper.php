@@ -40,11 +40,11 @@ class MediaHelper
 	private function setFileName($path, $filename, $extention)
     {
     	$newName = $filename;
-        $path_file = $path.'/'.$filename.'.'.$extention;
+        $path_file = $path.$filename.'.'.$extention;
         $i = 1;
-        while (file_exists(public_path($path_file))) {
+        while (file_exists($path_file)) {
             $newName = $filename.'-'.$i;
-            $path_file = $path.'/'.$newName.'.'.$extention;
+            $path_file = $path.$newName.'.'.$extention;
             $i++;
         }
         return $newName;

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="admin/css/cssloader.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="admin/media/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('admin/css/style_menu_vertical.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('admin/css/style_share_social.css') }}" type="text/css">
     
     <script type="text/javascript">
         var SUCCESS=200;
@@ -62,6 +63,7 @@
     <script type="text/javascript" src="admin/plug/jqueryui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="admin/media/fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="admin/js/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="admin/js/social_share.js"></script>
     <script type="text/javascript" src="admin/js/webhooks.js"></script>
     @yield('css')
 </head>

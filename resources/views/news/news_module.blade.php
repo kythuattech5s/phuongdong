@@ -12,7 +12,7 @@
                         <a href="{{Support::show($item, 'slug')}}" class="smooth robotob fs-22-cv hv-main-sp" title="{{$item->name}}">{{$item->name}}</a>
                     </h3>
                     <div class="short-content fs-16 mt-1 mt-lg-2">
-                        {{Str::words($item->short_content,'28')}}
+                        {{Str::words($item->seo_des,'28')}}
                     </div>
                     <div class="item-time d-block d-lg-none mt-1">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
