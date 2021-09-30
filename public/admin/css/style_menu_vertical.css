@@ -174,11 +174,6 @@ button.small-menu {
     border-left: 2px solid transparent;
 }
 
-.main-menu ul.sub{
-  max-height: 1000px;
-  transition: all 0.4s;
-}
-
 .main-menu .sub li a:hover,.main-menu .sub li a.active {
   background-color: #1b2327;
   color: #ffffff !important;
