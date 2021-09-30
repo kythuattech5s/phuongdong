@@ -76,17 +76,18 @@ trait SearchTrait{
 	private function getSearchArray($def,$more,$control){
 		$ret = array();
 		foreach ($control as $key => $value) {
-			
 			$_key = substr($key, 5);
-			$ctl = $control['type-'.$_key];
-			$tmp= array();
-			if(StringHelper::normal($ctl)=="datetime"){
-				$tmp = array('key'=>$_key,'value'=>$def['from-'.$_key],'from'=>$def['from-'.$_key],'to'=>$def['to-'.$_key],'type_search'=>$more["search-".$_key],'control'=>$ctl);
+			if(isset($def[$_key]) && $def[$_key] !== null){
+				$ctl = $control['type-'.$_key];
+				$tmp= array();
+				if(StringHelper::normal($ctl)=="datetime"){
+					$tmp = array('key'=>$_key,'value'=>$def['from-'.$_key],'from'=>$def['from-'.$_key],'to'=>$def['to-'.$_key],'type_search'=>$more["search-".$_key],'control'=>$ctl);
+				}
+				else{
+					$tmp = array('key'=>$_key,'value'=>$def[$_key],'type_search'=>$more["search-".$_key],'control'=>$ctl);
+				}
+				array_push($ret, $tmp);
 			}
-			else{
-				$tmp = array('key'=>$_key,'value'=>$def[$_key],'type_search'=>$more["search-".$_key],'control'=>$ctl);
-			}
-			array_push($ret, $tmp);
 		}
 		return $ret;
 	}
@@ -109,24 +110,27 @@ trait SearchTrait{
 		$q = DB::table($table);
 		if(is_array($raw)){
 			foreach ($raw as $key => $value) {
-				$q = $q->where($key,'like',"%".$value."%");
+				if(isset($value)){
+					$q = $q->where($key,'like',"%".$value."%");
+				}
 			}
 		}
 		if(is_array($more)){
 			foreach ($more as $key => $value) {
-				$tcf = $value["control"]=="SELECT"?"TEXT":$value["control"];
-				$fnc = 'catchTypeWhere'.$tcf;
-				if(method_exists($this, $fnc)){
-					$q = $this->$fnc($q,$value,$table);	
+				if(isset($value['value'])){
+					$tcf = $value["control"]=="SELECT"?"TEXT":$value["control"];
+					$fnc = 'catchTypeWhere'.$tcf;
+					if(method_exists($this, $fnc)){
+						$q = $this->$fnc($q,$value,$table);
+					}
+					else{
+						$fnc = 'catchTypeWhereBASE';
+						$q = $this->$fnc($q,$value,$table);	
+					}
 				}
-				else{
-					$fnc = 'catchTypeWhereBASE';
-					$q = $this->$fnc($q,$value,$table);	
-				}
-				
 			}
 		}
-		$q->orderBy($inputs['orderkey'],$inputs['ordervalue']);
+		$q->orderBy($table.'.'.$inputs['orderkey'],$inputs['ordervalue']);
 		return $q;
 	}
 	private function catchTypeWhereTEXT($query,$value){
@@ -169,6 +173,12 @@ trait SearchTrait{
 	private function catchTypeWhereDATETIME($query,$value,$table){
 		$from  = \DateTime::createFromFormat('Y-m-d H:i:s', $value['from']);
 		$to  = \DateTime::createFromFormat('Y-m-d H:i:s', $value['to']);
+		if(!$from){
+			$from = date('Y-m-d H:i:s',strtotime(str_replace('/','-',$value['from'])));
+		}
+		if(!$to){
+			$to = date('Y-m-d H:i:s',strtotime(str_replace('/','-',$value['to'])));
+		}
 		$query = $query->whereBetween($table.'.'.$value['key'],[$from,$to]);
 		return $query;
 	}
@@ -203,7 +213,7 @@ trait SearchTrait{
 				$inputHiddens .= '<input name="'.('to-'.$k).'" type="hidden" value="'.$inputs['to-'.$k].'">';
 			}
 			else{
-				$inputHiddens .= '<input name="'.$k.'" type="hidden" value="'.$inputs[$k].'">';
+				$inputHiddens .= '<input name="'.$k.'" type="hidden" value="'.( $inputs[$k] ?? '').'">';
 			}
 		}
 		return $inputHiddens;

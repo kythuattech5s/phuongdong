@@ -2,9 +2,9 @@
     <div class="pagination wow fadeInUp">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <strong><i class="fa fa-angle-left" aria-hidden="true"></i></strong>
+            <strong><i class="fa fa-chevron-left" aria-hidden="true"></i></strong>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            <a href="{{ $paginator->previousPageUrl() }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
             @if (!in_array($paginator->currentPage(), [1, 2]))
                 <a href="{{ $paginator->url(1) }}" >1</a></li>
                 @if ($paginator->currentPage() !== 3)
@@ -32,9 +32,9 @@
                 @endif
                 <a href="{{ $paginator->url($paginator->lastPage()) }}" >{{ $page }}</a></li>
             @endif
-            <a href="{{ $paginator->nextPageUrl() }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <a href="{{ $paginator->nextPageUrl() }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
         @else
-            <strong><i class="fa fa-angle-right" aria-hidden="true"></i></strong>
+            <strong><i class="fa fa-chevron-right" aria-hidden="true"></i></strong>
         @endif
     </div>
 @endif

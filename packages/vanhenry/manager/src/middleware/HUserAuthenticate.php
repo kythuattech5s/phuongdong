@@ -123,6 +123,10 @@ class HUserAuthenticate
                 $_action = 'view';
                 break;
             case 'deleteAll':
+            case 'trashAll':
+            case 'backTrashAll':
+            case 'activeAll':
+            case 'unActiveAll':
             case 'delete':
                 $_action = 'delete';
                 break;

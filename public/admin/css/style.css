@@ -458,7 +458,6 @@ div[data-menu=off] .nav-trigger {
     font-size: 2.5rem;
     margin-right: 15px;
     display: inline-block;
-    margin-bottom: 5px;
 }
 
 .pull-left .select2-container .select2-selection--single {
@@ -472,7 +471,6 @@ div[data-menu=off] .nav-trigger {
 }
 
 .right_header_admin small {
-    width: 105px;
     padding: 5px 10px;
     text-align: center;
     display: block;
@@ -997,7 +995,8 @@ ul.sub.none {
 }
 
 .copyright p {
-    padding: 25px;
+    padding: 5px;
+    padding-bottom: 0;
     text-transform: uppercase;
     font-family: robob;
     color: #636363;
@@ -1521,8 +1520,8 @@ td.action i {
     margin-bottom: 10px;
 }
 
-.pagination div {
-    font-size: 0;
+div.pagination {
+    display: flex;
 }
 
 .pagination div strong,
@@ -2327,10 +2326,6 @@ table {
 
 /* add more */
 
-#maincontent {
-    height: 100vh;
-}
-
 #mainedit-permis .bigtitle {
     background: #fa430f !important;
 }
@@ -2678,8 +2673,7 @@ table {
     padding: 4px 20px;
     color: white;
 }
-.h-user-online ul.h-user__list-all:hover,
-.h-user-online .count:hover ~ ul.h-user__list-all{
+.h-user-online ul.h-user__list-all.show{
     transform: scale(1);
     opacity: 1;
     pointer-events: all;
@@ -2687,6 +2681,7 @@ table {
 }
 
 .h-user-online ul.h-user__list-all{
+    z-index: 1043;
     position: absolute;
     right: 16px;
     top: 56px;
@@ -2780,4 +2775,53 @@ td.action[data-title="Chức năng"] {
   border-radius: 3px;
   width: 12px;
   height: 12px; 
+}
+
+
+.filter-table{
+    background: #e3e3e3;
+    padding: 6px 15px;
+}
+
+.filter-table form input{
+    min-width: 250px;
+    border: 1px solid #ebebeb;
+    padding: 3px 12px;
+    border-radius: 5px;
+}
+.group-filter--left .filter-group{
+    margin: 4px 0;
+}
+.group-filter--left .filter-group:not(:last-child){
+    margin-right: 4px;
+}
+
+.group-filter--left{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 95%;
+}
+
+.filter-table form button[type="submit"]{
+    padding: 0 6px;
+    border-radius: 5px;
+    background: #29cbd6;
+    border: 1px solid #29cbd6;
+    color: white;
+    width: 33px;
+    height: 33px;
+}
+
+.filter-table form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cursor-pointer i{
+    float:right;
+}
+.cursor-pointer{
+    cursor: pointer;
 }

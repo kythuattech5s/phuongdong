@@ -468,7 +468,13 @@ trait ViewTrait{
 		if($q !== null){
 			$values = $q;
 		}else{
-			$values = DB::table($table)->select($nameFiledShow)->orderBy('id','DESC');
+			$values = DB::table($table)->select($nameFiledShow);
+		}
+		
+		if(isset(request()->orderkey) && isset(request()->ordervalue)){
+			$values->orderBy($table.'.'.request()->orderkey,request()->ordervalue);
+		}else{
+			$values->orderBy('id','desc');
 		}
 		foreach($tab as $key => $name){
 			switch($key){
@@ -486,7 +492,11 @@ trait ViewTrait{
 					break;
 				case 'draft':
                     $draft = clone $values;
-					$dataList['draft'] = $draft->where('is_draft',1)->paginate($paginate);
+					$dataList['draft'] = $draft->where(function($q){
+						$q->where('is_draft',1)->where(function($q){
+							$q->whereNull('trash')->orWhere('trash',0);
+						});
+					})->paginate($paginate);
 					break;
 				case 'scheduled':
 					$scheduled = clone $values;

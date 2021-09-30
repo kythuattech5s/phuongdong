@@ -290,6 +290,7 @@ class Admin extends BaseAdminController
 		 return	JsonHelper::echoJson($ret,trans('db::missing_field'));	
 		}
 	}
+
 	public function deleteAll(Request $request, $table){
 		$inputs = $request->input();
 		if(@$inputs['id']){
@@ -323,6 +324,102 @@ class Admin extends BaseAdminController
 		 return	JsonHelper::echoJson(100,trans('db::missing_field'));	
 		}
 	}
+
+	public function trashAll(Request $request, $table){
+		$inputs = $request->input();
+        if (@$inputs['id']) {
+            $id = json_decode($inputs['id'], true);
+            $id = $id ==null?array():$id;
+            /* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+            $check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table, $id);
+            if (!$check) {
+                return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
+            }
+            $ret = DB::table($table)->whereIn('id', $id)->update(['trash' => 1]);
+
+            return response(json_encode([
+                'code'=> 200,
+                'message' => 'Xóa tạm thành công'
+            ],JSON_UNESCAPED_UNICODE));
+        }
+		return response(json_encode([
+			'code'=> 100,
+			'message' => 'Xóa tạm không thành công'
+		],JSON_UNESCAPED_UNICODE));
+		/* End check */
+	}
+
+	public function backTrashAll(Request $request, $table){
+		$inputs = $request->input();
+        if (@$inputs['id']) {
+            $id = json_decode($inputs['id'], true);
+            $id = $id ==null?array():$id;
+            /* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+            $check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table, $id);
+            if (!$check) {
+                return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
+            }
+            $ret = DB::table($table)->whereIn('id', $id)->update(['trash' => 0]);
+
+            return response(json_encode([
+                'code'=> 200,
+                'message' => 'Khôi phục thành công'
+            ],JSON_UNESCAPED_UNICODE));
+        }
+		return response(json_encode([
+			'code'=> 100,
+			'message' => 'Xóa tạm không thành công'
+		],JSON_UNESCAPED_UNICODE));
+	}
+
+	public function activeAll(Request $request, $table){
+		$inputs = $request->input();
+        if (@$inputs['id']) {
+            $id = json_decode($inputs['id'], true);
+            $id = $id ==null?array():$id;
+            /* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+            $check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table, $id);
+            if (!$check) {
+                return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
+            }
+            $ret = DB::table($table)->whereIn('id', $id)->update(['act' => 1]);
+
+            return response(json_encode([
+                'code'=> 200,
+                'message' => 'Kích hoạt thành công'
+            ],JSON_UNESCAPED_UNICODE));
+        }
+		return response(json_encode([
+			'code'=> 100,
+			'message' => 'Hủy kích hoạt không thành công'
+		],JSON_UNESCAPED_UNICODE));
+	}
+
+	public function unActiveAll(Request $request, $table){
+		$inputs = $request->input();
+	
+        if (@$inputs['id']) {
+            $id = json_decode($inputs['id'], true);
+            $id = $id ==null?array():$id;
+			
+            /* Check thêm quyền chỉ được xóa những bản ghi do user hoặc user trong group con tạo ra */
+            $check = \vanhenry\manager\helpers\RoleHelper::checkHUserDeletePermission($table, $id);
+			
+            if (!$check) {
+                return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
+            }
+            $ret = DB::table($table)->whereIn('id', $id)->update(['act' => 0]);
+            return response(json_encode([
+                'code'=> 200,
+                'message' => 'Hủy kích hoạt thành công'
+            ],JSON_UNESCAPED_UNICODE));
+        }
+		return response(json_encode([
+			'code'=> 100,
+			'message' => 'Hủy kích hoạt không thành công'
+		],JSON_UNESCAPED_UNICODE));
+	}
+
 	public function getCrypt(Request $request){
 		$post = $request->input();
 		$pass = $post["pass"];

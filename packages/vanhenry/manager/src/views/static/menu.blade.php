@@ -9,7 +9,7 @@
           @foreach($userglobal['menu'] ?: []   as $pmenu)
           <li class="nav-item">
                <div class="menu-anchor">
-                    <a href="{{$admincp.'/'}}{{FCHelper::ep($pmenu,'link')}}">
+                    <a href="javascript:void(0)">
                          <i class="{{$pmenu->icon}}"></i>
                          <span style="<?php session("menu_status",'off')=='on'?'display:inline-block;height:inherit;width:inherit;':'display:block;height:0px;width:0px'; ?>" class="txt">{{FCHelper::ep($pmenu,'name')}}
                          </span>

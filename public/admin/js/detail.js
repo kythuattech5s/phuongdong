@@ -16,9 +16,14 @@ $(function() {
                 } else {
                     $(input).next().val(ret);
                 }
-
             }
         }
+    });
+
+    $('.datepicker-filter').datetimepicker({
+        format: 'd/m/Y H:i:s',
+        formatTime: 'H:i:s',
+        formatDate: 'd/m/Y',
     });
 
     $('.boxtitle .btnshow').click(function(event) {

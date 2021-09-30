@@ -10,6 +10,7 @@ var MAIN = (function(){
     var checkEdit = function(){
         const button = document.querySelector('._vh_save');
         const buttonSaveDraft = document.querySelector('.save_draft');
+        const hasWarning = document.querySelector('.has_warning');
         if(pathname.indexOf('/esystem/edit/news') == 0){
             button.style.pointerEvents = 'none';
             var id = pathname.split('/')[pathname.split('/').length - 1];
@@ -26,7 +27,7 @@ var MAIN = (function(){
                     },1000*5);
                 }
             });
-        }else if(document.querySelector('.has_warning')?.value == 1){
+        }else if(hasWarning?.value == 1){
             runWarning();
         }else if(buttonSaveDraft){
             clickSave();
@@ -46,7 +47,9 @@ var MAIN = (function(){
         }
 
         function runWarning(){
-            beforeUnload();
+            if(hasWarning?.value == 1){
+                beforeUnload();
+            }
             checkClick();
             clickSave();
         }
@@ -76,7 +79,9 @@ var MAIN = (function(){
             window.onclick = function(e){
                 var parent = getParent(e.target,'._vh_save');
                 if(!parent){
-                    beforeUnload();
+                    if(hasWarning?.value == 1){
+                        beforeUnload();
+                    }
                 }
             }
             window.addEventListener('unload',updateEditing,{passive: true});
@@ -253,7 +258,6 @@ var DRAFT = (function(){
     }
 })();
 
-
 var USERONLINE = (function(){
 	// Pusher.logToConsole = true;
     var pusher = new Pusher('5ef77b79133276e49bce', {
@@ -327,9 +331,24 @@ var USERONLINE = (function(){
         return content;
     }
 
+    function clickShow(){
+        const count = document.querySelector('.h-user-online .count');
+        if(!count) return;
+        count.onclick = function(){
+            const list = document.querySelector('.h-user-online .h-user__list-all');
+            if(list.classList.contains('show')){
+                list.classList.remove('show');
+            }else{
+                list.classList.add('show');
+            }
+        }
+    }
     return {
         load:(function(){
             autoUpdate();
+            window.addEventListener('DOMContentLoaded', (event) => {
+                clickShow();
+            });
         })(),
         ajaxAction:function(action){
             ajaxAction(action);
@@ -348,49 +367,11 @@ document.onreadystatechange = function () {
 var TABLE = (function(){
     document.addEventListener('DOMContentLoaded',function(){
         const table = document.querySelector('.main_table table');
-        if(table){
-            const th = table.querySelectorAll('th');
-            th.forEach(function(elTh,n){
-                if(n !== 0){
-                    elTh.style.cursor = "pointer";
-                    elTh.onclick = function() {
-                        var rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-                        switching = true;
-                        dir = "asc"; 
-                        while (switching) {
-                          switching = false;
-                          rows = table.rows;
-                          console.log(rows);
-                          for (i = 1; i < (rows.length - 1); i++) {
-                            shouldSwitch = false;
-                            x = rows[i].getElementsByTagName("TD")[n];
-                            y = rows[i + 1].getElementsByTagName("TD")[n];
-                            if (dir == "asc") {
-                              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                                shouldSwitch= true;
-                                break;
-                              }
-                            } else if (dir == "desc") {
-                              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                                shouldSwitch = true;
-                                break;
-                              }
-                            }
-                          }
-                          if (shouldSwitch) {
-                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                            switching = true;
-                            switchcount ++;      
-                          } else {
-                            if (switchcount == 0 && dir == "asc") {
-                              dir = "desc";
-                              switching = true;
-                            }
-                          }
-                        }
-                    }
-                }
-            })
-        }
+        
+        const datas = table.querySelectorAll('.cursor-pointer');
+
+        datas.forEach(function(el){
+            el.onclick = e => window.location.href = el.dataset.href;
+        });
     })
 })()

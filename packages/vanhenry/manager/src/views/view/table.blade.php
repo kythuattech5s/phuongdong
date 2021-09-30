@@ -7,7 +7,7 @@
 <div class="pagination m0 textcenter show aclr">
 	<span class="total inlineblock pull-left">{{trans('db::number_record')}}: <strong>{{$listData->total()}}</strong></span>
 	<div class="inlineblock pull-right">
-		{{$listData->links()}}
+		{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
 	</div>
 </div>
 <div id="no-more-tables" class="row m0">
@@ -28,10 +28,34 @@
 		@endphp
 		@if(isset($check))
 			@if(isset($deleted_now) && $deleted_now->count() > 0)
-				<a class="_vh_delete_all" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i>{{trans('db::delete_all')}}</a>
+				<a class="_vh_action_all btn btn-danger" data-confirm="Bạn có thực sự muốn xóa?" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i> {{trans('db::delete_all')}}</a>
 			@endif
 		@else
-			<a class="_vh_delete_all" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i>{{trans('db::delete_all')}}</a>
+			<a class="_vh_action_all btn btn-danger" data-confirm="Bạn có thực sự muốn xóa?" href="{{$admincp}}/deleteAll/{{$tableData->get('table_map','')}}" title="{{trans('db::delete_all')}} {{$tableData->get('name','')}}"><i class="fa fa-trash" aria-hidden="true"></i> {{trans('db::delete_all')}}</a>
+		@endif
+		{{-- @if(isset($dataKey) && $dataKey !== 'trash')
+			<a class="_vh_action_all btn btn-danger" data-confirm="Bạn có muốn xóa tạm?" href="{{$admincp}}//{{$tableData->get('table_map','')}}" tite="Xóa tạm">
+				<i class="fa fa-ban" aria-hidden="true"></i>
+				Xóa tạm
+			</a>
+		@elseif(isset($dataKey) && $dataKey == 'trash')
+			<a class="_vh_action_all btn btn-danger" data-confirm="Bạn có muốn khôi phục?" href="{{$admincp}}/backTrashAll/{{$tableData->get('table_map','')}}" tite="Khôi phục">
+				<i class="fa fa-undo" aria-hidden="true"></i>
+				Khôi phục
+			</a>
+		@endif --}}
+		@php
+			$data_actions = $tableData->get('default_action_all',[]);
+			$data_actions = json_decode($data_actions,true);
+			// dd($data_actions);
+		@endphp
+		@if($data_actions !== null && count($data_actions) > 0)
+			@foreach($data_actions as $action)
+			<a class="_vh_action_all btn btn-danger" data-confirm="{{$action['message']}}" href="{{$admincp}}/{{$action['href']}}/{{$tableData->get('table_map','')}}" tite="{{$action['title']}}">
+				{!! $action['icon'] !!}
+				{{$action['title']}}
+			</a>
+			@endforeach
 		@endif
 		@if($tableData->get('table_parent','')!='')
 		<a href="#" data-toggle="modal" data-target="#addToParent" class="_vh_add_to_parent" title="Thêm vào danh mục cha"><i class="fa fa-puzzle-piece" aria-hidden="true">Thêm vào danh mục cha</i>
@@ -51,15 +75,24 @@
 					@if($has_delete)
 					<th>
 						<div class="squaredTwo">
-							<input type="checkbox" class="all" value="None" id="squaredTwoall" name="check">
-							<label for="squaredTwoall"></label>
+							<input type="checkbox" class="all" value="None" id="squaredTwoall{{ @$dataKey ?? '' }}" name="check">
+							<label for="squaredTwoall{{ @$dataKey ?? '' }}" data-tab="{{ @$dataKey ?? '' }}"></label>
 						</div>
 					</th>
 					@endif
 					{%FILTER.simpleShow.filterShow.tableDetailData%}
 					<th>STT</th>
 					@foreach($simpleShow as $show)
-					<th>{{$show->note}}</th>
+						@php
+							$urlSorts = Support::buildUrlSort($show);
+						@endphp
+					<th class="{{$urlSorts['cursor']}}" data-href="{{$urlSorts['url_sort']}}">{{$show->note}}
+						@if($urlSorts['ordervalue'] == 'asc')
+							<i class="fa fa-sort-asc" aria-hidden="true"></i>
+						@elseif($urlSorts['ordervalue'] == 'desc')
+							<i class="fa fa-sort-desc" aria-hidden="true"></i>
+						@endif
+					</th>
 					@endforeach
 					<th>Chức năng</th>
 				</tr>
@@ -182,7 +215,7 @@
 	<div class="pagination col-xs-12 m0 textcenter show aclr">
 		<span class="total inlineblock pull-left">{{trans('db::number_record')}}:<strong> {{$listData->total()}}</strong></span>
 		<div class="inlineblock pull-right">
-			{{$listData->links()}}
+			{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
 		</div>
 	</div>
 </div>

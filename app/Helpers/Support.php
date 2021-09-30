@@ -1152,4 +1152,39 @@ class Support
 	    $data['content'] = $html;
 	    return $data;
 	}
+
+	public static function buildUrlSort($show){
+		$params = request()->all();
+		if(isset($params['orderkey'])){
+			unset($params['orderkey']);
+		}
+		
+		if($show->simple_sort == 1){
+			if(isset($params['ordervalue']) && $params['ordervalue'] == 'desc'){
+				$ordervalue = 'asc';
+			}else{
+				$ordervalue = 'desc';
+			}
+			if(isset($params['ordervalue'])){
+				unset($params['ordervalue']);
+			}
+
+			if(count($params) > 0){
+				$paramBuild = implode('&', array_map(function ($val, $key) { 
+					return sprintf("%s=%s", $key, $val); 
+				},$params,array_keys($params)));
+			}else{
+				$paramBuild = '';
+			}
+			
+			$cursor = 'cursor-pointer';
+			$url_sort = url()->current().'?'.$paramBuild.'&orderkey='.$show->name.'&ordervalue='.$ordervalue;
+		}else{
+			$cursor = '';
+			$url_sort = '';
+			$ordervalue = '';
+		}
+
+		return compact('cursor','url_sort','ordervalue');
+	}
 }

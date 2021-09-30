@@ -21,13 +21,13 @@ class DetailTableHelper
 	public static function filterSimpleSort($collect){
 		$ret = $collect->filter(function ($item)  {
 	    	return FCHelper::er($item,'simple_sort') ==1 || FCHelper::er($item,'type_show')=='PRIMARY_KEY';
-	    }); 
+	    })->sortBy('ord_search'); 
 	    return $ret;
 	}
 	public static function filterAdvanceSearch($collect){
 		$ret = $collect->filter(function ($item)  {
-	    	return FCHelper::er($item,'advance_search') ==1 && FCHelper::er($item,'simple_search') !=1;
-	    }); 
+	    	return FCHelper::er($item,'advance_search') == 1 && FCHelper::er($item,'simple_search') !=1;
+	    })->sortBy('ord_search'); 
 	    return $ret;
 	}
 	public static function filterShow($collect){

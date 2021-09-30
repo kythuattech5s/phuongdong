@@ -3,11 +3,14 @@ var MENU = (function(){
     const CONFIG_SMALL_MENU = 'CONFIG_SMALL_MENU';
 
     function clickshowMenu(){
+        const divAnchors = document.querySelectorAll('.main-menu>li .menu-anchor');
         const btnIcons = document.querySelectorAll('.menu-show-icon');
         const submenus = document.querySelectorAll('.main-menu .sub');
-        btnIcons.forEach(function(btn,index){
-            btn.onclick = function(){
-                const submenu = btn.parentElement.nextElementSibling;
+        divAnchors.forEach(function(divAnchor,index){
+            divAnchor.onclick = function(e){
+                e.preventDefault();
+                const li = divAnchor.parentElement;
+                const submenu = li.querySelector('.sub');
                 if(submenu.classList.contains('none')){
                     btnIcons.forEach(element => {
                         element.querySelector('i').animate([{transform:"rotate(0deg)"}],{
@@ -29,7 +32,7 @@ var MENU = (function(){
                         }
                     })
 
-                    btn.querySelector('i').animate([{transform:"rotate(-90deg)"}],{
+                    li.querySelector('button i').animate([{transform:"rotate(-90deg)"}],{
                         duration:200,
                         fill:"forwards",
                     })
@@ -47,7 +50,7 @@ var MENU = (function(){
                         submenu.classList.add('none');
                         submenuAnimate.cancel();
                     }
-                    btn.querySelector('i').animate([{transform:"rotate(0deg)"}],{
+                    li.querySelector('button i').animate([{transform:"rotate(0deg)"}],{
                         fill:"forwards",
                         duration:200
                     })
@@ -67,6 +70,7 @@ var MENU = (function(){
         if(store.get()){
             document.querySelector('.small-menu').classList.add('fix-small');
             document.querySelector('.root-left').classList.add('fix-small');
+            document.querySelector('.root-right').classList.add('fix-small');
             document.querySelector('.top_menu').classList.add('fix-small');
             hoverShowMenu();
         }
@@ -84,6 +88,7 @@ var MENU = (function(){
             }
         })
     }
+    
     function showSubMenu(e){
         const ulSub = e.target.closest('li').querySelector('ul');
         if(ulSub){
@@ -105,10 +110,12 @@ var MENU = (function(){
         const top = document.querySelector('.top_menu');
         btn.onclick = function(){
             const left = document.querySelector('.root-left');
+            const right = document.querySelector('.root-right');
             if(btn.classList.contains('fix-small')){
                 left.classList.remove('fix-small');
                 btn.classList.remove('fix-small');
                 top.classList.remove('fix-small');
+                right.classList.remove('fix-small');
                 clickshowMenu();
                 hoverShowMenu(false);
                 store.set(false);
@@ -117,6 +124,7 @@ var MENU = (function(){
                 left.classList.add('fix-small');
                 top.classList.add('fix-small');
                 btn.classList.add('fix-small');
+                right.classList.add('fix-small');
                 hoverShowMenu();
             }
         }

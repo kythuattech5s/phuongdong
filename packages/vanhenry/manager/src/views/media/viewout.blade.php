@@ -1,6 +1,6 @@
 @extends('vh::master')
 @section('content')
-<div class="header-top aclr">
+{{-- <div class="header-top aclr"> --}}
   {{-- <div class="breadc pull-left">
     <i class="fa fa-home pull-left"></i>
     <ul class="aclr pull-left list-link">
@@ -13,8 +13,8 @@
     <span  class="clfff">Xem website</span> 
   </a> --}}
  
-</div>
-<div id="maincontent" style="position: relative;">
+{{-- </div> --}}
+<div id="maincontent" style="position: relative; height:100vh">
     <div class="listcontent">
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Media Manager</a></li>

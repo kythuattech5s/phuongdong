@@ -16,6 +16,10 @@
 		Route::post('trash/{table}',array( 'uses'=>"Admin@trash"));
 		Route::post('backtrash/{table}',array( 'uses'=>"Admin@backtrash"));
 		Route::post('deleteAll/{table}',array( 'uses'=>"Admin@deleteAll"));
+		Route::post('trashAll/{table}',array( 'uses'=>"Admin@trashAll"));
+		Route::post('backTrashAll/{table}',array( 'uses'=>"Admin@backTrashAll"));
+		Route::post('activeAll/{table}',array( 'uses'=>"Admin@activeAll"));
+		Route::post('unActiveAll/{table}',array( 'uses'=>"Admin@unActiveAll"));
 		Route::get('viewdetail/{table}/{id}',array( 'uses'=>"Admin@viewDetail"));
 		Route::get('edit/{table}/{id}',array( 'uses'=>"Admin@edit"));
 		Route::post('edit/{table}/{id}',array( 'uses'=>"Admin@edit"));

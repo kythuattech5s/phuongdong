@@ -20,6 +20,7 @@ _VH_CATE.initFilter = function() {
             setFilter.fadeIn(200);
         }
     });
+
     $('.listcontent .filter .advancefilter .btnadd').click(function(event) {
         var p = $(this).parent();
         var selectKeyChoose = p.find('select[name=keychoose]'); /*Select chọn loại điều kiện: id / slug/name...*/
@@ -103,10 +104,12 @@ _VH_CATE.initFilter = function() {
             $.simplyToast("Chưa chọn điều kiện lọc", "warning");
         }
     });
+
     $('.listcontent .filter .advancefilter .btnclose').click(function(event) {
         var mparent = $(this).parent();
         mparent.fadeOut(200);
     });
+
     $('.listcontent .listfilter').on('click', 'i.fa-close', function(event) {
         var p = $(this).parent();
         var name = p.attr('data-field');
@@ -121,6 +124,7 @@ _VH_CATE.initFilter = function() {
         p.remove();
     });
 }
+
 _VH_CATE.showTableControl = function(checked) {
     if (checked) {
         $('.tablecontrol').fadeIn(200);
@@ -128,21 +132,42 @@ _VH_CATE.showTableControl = function(checked) {
         $('.tablecontrol').fadeOut(200);
     }
 }
+
 _VH_CATE.initCheckboxAll = function() {
+    const inputCheckAll = $('input[id^="squaredTwoall"]');
+    $.each(inputCheckAll,function(key,element){
+        element.onclick = function(){
+            var checked = $(this).is(':checked')
+            if (!checked) {
+                $('#no-more-tables table tr.active').removeClass('active');
+            } else {
+                $('#no-more-tables table tr').addClass('active');
+            }
+            
+            $(this).closest('table').find('input.one').prop('checked', checked);
+            _VH_CATE.showTableControl(checked);
+            _VH_CATE.getAllCheckboxOneOfTab($(this).closest('table').find('input.one'),element);
+        }
+    });
+
     $(document).on('click', 'input#squaredTwoall', function(event) {
         var checked = $(this).is(':checked')
+        var table = $(this).closest('.main_table');
         if (!checked) {
             $('#no-more-tables table tr.active').removeClass('active');
         } else {
             $('#no-more-tables table tr').addClass('active');
         }
-        $('input.one').prop('checked', checked);
+        
+        $(this).closest('table').find('input.one').prop('checked', checked);
         _VH_CATE.showTableControl(checked);
-        _VH_CATE.getAllCheckboxOne();
+        _VH_CATE.getAllCheckboxOne(table);
     });
+
     $(document).on('click', 'input.one', function(event) {
         var checked = $(this).is(':checked')
         var parent = $(this).parent().parent().parent();
+        var table = $(this).closest('.main_table');
         if (!checked) {
             parent.removeClass('active');
             $('input#squaredTwoall').prop('checked', checked);
@@ -161,18 +186,31 @@ _VH_CATE.initCheckboxAll = function() {
                 $('input#squaredTwoall').prop('checked', checked);
             }
         }
-        _VH_CATE.getAllCheckboxOne();
+        _VH_CATE.getAllCheckboxOne(table);
     });
 
 }
-_VH_CATE.getAllCheckboxOne = function() {
-    var $arr = $('input.one:checked');
+
+_VH_CATE.getAllCheckboxOneOfTab = function(arr, element) {
+    var slt = [];
+    for (var i = 0; i < arr.length; i++) {
+        if($(arr[i]).is(':checked')){
+            slt.push($(arr[i]).attr('dt-id'));
+        }
+    }
+    $(element).attr('dt-id', JSON.stringify(slt));
+}
+
+_VH_CATE.getAllCheckboxOne = function(table) {
+    var $arr = $(table).find('input.one:checked');
+    console.log($arr);
     var slt = [];
     for (var i = 0; i < $arr.length; i++) {
         slt.push($($arr[i]).attr('dt-id'));
     }
-    $('input#squaredTwoall').attr('dt-id', JSON.stringify(slt));
+    $(table).find('input.all').attr('dt-id', JSON.stringify(slt));
 }
+
 _VH_CATE.initFncJquery = function() {
     jQuery.fn.extend({
         flex: function() {
@@ -182,6 +220,7 @@ _VH_CATE.initFncJquery = function() {
         }
     });
 }
+
 _VH_CATE.initChangeChooseSearch = function() {
     $('select[name=keychoose]').select2()
         .on("change", function(e) {
@@ -191,111 +230,114 @@ _VH_CATE.initChangeChooseSearch = function() {
             parent.find('.add div.search-' + val).flex();
         })
 }
+
 _VH_CATE.initDelete = function() {
-        $(document).on('click', '._vh_delete', function(event) {
-            event.preventDefault();
-            var _this = this;
-            bootbox.confirm("Bạn có thực sự muốn <strong style='font-size:20px'>xóa vĩnh viễn?</strong>", function(result) {
-                if (result) {
-                    var id = $(_this).parent().parent().find('input.one').attr('dt-id');
-                    $.ajax({
-                            url: $(_this).attr('href'),
-                            type: 'POST',
-                            data: { id: id },
-                        })
-                        .done(function(data) {
-                            try {
-                                var json = JSON.parse(data);
-                                if (json.code == 200) {
-                                    $(_this).parent().parent().remove();
-                                }
+    $(document).on('click', '._vh_delete', function(event) {
+        event.preventDefault();
+        var _this = this;
+        bootbox.confirm("Bạn có thực sự muốn <strong style='font-size:20px'>xóa vĩnh viễn?</strong>", function(result) {
+            if (result) {
+                var id = $(_this).parent().parent().find('input.one').attr('dt-id');
+                $.ajax({
+                        url: $(_this).attr('href'),
+                        type: 'POST',
+                        data: { id: id },
+                    })
+                    .done(function(data) {
+                        try {
+                            var json = JSON.parse(data);
+                            if (json.code == 200) {
+                                $(_this).parent().parent().remove();
+                            }
 
-                            } catch (ex) {}
-                        });
-                }
-            });
-        });
-        $(document).on('click', '._vh_trash', function(event) {
-            event.preventDefault();
-            var _this = this;
-            bootbox.confirm("Bạn có thực sự muốn đưa bản ghi này <strong  style='font-size:20px'>vào thùng rác ?</strong>", function(result) {
-                if (result) {
-                    var id = $(_this).parent().parent().find('input.one').attr('dt-id');
-                    $.ajax({
-                            url: $(_this).attr('href'),
-                            type: 'POST',
-                            data: { id: id },
-                        })
-                        .done(function(data) {
-                            try {
-                                var json = JSON.parse(data);
-                                if (json.code == 200) {
-                                    $(_this).parent().parent().remove();
-                                }
-
-                            } catch (ex) {}
-                        })
-                        .fail(function() {})
-                        .always(function() {});
-                }
-            });
-        });
-        $(document).on('click', '._vh_backtrash', function(event) {
-            event.preventDefault();
-            var _this = this;
-            bootbox.confirm("Bạn có thực sự muốn <strong  style='font-size:20px'>phục hồi</strong> bản ghi này?", function(result) {
-                if (result) {
-                    var id = $(_this).parent().parent().find('input.one').attr('dt-id');
-                    $.ajax({
-                            url: $(_this).attr('href'),
-                            type: 'POST',
-                            data: { id: id },
-                        })
-                        .done(function(data) {
-                            try {
-                                var json = JSON.parse(data);
-                                if (json.code == 200) {
-                                    $(_this).parent().parent().remove();
-                                }
-
-                            } catch (ex) {}
-                        })
-                        .fail(function() {})
-                        .always(function() {});
-                }
-            });
-        });
-        $(document).on('click', '._vh_delete_all', function(event) {
-            event.preventDefault();
-            var _this = this;
-            var id = $('#squaredTwoall').attr('dt-id');
-            if (id.length <= 0) {
-                return;
+                        } catch (ex) {}
+                    });
             }
-            bootbox.confirm("Bạn có thực sự muốn xóa?", function(result) {
-                if (result) {
-                    $.ajax({
-                            url: $(_this).attr('href'),
-                            type: 'POST',
-                            data: { id: id },
-                        })
-                        .done(function(data) {
-                            try {
-                                var json = JSON.parse(data);
-                                if (json.code == 200) {
-                                    window.location.reload();
-                                }
-
-                            } catch (ex) {}
-                        })
-                        .fail(function() {})
-                        .always(function() {});
-                }
-            });
-
-
         });
-    }
+    });
+    $(document).on('click', '._vh_trash', function(event) {
+        event.preventDefault();
+        var _this = this;
+        bootbox.confirm("Bạn có thực sự muốn đưa bản ghi này <strong  style='font-size:20px'>vào thùng rác ?</strong>", function(result) {
+            if (result) {
+                var id = $(_this).parent().parent().find('input.one').attr('dt-id');
+                $.ajax({
+                        url: $(_this).attr('href'),
+                        type: 'POST',
+                        data: { id: id },
+                    })
+                    .done(function(data) {
+                        try {
+                            var json = JSON.parse(data);
+                            if (json.code == 200) {
+                                $(_this).parent().parent().remove();
+                            }
+
+                        } catch (ex) {}
+                    })
+                    .fail(function() {})
+                    .always(function() {});
+            }
+        });
+    });
+    $(document).on('click', '._vh_backtrash', function(event) {
+        event.preventDefault();
+        var _this = this;
+        bootbox.confirm("Bạn có thực sự muốn <strong  style='font-size:20px'>phục hồi</strong> bản ghi này?", function(result) {
+            if (result) {
+                var id = $(_this).parent().parent().find('input.one').attr('dt-id');
+                $.ajax({
+                        url: $(_this).attr('href'),
+                        type: 'POST',
+                        data: { id: id },
+                    })
+                    .done(function(data) {
+                        try {
+                            var json = JSON.parse(data);
+                            if (json.code == 200) {
+                                $(_this).parent().parent().remove();
+                            }
+
+                        } catch (ex) {}
+                    })
+                    .fail(function() {})
+                    .always(function() {});
+            }
+        });
+    });
+    $(document).on('click', '._vh_action_all', function(event) {
+        event.preventDefault();
+        var _this = this;
+        var id = $(this).closest('#main-table').find('input[id^=squaredTwoall]').attr('dt-id');
+        if (id.length <= 0) {
+            return;
+        }
+
+        bootbox.confirm($(this).data('confirm'), function(result) {
+            if (result) {
+                $.ajax({
+                        url: $(_this).attr('href'),
+                        type: 'POST',
+                        data: { id: id },
+                    })
+                    .done(function(data) {
+                        try {
+                            var json = JSON.parse(data);
+                            if (json.code == 200) {
+                                $.simplyToast(json.message, 'success');
+                                window.location.reload();
+                            }else{
+                                $.simplyToast(json.message, 'danger');
+                            }
+
+                        } catch (ex) {}
+                    })
+                    .fail(function() {})
+                    .always(function() {});
+            }
+        });
+    });
+}
     /*Tương tác với parent : Thêm/xóa khỏi danh mục*/
 _VH_CATE.initReactWithParent = function() {
     $(document).on('click', '._vh_add_to_parent', function(event) {
@@ -332,6 +374,7 @@ _VH_CATE.initReactWithParent = function() {
 
     });
 }
+
 _VH_CATE.setUpAjaxEditable = function() {
     $(document).on('dblclick', 'input.editable', function(event) {
         event.preventDefault();
@@ -363,6 +406,7 @@ _VH_CATE.setUpAjaxEditable = function() {
         _VH_CATE.submitEditable($(this).attr('name'), $(this).val(), _id, this);
     });
 }
+
 _VH_CATE.submitEditable = function(control, value, _id, _this) {
     var _obj = {};
     _obj[control] = value;
