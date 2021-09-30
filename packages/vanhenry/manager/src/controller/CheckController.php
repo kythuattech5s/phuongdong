@@ -73,6 +73,7 @@ class CheckController extends BaseAdminController{
                 'h_user_id' => $user->id,
                 'content_old' => $news->content,
                 'content' => $request->content,
+                'reason' => $request->reason ?? '',
                 'news_id' => $id,
                 'type' => $request->type,
                 'created_at' => new \DateTime

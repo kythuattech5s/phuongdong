@@ -16,7 +16,7 @@ class BaseModel extends Model
 	}
 	public function scopeOrd($q)
 	{
-		return $q->orderBy('ord', 'asc')->orderBy('id', 'desc');
+		return $q->orderBy('ord', 'desc')->orderBy('id', 'desc');
 	}
 
 	public function scopeDraft($q){

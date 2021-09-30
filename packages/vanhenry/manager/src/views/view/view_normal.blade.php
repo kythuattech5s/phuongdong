@@ -39,8 +39,20 @@
 			@endif
 			@if($tableData->get('has_draft','') == 1 && isset($tab))
 				@foreach($tab as $key => $detailTab)
-				<li>
-					<li class="{{$loop->first ? 'active' : ''}}"><a class="pull-right bgmain" data-toggle="pill" href="#{{$key}}">{{$detailTab['name']}}</a></li>
+
+				@php
+					if(isset(request()->tab) && $key == request()->tab){
+						$active_tab = 'active';
+					}elseif(!isset(request()->tab)){
+						$active_tab = $loop->first ? 'active' : '';
+					}else{
+						$active_tab = '';
+					}
+				@endphp
+				<li class="{{$active_tab}}">
+					<a class="pull-right bgmain" data-toggle="pill" href="#{{$key}}">
+						{{$detailTab['name']}}
+					</a>
 				</li>
 				@endforeach
 			@endif
@@ -91,11 +103,21 @@
 		<div class="tab-content">
 			@if(isset($tab))
 				@foreach($tab as $key => $detailTab)
-				<div id="{{$key}}" class="tab-pane fade in {{$loop->first ? 'active' : ''}}">
+				@php
+					if(isset(request()->tab) && $key == request()->tab){
+						$active_tab = 'active';
+					}elseif(!isset(request()->tab)){
+						$active_tab = $loop->first ? 'active' : '';
+					}else{
+						$active_tab = '';
+					}
+				@endphp
+				<div id="{{$key}}" class="tab-pane fade in {{ $active_tab }}">
 					<div class="filter aclr">
 						<div class="advancefilter pull-left">
 							<button type="button" class="robo  clmain btnfilter">{{trans('db::condition_filter')}}<span class="caret"></span></button>
 							<div class="row setfilter">
+								
 								<h3>{{trans('db::show')}} {{$tableData->get('name','')}} {{trans('db::as')}} </h3>
 								{%FILTER.advanceSearchs.filterAdvanceSearch.tableDetailData%}
 								<select name="keychoose" class="select2" style="width:100%">
@@ -119,6 +141,7 @@
 							</div>
 						</div>
 						<form id="frmsearch" action="{{$admincp}}/search/{{$tableData->get('table_map','')}}" class="">
+							<input type="hidden" name="tab" value="{{$key}}">
 							<div class="form">
 								<div class="boxsearch">
 									<i class="fa fa-search"></i>

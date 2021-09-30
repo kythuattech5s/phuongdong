@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\{Banner,Partner,Services,Doctor,News,ForCustomer,Equipment};
+use App\Models\{Banner,Partner,Services,Doctor,News,ForCustomer,Equipment,RedirectLink};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Helpers\{Utm,TwoLevelSlug};
@@ -10,6 +10,12 @@ class HomeController extends Controller
     {
         $lang  = \App::getLocale();
         $link  = \Support::getSegment($request, 1);
+        /* Check link chuyển hướng */
+        $linkRedirect = RedirectLink::where('root_link',trim($_SERVER['REQUEST_URI'],'/'))->first();
+        if (isset($linkRedirect) && (int)$linkRedirect->type) {
+            return \Redirect::to(trim($linkRedirect->redirect_link,'/'),$linkRedirect->type);
+        }
+        /* End check link chuyển hướng */
         $listTableTwoLevelSlug = TwoLevelSlug::getArrTable();
         if (in_array($link,$listTableTwoLevelSlug) && \Support::getSegment($request, 2) != '') {
             $tableAccess = array_search($link, $listTableTwoLevelSlug);

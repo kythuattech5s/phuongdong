@@ -385,6 +385,9 @@ var COMMENT = (function(){
         },
 		setUrl:function(urls){
 			setUrl(urls)
+		},
+		notification:function(res){
+			notification(res);
 		}
 	}
 
@@ -424,7 +427,7 @@ var onlyRating = (function(){
 				};
 				
 				XHR.send(options).then(function(res){
-					console.log(res);
+					COMMENT.notification(res);
 				})
 			}
 		})

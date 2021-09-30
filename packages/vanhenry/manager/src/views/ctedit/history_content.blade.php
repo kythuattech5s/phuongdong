@@ -46,6 +46,9 @@
         opacity: 0;
     }
 
+    .mb-3{
+        margin-bottom: 0.875rem;
+    }
     @keyframes opacity{
         to{
             opacity: 1;
@@ -66,14 +69,14 @@
                         <h4 class="modal-title">Bản ghi</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="">Chọn bản ghi</label>
+                        <label for="">Chọn bản ghi</label>
+                        <div class="form-control form-reset flex mb-3">
                             <select name="" id="" class="select2">
                                 @foreach($classify as $content)
                                     @php
                                         $user = FCHelper::getHUserById($content->h_user_id);
                                     @endphp
-                                <option value="{{$content->id}}"> {{ $user->name. ' - ' . date('H:i H:i:s')}}</option>
+                                <option value="{{$content->id}}"> {{ $user->name. ' - ' . $content->reason . ' - ' . date('H:i H:i:s')}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -118,7 +121,10 @@
     function loadContent(){
         var new_html = $('.compare-item.active .compare-item__new .s-content');
         var old_html = $('.compare-item.active .compare-item__old .s-content').html();
-        new_html.attr('data-content',new_html.html());
+        console.log(new_html.data('content'));
+        if(new_html.data('content') == undefined){
+            new_html.attr('data-content',new_html.html());
+        }
         let output = htmldiff(old_html, new_html.html());
         new_html.html(output);
     }

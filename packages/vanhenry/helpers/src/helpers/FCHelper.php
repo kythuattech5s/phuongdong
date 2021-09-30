@@ -456,4 +456,25 @@ class FCHelper{
 	public static function getHUserById($id){
         return DB::table('h_users')->where('id', $id)->first();
 	}
+	public static function checkActiveLinkMenuAdmin($link){
+		if (\URL::to($link) == \Request::url()) {
+			return true;
+		}
+		$tableUrl = \Support::getSegment(request(), 3);
+		$arrLinkInfo =  explode('/',$link);
+		if (isset($arrLinkInfo[2]) && $arrLinkInfo[2] == $tableUrl) {
+			return true;
+		}
+		return false;
+	}
+	public static function checkHaveActiveLinkMenuAdmin($admincp,$pmenu)
+	{
+		foreach ($pmenu->childs as $cmenu) {
+			$checkInfo = self::checkActiveLinkMenuAdmin($admincp.'/'.$cmenu->link);
+			if ($checkInfo) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

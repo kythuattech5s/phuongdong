@@ -6,7 +6,7 @@
 	</section>
 	<section class="container">
 	    <h1 class="fs-30-cv robotob mb-1">{{$currentItem->seo_title != '' ? $currentItem->seo_title:$currentItem->name}}</h1>
-	    <p class="fs-16">{{$currentItem->short_content}}</p>
+	    <div class="fs-16">{!!$currentItem->short_content!!}</div>
     	<div class="position-relative list-pathology-cate pt-4 px-4">
 	        <div class="swiper-container slide-pathology wow fadeInUp">
 	            <div class="swiper-wrapper">
@@ -53,7 +53,7 @@
 		    <div class="col-lg-8 shadow-box-right pb-3 pb-md-4 pt-xl-2 pe-lg-4">
 		        {{\Breadcrumbs::render('news_category',$currentItem)}}
 		        <h1 class="fs-30-cv robotob mb-1 wow fadeInUp lh-13">{{$currentItem->seo_title != '' ? $currentItem->seo_title:$currentItem->name}}</h1>
-		        <p class="fs-16 wow fadeInUp">{{$currentItem->short_content}}</p>
+		        <div class="fs-16 wow fadeInUp">{!!$currentItem->short_content!!}</div>
 		        @foreach ($listItems as $key => $item)
 		            @if ($key < 1)
 		                <div class="new-big d-flex flex-wrap py-3 py-xxl-4 wow fadeInUp">
@@ -66,7 +66,7 @@
 		                        <h3>
 		                            <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
 		                        </h3>
-		                        <p class="fs-16-cv my-2 my-xl-3">{{Str::words($item->short_content,'50')}}</p>
+		                        <p class="fs-16-cv my-2 my-xl-3">{{Str::words($item->seo_des,'50')}}</p>
 		                        <div class="item-time mt-1">
 		                            <i class="fa fa-calendar" aria-hidden="true"></i>
 		                            <span>{{\Support::showDate($item->created_at)}}</span>

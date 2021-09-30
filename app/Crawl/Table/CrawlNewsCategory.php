@@ -2,14 +2,16 @@
 namespace App\Crawl\Table;
 use App\Crawl\BaseCrawl;
 use App\Models\{NewsCategory,Vroutes};
+use Carbon\Carbon;
 class CrawlNewsCategory extends BaseCrawl
 {
     public function crawl()
     {
+    	var_dump('die news categories');die();
     	set_time_limit(0);
     	$listNew = NewsCategory::get();
     	foreach ($listNew as $item) {
-    		$html = $this->curlHelper->exeCurl($item->url_root);
+    		$html = $this->curlHelper->exeCurl('https://benhvienphuongdong.vn/admin/category/edit-categories/'.$item->id.'?type=news');
 			if (!isset($html['res'])) {
 				continue;
 			}
@@ -24,8 +26,14 @@ class CrawlNewsCategory extends BaseCrawl
 			$item->seo_des 			= html_entity_decode($this->htmlHelper->getAttributeDom($html->find('textarea[name=seo_description]',0),'innertext'));
 			$item->act 				= (int)$this->htmlHelper->getAttributeDom($html->find('select[name=status] option[selected]',0),'value');
 			$item->ord 				= (int)$this->htmlHelper->getAttributeDom($html->find('input[name=position]',0),'value',0);
-			$item->created_at 		= new \DateTime;
-			$item->updated_at 		= new \DateTime;
+			$item->share_title_facebook = html_entity_decode($this->htmlHelper->getAttributeDom($html->find('input[name=share_title_facebook]',0),'value'));
+			$item->share_description_facebook = html_entity_decode($this->htmlHelper->getAttributeDom($html->find('textarea[name=share_description_facebook]',0),'innertext'));
+			$imgSource 					= $this->htmlHelper->getAttributeDom($html->find('div[id=url-img-thumbnails] img',0),'src');
+			if ($imgSource != '') {
+				$imgInfo = $this->mediaHelper->crawlImage($imgSource,'tin-tuc');
+				$item->img 			= $imgInfo;
+				$item->share_image_facebook = $imgInfo;
+			}
 			$item->save();
 			$dataVroutes = [
 				'vi_name' => $item->name,
@@ -39,6 +47,20 @@ class CrawlNewsCategory extends BaseCrawl
 				'updated_at' => $item->updated_at
 			];
 			Vroutes::insert($dataVroutes);
+    	}
+    	dd('sắc sét');
+    }
+    public function crawlDb(){
+    	var_dump('die news categories');die();
+    	$listNew = NewsCategory::get();
+    	foreach ($listNew as $item) {
+    		$infoCate = \DB::table('categories')->where('id',$item->id)->first();
+    		$infoCateItem = \DB::table('categories_content')->where('id',$item->id)->first();
+    		$item->create_by = $infoCate->created_by;
+    		$item->update_by = $infoCate->updated_by;
+    		$item->created_at = $infoCate->created != ''? Carbon::createFromFormat('Y-m-d H:i:s',$infoCate->created):new \DateTime;
+    		$item->updated_at = $infoCate->updated != ''? Carbon::createFromFormat('Y-m-d H:i:s',$infoCate->updated):new \DateTime;
+    		$item->save();
     	}
     	dd('sắc sét');
     }

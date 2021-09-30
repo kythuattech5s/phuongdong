@@ -21,10 +21,17 @@
 .main-menu .nav-item{
     border-bottom: 1px solid #313c42;
 }
+
 .root-right{
-  overflow: hidden;
+  /* overflow: hidden; */
   flex: 1;
+  max-width: 88%;
 }
+
+.root-right.fix-small{
+  max-width: 96.5%;
+}
+
 p{
   word-break: keep-all;
 }
@@ -37,13 +44,14 @@ p{
 .header-top.aclr{
   margin-bottom:inherit;
 }
+
 .root-left {
   flex: 0 0 12%;
   position: sticky;
   top: 0;
   height: 100vh;
   box-shadow: 1px 1px 2px 1px #ebebeb;
-  z-index: 1;
+  z-index: 1041;
 }
 
 .top_menu{
@@ -165,13 +173,13 @@ button.small-menu {
     font-size: 13px;
     border-left: 2px solid transparent;
 }
-.main-menu .sub li a:hover {
+.main-menu .sub li a:hover,.main-menu .sub li a.active {
   background-color: #1b2327;
   color: #ffffff !important;
   border-left: 2px solid #2ea1f8;
 }
-.main-menu .sub li a:hover span.txt {
-    color: 
+.main-menu .sub li a:hover .txt,.main-menu .sub li a.active .txt{
+  color: white!important;
 }
 .main-menu li a:hover {
   background: inherit;
@@ -198,4 +206,15 @@ button.small-menu {
         transform: scale(1);
         opacity: 1;
     }
+}
+tr:hover p.select a{
+  color: white!important;
+}
+td.action[data-title="Chức năng"] a:last-child .tooltiptext{
+  left: auto;
+  right: -50px;
+}
+td.action[data-title="Chức năng"] a:last-child .tooltiptext:after{
+  left: auto;
+  right: 0px;
 }
