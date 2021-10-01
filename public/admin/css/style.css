@@ -2882,3 +2882,8 @@ td.action[data-title="Chức năng"] {
     cursor: no-drop;
     pointer-events: none;
 }
+.btnadmin {
+    border: 1px solid #00923F;
+    padding: 1px;
+    display: inline-block;
+}

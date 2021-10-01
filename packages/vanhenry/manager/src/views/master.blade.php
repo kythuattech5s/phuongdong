@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="admin/media/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('admin/css/style_menu_vertical.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('admin/css/style_share_social.css') }}" type="text/css">
+    <link type="text/javascript" src="admin/gallery_control/css/jquery.contextMenu.min.css"></link>
+    <script type="text/javascript" src="admin/gallery_control/js/jquery.contextMenu.min.js"></script>
+    <script type="text/javascript" src="admin/gallery_control/js/script.js"></script>
     
     <script type="text/javascript">
         var SUCCESS=200;
