@@ -18,7 +18,7 @@
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <span>{{Support::showDate($item->time_published)}}</span>
                 </div>
-                <p class="fs-16-cv mt-2 mt-xl-2">{{Str::words($item->short_content,'30')}}</p>
+                <p class="fs-16-cv mt-2 mt-xl-2">{{Str::words($item->seo_des,'30')}}</p>
             </div>
         </div>
     @endforeach

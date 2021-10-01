@@ -8,56 +8,60 @@
         <div class="col-lg-8 shadow-box-right pt-xl-2 pb-md-4 pb-xxl-5">
             {{\Breadcrumbs::render('news',$currentItem,$parent)}}
             <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
-            <div class="title-info-new d-flex flex-wrap align-items-center justify-content-between my-3 pb-0 pb-xl-2 wow fadeInUp" data-wow-delay="0.2s">
-                @php
-                    $doctor = $currentItem->getDoctor();
-                @endphp
-                @if (isset($doctor))
-                    <div class="author_info d-flex align-items-center mb-2 me-3">
-                        <a href="{{Support::show($doctor, 'slug')}}" class="smooth img" title="{{$doctor->name}}">
-                            @include('image_loader.small',['itemImage'=>$doctor])
-                        </a>
-                        <div class="content lh-13">
-                            <p>Tham vấn chuyên môn bài viết</p>
-                            <a href="{{Support::show($doctor, 'slug')}}" class="smooth d-inline-block robotob hv-main fs-16" title="{{$doctor->name}}">
-                                {{$doctor->academic_rank}} {{$doctor->name}}
+            <div class="position-relative">
+                <div class="title-info-new d-flex flex-wrap align-items-center justify-content-between my-3 pb-0 pb-xl-2 wow fadeInUp" data-wow-delay="0.2s">
+                    @php
+                        $doctor = $currentItem->getDoctor();
+                    @endphp
+                    @if (isset($doctor))
+                        <div class="author_info d-flex align-items-center mb-2 me-3">
+                            <a href="{{Support::show($doctor, 'slug')}}" class="smooth img" title="{{$doctor->name}}">
+                                @include('image_loader.small',['itemImage'=>$doctor])
                             </a>
-                            <p class="fs-16">Cập nhật: {{Support::showDate($currentItem->time_published)}}</p>
-                        </div>
-                    </div>
-                @else
-                    <div></div>
-                @endif
-                <div class="title-info-rating d-flex align-items-center mb-2 position-relative">
-                    <button class="me-2 btn-show-change-fontsize">
-                        <img src="frontend/images/font-size.png" title="" alt="" class="img-fluid smooth">
-                    </button>
-                    <div class="show-change-font-size">
-                        <div class="d-flex">
-                            <input type="range" name="rangeInputFontsize" min="10" max="30" value="16" oninput="updateTextInputFontsize(this.value);">
-                            <div class="current-fontsize ms-2">
-                                16
+                            <div class="content lh-13">
+                                <p>Tham vấn chuyên môn bài viết</p>
+                                <a href="{{Support::show($doctor, 'slug')}}" class="smooth d-inline-block robotob hv-main fs-16" title="{{$doctor->name}}">
+                                    {{$doctor->academic_rank}} {{$doctor->name}}
+                                </a>
+                                <p class="fs-16">Cập nhật: {{Support::showDate($currentItem->time_published)}}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="rating-info text-center">
-                        @php
-                            $rating = $currentItem->getRating('main');
-                        @endphp
-                        @include('path.rating',['rating' => $rating['percentAll'].'%'])
-                        <p class="fs-12">{{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)</p>
+                    @else
+                        <div></div>
+                    @endif
+                    <div class="title-info-rating d-flex align-items-center mb-2 position-relative">
+                        <button class="me-2 btn-show-change-fontsize">
+                            <img src="frontend/images/font-size.png" title="" alt="" class="img-fluid smooth">
+                        </button>
+                        <div class="show-change-font-size">
+                            <div class="d-flex">
+                                <input type="range" name="rangeInputFontsize" min="10" max="30" value="16" oninput="updateTextInputFontsize(this.value);">
+                                <div class="current-fontsize ms-2">
+                                    16
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rating-info text-center">
+                            @php
+                                $rating = $currentItem->getRating('main');
+                            @endphp
+                            @include('path.rating',['rating' => $rating['percentAll'].'%'])
+                            <p class="fs-12">{{$rating['scoreAll']}} / 5 ( {{$rating['totalRating']}} bình chọn)</p>
+                        </div>
                     </div>
                 </div>
+                <?php /* ?>
+                <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.4s"> {!!$currentItem->short_content!!}
+                </div>
+                <?php */ ?>
+                <div class="my-3 wow fadeInUp toc-wrapper">
+                    {!!$dataContent['toc']!!}
+                </div>
+                <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
+                    {!!$dataContent['content']!!}
+                </div>
             </div>
-            <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.4s"> {!!$currentItem->short_content!!}
-            </div>
-            <div class="my-3 wow fadeInUp toc-wrapper">
-                {!!$dataContent['toc']!!}
-            </div>
-            <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                {!!$dataContent['content']!!}
-            </div>
-            <div data-new="{{$currentItem->id}}" data-action="{{VRoute::get('rating-useful-new')}}" class="rating-new-info d-flex align-items-center flex-wrap wow fadeInUp">
+            <div data-new="{{$currentItem->id}}" data-action="{{VRoute::get('rating-useful-new')}}" class="rating-new-info d-flex align-items-center flex-wrap mt-4 wow fadeInUp">
                 <div class="view d-flex align-items-center me-4">
                     <i class="fa fa-eye me-1" aria-hidden="true"></i>
                     <span class="number-count">{{number_format($currentItem->count_view)}}</span>

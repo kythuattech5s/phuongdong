@@ -17,10 +17,17 @@ class BaseCrawl
 		}
 		$imgs = $html->find('img');
 		foreach ($imgs as $item) {
-			$fullSrc = str_replace('../../..','https://benhvienphuongdong.vn',$this->htmlHelper->getAttributeDom($item,'src'));
-			if ($fullSrc != '') {
-				$imgInfo = $this->mediaHelper->crawlImage($fullSrc,$pathSave);
+			$imgSource = $this->htmlHelper->getAttributeDom($item,'src');
+			$pos = strpos($imgSource , 'http');
+			if($pos === FALSE) {
+				$imgSource = str_replace('../../..','https://benhvienphuongdong.vn',$imgSource);
+			}
+			if ($imgSource != '') {
+				$imgInfo = $this->mediaHelper->crawlImage($imgSource,$pathSave);
 				$arrImgInfo = json_decode($imgInfo,true);
+				if (!isset($arrImgInfo['path']) || !isset($arrImgInfo['file_name'])) {
+					continue;
+				}
 				$newSrc = $arrImgInfo['path'].$arrImgInfo['file_name'];
 				$item->setAttribute('src',$newSrc);
 			}

@@ -587,7 +587,7 @@ html[lang='vi'],html[lang='auto']{
 			ul{
 				box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.1);
 			    position: absolute;
-			    min-width: 200px;
+			    min-width: 250px;
 			    top: 100%;
 			    z-index: 1000;
 			    margin: 0px;
@@ -612,7 +612,7 @@ html[lang='vi'],html[lang='auto']{
 				    font-family: 'roboto';
 				    a{
 				    	color: #151514!important;
-				    	padding: 10px 12px;
+				    	padding: 8px 12px;
 				    }
 				    &:hover{
 						a{
@@ -622,6 +622,17 @@ html[lang='vi'],html[lang='auto']{
 					}
 					&:not(:last-child){
 				    	border-bottom: 1px solid #f5f5f5;
+					}
+				}
+				&.big-menu{
+					display: flex;
+					flex-wrap: wrap;
+					width: 500px;
+					li{
+						width: 250px;
+						a{
+							height: 100%;
+						}
 					}
 				}
 			}

@@ -10,8 +10,8 @@ class NewsCategoryController extends Controller
     public function all($request, $route, $link)
     {
         $currentItem = $route;
-        $listItems = News::act()->ord()->publish()->paginate(10);
-        return view('news_categories.all',compact('currentItem','listItems')); 
+        $listCateChild = NewsCategory::act()->ord()->get()->all();
+        return view('news_categories.all',compact('currentItem','listCateChild')); 
     }
     public function view($request, $route, $link){
         $currentItem = NewsCategory::slug($link)->act()->first();
