@@ -203,7 +203,6 @@ _VH_CATE.getAllCheckboxOneOfTab = function(arr, element) {
 
 _VH_CATE.getAllCheckboxOne = function(table) {
     var $arr = $(table).find('input.one:checked');
-    console.log($arr);
     var slt = [];
     for (var i = 0; i < $arr.length; i++) {
         slt.push($($arr[i]).attr('dt-id'));

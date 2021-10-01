@@ -26,7 +26,7 @@ var MENU = (function(){
                                 fill:"forwards",
                             });
                             animateSubmenu.onfinish = function(){
-                                subMenuOther.classList.add('none');
+                                subMenuOther.className = "sub none";
                                 animateSubmenu.cancel();
                             }
                         }
@@ -47,7 +47,7 @@ var MENU = (function(){
                         fill:"forwards",
                     });
                     submenuAnimate.onfinish = function(){
-                        submenu.classList.add('none');
+                        submenu.className = "sub none";
                         submenuAnimate.cancel();
                     }
                     li.querySelector('button i').animate([{transform:"rotate(0deg)"}],{
@@ -92,16 +92,13 @@ var MENU = (function(){
     function showSubMenu(e){
         const ulSub = e.target.closest('li').querySelector('ul');
         if(ulSub){
-            ulSub.classList.remove('none');
-            ulSub.classList.add('fix-small');
-            
+            ulSub.className = "sub fix-small";
         }
     }
     function hideSubMenu(e){
         const ulSub = e.target.closest('li').querySelector('ul');
         if(ulSub){
-            ulSub.classList.remove('fix-small');
-            ulSub.classList.add('none');
+            ulSub.className = "sub none";
         }
     }
     function clickSmallMenu(){

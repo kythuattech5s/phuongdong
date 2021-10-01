@@ -14,7 +14,7 @@
   </a> --}}
  
 {{-- </div> --}}
-<div id="maincontent" style="position: relative; height:100vh">
+<div id="maincontent" style="position: relative; height:79vh">
     <div class="listcontent">
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Media Manager</a></li>

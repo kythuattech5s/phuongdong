@@ -50,8 +50,13 @@
 					}
 				@endphp
 				<li class="{{$active_tab}}">
-					<a class="pull-right bgmain" data-toggle="pill" href="#{{$key}}">
+					<a class="pull-right bgmain" href="{{url()->current().'?tab='.$key}}">
 						{{$detailTab['name']}}
+						@if(in_array($key,['scheduled','trash']))
+							<span class="count">
+								{{$listData[$key]->total()}}
+							</span>
+						@endif
 					</a>
 				</li>
 				@endforeach
@@ -112,12 +117,14 @@
 						$active_tab = '';
 					}
 				@endphp
-				<div id="{{$key}}" class="tab-pane fade in {{ $active_tab }}">
-					@include('vh::ctview.filter')
-					<div id="main-table">
-						@include('vh::view.table',['tableData'=>$tableData,'listData' => $listData[$key], 'check' => $detailTab['check'],'dataKey' => $key])
-					</div>
-				</div>
+					@if( (isset(request()->tab) && request()->tab == $key) || (!isset(request()->tab) && $key == 'home') )
+						<div id="{{$key}}" class="tab-pane fade in {{ $active_tab }}">
+							@include('vh::ctview.filter')
+							<div id="main-table">
+								@include('vh::view.table',['tableData'=>$tableData,'listData' => $listData[$key], 'check' => $detailTab['check'],'dataKey' => $key])
+							</div>
+						</div>
+					@endif
 				@endforeach
 			@else
 				<div id="home" class="tab-pane fade in active">

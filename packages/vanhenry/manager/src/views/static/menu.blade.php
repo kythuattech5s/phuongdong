@@ -10,7 +10,7 @@
                @php
                     $isHaveLinkActive = FCHelper::checkHaveActiveLinkMenuAdmin($admincp,$pmenu);
                @endphp
-               <li class="nav-item">
+               <li class="nav-item {{$isHaveLinkActive ? 'active' : '' }}">
                     <div class="menu-anchor">
                          <a href="javascript:void(0)">
                               <i class="{{$pmenu->icon}}"></i>
@@ -21,7 +21,7 @@
                               <i class="fa fa-angle-down" aria-hidden="true"></i>
                          </button>
                     </div>
-                    <ul class="sub {{$isHaveLinkActive ? '':'none'}}">
+                    <ul class="sub {{$isHaveLinkActive ? 'active' : 'none' }}">
                          @foreach($pmenu->childs as $cmenu)
                               @php
                                    $checkActiveLink = FCHelper::checkActiveLinkMenuAdmin($admincp.'/'.$cmenu->link);

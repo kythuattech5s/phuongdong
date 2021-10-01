@@ -4,11 +4,9 @@
 	$has_copy =$tableData->get('has_copy','')==1;
 	$has_trash =$tableData->get('has_trash','')==1;
 ?>
-<div class="pagination m0 textcenter show aclr">
-	<span class="total inlineblock pull-left">{{trans('db::number_record')}}: <strong>{{$listData->total()}}</strong></span>
-	<div class="inlineblock pull-right">
-		{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
-	</div>
+<div class="pagination">
+	<span class="total">{{trans('db::number_record')}}: <strong>{{$listData->total()}}</strong></span>
+	{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
 </div>
 <div id="no-more-tables" class="row m0">
 	<div class="tablecontrol none" >
@@ -49,13 +47,15 @@
 			$data_actions = json_decode($data_actions,true);
 			// dd($data_actions);
 		@endphp
-		@if($data_actions !== null && count($data_actions) > 0)
-			@foreach($data_actions as $action)
-			<a class="_vh_action_all btn btn-danger" data-confirm="{{$action['message']}}" href="{{$admincp}}/{{$action['href']}}/{{$tableData->get('table_map','')}}" tite="{{$action['title']}}">
-				{!! $action['icon'] !!}
-				{{$action['title']}}
-			</a>
-			@endforeach
+		@if(isset($check) && isset($deleted_now) && $deleted_now->count() > 0)
+			@if($data_actions !== null && count($data_actions) > 0)
+				@foreach($data_actions as $action)
+				<a class="_vh_action_all btn btn-danger" data-confirm="{{$action['message']}}" href="{{$admincp}}/{{$action['href']}}/{{$tableData->get('table_map','')}}" tite="{{$action['title']}}">
+					{!! $action['icon'] !!}
+					{{$action['title']}}
+				</a>
+				@endforeach
+			@endif
 		@endif
 		@if($tableData->get('table_parent','')!='')
 		<a href="#" data-toggle="modal" data-target="#addToParent" class="_vh_add_to_parent" title="Thêm vào danh mục cha"><i class="fa fa-puzzle-piece" aria-hidden="true">Thêm vào danh mục cha</i>
@@ -212,10 +212,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="pagination col-xs-12 m0 textcenter show aclr">
-		<span class="total inlineblock pull-left">{{trans('db::number_record')}}:<strong> {{$listData->total()}}</strong></span>
-		<div class="inlineblock pull-right">
-			{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
-		</div>
+	<div class="pagination">
+		<span class="total">{{trans('db::number_record')}}:<strong> {{$listData->total()}}</strong></span>
+		{{$listData->withQueryString()->links('vendor.pagination.pagination')}}
 	</div>
 </div>

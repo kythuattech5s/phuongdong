@@ -365,13 +365,43 @@ document.onreadystatechange = function () {
 }
 
 var TABLE = (function(){
-    document.addEventListener('DOMContentLoaded',function(){
-        const table = document.querySelector('.main_table table');
-        
-        const datas = table.querySelectorAll('.cursor-pointer');
 
-        datas.forEach(function(el){
-            el.onclick = e => window.location.href = el.dataset.href;
+    var clickSort = function(){
+       
+            const table = document.querySelector('.main_table table');
+            if(!table) return;
+            const datas = table.querySelectorAll('.cursor-pointer');
+    
+            datas.forEach(function(el){
+                el.onclick = e => window.location.href = el.dataset.href;
+            });
+        
+    }
+
+    var selectSort = function(){
+        const selects = document.querySelectorAll('.filter-table__bottom select');
+        selects.forEach(function(el){
+            el.onchange = function(){
+                el.closest('form').submit();
+            }
         });
-    })
-})()
+    }
+
+    var buttonSort = function(){
+        const sortBtn = document.querySelector('.filter-table__sort-title');
+        if(!sortBtn) return;
+        sortBtn.onclick = function(){
+            sortBtn.closest('form').submit();
+        }
+    }
+
+    return {
+        load:(function(){
+            document.addEventListener('DOMContentLoaded',function(){
+                clickSort();
+                selectSort();
+                buttonSort();
+            })
+        })()
+    }
+})();
