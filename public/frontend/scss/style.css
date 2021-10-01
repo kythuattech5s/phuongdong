@@ -903,7 +903,7 @@ html[lang='vi'] .header-top .search-box, html[lang='auto'] .header-top .search-b
     .main-menu ul li ul {
       box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
       position: absolute;
-      min-width: 200px;
+      min-width: 250px;
       top: 100%;
       z-index: 1000;
       margin: 0px;
@@ -928,12 +928,20 @@ html[lang='vi'] .header-top .search-box, html[lang='auto'] .header-top .search-b
         font-family: 'roboto'; }
         .main-menu ul li ul li a {
           color: #151514 !important;
-          padding: 10px 12px; }
+          padding: 8px 12px; }
         .main-menu ul li ul li:hover a {
           background: #2891cc;
           color: white !important; }
         .main-menu ul li ul li:not(:last-child) {
           border-bottom: 1px solid #f5f5f5; }
+      .main-menu ul li ul.big-menu {
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px; }
+        .main-menu ul li ul.big-menu li {
+          width: 250px; }
+          .main-menu ul li ul.big-menu li a {
+            height: 100%; }
     .main-menu ul li:hover > ul {
       transform: translateY(0);
       opacity: 1;

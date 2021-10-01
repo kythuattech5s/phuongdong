@@ -89,19 +89,27 @@ p{
 .navigation .nav-top a.show img{
   padding: 10px;
 }
+
 /* FIX SMALL NAVIGATION */
 button.small-menu {
   padding: 5px 9px;
   border: none;
-  background: #e33438;
+  background: #087990;
   color: white;
 }
+
 .top_menu.fix-small{
   width: calc(100% - 3.5%);
 }
 .root-left.fix-small{
   flex: 0 0 3.5%;
 } 
+.root-left.fix-small .nav-item.active{
+  background: #30434c;
+}
+.root-left.fix-small .sub.active{
+  display: none;
+}
 .root-left.fix-small .main-menu{
   overflow: inherit;
 }
@@ -142,6 +150,9 @@ button.small-menu {
 .main-menu ul.sub{
     max-height: 0;
     overflow: hidden;
+}
+.main-menu ul.sub.active{
+  max-height: 1000px;
 }
 .navigation .nav-top{
   padding: inherit;

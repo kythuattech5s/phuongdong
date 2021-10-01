@@ -6,29 +6,34 @@ use Illuminate\Http\Request;
 use WebPConvert\WebPConvert;
 class CronImgController extends Controller
 {
-    public function convertImg(Request $request)
-    {
+    public function convertImg(Request $request){
         set_time_limit(0);
         $hLock=fopen("cronimg.lock", "w+");
         if(!flock($hLock, LOCK_EX | LOCK_NB)){
             die("Already running. Exiting...");
         }
-        $imgs = \DB::table('custom_media_images')->where('act', 0)->get();
+        $imgs = \DB::table('custom_media_images')->where('act', 0)->take(10)->get();
         foreach ($imgs as $key => $item) {
             $fileName = substr($item->name, strrpos($item->name, '/') + 1, strlen($item->name));
             $baseName = substr($fileName, 0, strrpos($fileName, '.'));
+            $fileExtension = strtolower(substr($fileName, strrpos($fileName, '.') + 1));
             $pathMove = substr($item->name, 0, strrpos($item->name, '/'));
-            $pathMove = base_path('public/'.$pathMove.'/');
-            if (file_exists($pathMove)) {
-                WebPConvert::convert($item->name, $pathMove.$baseName.'.webp', []);
-                $arrSizes = $this->getSizes($pathMove.$fileName);
-                if(count($arrSizes) > 0){
-                    foreach ($arrSizes as $size) {
-                        $new_image = $this->resizeImage($pathMove,$baseName,$fileName,$size["width"],$size["height"],$size["quality"],$size["name"]);
-                    }
+            $pathMove = base_path($pathMove.'/');
+            $status = 1;
+            if (file_exists($pathMove) && file_exists(base_path($item->name)) && in_array($fileExtension,['jpg','jpeg','png'])) {
+                try {
+                    WebPConvert::convert(base_path($item->name), $pathMove.$baseName.'.webp', []);
+                    $arrSizes = @$this->getSizes($pathMove.$fileName);
+                    if(count($arrSizes) > 0){
+                        foreach ($arrSizes as $size) {
+                            $new_image = $this->resizeImage($pathMove,$baseName,$fileName,$size["width"],$size["height"],$size["quality"],$size["name"]);
+                        }
+                    } 
+                } catch (\Exception $e) {
+                    $status = 2;
                 }
             }
-            \DB::table('custom_media_images')->where('id', $item->id)->update(['act' => 1]);
+            \DB::table('custom_media_images')->where('id', $item->id)->update(['act' => $status]);
         }
         flock($hLock, LOCK_UN);
         fclose($hLock);
@@ -37,6 +42,7 @@ class CronImgController extends Controller
     private function getSizes($file){
         if(file_exists($file)){
             $sizes = \DB::table("v_configs")->select("value")->where("name","SIZE_IMAGE")->get();
+            
             if($sizes!=null && count($sizes)>0){
                 $json = $sizes[0]->value;
                 $arr = json_decode($json,true);

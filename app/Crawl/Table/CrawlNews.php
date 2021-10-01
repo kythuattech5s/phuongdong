@@ -9,7 +9,6 @@ class CrawlNews extends BaseCrawl
     {
     	var_dump(1);die();
     	set_time_limit(0);
-		$urlListNews = 'https://benhvienphuongdong.vn/admin/news/list-news';
     	$dataFillter = [
 			'keyword'=>'', 
 			'category_filter'=>'',
@@ -18,12 +17,14 @@ class CrawlNews extends BaseCrawl
 			'featured'=>'',
 			'status'=>'',
 			'language'=>'vie',
-			'sort'=>'News.position',
-			'direction'=>'DESC',
-			'position'=>'1138',
+			'sort'=>'News.id',
+			'direction'=>'ASC',
 			'limit'=>'20',
-			'page'=> 53
+			'page'=> 1
 		];
+		// $urlListNews = 'https://benhvienphuongdong.vn/admin/login';
+		// $html = $this->curlHelper->exeCurl($urlListNews,'POST',[]);
+		$urlListNews = 'https://benhvienphuongdong.vn/admin/news/list-news';
 		$html = $this->curlHelper->exeCurl($urlListNews,'POST',$dataFillter);
 		if (!isset($html['res'])) {
 			return;
@@ -42,9 +43,8 @@ class CrawlNews extends BaseCrawl
 				'featured'=>'',
 				'status'=>'',
 				'language'=>'vie',
-				'sort'=>'News.position',
-				'direction'=>'DESC',
-				'position'=>'1138',
+				'sort'=>'News.id',
+				'direction'=>'ASC',
 				'limit'=>'20',
 				'page'=> (int)$nextPage->find('a',0)->innertext
     		];
@@ -81,9 +81,6 @@ class CrawlNews extends BaseCrawl
     		$itemNews->count_view 		= (int)$this->htmlHelper->getAttributeDom($listTd[9]->find('p',0),'innertext');
     		$newRootLink 				= $this->htmlHelper->getAttributeDom($listTd[12]->find('a',0),'href');
     		$itemNews->id 				= (int)str_replace('https://benhvienphuongdong.vn/admin/news/edit-news/','',$newRootLink);
-    		if ($itemNews->id >= 869) {
-    			continue;
-    		}
 
     		$html = $this->curlHelper->exeCurl('https://benhvienphuongdong.vn/admin/news/edit-news/'.$itemNews->id);
 			if (!isset($html['res'])) {
@@ -114,6 +111,10 @@ class CrawlNews extends BaseCrawl
 			}
 			$imgShareSource 			= $this->htmlHelper->getAttributeDom($html->find('input[name=share_image_facebook]',0),'value');
 			if ($imgShareSource != '') {
+				$pos = strpos($imgShareSource , 'http');
+				if($pos === FALSE) {
+					$imgShareSource = 'https://benhvienphuongdong.vn/'.$imgShareSource;
+				}
 				$imgShareInfo = $this->mediaHelper->crawlImage($imgShareSource,'tin-tuc/bai-viet');
 				$itemNews->share_image_facebook = $imgShareInfo;
 			}

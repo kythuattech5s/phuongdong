@@ -288,7 +288,11 @@ class Support
 	public static function showMenuRecursive($menus)
 	{
 		if ($menus->count() > 0) {
-			echo '<ul>';
+			$addClass = '';
+			if ($menus->count() > 10) {
+				$addClass = 'big-menu';
+			}
+			echo '<ul class="'.$addClass.'">';
 				foreach ($menus as $menu) {
 					$active = url()->current() == url($menu->link) ? "active" : " ";
 					echo '<li>';
@@ -1145,6 +1149,7 @@ class Support
 	    $toc = $i === 0 ? '' : $toc;
 	    $listImg = $html->find('img');
 	    foreach ($listImg as $itemImg) {
+	    	$itemImg->setAttribute('src',str_replace('%','%25',$itemImg->src));
 	    	$itemImg->parent()->innertext = "<a href='".$itemImg->src."'' data-fancybox='gallery' data-animation-effect='fade'>".$itemImg->outertext."</a>";
 	    }
 	    $html->save();

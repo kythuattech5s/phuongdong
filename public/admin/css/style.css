@@ -123,28 +123,32 @@ a:hover {
 
 .header-top .bgmain:hover span,
 .header-top .bgmain:hover i {
-    color: #fa430f !important;
+    color: #087990 !important;
 }
 
 .header-top .bgmain:hover {
     background: white !important;
-    border: 1px solid #fa430f;
+    border: 1px solid #087990;
 }
 
 .header-top .bgmain {
-    background: #fa430f;
+    background: #087990;
     transition: .3s;
     border: 1px solid transparent;
 }
 
 .header-top .bgmain1:hover span,
 .header-top .bgmain1:hover i {
-    color: #E96A0C;
+    color: #000000;
+}
+
+.save_draft{
+    border: 1px solid transparent;
 }
 
 .bgmain1:hover {
     background: white !important;
-    border: 1px solid #E96A0C;
+    border: 1px solid #000000;
 }
 
 .bgmain1 {
@@ -308,8 +312,8 @@ a:hover {
 }
 
 .table-data-view .text-danger {
-    color: #fa430f;
-    background: #fa430f1f;
+    color: #087990;
+    background: #0879901f;
     border-radius: 99px;
     height: 35px;
     width: 133px;
@@ -452,6 +456,8 @@ div[data-menu=off] .nav-trigger {
 .header-top.aclr {
     display: flex;
     justify-content: space-between;
+    align-content: center;
+    align-items: center;
 }
 
 .header-top.aclr ul.list-link li a {
@@ -544,12 +550,12 @@ div[data-menu=off] .nav-trigger {
 }
 
 .right_header_admin ul li:hover a {
-    background: #fa430f;
+    background: #087990;
     color: white;
 }
 
 .aclr .pull-left .list-link .pull-left a:hover {
-    color: #fa430f;
+    color: #087990;
 }
 
 .aclr .pull-left .list-link .pull-left a {
@@ -597,14 +603,13 @@ div[data-menu=off] .nav-trigger {
 }
 
 .viewsite {
-    padding: 5px 34px;
+    padding: 5px 24px;
     border-radius: 5px;
     margin: 0px 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 40px;
     height: fit-content;
     white-space: nowrap;
     color: white !important;
@@ -630,14 +635,6 @@ ul.sub.none {
     overflow: hidden;
 }
 
-
-/*#maincontent{
-  padding: 3px 3px 0px 3px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 80vh;
-  background: white;
-}*/
 
 #maincontent .listcontent .nav-tabs {
     justify-content: flex-start;
@@ -1021,6 +1018,7 @@ ul.sub.none {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 10px;
+    padding-top: 10px;
 }
 
 .select2-container--open .select2-dropdown--below {
@@ -1064,22 +1062,42 @@ ul.sub.none {
 .listcontent .nav-tabs>li.active>a:focus,
 .listcontent .nav-tabs>li.active>a:hover {
     cursor: default;
-    background-color: #fa430f;
+    background-color: #087990;
     border: 0px;
     color: white;
+    position: relative;
 }
+
+.listcontent .nav-tabs>li a .count{
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    font-size: 13px;
+    font-weight: 500;
+    justify-content: center;
+    line-height: 13px;
+    padding: 0px 5px;
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    background: #ff0000;
+    z-index: 1;
+    border-radius: 3px;
+}
+
 
 .listcontent .nav-tabs>li>a {
     margin-right: 10px;
     border: 0;
     border-radius: 0;
     font-family: robo;
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     background: white;
     border: solid 1px #eee;
     color: #212B36;
     border-radius: 5px;
+    padding: 5px 16px;
 }
 
 .listcontent h1 span {
@@ -1322,7 +1340,7 @@ ul.sub.none {
 
 .listcontent .filter form button[type=submit] {
     color: #fff;
-    background: #fa430f;
+    background: #087990;
     border: 1px solid transparent;
     padding: 0px 15px;
     border-bottom-right-radius: 5px;
@@ -1350,7 +1368,7 @@ ul.sub.none {
     text-transform: uppercase;
     font-size: 13px;
     height: 40px;
-    background: #fa430f;
+    background: #087990;
     color: #fff;
     padding: 3px 14px;
     display: flex;
@@ -1382,10 +1400,10 @@ ul.sub.none {
 .squaredTwo label {
     cursor: pointer;
     position: absolute;
-    width: 14px;
-    height: 14px;
-    left: 3px;
-    top: 3px;
+    width: 16px;
+    height: 16px;
+    left: 2px;
+    top: 2px;
     background: #FFF;
 }
 
@@ -1393,12 +1411,12 @@ ul.sub.none {
     opacity: 0;
     content: '';
     position: absolute;
-    width: 25px;
+    width: 22px;
     height: 10px;
     background: transparent;
     top: -4px;
-    left: 0px;
-    border: 3px solid #212B36;
+    left: 2px;
+    border: 2px solid #212B36;
     border-top: none;
     border-right: none;
     -webkit-transform: rotate(-45deg);
@@ -1440,7 +1458,7 @@ td.action i {
     font-family: robo;
     text-transform: uppercase;
     font-size: 13px;
-    background: #fa430f;
+    background: #087990;
     color: #fff;
     padding: 10px 15px;
     min-width: 100px;
@@ -1522,6 +1540,14 @@ td.action i {
 
 div.pagination {
     display: flex;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: inherit;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .pagination div strong,
@@ -1549,8 +1575,8 @@ div.pagination {
 
 .pagination div a:hover,
 .pagination div a:focus {
-    color: #fa430f;
-    border: 1px solid #fa430f;
+    color: #087990;
+    border: 1px solid #087990;
 }
 
 .pagination div a:hover img,
@@ -1559,15 +1585,16 @@ div.pagination {
 }
 
 .pagination div strong {
-    background: white;
-    color: #fa430f;
-    border: 1px solid #fa430f;
+    background: #087990;
+    color: white;
+    border: 1px solid #087990;
 }
-
+.pagination .pagination{
+    margin-top: 0;
+}
 .pagination span.total {
-    padding: 10px 0px;
     font-family: robo;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
@@ -1780,7 +1807,6 @@ p.select {
     color: #000;
     cursor: pointer;
     margin: 2px;
-    min-width: 200px;
     text-align: left;
 }
 
@@ -2165,7 +2191,7 @@ span.tooltiptext:after {
 }
 
 .btn-func:hover {
-    color: #fa430f;
+    color: #087990;
 }
 
 .sysedit {
@@ -2185,19 +2211,19 @@ span.tooltiptext:after {
 
 ._vh_trash i,
 ._vh_trash i:hover {
-    color: #fa430f !important;
-    border: 1px solid #fa430f !important;
+    color: #087990 !important;
+    border: 1px solid #087990 !important;
 }
 
 ._vh_delete_permanent i,
 ._vh_delete_permanent i:hover {
-    background: #fa430f !important;
-    border: 1px solid #fa430f !important;
+    background: #087990 !important;
+    border: 1px solid #087990 !important;
     color: #fff !important;
 }
 
 .table-lang.edit a.active {
-    background: #fa430f
+    background: #087990
 }
 
 .table-lang.edit {
@@ -2216,7 +2242,7 @@ span.tooltiptext:after {
 }
 
 .preview-slug:hover {
-    background: #fa430f;
+    background: #087990;
 }
 
 .preview-slug {
@@ -2235,7 +2261,7 @@ span.tooltiptext:after {
 
 .table-lang li a.active {
     pointer-events: none;
-    background: #fa430f;
+    background: #087990;
 }
 
 .img_flashsale {
@@ -2327,7 +2353,7 @@ table {
 /* add more */
 
 #mainedit-permis .bigtitle {
-    background: #fa430f !important;
+    background: #087990 !important;
 }
 
 #mainedit-permis .title {
@@ -2394,6 +2420,9 @@ table {
 .main_table {
     padding: 10px 5px;
     overflow: auto;
+    /* white-space: nowrap; */
+}
+.main_table th,.main_table td{
     white-space: nowrap;
 }
 
@@ -2427,7 +2456,7 @@ table {
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    color: #fa430f;
+    color: #087990;
     z-index: 10;
     font-size: 40px;
     border: 0px;
@@ -2558,8 +2587,8 @@ table {
 .pagination>.active>span,
 .pagination>li>a:hover {
     color: #fff;
-    background: #fa430f;
-    border-color: #fa430f;
+    background: #087990;
+    border-color: #087990;
 }
 
 .question form.ask {
@@ -2595,7 +2624,7 @@ table {
 /* Handle */
 
 .gallery_table::-webkit-scrollbar-thumb {
-    background: #fa430f;
+    background: #087990;
     border-radius: 10px;
 }
 
@@ -2656,7 +2685,7 @@ table {
     color: white;
     border: 1px solid #389402;
     border-radius: 5px;
-    box-shadow: 0 0 6px 0.2px #108d35;
+    box-shadow: 0 0 2px 0.2px #108d35;
 }
 
 .h-user-online ul.h-user__list{
@@ -2714,12 +2743,12 @@ table {
     top: 8px;
     right: 16px;
     padding: 8px 16px;
-    background: #E96A0C;
+    background: #087990;
     font-weight: bold;
-    border: 1px solid #E96A0C;
+    border: 1px solid #087990;
     border-radius: 5px;
     color: white;
-    box-shadow: 0 0 6px 0.2px #E96A0C;
+    box-shadow: 0 0 2px 0.2px #087990;
 }
 
 .h-user-online{
@@ -2778,10 +2807,6 @@ td.action[data-title="Chức năng"] {
 }
 
 
-.filter-table{
-    background: #e3e3e3;
-    padding: 6px 15px;
-}
 
 .filter-table form input{
     min-width: 250px;
@@ -2789,6 +2814,33 @@ td.action[data-title="Chức năng"] {
     padding: 3px 12px;
     border-radius: 5px;
 }
+
+.filter-table .filter-table__bottom .filter-table__sort-title{
+    margin-right: 10px;
+    font-size: 14px;
+    padding: 3px 7px;
+    background: #087990;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-table .filter-table__bottom .filter-group + .filter-group{
+    margin-left: 12px;
+}
+
+.filter-table .filter-table__bottom{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-table .filter-table__top{
+    background: #e3e3e3;
+    padding: 6px 15px;
+    margin-bottom: 10px;
+}
+
 .group-filter--left .filter-group{
     margin: 4px 0;
 }
@@ -2805,14 +2857,14 @@ td.action[data-title="Chức năng"] {
 .filter-table form button[type="submit"]{
     padding: 0 6px;
     border-radius: 5px;
-    background: #29cbd6;
-    border: 1px solid #29cbd6;
+    background: #087990;
+    border: 1px solid #087990;
     color: white;
     width: 33px;
     height: 33px;
 }
 
-.filter-table form{
+.filter-table .filter-table__top{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -2824,4 +2876,9 @@ td.action[data-title="Chức năng"] {
 }
 .cursor-pointer{
     cursor: pointer;
+}
+
+.no-editable + .btn-group{
+    cursor: no-drop;
+    pointer-events: none;
 }
