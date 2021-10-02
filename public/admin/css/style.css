@@ -2854,7 +2854,12 @@ td.action[data-title="Chức năng"] {
     flex: 0 0 95%;
 }
 
+.filter-table form button[type="submit"]:hover{
+    background: #075c6d;
+}
+
 .filter-table form button[type="submit"]{
+    transition: all 0.5s;
     padding: 0 6px;
     border-radius: 5px;
     background: #087990;
@@ -2886,4 +2891,22 @@ td.action[data-title="Chức năng"] {
     border: 1px solid #00923F;
     padding: 1px;
     display: inline-block;
+}
+
+.refresh:hover{
+    background: #00923F;
+    color: white;
+}
+
+.refresh{
+    transition: all 0.5s;
+    padding: 0 12px;
+    height: 33px;
+    width: 33px;
+    background: #00af4c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 5px;
 }

@@ -6,9 +6,7 @@
 		});
 	}
 	$name = FCHelper::er($table,'name');
-	// if(session()->getId() == 's9j9ibxLoHOYqKzsDn6xIoHMKbHB40JuLuSVnKSP'){
-	// 	dd();
-	// }
+	
 	$value ="";
 	if($actionType=='edit'||$actionType=='copy'){
 		$value = FCHelper::ep($dataItem,$name);

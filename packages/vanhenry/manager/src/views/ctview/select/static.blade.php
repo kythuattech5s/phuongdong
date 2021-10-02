@@ -26,7 +26,9 @@ if exist -> show as tag p
 		"multiselect": "1"
 	}
 }
-*/ ?>
+
+*/ 
+?>
 <?php $isMultiselect = FCHelper::ep($arrConfig,'multiselect'); ?>
 @if($show->editable == 1 && !$isMultiselect)
 	<select name="{{$show->name}}" class="select2 editable" table="{{$show->parent_name}}" style="width: 150px">
@@ -41,8 +43,8 @@ if exist -> show as tag p
 @else
 	@foreach($arrData as $key => $value)
 		<?php 
-		$tmpValue = is_array($value) ? FCHelper::ep($value,'key',1): $value ; 
-		$currentID = FCHelper::ep($dataItem,$show->name);
+			$tmpValue = is_array($value) ? FCHelper::ep($value,'key',1): $value ; 
+			$currentID = FCHelper::ep($dataItem,$show->name);
 		?>
 		@if($isMultiselect)
 			<?php $multi = explode(',', $currentID); ?>

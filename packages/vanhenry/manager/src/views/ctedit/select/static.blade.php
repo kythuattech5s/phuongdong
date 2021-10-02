@@ -1,6 +1,14 @@
 <?php 
-$data= $arrData;
+	$data= $arrData;
+
+	$user = Auth::guard('h_users')->user()->with('hGroupUser')->find(Auth::guard('h_users')->id());
+	if($user->hGroupUser !== null && $user->hGroupUser->hActions->count() > 0){
+		$active = $user->hGroupUser->hActions->filter(function($v){
+			return $v->key == 'ACTIVE';
+		});
+	}
 ?>
+@if((isset($active) && count($active) > 0) || $name !== 'act')
 <div class="form-group ">
   <p class="form-title" for="">{{FCHelper::ep($table,'note')}}<p/>
   <div class="form-control form-reset flex">
@@ -15,3 +23,6 @@ $data= $arrData;
 	</select>
   </div>
 </div>
+@else
+	<input type="hidden" name="{{$name}}" value="0">
+@endif
