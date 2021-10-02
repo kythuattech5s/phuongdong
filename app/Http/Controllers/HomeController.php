@@ -48,7 +48,6 @@ class HomeController extends Controller
         $listEquipment = Equipment::act()->get();
         return view('home',compact('listBanner','listPartner','listService','listDoctor','listNews','listForcustomer','listEquipment'));
     }
-
     public function test(){
         dd(session()->getId());
     }

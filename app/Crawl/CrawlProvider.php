@@ -9,6 +9,8 @@ class CrawlProvider
                 return new \App\Crawl\Table\CrawlNewsCategory;
             case 'news':
                 return new \App\Crawl\Table\CrawlNews;
+            case 'partners':
+                return new \App\Crawl\Table\CrawlPartner;
             default:
                 throw new \Exception('Không tìm thấy code crawl cho bảng '.$table,69);
                 break;
