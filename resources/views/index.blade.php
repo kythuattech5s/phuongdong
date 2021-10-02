@@ -19,6 +19,7 @@
     <link href="frontend/scss/mobile.css" type="text/css" rel="stylesheet" />
     @yield('css')
     <script type="text/javascript">
+        
         var messageNotify = "{{Session::get('messageNotify', '')}}";
         var typeNotify = "{{Session::get('typeNotify', '')}}";
     </script>
