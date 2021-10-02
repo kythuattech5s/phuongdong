@@ -7,7 +7,7 @@
 			</div>
 		@endforeach
 	</div>
-	<div class="pagination d-flex justify-content-center mt-3 wow fadeInUp">
+	<div class="pagenigation d-flex justify-content-center mt-3 wow fadeInUp">
 	    {{$listItems->withQueryString()->links('vendor.pagination.pagination')}}
 	</div>
 @endif

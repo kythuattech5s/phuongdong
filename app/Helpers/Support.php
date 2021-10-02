@@ -1149,7 +1149,6 @@ class Support
 	    $toc = $i === 0 ? '' : $toc;
 	    $listImg = $html->find('img');
 	    foreach ($listImg as $itemImg) {
-	    	$itemImg->setAttribute('src',str_replace('%','%25',$itemImg->src));
 	    	$itemImg->parent()->innertext = "<a href='".$itemImg->src."'' data-fancybox='gallery' data-animation-effect='fade'>".$itemImg->outertext."</a>";
 	    }
 	    $html->save();

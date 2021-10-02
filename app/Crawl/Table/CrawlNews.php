@@ -7,7 +7,6 @@ class CrawlNews extends BaseCrawl
 {
     public function crawl()
     {
-    	var_dump(1);die();
     	set_time_limit(0);
     	$dataFillter = [
 			'keyword'=>'', 
@@ -24,6 +23,7 @@ class CrawlNews extends BaseCrawl
 		];
 		// $urlListNews = 'https://benhvienphuongdong.vn/admin/login';
 		// $html = $this->curlHelper->exeCurl($urlListNews,'POST',[]);
+		// var_dump($html);die();
 		$urlListNews = 'https://benhvienphuongdong.vn/admin/news/list-news';
 		$html = $this->curlHelper->exeCurl($urlListNews,'POST',$dataFillter);
 		if (!isset($html['res'])) {
