@@ -6,10 +6,10 @@
 	}
 ?>
 <div class="row margin0">
-	<div class="col-md-2 col-xs-12">
-		{{FCHelper::er($table,'note')}}
+	<div class="col-xs-12">
+		<p class="form-title">{{FCHelper::er($table,'note')}}</p>
 	</div>
-	<div class="col-md-10 col-xs-12 box-gallery" data-variable ='gallery_control_admin_{{$name}}'>
+	<div class="col-xs-12 box-gallery" data-variable ='gallery_control_admin_{{$name}}'>
 		<?php 
 			$galleriesJson = $value;
            	$galleries = json_decode($galleriesJson,true);
@@ -30,7 +30,7 @@
             	<?php 
             		$idfile = \Str::random(10);
             	?>
-	            <li class="col-sm-3 col-xs-12 gallery-item">
+	            <li class="col-sm-2 col-xs-12 gallery-item">
 	                 <div>
 	                    <span tagname="gallery"></span> <img class="img-responsive " name="gallery_control_admin_list_<?php echo $idfile ?>" id="gallery_control_admin_list_<?php echo $idfile ?>" rel="lib_img" dt-file='<?php echo json_encode($gallery) ?>' src="<?php echo $file ?>" alt="<?php echo $gallery['file_name'] ?? '' ?>"> 
 	                    <p><?php echo $gallery['file_name'] ?? '' ?></p>
@@ -49,8 +49,11 @@
 	</div>
 </div>
 <style type="text/css">
+	.box-gallery{
+		margin-bottom: 15px;
+	}
 	.gallery_control_admin_list{
-	    width: 80%;
+	    width: 100%;
 		max-height: 250px;
 		border: 1px solid #E0E0E0;
 		overflow-y: scroll;

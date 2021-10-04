@@ -186,12 +186,16 @@
                                                 @foreach ($shotContentHome as $itemContent)
                                                     <div class="item">
                                                         <div class="header-item mb-2 d-flex align-items-center">
+                                                            @php
+                                                                $itemImg = new \Stdclass;
+                                                                $itemImg->img = $itemContent['image'];
+                                                            @endphp
                                                             <div class="icon me-2">
-                                                                <img loading="lazy" src="{{$itemContent['img']}}" class="img-fluid smooth">
+                                                                @include('image_loader.all',['itemImage'=>$itemImg])
                                                             </div>
-                                                            <p class="fs-22-cv clmain">{{$itemContent['name']}}</p>
+                                                            <p class="fs-22-cv clmain">{{$itemContent['title']}}</p>
                                                         </div>
-                                                        <div class="content-item s-content fs-16">{!!$itemContent['content']!!}</div>
+                                                        <div class="content-item s-content fs-16">{!!$itemContent['content_editor']!!}</div>
                                                     </div>
                                                 @endforeach
                                             @endif

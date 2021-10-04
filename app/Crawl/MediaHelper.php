@@ -55,11 +55,14 @@ class MediaHelper
 		file_put_contents($pathMoveImg, $res['res']);
 
 		$imgId = Media::insertImageMedia($uploadRootDir, $pathAbsolute, $pathRelative, $fileName, $parentId);
-		\DB::table('custom_media_images')->insert([
-			'name' => $pathRelative.$fileName,
-			'act' => 0,
-			'created_at' => new \DateTime,
-		]);
+		if (in_array(strtoupper($extention),['JPG','JPEG','PNG'])) {
+			\DB::table('custom_media_images')->insert([
+				'name' => $pathRelative.$fileName,
+				'act' => 0,
+				'created_at' => new \DateTime,
+			]);
+		}
+		
 		return Media::img($imgId);
 	}
 	private function setFileName($path, $filename, $extention)
