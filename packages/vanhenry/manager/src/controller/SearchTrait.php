@@ -111,7 +111,11 @@ trait SearchTrait{
 		if(is_array($raw)){
 			foreach ($raw as $key => $value) {
 				if(isset($value)){
-					$q = $q->where($key,'like',"%".$value."%");
+					if(is_numeric($value)){
+						$q = $q->where($key,$value);
+					}else{
+						$q = $q->where($key,'like',"%".$value."%");
+					}
 				}
 			}
 		}
