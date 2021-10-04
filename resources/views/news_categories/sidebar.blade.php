@@ -1,7 +1,11 @@
 <div class="sidebar-all py-4 py-xxl-5">
     <p class="side-bar-title robotob wow fadeInUp">BÀI VIẾT MỚI</p>
     @php
-        $listNews = \App\Models\News::act()->publish()->orderBy('time_published','desc')->take(5)->get()->all();;
+        if (isset($currentItem) && method_exists($currentItem,'getTable') && $currentItem->getTable() == 'news') {
+            $listNews = $currentItem->getRelatesCollection()->all();
+        }else {
+            $listNews = \App\Models\News::act()->publish()->orderBy('time_published','desc')->take(5)->get()->all();
+        }
     @endphp
     @foreach (array_slice($listNews,0,1) as $item)
         <div class="new-side-bar-big py-3 wow fadeInUp" data-wow-delay="0.2s">

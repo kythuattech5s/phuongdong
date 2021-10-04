@@ -48,7 +48,7 @@
 					$typeSubControl = $itemSubControl['type'];
 					$field =  $itemSubControl['name'];
 				?>
-					<div class="elementor_json_field_control <?php echo (isset($itemSubControl['width'])&&$itemSubControl['width']==1)?'col-100':'col-50' ?> ">
+					<div class="elementor_json_field_control">
 						<div class="elementor_json_field_control_name">
 							<label><?php echo isset($itemSubControl['text'])?$itemSubControl['text']:'' ?></label>
 						</div>
@@ -63,16 +63,20 @@
 			</div>
 		<?php endforeach ?>
 	</div>
-	<div class="text-center" style="width: 80%">
+	<div class="text-center" style="width: 100%;margin-top: 10px;">
 		<div class="btnadmin">
 			<button type="button" class="btn add-<?php echo $key.$name; ?>"><?php echo 'Thêm mới'; ?></button>
 		</div>
 	</div>		
 </div>
 <style type="text/css">
+	.elementor_json_field_control .btnadmin .btn{
+		font-size: 12px;
+		padding: 6px;
+	}
 	.elementor_json_field .list-items{
 	    border: 1px solid #00923f;
-	    width: 80%;
+	    width: 100%;
 	    display: flex;
 	    flex-wrap: wrap;
 	    padding: 5px;

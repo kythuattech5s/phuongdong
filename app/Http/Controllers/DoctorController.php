@@ -27,7 +27,7 @@ class DoctorController extends Controller
         $listRelateDoctor = Doctor::where('specialist_id',$currentItem->specialist_id)->where('id','!=',$currentItem->id)->act()->get();
         $specialists = Specialist::find($currentItem->specialist_id);
         $listNews = News::where('doctor_id',$currentItem->id)->act()->publish()->get()->all();
-        $contentArr = json_decode($currentItem->content,true);
+        $contentArr = json_decode($currentItem->content_intro,true);
         return view('doctors.view',compact('currentItem','specialists','listRelateDoctor','listNews','contentArr'));
     }
 }

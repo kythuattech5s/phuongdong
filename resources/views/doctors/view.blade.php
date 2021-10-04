@@ -59,53 +59,59 @@
             <p class="fs-16 wow fadeInUp">{{$currentItem->academic_rank}}</p>
             <h1 class="text-uppercase fs-26-cv robotob clmain wow fadeInUp">{{$currentItem->name}}</h1>
             <p class="doctor-position text-uppercase wow fadeInUp">{{$currentItem->position}}</p>
-            <div class="list-info-doctor-content mt-4">
-                @foreach ($contentArr as $itemContent)
-                    <div class="item wow fadeInUp">
-                        <div class="header-item mb-2 d-flex align-items-center">
-                            <p class="fs-22-cv clmain">{{$itemContent['name']}}</p>
-                        </div>
-                        <div class="content-item s-content fs-16">{!!$itemContent['content']!!}</div>
-                    </div>
-                @endforeach
+            <div class="s-content wow fadeInUp mt-4">
+                {!!$currentItem->content!!}
             </div>
-            <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Hình ảnh hoạt động của {{$currentItem->academic_rank}} {{$currentItem->name}}</p>
-            <div class="doctor-image position-relative wow fadeInUp">
-                <div class="swiper-container slide-doctor-image">
-                    <div class="swiper-wrapper">
-                        @php
-                            $imgs = json_decode($currentItem->imgs, true);
-                            $imgs = $imgs !== null ? $imgs : [json_decode($currentItem->img,true)];
-                        @endphp
-                        @foreach ($imgs as $img)
-                            @php
-                                $itemImg = new \Stdclass;
-                                $itemImg->img = json_encode($img);
-                            @endphp
-                            <div class="swiper-slide">
-                                <div class="item-doctor-image">
-                                    <div class="img">
-                                        <a href="{%IMGV2.itemImg.img.-1%}" data-fancybox="gallery" class="smooth" title="">
-                                            @include('image_loader.all',['itemImage'=>$itemImg])
-                                        </a>
-                                    </div>
-                                    <div class="content smooth text-center p-3">
-                                        <p class="fs-18">{%AIMGV2.itemImg.img.alt%}</p>
-                                    </div>
-                                </div>
+            @if (is_array($contentArr) && count($contentArr))
+                <div class="list-info-doctor-content mt-4">
+                    @foreach ($contentArr as $itemContent)
+                        <div class="item wow fadeInUp">
+                            <div class="header-item mb-2 d-flex align-items-center">
+                                <p class="fs-22-cv clmain">{{$itemContent['title']}}</p>
                             </div>
-                        @endforeach
+                            <div class="content-item s-content fs-16">{!!$itemContent['content_editor']!!}</div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            @php
+                $listImageItem = json_decode($currentItem->imgs, true);
+            @endphp
+            @if (is_array($listImageItem) && count($listImageItem) > 0)
+                <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Hình ảnh hoạt động của {{$currentItem->academic_rank}} {{$currentItem->name}}</p>
+                <div class="doctor-image position-relative wow fadeInUp">
+                    <div class="swiper-container slide-doctor-image">
+                        <div class="swiper-wrapper">
+                            @foreach ($listImageItem as $img)
+                                @php
+                                    $itemImg = new \Stdclass;
+                                    $itemImg->img = $img['image'];
+                                @endphp
+                                <div class="swiper-slide">
+                                    <div class="item-doctor-image">
+                                        <div class="img">
+                                            <a href="{%IMGV2.itemImg.img.-1%}" data-fancybox="gallery" class="smooth" title="">
+                                                @include('image_loader.all',['itemImage'=>$itemImg])
+                                            </a>
+                                        </div>
+                                        <div class="content smooth text-center p-3">
+                                            <p class="fs-18">{{$img['title']}}</p>
+                                        </div>
+                                    </div> 
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slide-doctor-image-prev prev-btn">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="slide-doctor-image-next next-btn">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="slide-doctor-image-prev prev-btn">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                    </button>
-                    <button class="slide-doctor-image-next next-btn">
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
+            @endif
             @if (count($listNews) > 0)
                 <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Các bài viết tham vấn</p>
                 @include('news.new_bottom_detail',['listNews'=>$listNews])

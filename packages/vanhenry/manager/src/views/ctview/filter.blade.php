@@ -98,6 +98,7 @@
                 @endif
             </div>
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <a class="refresh" href="{{url('esystem/view/'.$tableData['table_map'].(isset($key) ? '?tab='.$key : ''))}}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
         </div>
         <div class="filter-table__bottom">
             <p class="filter-table__sort-title">Sắp xếp</p>

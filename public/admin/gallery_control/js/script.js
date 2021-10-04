@@ -100,7 +100,7 @@ var GALLERY_CONTROL = function(clazz){
 
     	var json = JSON.stringify(item);
 
-    	var html = `<li class="col-sm-3 col-xs-12 gallery-item">
+    	var html = `<li class="col-sm-2 col-xs-12 gallery-item">
 
                  <div>
 

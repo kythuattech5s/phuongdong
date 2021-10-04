@@ -42,7 +42,7 @@ if($actionType=='edit'||$actionType=='copy'){
 
        ?>
 
-      <li class="col-sm-3 col-xs-12 gallery-item gallery-item-{{$name}}">
+      <li class="col-sm-2 col-xs-12 gallery-item gallery-item-{{$name}}">
 
         <div>
 
@@ -120,7 +120,7 @@ if($actionType=='edit'||$actionType=='copy'){
 
         element: function(clone, ui) {
 
-          return $('<li class="selected col-sm-3 col-xs-12 gallery-item gallery-item-{{$name}} ">'+clone[0].innerHTML+'</li>');
+          return $('<li class="selected col-sm-2 col-xs-12 gallery-item gallery-item-{{$name}} ">'+clone[0].innerHTML+'</li>');
 
         },
 
@@ -162,7 +162,7 @@ if($actionType=='edit'||$actionType=='copy'){
 
       var unique_img = 'vth'+ID();
 
-      var str = '<li class="col-sm-3 col-xs-12 gallery-item gallery-item-{{$name}}">';
+      var str = '<li class="col-sm-2 col-xs-12 gallery-item gallery-item-{{$name}}">';
 
       str+='<div>';
 
