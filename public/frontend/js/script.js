@@ -299,6 +299,12 @@ var GUI = (function(){
             }
         });
     }
+    var initFixedMenu = function (){
+    	if ($(window).width >= 1200) {
+	    	var heightMenu = $('.header-menu-wrapper').height();
+	    	$('body').css('padding-top',heightMenu);
+    	}
+    }
 	return {
 		_:function(){
 			flashNotification();
@@ -313,6 +319,7 @@ var GUI = (function(){
 			showQuickNotification();
 			showChangeFontSizeUser();
 			initNumberUp();
+			initFixedMenu();
 		}
 	};
 })();

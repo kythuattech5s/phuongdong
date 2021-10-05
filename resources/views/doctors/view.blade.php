@@ -8,8 +8,8 @@
     <div class="border-top mt-2">
     </div>
     <div class="row">
-        <div class="col-lg-4 col-xl-28">
-            <div class="px-lg-3">
+        <div class="col-lg-4 col-xl-28 position-relative">
+            <div class="px-lg-3 doctor-sidebar-info">
                 <div class="sidebar-all py-4">
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-12">

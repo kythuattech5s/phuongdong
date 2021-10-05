@@ -6,18 +6,23 @@
             {{\Breadcrumbs::render('video_gallery',$currentItem,$parent)}}
             <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
             <div class="title-info-new d-flex flex-wrap my-3 pb-0 pb-xl-2 fs-15 wow fadeInUp" data-wow-delay="0.2s">
-               <p class="me-4">
+                <p class="me-4">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <span>{{\Support::showDate($currentItem->created_at)}}</span>
-               </p>
-               <p>
-                   <i class="fa fa-user-o" aria-hidden="true"></i>
-                   <span>Tác giả:</span>
-                   <span class="clmain">{{$currentItem->publish_by}}</span>
-               </p>
+                </p>
+                @php
+                    $author = $currentItem->getAuthor('create_by');
+                @endphp
+                @if (isset($author))
+                    <p>
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <span>Tác giả:</span>
+                        <span class="robotob">{{$author->name}}</span>
+                    </p>
+                @endif
             </div>
-            <div class="c-img my-3 my-xl-4" style="padding-top: 56%">
-                {!!$currentItem->iframe_video!!}
+            <div class="c-img my-3 my-xl-4 wow fadeInUp" style="padding-top: 56%">
+                {!!$currentItem->getPlayHtml()!!}
             </div>
             <div class="short-content-new fs-16 wow fadeInUp" data-wow-delay="0.3s">
                 {{$currentItem->short_content}}

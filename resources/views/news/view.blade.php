@@ -124,7 +124,7 @@
                     <p class="side-bar-title robotob">VIDEO CÙNG CHỦ ĐỀ</p>
                     <div class="video-youtybe-container-new mx-auto mt-3 mt-xl-4">
                         <div class="video-youtybe-container ">
-                            {!!$videoRelate->iframe_video!!}
+                            {!!$videoRelate->getPlayHtml()!!}
                         </div>
                     </div>
                     <h3 class="mt-2 text-center">

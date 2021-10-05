@@ -19,6 +19,8 @@ class CrawlProvider
                 return new \App\Crawl\Table\CrawlSpecialist;
             case 'gallery':
                 return new \App\Crawl\Table\CrawlGallery;
+            case 'services_categories':
+                return new \App\Crawl\Table\CrawlServicesCategory;
             default:
                 throw new \Exception('Không tìm thấy code crawl cho bảng '.$table,69);
                 break;

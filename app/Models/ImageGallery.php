@@ -10,11 +10,16 @@ class ImageGallery extends BaseModel
 {
 	use HasFactory;
     protected $table = 'image_gallery';
-	public function category()
-	{
-		return $this->hasOne(ImageGalleryCategory::class, 'id', 'parent');
-	}
-	public function getRelates()
+	public function pivot(){
+        return $this->hasMany('\App\Models\ImageGalleryImageGalleryCategory', 'image_gallery_id', 'id');
+    }
+    
+    public function category()
+    {
+        return $this->belongsToMany('App\Models\ImageGalleryCategory');
+    }
+    
+    public function getRelates()
     {
         $category = $this->category()->act()->first();
         if ($category == null) {

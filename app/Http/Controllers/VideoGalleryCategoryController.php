@@ -9,7 +9,7 @@ class VideoGalleryCategoryController extends Controller
 	public function all($request, $route, $link)
 	{
         $currentItem = $route;
-		$listItems = VideoGalleryCategory::act()->Ord()->paginate(12);
+		$listItems = VideoGalleryCategory::act()->Ord()->paginate(1);
         $listHotItems = VideoGallery::where('hot',1)->act()->get()->all();
 		return View::make('video_gallery_categories.all',compact('currentItem','listItems','listHotItems'));	
 	}

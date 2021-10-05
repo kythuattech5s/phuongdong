@@ -296,7 +296,7 @@ class Support
 				foreach ($menus as $menu) {
 					$active = url()->current() == url($menu->link) ? "active" : " ";
 					echo '<li>';
-						echo '<a href="'.$menu->link.'/" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
+						echo '<a href="'.trim($menu->link,'/').'/" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
 								if($menu->icon != ''){
 									echo '<img src="'.\FCHelper::eimg2($menu,'icon','200x0').'" alt="'.\Support::show($menu, 'name').'" title="'.\Support::show($menu, 'name').'"/>';
 								}

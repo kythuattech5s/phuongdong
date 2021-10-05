@@ -14,7 +14,7 @@ class Controller extends BaseController
     {
         $listTimePick = \App\Models\TimePick::get();
         $listDoctor = \App\Models\Doctor::act()->get();
-        $listService = \App\Models\Services::act()->get();
+        $listService = \App\Models\ServiceCategory::act()->get();
         $listSpecialist = \App\Models\Specialist::act()->get();
         $itemFlashNotifcation = \App\Models\FlashNotification::act()->get()->first();
         \View::share('listTimePick', $listTimePick);

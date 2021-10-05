@@ -63,5 +63,8 @@
             </div>
         @endif
     @endforeach
+    <div class="pagenigation mb-2 mt-3 mt-xl-4">
+        {{$listItems->withQueryString()->links('vendor.pagination.pagination')}}
+    </div>
 </section>
 @stop

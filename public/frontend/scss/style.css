@@ -3099,4 +3099,7 @@ html[lang='vi'] .btn-lang-vi, html[lang='auto'] .btn-lang-vi {
     bottom: 0;
     left: 0; }
 
+.sidebar-all {
+  height: 100%; }
+
 /*# sourceMappingURL=style.css.map */

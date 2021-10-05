@@ -326,7 +326,7 @@
                     <div class="swiper-slide p-1">
                         <div class="item-certifications cspoint">
                             <div class="img text-center">
-                                <a href="{{$itemCertification->link}}" class="smooth" title="{{$itemCertification->name}}">
+                                <a href="{%IMGV2.itemCertification.img.-1%}" data-fancybox class="smooth" title="{{$itemCertification->name}}">
                                     @include('image_loader.small',['itemImage'=>$itemCertification])
                                 </a>
                             </div>
