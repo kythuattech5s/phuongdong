@@ -504,6 +504,7 @@ trait EditTrait{
 	}
 	private function __update_normal(Request $request,$table,$id){
 		if($request->isMethod('post')){
+			$oldData = \DB::table($table->table_map)->find($id);
 			$data = $request->post();
 			if(isset($data['_token']))
 			{
@@ -589,7 +590,7 @@ trait EditTrait{
 			if($ret >=0){
 				$this->__updatePivots($data['id'], $pivots, $table->table_map);
 				$this->_updateOutRefernce($table->table_map,$outs,$id);
-				\Event::dispatch('vanhenry.manager.update_normal.success', array($table,$data,$injects,$id));
+				\Event::dispatch('vanhenry.manager.update_normal.success', array($table,$data,$injects,$id,$oldData));
 				return 200;
 			}
 			else{

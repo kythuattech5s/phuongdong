@@ -127,7 +127,7 @@ var GALLERY_CONTROL = function(clazz){
 
         	var id = self.uniqueID();
 
-			var html = self.getHtmlItem(id,'theme/frontend/plugins/gallery_control_admin/theme/images/no-image.svg','New Image',{});
+			var html = self.getHtmlItem(id,'public/admin/images/noimage.png','New Image',{});
 
         	self.currentGallery.append(html);
 

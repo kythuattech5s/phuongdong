@@ -375,6 +375,7 @@ class FCHelper{
 	}
 	public static function generateSlug($tableMap, $slug, $id = null){
 		$num = 2;
+		$slug = trim($slug,'-');
 		do {
 			$e = \DB::table($tableMap)->select('id')->where(function($q) use($id, $slug){
 				$q->where(['vi_link' => $slug]);

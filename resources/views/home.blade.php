@@ -3,10 +3,14 @@
 <section class="banner-home position-relative">
     <div class="swiper-container slide-banner-home">
         <div class="swiper-wrapper">
-        	@foreach ($listBanner as $itemBanner)
+        	@foreach ($listBanner as $key => $itemBanner)
                 <div class="swiper-slide">
                 	<a href="{{$itemBanner->link}}" class="smooth" title="{{$itemBanner->name}}">
-                    	@include('image_loader.all',['itemImage'=>$itemBanner])
+                        @if ($key == 0)
+                    	   @include('image_loader.all',['itemImage'=>$itemBanner,'noLazyLoad'=>1])
+                        @else
+                           @include('image_loader.all',['itemImage'=>$itemBanner])
+                        @endif
                 	</a>
                 </div>
             @endforeach
@@ -47,7 +51,7 @@
                     <div class="list-time-pick">
                         <p class="fs-16 mb-1 robotob clmain">LỊCH KHÁM</p>
                         <div class="d-flex justify-content-between flex-wrap">
-                            @foreach ($listTimePick as $itemTime)
+                            @foreach ($listTimePickAll as $itemTime)
                                 <div class="item-time-pick">
                                     <label class="w-100">
                                         <input type="radio" value="{{$itemTime->id}}" class="d-none" name="time_pick">

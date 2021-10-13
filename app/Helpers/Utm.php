@@ -25,7 +25,7 @@ class Utm
 	public static function get()
 	{
 		$infoSession = request()->session()->has(self::UTM_SESSION_KEY) ? request()->session()->get(self::UTM_SESSION_KEY):[];
-		$ret["utm_source"] 		= isset($infoSession['utm_source']) && $infoSession['utm_source'] != '' ? $infoSession['utm_source']:'direct';
+		$ret["utm_source"] 		= isset($infoSession['utm_source']) && $infoSession['utm_source'] != '' ? $infoSession['utm_source']:'Direct';
 		$ret["utm_medium"] 		= isset($infoSession['utm_medium']) ? $infoSession['utm_medium']:'';
 		$ret["utm_campaign"] 	= isset($infoSession['utm_campaign']) ? $infoSession['utm_campaign']:'';
 		$ret["utm_content"] 	= isset($infoSession['utm_content']) ? $infoSession['utm_content']:'';

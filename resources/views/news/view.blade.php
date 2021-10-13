@@ -58,7 +58,7 @@
                     {!!$dataContent['toc']!!}
                 </div>
                 <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                    {!!$dataContent['content']!!}
+                    {!!Support::showContentHasHtmlTemplate(Support::showContentHasGallery($dataContent['content'],$currentItem->imgs_template),$currentItem->htmls_template)!!}
                 </div>
             </div>
             <div data-new="{{$currentItem->id}}" data-action="{{VRoute::get('rating-useful-new')}}" class="rating-new-info d-flex align-items-center flex-wrap mt-4 wow fadeInUp">
@@ -124,7 +124,7 @@
                     <p class="side-bar-title robotob">VIDEO CÙNG CHỦ ĐỀ</p>
                     <div class="video-youtybe-container-new mx-auto mt-3 mt-xl-4">
                         <div class="video-youtybe-container ">
-                            {!!$videoRelate->iframe_video!!}
+                            {!!$videoRelate->getPlayHtml()!!}
                         </div>
                     </div>
                     <h3 class="mt-2 text-center">

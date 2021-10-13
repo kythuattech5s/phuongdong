@@ -26,7 +26,7 @@
             <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
         </h3>
         @if (!isset($inSearchItem))
-            <div class="fs-16-cv my-1 my-xl-2">{{$item->short_content}}</div>
+            <div class="fs-16-cv my-1 my-xl-2">{{Str::words($item->question,'35')}}</div>
         @endif
     </div>
 </div>

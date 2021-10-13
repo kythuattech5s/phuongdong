@@ -8,8 +8,8 @@ class FileGalleryCategory extends BaseModel
 {
 	use HasFactory;
 	protected $table = 'file_gallery_categories';
-	public function imageGallery()
+	public function fileGallery()
 	{
-		return $this->hasMany('App\Models\FileGallery', 'parent', 'id');
+		return $this->belongsToMany('App\Models\FileGallery', 'file_gallery_file_gallery_category', 'file_gallery_category_id', 'file_gallery_id');
 	} 
 }

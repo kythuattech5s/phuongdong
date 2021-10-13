@@ -139,11 +139,9 @@ class Support
 				break;
 			case 'slug':
 				if (method_exists($object,'getTable')) {
-					$listTableTwoLevelSlug = TwoLevelSlug::getArrTable();
 					$currentItemTable = $object->getTable();
-					if (isset($listTableTwoLevelSlug[$currentItemTable])) {
-						return route('home').'/'.$listTableTwoLevelSlug[$currentItemTable].'/'.$value.'/';
-					}
+					$slug = TwoLevelSlug::convertLink($currentItemTable,$value);
+					return $slug;
 				}
 				return route('home').'/'.$value.'/';
 				break;
@@ -296,7 +294,7 @@ class Support
 				foreach ($menus as $menu) {
 					$active = url()->current() == url($menu->link) ? "active" : " ";
 					echo '<li>';
-						echo '<a href="'.$menu->link.'/" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
+						echo '<a href="'.trim($menu->link,'/').'/" title="'.\Support::show($menu, 'name').'" class="'.$active.'" >';
 								if($menu->icon != ''){
 									echo '<img src="'.\FCHelper::eimg2($menu,'icon','200x0').'" alt="'.\Support::show($menu, 'name').'" title="'.\Support::show($menu, 'name').'"/>';
 								}
@@ -1156,7 +1154,48 @@ class Support
 	    $data['content'] = $html;
 	    return $data;
 	}
-
+	public static function showContentHasGallery($content,$gallery,$view = 'path.slide_detail'){
+		if($content == '') return $content;
+		preg_match_all( '/\[(.+?)\]/', $content,$allKey);
+		$allKey = $allKey[0] ?? [];
+		$gallery = self::jsonDecode($gallery);
+		foreach($allKey as $itemKey){
+			if (strpos($itemKey, 'gallery') !== false) {
+			    $key = str_replace('[gallery=','',$itemKey);
+				$key = str_replace(']','',$key);
+				foreach($gallery as $k => $item){
+					$code = $item['code'] ?? '';
+					if($code == $key){
+						$galleryItem = self::jsonDecode($item['gallery'] ?? '');
+						$slideItem = view('path.slide_detail',compact('galleryItem','code'))->render();
+						$content = str_replace($itemKey,$slideItem,$content);
+					}
+				}
+			}
+		}
+		return $content;
+	}
+	public static function showContentHasHtmlTemplate($content,$htmlsTemplate,$view = 'path.html_template'){
+		if($content == '') return $content;
+		preg_match_all( '/\[(.+?)\]/', $content,$allKey);
+		$allKey = $allKey[0] ?? [];
+		$htmlsTemplate = self::jsonDecode($htmlsTemplate);
+		foreach($allKey as $itemKey){
+			if (strpos($itemKey, 'html') !== false) {
+			    $key = str_replace('[html=','',$itemKey);
+				$key = str_replace(']','',$key);
+				foreach($htmlsTemplate as $k => $item){
+					$code = $item['code'] ?? '';
+					if($code == $key){
+						$htmlItem = $item;
+						$htmlItem = view('path.html_template',compact('htmlItem','code'))->render();
+						$content = str_replace($itemKey,$htmlItem,$content);
+					}
+				}
+			}
+		}
+		return $content;
+	}
 	public static function buildUrlSort($show){
 		$params = request()->all();
 		if(isset($params['orderkey'])){
@@ -1190,5 +1229,20 @@ class Support
 		}
 
 		return compact('cursor','url_sort','ordervalue');
+	}
+	public static function replaceCharacterVn($string){
+	    $string=strtolower($string);
+	    $str = str_replace('-', ' ', $string);
+	    $utf8characters = 'à|a, ả|a, ã|a, á|a, ạ|a, ă|ă, ằ|ă, ẳ|ă, ẵ|ă,  ắ|ă, ặ|ă, â|a, ầ|â, ẩ|â, ẫ|â, ấ|â, ậ|â, đ|d, è|e, ẻ|e, ẽ|e, é|e, ẹ|e,  ê|e, ề|e, ể|e, ễ|e, ế|e, ệ|e, ì|i, ỉ|i, ĩ|i, í|i, ị|i, ò|o, ỏ|o, õ|o,  ó|o, ọ|o, ô|o, ồ|o, ổ|o, ỗ|o, ố|o, ộ|o, ơ|o, ờ|o, ở|o, ỡ|o, ớ|o, ợ|o,  ù|u, ủ|u, ũ|u, ú|u, ụ|u, ư|u, ừ|u, ử|u, ữ|u, ứ|u, ự|u, ỳ|y, ỷ|y, ỹ|y,  ý|y, ỵ|y, À|a, Ả|a, Ã|a, Á|a, Ạ|a, Ă|ă, Ằ|ă, Ẳ|ă, Ẵ|ă, Ắ|ă, Ặ|ă, Â|â,  Ầ|â, Ẩ|â, Ẫ|â, Ấ|â, Ậ|â, È|e, Ẻ|e, Ẽ|e, É|e, Ẹ|e, Ê|ê, Ề|ê, Ể|ê,  Ễ|ê, Ế|ê, Ệ|ê, Ì|i, Ỉ|i, Ĩ|i, Í|i, Ị|i, Ò|o, Ỏ|o, Õ|o, Ó|o, Ọ|o, Ô|o,  Ồ|o, Ổ|o, Ỗ|o, Ố|o, Ộ|o, Ơ|o, Ờ|o, Ở|o, Ỡ|o, Ớ|o, Ợ|o, Ù|u, Ủ|u, Ũ|u,  Ú|u, Ụ|u, Ư|ư, Ừ|ư, Ử|ư, Ữ|ư, Ứ|ư, Ự|ư, Ỳ|y, Ỷ|y, Ỹ|y, Ý|y, Ỵ|y, "|,  &|';
+	    $replacements = array();
+	    $items = explode(',', $utf8characters);
+	    foreach ($items as $item) {
+	        @list($src, $dst) = explode('|', trim($item));
+	        $replacements[trim($src)] = trim($dst);
+	    }
+	    $str = trim(strtr($str, $replacements));
+	    $str = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $str);
+	    $str = trim($str, '-');
+	    return strtoupper($str);
 	}
 }

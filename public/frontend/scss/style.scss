@@ -3155,3 +3155,62 @@ html[lang='vi'],html[lang='auto']{
 		}
 	}
 }
+.sidebar-all{
+	height: 100%;
+}
+.c-img-file{
+	img{
+		object-fit: contain;
+		width: 90%;
+		height: 90%;
+		top: 5%;
+		right: 5%;
+	}
+}
+.slide_detail_editor{
+	max-width: 600px;
+	.swiper-slide{
+		padding: 10px;
+		.image{
+			box-shadow: 0px 1px 5px 1px #e1e1e1;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		img{
+			width: 100%;
+			margin:0!important;
+		}
+	}
+	.slider-controls{
+		.prev-btn,.next-btn{
+			@include translateY(-50%);
+			background: #f0ebe7;
+			color: #8e8c8f;
+			font-size: 16px;
+			height: 42px;
+			width: 42px;
+			@include smooth(.3s);
+			&:hover{
+				color: #f0ebe7;
+				background: #8e8c8f;
+			}
+		}
+		.prev-btn{
+			left: 10px;
+		}
+		.next-btn{
+			right: 10px;
+		}
+		.swiper-button-disabled{
+			display: none!important;
+		}
+	}
+}
+.news-detail-html{
+	background: #f7f9f8;
+	padding: 15px;
+	border-left: solid 8px $main;
+	.author{
+		font-style: italic;
+	}
+}

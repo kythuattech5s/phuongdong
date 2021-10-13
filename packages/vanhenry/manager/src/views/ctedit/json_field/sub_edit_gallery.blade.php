@@ -50,7 +50,7 @@
 </div>
 <style type="text/css">
 	.gallery_control_admin_json_field_list{
-	    width: 80%;
+	    width: 100%;
 		max-height: 250px;
 		border: 1px solid #E0E0E0;
 		overflow-y: scroll;

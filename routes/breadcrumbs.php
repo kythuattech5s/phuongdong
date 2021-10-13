@@ -28,9 +28,27 @@ Breadcrumbs::for('page', function ($trail,$currentItem) {
 	$trail->parent('home');
 	$trail->push($currentItem->name);
 });
+Breadcrumbs::for('specialist_category', function ($trail, $currentItem, $level = 0) {
+	if ($level == 0) {
+		$trail->parent('home');
+		$trail->push('Chuyên khoa', VRoute::get('chuyen-khoa'));
+	}
+	if ($currentItem->parent > 0) {
+		$parent = App\Models\SpecialistCategory::where('specialist_category.id', $currentItem->parent)->first();
+	    if ($parent != null) {
+    		$trail->parent('specialist_category', $parent, $level += 1);
+	    }	
+	}
+    $trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
 Breadcrumbs::for('news_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
+		// if ($currentItem->type_slug == 2) {
+		// 	$trail->push('Hướng dẫn khách hàng', VRoute::get('huong-dan-khach-hang'));
+		// }else {
+		// 	$trail->push('Tin tức', VRoute::get('tin-tuc'));
+		// }
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\NewsCategory::where('news_categories.id', $currentItem->parent)->first();
@@ -53,7 +71,7 @@ Breadcrumbs::for('news', function ($trail, $currentItem, $parent) {
 Breadcrumbs::for('service_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
-		$trail->push('Dịch vụ y tế',VRoute::get('dich-vu-y-te'));
+		$trail->push('Dịch vụ',VRoute::get('dich-vu'));
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\ServiceCategory::where('service_category.id', $currentItem->parent)->first();
@@ -89,6 +107,7 @@ Breadcrumbs::for('question_category', function ($trail, $currentItem, $level = 0
 Breadcrumbs::for('question', function ($trail, $currentItem, $parent) {
     if ($parent == null) {
 		$trail->parent('home');
+   		$trail->push('Hỏi đáp chuyên gia',VRoute::get('hoi-dap-chuyen-gia'));
    		$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
     }
     else{
@@ -102,7 +121,7 @@ Breadcrumbs::for('image_gallery_category', function ($trail, $currentItem, $leve
 		$trail->push('Thư viện ảnh',VRoute::get('thu-vien-anh'));
 	}
 	if ($currentItem->parent > 0) {
-		$parent = App\Models\QuestionCategory::where('image_gallery_categories.id', $currentItem->parent)->first();
+		$parent = App\Models\ImageGalleryCategory::where('image_gallery_categories.id', $currentItem->parent)->first();
 	    if ($parent != null) {
     		$trail->parent('image_gallery_category', $parent, $level += 1);
 	    }	
@@ -125,7 +144,7 @@ Breadcrumbs::for('video_gallery_category', function ($trail, $currentItem, $leve
 		$trail->push('Thư viện video',VRoute::get('thu-vien-video'));
 	}
 	if ($currentItem->parent > 0) {
-		$parent = App\Models\QuestionCategory::where('video_gallery_categories.id', $currentItem->parent)->first();
+		$parent = App\Models\ImageGalleryCategory::where('video_gallery_categories.id', $currentItem->parent)->first();
 	    if ($parent != null) {
     		$trail->parent('video_gallery_category', $parent, $level += 1);
 	    }	
@@ -139,6 +158,29 @@ Breadcrumbs::for('video_gallery', function ($trail, $currentItem, $parent) {
     }
     else{
     	$trail->parent('video_gallery_category', $parent);
+    	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+});
+Breadcrumbs::for('file_gallery_category', function ($trail, $currentItem, $level = 0) {
+	if ($level == 0) {
+		$trail->parent('home');
+		$trail->push('Thư viện file',VRoute::get('thu-vien-file'));
+	}
+	if ($currentItem->parent > 0) {
+		$parent = App\Models\ImageGalleryCategory::where('file_gallery_categories.id', $currentItem->parent)->first();
+	    if ($parent != null) {
+    		$trail->parent('file_gallery_category', $parent, $level += 1);
+	    }	
+	}
+    $trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
+Breadcrumbs::for('file_gallery', function ($trail, $currentItem, $parent) {
+    if ($parent == null) {
+		$trail->parent('home');
+   		$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+    }
+    else{
+    	$trail->parent('file_gallery_category', $parent);
     	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
     }
 });

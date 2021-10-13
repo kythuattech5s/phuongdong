@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
 <section class="container pt-xl-2 pb-4 pb-xl-5">
-    {{\Breadcrumbs::render('static','Dịch vụ y tế','dich-vu-y-te')}}
+    {{\Breadcrumbs::render('static','Dịch vụ','dich-vu')}}
     <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Dịch vụ khám chữa bệnh</h1>
     <p class="fs-16 wow fadeInUp">{[service_page_content]}</p>
     <div class="row gx-3 gx-lg-4 mt-4 pt-xl-2">

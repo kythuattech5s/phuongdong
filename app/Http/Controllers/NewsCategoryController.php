@@ -10,7 +10,13 @@ class NewsCategoryController extends Controller
     public function all($request, $route, $link)
     {
         $currentItem = $route;
-        $listCateChild = NewsCategory::act()->ord()->get()->all();
+        $listCateChild = NewsCategory::act()->where('type_slug',1)->ord()->get()->all();
+        return view('news_categories.all',compact('currentItem','listCateChild')); 
+    }
+    public function allInstruct($request, $route, $link)
+    {
+        $currentItem = $route;
+        $listCateChild = NewsCategory::act()->where('type_slug',2)->ord()->get()->all();
         return view('news_categories.all',compact('currentItem','listCateChild')); 
     }
     public function view($request, $route, $link){

@@ -12,15 +12,15 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function __construct() 
     {
-        $listTimePick = \App\Models\TimePick::get();
-        $listDoctor = \App\Models\Doctor::act()->get();
-        $listService = \App\Models\Services::act()->get();
-        $listSpecialist = \App\Models\Specialist::act()->get();
+        $listTimePickAll = \App\Models\TimePick::get();
+        $listDoctorAll = \App\Models\Doctor::act()->get();
+        $listServiceAll = \App\Models\ServiceCategory::act()->get();
+        $listSpecialistAll = \App\Models\Specialist::act()->get();
         $itemFlashNotifcation = \App\Models\FlashNotification::act()->get()->first();
-        \View::share('listTimePick', $listTimePick);
+        \View::share('listTimePickAll', $listTimePickAll);
         \View::share('itemFlashNotifcation', $itemFlashNotifcation);
-        \View::share('listDoctor', $listDoctor);
-        \View::share('listService', $listService);
-        \View::share('listSpecialist', $listSpecialist);
+        \View::share('listDoctorAll', $listDoctorAll);
+        \View::share('listServiceAll', $listServiceAll);
+        \View::share('listSpecialistAll', $listSpecialistAll);
     }
 }

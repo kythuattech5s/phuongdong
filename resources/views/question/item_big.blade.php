@@ -25,6 +25,6 @@
         <h3>
             <a href="{{Support::show($item, 'slug')}}" class="smooth hv-main-sp fs-22-cv robotob lh-13" title="{{$item->name}}">{{$item->name}}</a>
         </h3>
-        <div class="fs-16-cv my-2 my-xl-3">{{$item->short_content}}</div>
+        <div class="fs-16-cv my-2 my-xl-3">{{Str::words($item->question,'35')}}</div>
     </div>
 </div>

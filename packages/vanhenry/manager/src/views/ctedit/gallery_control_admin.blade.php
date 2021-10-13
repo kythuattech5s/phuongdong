@@ -25,7 +25,7 @@
             		$path = $gallery["path"] ?? '';
             		$fileName = $gallery["file_name"] ?? '';
             		$file =$path.$fileName; 
-            		$file= file_exists($file)?$file:'admin/gallery_control/theme/images/no-image.svg'; 
+            		$file= file_exists($file)?$file:'public/admin/images/noimage.png'; 
             	?>
             	<?php 
             		$idfile = \Str::random(10);

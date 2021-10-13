@@ -10,6 +10,6 @@ class ImageGalleryCategory extends BaseModel
 	protected $table = 'image_gallery_categories';
 	public function imageGallery()
 	{
-		return $this->hasMany('App\Models\ImageGallery', 'parent', 'id');
+		return $this->belongsToMany('App\Models\ImageGallery', 'image_gallery_image_gallery_category', 'image_gallery_category_id', 'image_gallery_id');
 	} 
 }

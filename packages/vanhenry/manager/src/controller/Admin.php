@@ -335,6 +335,7 @@ class Admin extends BaseAdminController
             if (!$check) {
                 return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
             }
+            \Event::dispatch('vanhenry.manager.trash.success', array($table,$id,1));
             $ret = DB::table($table)->whereIn('id', $id)->update(['trash' => 1]);
 
             return response(json_encode([
@@ -359,6 +360,7 @@ class Admin extends BaseAdminController
             if (!$check) {
                 return JsonHelper::echoJson(100, 'Có 1 hoặc nhiều bản ghi bạn không có quyền xóa');
             }
+            \Event::dispatch('vanhenry.manager.trash.success', array($table,$id,0));
             $ret = DB::table($table)->whereIn('id', $id)->update(['trash' => 0]);
 
             return response(json_encode([

@@ -105,8 +105,8 @@ class Media
 		$extra['dir'] = $uploadRootDir;
 		$extra['path'] = $pathRelative;
 		$sizes = getimagesize($pathAbsolute.$fileName);
-		$extra['width'] = $sizes[0];
-		$extra['height'] = $sizes[1];
+		$extra['width'] = is_array($sizes) && isset($sizes[0]) ? $sizes[0]:0;
+		$extra['height'] = is_array($sizes) && isset($sizes[1]) ? $sizes[1]:0;
 		$extra['thumb'] = $pathRelative.'thumbs/def/'.$fileName;
 		$m->extra = json_encode($extra);
 		$m->save();

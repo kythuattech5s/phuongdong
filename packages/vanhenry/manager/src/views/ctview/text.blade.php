@@ -1,4 +1,4 @@
-<td data-title="{{$show->note}}" style="text-align: left;{{$show->name == 'name' ? 'white-space: normal;min-width: 300px;':'';}}{{$show->name == 'ord' ? 'width: 50px;':'';}}">
+<td data-title="{{$show->note}}" style="text-align: left;{{$show->name == 'name' || $show->name == 'note' ? 'white-space: normal;min-width: 300px;':'';}}{{$show->name == 'ord' ? 'width: 50px;':'';}}">
 	@if($show->name == 'name')
 		<p><a href="{{$admincp}}/edit/{{$tableData->get('table_map','')}}/{{FCHelper::ep($itemMain,'id')}}?returnurl={{$urlFull}}">
 			{{FCHelper::ep($dataItem,$show->name)}}

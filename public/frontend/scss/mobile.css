@@ -23,13 +23,34 @@
     left: 130%;
     transition-property: left, top, opacity;
     transition-duration: 0.7s, 0.7s, 0.25s;
-    transition-timing-function: ease; } }
+    transition-timing-function: ease; }
+
+  .form-contact-sidebar, .doctor-sidebar-info {
+    position: sticky;
+    top: 10px;
+    z-index: 2; } }
 @media (min-width: 1200px) {
   .col-xl-28 {
     width: 28%; }
 
   .col-xl-72 {
-    width: 72%; } }
+    width: 72%; }
+
+  .header-menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; }
+
+  body {
+    padding-top: 118px; }
+
+  .form-contact-sidebar, .doctor-sidebar-info {
+    top: 130px; }
+
+  .toc-wrapper {
+    top: 119px; } }
 @media (min-width: 1400px) {
   .container {
     max-width: 1170px; } }

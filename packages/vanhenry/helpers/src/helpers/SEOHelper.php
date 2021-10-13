@@ -117,7 +117,7 @@ class SEOHelper{
 		}else{
 			$seo_title = addslashes($titleSEO);
 		}
-		$ret .= '<title>'.$seo_title.'</title>';
+		$ret .= '<title>'.(isset($dataitem->name) ? $dataitem->name:$seo_title).'</title>';
 	    $ret .= '<meta name="description" content="'.addslashes($desSEO).'">';
 	    $ret .= '<meta name="keywords" content="'.addslashes($keySEO).'">';
 	    $tmp = SettingHelper::getSetting('site_name');

@@ -21,14 +21,13 @@
                     </p>
                 @endif
             </div>
-            <div class="short-content-new robotob fs-16 wow fadeInUp" data-wow-delay="0.3s">
-                {{$currentItem->short_content}}
-            </div>
-            <div class="my-3 wow fadeInUp" data-wow-delay="0.4s">
-                {!!$dataContent['toc']!!}
-            </div>
-            <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                {!!$dataContent['content']!!}
+            <div class="position-relative">
+                <div class="my-3 wow fadeInUp" data-wow-delay="0.4s">
+                    {!!$dataContent['toc']!!}
+                </div>
+                <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
+                    {!!$dataContent['content']!!}
+                </div>
             </div>
             <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase">Một số hình ảnh hoạt động của dịch vụ</p>
             <div class="doctor-image position-relative wow fadeInUp">
@@ -78,7 +77,7 @@
                     <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Video giới thiệu {{$currentItem->name}}</p>
                     <div class="video-youtybe-container-new mx-auto mt-3 mt-xl-4">
                         <div class="video-youtybe-container ">
-                            {!!$videoIntro->iframe_video!!}
+                            {!!$videoIntro->getPlayHtml()!!}
                         </div>
                     </div>
                     <h3 class="mt-2 text-center">

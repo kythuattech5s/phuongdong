@@ -17,7 +17,11 @@
 			</tr>
 			<tr>
 				<td style="border:solid 1px #999999;padding: 5px;width:180px;"><strong>Dịch vụ khám</strong></td>
-				<td style="border:solid 1px #999999;padding: 5px">{{\App\Models\Services::getNameById($data['service_id'])}}</td>
+				<td style="border:solid 1px #999999;padding: 5px">{{\App\Models\ServiceCategory::getNameById($data['service_id'])}}</td>
+			</tr>
+			<tr>
+				<td style="border:solid 1px #999999;padding: 5px;width:180px;"><strong>Chuyên khoa</strong></td>
+				<td style="border:solid 1px #999999;padding: 5px">{{\App\Models\Specialist::getNameById($data['service_id'])}}</td>
 			</tr>
 			<tr style="background: #f2f2f2">
 				<td style="border:solid 1px #999999;padding: 5px;width:180px;"><strong>Số điện thoại</strong></td>

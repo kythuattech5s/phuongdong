@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-8 shadow-box-right py-3 py-md-4 pe-lg-4">
             <h1 class="fs-30-cv robotob wow fadeInUp">Đội ngũ Bác sĩ {{$specialist->name}}</h1>
-            <p class="fs-16-cv wow fadeInUp">{{$specialist->short_content}}</p>
+            <p class="fs-16-cv wow fadeInUp">{{$specialist->seo_des}}</p>
             <div class="list-doctor mt-3 mt-lg-4">
                 @foreach ($listItems as $itemDoctor)
                     @include('doctors.item')

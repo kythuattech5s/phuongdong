@@ -16,7 +16,8 @@ class SpecialistController extends Controller
     {
     	$currentItem = Specialist::slug($link)->act()->first();
         if ($currentItem == null) { abort(404); }
+        $dataContent = \Support::createdTocContent($currentItem->content);
         $listRelateDoctor = Doctor::where('specialist_id',$currentItem->id)->act()->get();
-        return view('specialists.view',compact('currentItem','listRelateDoctor'));
+        return view('specialists.view',compact('currentItem','listRelateDoctor','dataContent'));
     }
 }

@@ -24,8 +24,8 @@ var TINYMCE = $(function() {
 				{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
 			],
 			rel_list: [
-			    {title: 'Nofollow', value: ' nofollow'},
-			    {title: 'Dofollow', value: 'dofollow'}
+			    {title: 'Dofollow', value: 'dofollow'},
+			    {title: 'Nofollow', value: ' nofollow'}
 			],
 			fontsize_formats: '10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 30px 36px',
 			lineheight_formats: "10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 26px 28px 30px 32px 34px 36px 38px 40px 42px 46px 50px",
