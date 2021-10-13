@@ -26,10 +26,22 @@ class ManagerEventListener
             }
             /* End xóa thông tin phân quyền user */
 
+            $idSp = $id;
             $id = is_array($id) ? implode(",", $id) : $id;
             $name = "Delete " . $tbl;
             $content = "Delete " . $tbl . " id = " . $id;
-            $this->insertHistory($name, $content);
+            $dataAdd = [];
+            $dataAdd['table_name'] = $tbl;
+            $dataAdd['action'] = 'delete';
+            if (is_array($idSp)) {
+                foreach ($idSp as $itemId) {
+                    $dataAdd['target_id'] = $itemId;
+                    $this->insertHistory($name,$content,$dataAdd);
+                }
+            }else {
+                $dataAdd['target_id'] = $idSp;
+                $this->insertHistory($name,$content,$dataAdd);
+            }
             return array(
                 "status" => true
             );
@@ -55,7 +67,11 @@ class ManagerEventListener
             
             $name = "Insert " . $tbl;
             $content = "Insert " . $tbl . " id = " . $id . (isset($data["name"]) ? " name " . $data["name"] : "");
-            $this->insertHistory($name, $content);
+            $dataAdd = [];
+            $dataAdd['table_name'] = $table->table_map;
+            $dataAdd['action'] = 'insert';
+            $dataAdd['target_id'] = $id;
+            $this->insertHistory($name, $content,$dataAdd);
         });
         $events->listen('vanhenry.manager.trash.success', function ($table, $id, $value)
         {
@@ -64,12 +80,26 @@ class ManagerEventListener
             {
                 $tbl = $table->name;
             }
-            $type = $value == 1 ? "Trash" : "Restore";
+            $idSp = $id;
+            $id = is_array($id) ? implode(",", $id) : $id;
+            $type = $value == 1 ? "trash" : "restore";
             $name = $type . " " . $tbl;
             $content = $type . " " . $tbl . " id = " . $id;
-            $this->insertHistory($name, $content);
+
+            $dataAdd = [];
+            $dataAdd['table_name'] = $tbl;
+            $dataAdd['action'] = $type;
+            if (is_array($idSp)) {
+                foreach ($idSp as $itemId) {
+                    $dataAdd['target_id'] = $itemId;
+                    $this->insertHistory($name,$content,$dataAdd);
+                }
+            }else {
+                $dataAdd['target_id'] = $idSp;
+                $this->insertHistory($name,$content,$dataAdd);
+            }
         });
-        $events->listen('vanhenry.manager.update_normal.success', function ($table, $data, $injects, $id)
+        $events->listen('vanhenry.manager.update_normal.success', function ($table, $data, $injects, $id,$oldData = null)
         {
             $tbl = $table;
             if ($table instanceof \vanhenry\manager\model\VTable)
@@ -77,8 +107,32 @@ class ManagerEventListener
                 $tbl = $table->name;
             }
             $name = "Update Normal " . $tbl;
+            $dataAdd = [];
+            $dataAdd['table_name'] = $table->table_map;
+            $dataAdd['action'] = 'update';
+            $dataAdd['target_id'] = $id;
+            $arrChangeField = [];
+            if (isset($oldData)) {
+                foreach ($data as $key => $item) {
+                    if (isset($oldData->$key) && $oldData->$key != $item) {
+                        array_push($arrChangeField, $key);
+                    }
+                }
+                if (count($arrChangeField)) {
+                    $dataAdd['field_change'] = implode(',',$arrChangeField);
+                }
+                $arrNotCheckChange = ['created_at','updated_at','update_by','create_by'];
+                foreach ($arrNotCheckChange as $item) {
+                    if (($keyD = array_search($item, $arrChangeField)) !== false) {
+                        unset($arrChangeField[$keyD]);
+                    }
+                }
+                if (count($arrChangeField)) {
+                    $dataAdd['field_change'] = implode(',',$arrChangeField);
+                }
+            }
             $content = "Update " . $tbl . " id = " . $id . (isset($data["name"]) ? " name " . $data["name"] : "");
-            $this->insertHistory($name, $content);
+            $this->insertHistory($name, $content , $dataAdd);
         });
         $events->listen('vanhenry.manager.update_config.success', function ($table, $data, $id)
         {
@@ -158,7 +212,7 @@ class ManagerEventListener
             ]);
         });
     }
-    private function insertHistory($name, $content)
+    private function insertHistory($name, $content,$addData = null)
     {
         $h = new HHistory;
         $h->name = $name;
@@ -166,6 +220,17 @@ class ManagerEventListener
         $h->ip = request()->ip();
         $h->username = \Auth::guard("h_users")->user()->name;
         $h->id_user = \Auth::guard("h_users")->id();
+        if (isset($addData) && is_array($addData)) {
+            foreach ($addData as $key => $item) {
+                $h->$key = $item;
+            }
+            if (isset($addData['table_name']) && isset($addData['target_id'])) {
+                $itemTarget = \DB::table($addData['table_name'])->find($addData['target_id']);
+                if (isset($itemTarget)) {
+                    $h->target_name = isset($itemTarget->name) ? $itemTarget->name:'';
+                }
+            }
+        }
         $h->save();
     }
 }

@@ -7,13 +7,13 @@ class CrawlGallery extends BaseCrawl
 {
     public function crawl()
     {
+    	var_dump(1);die();
     	$listFile = FileGallery::get();
     	foreach ($listFile as $itemFile) {
     		$fileInfo = $this->mediaHelper->crawlImage($itemFile->link_video,'thu-vien-file/file');
     		$itemFile->file = $fileInfo;
     		$itemFile->save();
     	}
-    	var_dump(1);die();
 		$urlListNews = 'https://benhvienphuongdong.vn/admin/media/list-file';
 		$dataFillter = [
 			'page'=> 1

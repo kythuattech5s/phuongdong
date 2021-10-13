@@ -12,16 +12,23 @@ var ELEMENTOR_JSON_FIELD = function(clazz){
 			event.preventDefault();
 			var html = $(this).closest('.elementor_json_field').find('.hidden-item').html();
 			var fdivs = $(html).find('.elementor_json_field_control_content > div');
-
 			for(var i = 0;i<fdivs.length;i++){
 				var uniqueID = self.uniqueID();
                 var div = $(fdivs[i]);
                 var oldId = div.attr('class');
+                var dataType = div.attr('data-type');
 			    html = html.replace(new RegExp(oldId, 'g'), uniqueID);
+                self.initNewGalleryControl(dataType,uniqueID);
             }
 			$('.elementor_json_field .list-items-'+self.currentClazz).append(html);
 			self.initEditor();
 		});
+	}
+	this.initNewGalleryControl = function(dataType,uniqueID){
+		if(dataType == 'sub_edit_gallery'){
+			window['uniqueID'] = new GALLERY_CONTROL_JSON_FIELD(uniqueID);
+			window['uniqueID'].init();
+        }
 	}
 	this.initCloseItem = function(){
 		var self = this;
@@ -33,7 +40,7 @@ var ELEMENTOR_JSON_FIELD = function(clazz){
 	}
 	this.initChange = function(){
 		var self = this;
-		$(document).on('input', '.elementor_json_field .list-items-'+self.currentClazz+' .item .text,.elementor_json_field .list-items-'+self.currentClazz+' .item .textarea,.elementor_json_field .list-items-'+self.currentClazz+' .item .number,.elementor_json_field .list-items-'+self.currentClazz+' .item .checkbox', function(event) {
+		$(document).on('change', '.elementor_json_field .list-items-'+self.currentClazz+' .item .gallery,.elementor_json_field .list-items-'+self.currentClazz+' .item .text,.elementor_json_field .list-items-'+self.currentClazz+' .item .textarea,.elementor_json_field .list-items-'+self.currentClazz+' .item .number,.elementor_json_field .list-items-'+self.currentClazz+' .item .checkbox', function(event) {
 			event.preventDefault();
 			self.getDataValue();
 		});
@@ -249,9 +256,12 @@ var ELEMENTOR_JSON_FIELD = function(clazz){
 			item.tinymce(options);
 		}
 	}
+	this.getDataValuegallery = function(item){
+		return $(item).val();
+	},
 	this.getDataValuetext = function(item){
 		return $(item).val();
-	}
+	},
 	this.getDataValuecolor=function(item){
 		return this.getDataValuetext(item);
 	},

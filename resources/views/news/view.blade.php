@@ -58,7 +58,7 @@
                     {!!$dataContent['toc']!!}
                 </div>
                 <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                    {!!$dataContent['content']!!}
+                    {!!Support::showContentHasHtmlTemplate(Support::showContentHasGallery($dataContent['content'],$currentItem->imgs_template),$currentItem->htmls_template)!!}
                 </div>
             </div>
             <div data-new="{{$currentItem->id}}" data-action="{{VRoute::get('rating-useful-new')}}" class="rating-new-info d-flex align-items-center flex-wrap mt-4 wow fadeInUp">

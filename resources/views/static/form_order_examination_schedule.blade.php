@@ -1,4 +1,4 @@
-<form class="form-contact-main form-send-contact h-100" action="{{VRoute::get('bookApointment')}}" method="post" accept-charset="utf8" autocomplete="off">
+<form class="form-contact-main form-send-contact form-book-apointments h-100" action="{{VRoute::get('bookApointment')}}" method="post" accept-charset="utf8" autocomplete="off">
     <div class="header-form text-center py-2 py-lg-4">
         <p class="fs-30-cv text-uppercase robotob">Đặt lịch khám chữa bệnh</p>
         <p class="fs-16 px-3 px-xl-5 mx-xl-4 mt-xl-3">{[form_book_content]}</p>
@@ -16,7 +16,7 @@
         <div class="list-time-pick pb-1">
             <p class="fs-16 mb-1 robotob clmain">LỊCH KHÁM</p>
             <div class="d-flex justify-content-between flex-wrap">
-                @foreach ($listTimePick as $itemTime)
+                @foreach ($listTimePickAll as $itemTime)
                     <div class="item-time-pick">
                         <label class="w-100">
                             <input type="radio" value="{{$itemTime->id}}" class="d-none" name="time_pick">
@@ -27,14 +27,20 @@
             </div>
         </div>
         <select name="service">
-        	<option value="0">Chọn dịch vụ khám</option>
-        	@foreach ($listService as $item)
+            <option value="0">Dịch vụ</option>
+            @foreach ($listServiceAll as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+            @endforeach
+        </select>
+        <select name="specialist" data-action="{{VRoute::get('load-doctor-specialist')}}">
+        	<option value="0">Chọn chuyên khoa</option>
+        	@foreach ($listSpecialistAll as $item)
         		<option value="{{$item->id}}">{{$item->name}}</option>
         	@endforeach
         </select>
         <select name="doctor">
         	<option value="0">Chọn bác sĩ</option>
-        	@foreach ($listDoctor as $item)
+        	@foreach ($listDoctorAll as $item)
         		<option value="{{$item->id}}">{{$item->name}}</option>
         	@endforeach
         </select>

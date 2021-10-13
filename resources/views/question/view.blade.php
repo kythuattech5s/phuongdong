@@ -44,14 +44,14 @@
                 </div>
                 <div class="title-question-answer mb-2">
                     @if (isset($doctor))
-                        <div class="mt-3 mb-1 d-flex">
+                        <div class="mt-3 d-flex">
                             <span class="icon">
                                 <img src="frontend/images/icon_doctor.png" title="" alt="" class="img-fluid smooth">
                             </span>
                             <span class="ms-1 d-inline-block robotob fs-18 pt-1 lh-13">{{$doctor->academic_rank}} {{$doctor->name}} - {{$doctor->position}}</span>
                         </div>
                     @endif
-                    <p class="fs-15">Đã trả lời: Ngày {{\Support::showDate($currentItem->time_reply)}}
+                    <p class="fs-15 mt-1">Đã trả lời: Ngày {{\Support::showDate($currentItem->time_reply)}}
                         @if (isset($parent))
                             / Chủ đề: <a href="{{Support::show($parent, 'slug')}}" class="robotob hv-sp" title="{{$parent->name}}">{{$parent->name}}</a>
                         @endif

@@ -6,7 +6,7 @@
     <p class="all-sub-title wow fadeInUp mb-3">Bác sĩ chuyên khoa</p>
     <ul class="list-service-sidebar mt-2 fs-18 wow fadeInUp">
         @foreach ($listSpecialist as $item)
-            <li><a href="doi-ngu-bac-si/{{$item->slug}}/" class="smooth" title="{{$item->name}}"><i class="fa fa-angle-double-right me-2" aria-hidden="true"></i>{{$item->name}}</a></li>
+            <li><a href="{{$item->slug}}" class="smooth" title="{{$item->name}}"><i class="fa fa-angle-double-right me-2" aria-hidden="true"></i>{{$item->name}}</a></li>
         @endforeach
     </ul>
     @include('register_advise_form')

@@ -26,7 +26,7 @@
 					$typeSubControl = $itemSubControl['type']; 
 					$field =  $itemSubControl['name'];
 				?>
-				<div class="elementor_json_field_control <?php echo (isset($itemSubControl['width'])&&$itemSubControl['width']==1)?'col-100':'col-50' ?> ">
+				<div class="elementor_json_field_control <?php echo (isset($itemSubControl['width'])&&$itemSubControl['width']==1)?'col-100':'col-50' ?>">
 					<div class="elementor_json_field_control_name">
 						<label><?php echo isset($itemSubControl['text'])?$itemSubControl['text']:'' ?></label>
 					</div>
@@ -48,14 +48,14 @@
 					$typeSubControl = $itemSubControl['type'];
 					$field =  $itemSubControl['name'];
 				?>
-					<div class="elementor_json_field_control">
-						<div class="elementor_json_field_control_name">
-							<label><?php echo isset($itemSubControl['text'])?$itemSubControl['text']:'' ?></label>
-						</div>
-						<div class="elementor_json_field_control_content col">
-							@include('vh::ctedit.json_field.sub_edit_'.$typeSubControl,['itemSubControl'=>$itemSubControl,'field'=>$field,'key'=>$key,'subValue'=>$subValue,'nameSubControl'=>$nameSubControl])
-						</div>
+				<div class="elementor_json_field_control <?php echo (isset($itemSubControl['width'])&&$itemSubControl['width']==1)?'col-100':'col-50' ?> ">
+					<div class="elementor_json_field_control_name">
+						<label><?php echo isset($itemSubControl['text'])?$itemSubControl['text']:'' ?></label>
 					</div>
+					<div class="elementor_json_field_control_content col">
+						@include('vh::ctedit.json_field.sub_edit_'.$typeSubControl,['itemSubControl'=>$itemSubControl,'field'=>$field,'key'=>$key,'subValue'=>$subValue,'nameSubControl'=>$nameSubControl])
+					</div>
+				</div>
 			<?php endforeach; ?>
 			<span class="close">
 				<i class="fa fa-times" aria-hidden="true"></i>
@@ -84,7 +84,6 @@
 	.elementor_json_field .elementor_json_field_control{
 		display: flex;
 		margin: 2px 0px;
-
 	}
 	.elementor_json_field .list-items .item{
 		padding:0;
@@ -158,10 +157,10 @@
 		width:100% !important;
 	}
 </style>
+<script type="text/javascript" src="admin/js/json_field/gallery.js"></script>
 <script type="text/javascript" src="admin/js/json_field.js"></script>
 <script type="text/javascript">
 	$(function() {
-
 		window['elementor_json_field_<?php echo $key.$nameSubControl; ?>'] = new ELEMENTOR_JSON_FIELD('<?php echo $key.$nameSubControl; ?>');
 		window['elementor_json_field_<?php echo $key.$nameSubControl; ?>'].init();
 	});

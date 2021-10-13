@@ -328,7 +328,7 @@ var SLIDER = (function(){
 		if ($('.slide-banner-home').length == 0) return;
 		const swiper = new Swiper('.slide-banner-home', {
 			slidesPerView: 1,
-			loop: false,
+			loop: true,
 			disableOnInteraction: true,
 			speed: 1000,
 			effect: "coverflow",
@@ -671,6 +671,27 @@ var SLIDER = (function(){
 			}
 		});
 	}
+	var slideDetailEditor = function(){
+        var boxSlides = $('.slide_detail_editor');
+        if(boxSlides.length == 0) return;
+        boxSlides.each(function(e){
+            var _this = $(this);
+            var dataId = _this.attr('data-code');
+            if($('.slide_detail_editor_' + dataId).length == 0) return;
+            const swiper = new Swiper('.slide_detail_editor_' + dataId, {
+                slidesPerView: 1,
+                disableOnInteraction: true,
+                speed: 600,
+                spaceBetween: 0,
+                observer: true,
+                observeParents: true,
+                navigation: {
+                    nextEl: ".slide_detail_editor_next_" + dataId,
+                    prevEl: ".slide_detail_editor_prev_" + dataId,
+                }
+            });
+        });
+    }
 	return {
 		_:function(){
 			sliderBannerHome();
@@ -688,6 +709,7 @@ var SLIDER = (function(){
 			sliderIntroTtb();
 			slideHistoryBegin();
 			sliderCertifications();
+			slideDetailEditor();
 		}
 	};
 })();
@@ -780,10 +802,27 @@ var AJAX_SP = (function(){
     		})
     	});
     }
+    var loadDoctorBookApointment = function(){
+    	$(document).on('change', '.form-book-apointments select[name=specialist]', function(event) {
+    		var _this = $(this);
+    		$.ajax({
+    			url: _this.data('action'),
+    			type: 'POST',
+    			dataType: 'html',
+    			data: {
+    				specialist: _this.val()
+    			}
+    		})
+    		.done(function(html) {
+    			_this.closest('.form-book-apointments').find('select[name=doctor]').html(html);
+    		})
+    	});
+    }
     return {_:function(){
         paginateAjax();
         sendContact();
         ratingUsfulNew();
+        loadDoctorBookApointment();
     }
 };
 })();
@@ -793,10 +832,3 @@ $(document).ready(function(){
 	SEARCH._();
 	AJAX_SP._();
 })
-
-
-var str = '';
-$('.list-categories-tbody tr').each(function(index, el) {
-	var idCate = $(this).attr('class').trim().replace('treegrid','');
-	console.log('https://benhvienphuongdong.vn/admin/category/edit-categories/'+idCate+'?type=news');
-});

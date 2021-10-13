@@ -17,7 +17,7 @@ class TwoLevelSlug
 		$listTableTwoLevelSlug = self::getArrTable();
 		if ($table == 'news_categories') {
 			$subSlug = self::getSpecialSubSlugByTable($table,$link);
-			return $subSlug.''.$link.'/';
+			return $subSlug.'/'.$link.'/';
 		}
 		if (isset($listTableTwoLevelSlug[$table])) {
 			return $listTableTwoLevelSlug[$table].'/'.$link.'/';

@@ -1,3 +1,13 @@
+@php
+    $arrCharacter = range('A', 'Z');
+    array_splice($arrCharacter, 1, 0, ['Ă'] );
+    array_splice($arrCharacter, 2, 0, ['Â'] );
+    array_splice($arrCharacter, 6, 0, ['Đ'] );
+    array_splice($arrCharacter, 8, 0, ['Ê'] );
+    array_splice($arrCharacter, 19 , 0, ['Ô'] );
+    array_splice($arrCharacter, 20 , 0, ['Ơ'] );
+    array_splice($arrCharacter, 27 , 0, ['Ư'] );
+@endphp
 @extends('index')
 @section('content')
 <section class="container pt-xl-2 pb-4">
@@ -22,7 +32,7 @@
         theo bảng chữ cái
     </h1>
     <div class="list-character px-xl-5 ms-3 mt-3 mt-xl-4 wow fadeInUp">
-        @foreach (range('A', 'Z') as $item)
+        @foreach ($arrCharacter as $item)
             <div class="item-character" data-key="{{$item}}">
                 <span class="notranslate">{{$item}}</span>
             </div>
@@ -34,7 +44,7 @@
             <li><a href="{{Support::show($item, 'slug')}}" class="smooth" title="{{$item->name}}">{{$item->name}}</a></li>
         @endforeach
     </ul>
-    @foreach (range('A', 'Z') as $item)
+    @foreach ($arrCharacter as $item)
         <div class="section-item-search mt-3 mt-xl-4 pt-2" id="{{$item}}">
             <div class="header-item-search d-flex justify-content-between align-items-end mb-4">
                 <span class="fs-30-cv mb-1 notranslate">{{$item}}</span>
@@ -45,7 +55,11 @@
             </div>
             <ul class="list-item-search">
                 @foreach ($listItems as $itemLookup)
-                    @if ($item == strtoupper($itemLookup->name[0]))
+                    @php
+                        $arrayString = preg_split("//u", $itemLookup->name, -1, PREG_SPLIT_NO_EMPTY);
+                        $firstCharacter = $arrayString[0];
+                    @endphp
+                    @if ($item == Support::replaceCharacterVn($firstCharacter))
                         <li><a href="{{Support::show($itemLookup, 'slug')}}" class="smooth" title="{{$itemLookup->name}}">{{$itemLookup->name}}</a></li>
                     @endif
                 @endforeach

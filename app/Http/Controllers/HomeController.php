@@ -10,12 +10,14 @@ class HomeController extends Controller
     {
         $lang  = \App::getLocale();
         $link  = \Support::getSegment($request, 1);
+        $baseUrl = url()->to('');
         /* Check link chuyển hướng */
         $linkRedirect = RedirectLink::where('root_link',trim($_SERVER['REQUEST_URI'],'/'))->first();
         if (isset($linkRedirect) && (int)$linkRedirect->type) {
-            return \Redirect::to(trim($linkRedirect->redirect_link,'/'),$linkRedirect->type);
+            return \Redirect::to($baseUrl.trim($linkRedirect->redirect_link,'/').'/',$linkRedirect->type);
         }
         /* End check link chuyển hướng */
+
         $listTableTwoLevelSlug = TwoLevelSlug::getArrTable();
         list($link,$tableAccess) = TwoLevelSlug::checkLinkSegmentBeforGetRoutest($link);
         $route = \DB::table('v_routes')->select('*')->where($lang.'_link', $link)->first();
@@ -23,12 +25,19 @@ class HomeController extends Controller
             abort(404);
         }
         if (isset($tableAccess) && $route->is_static == 0 && $tableAccess != $route->table) {
-            dd($link,$tableAccess,$route);
             abort(404);
         }
         if (!isset($tableAccess) && isset($listTableTwoLevelSlug[$route->table])) {
-            return \Redirect::to(url()->to('/').TwoLevelSlug::convertSlugRoutes($route,$link),301);
+            return \Redirect::to($baseUrl.TwoLevelSlug::convertSlugRoutes($route,$link),301);
         }
+
+        /* Check link đuôi có dấu / */
+        if (substr($_SERVER['REDIRECT_URL'], -1) != '/') {
+            $newUrl = $baseUrl.$_SERVER['REDIRECT_URL'].'/'.($_SERVER['QUERY_STRING'] != '' ? '?'.$_SERVER['QUERY_STRING'] : '');
+            return \Redirect::to($newUrl,301);
+        }
+        /* End check link đuôi có dấu / */
+
         Utm::check();
         $controllers = explode('@', $route->controller);
         $controller = $controllers[0];

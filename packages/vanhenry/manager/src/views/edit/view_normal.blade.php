@@ -1,5 +1,6 @@
 @extends('vh::master')
 @section('css')
+<script type="text/javascript" src="admin/js/json_field/gallery.js"></script>
 @if($tableData->get('has_yoast_seo','') == 1)
 <link rel="stylesheet" href="admin/tech5s_yoast_seo/theme/css/yoastseo.css" type="text/css">
 @endif
@@ -92,7 +93,7 @@ else{
 						</div>
 					</div>
 					@else
-					<h1 class="col-xs-12">{{FCHelper::ep($groupControl[$currentGroup],'name',1)}}</h1>
+						<h1 class="col-xs-12">{{FCHelper::ep($groupControl[$currentGroup],'name',1)}}</h1>
 					@endif
 					<p class="des col-xs-12">{{FCHelper::ep($groupControl[$currentGroup],'note',1)}}</p>
 					<div class="col-xs-12 {{$groupControl[$currentGroup]->has_button_hide==1?'boxhide':''}} {{$groupControl[$currentGroup]->display_default==0?'none':''}}">

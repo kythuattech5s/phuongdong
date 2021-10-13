@@ -2650,7 +2650,7 @@ table {
 }
 
 .nav-tabs {
-    height: 42px;
+    max-height: 42px;
 }
 
 .get-link:hover{

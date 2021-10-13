@@ -210,7 +210,7 @@ class SysController extends BaseAdminController
             $this->updateSitemapStatic();
         }
         $html = \View::make('vh::more.template_sitemap', compact("listSitemaps"))->render();
-        file_put_contents("sitemap.xml",$html);
+        file_put_contents(public_path("sitemap.xml"),$html);
         return redirect()->back()->with("status","Cập nhật thành công");
     }
     private function updateSitemapItem($table,$year,$month){
