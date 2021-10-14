@@ -7,7 +7,16 @@
     font-family: 'Robob';
     src: url("../fonts/OpenSans-Bold.ttf");
 }
-
+@font-face {
+    font-family: 'aceEditorFont';
+    src: url("../fonts/SourceCodePro-Regular.ttf");
+}
+.ace_editor, .ace_editor *{
+font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
+font-size: 12px !important;
+font-weight: 400 !important;
+letter-spacing: 0 !important;
+}
 p,
 span,
 h1,
@@ -1441,10 +1450,10 @@ td.action i:hover {
 td.action i {
     display: inline-block;
     border: 1px solid #212B36;
-    padding: 5px;
+    padding: 4px;
     color: #212B36;
-    font-size: 18px;
-    border-radius: 5px;
+    font-size: 14px;
+    border-radius: 2px;
 }
 
 #no-more-tables .tablecontrol ._vh_delete_all i {
@@ -1774,7 +1783,7 @@ table th {
 .table-condensed>tfoot>tr>th,
 .table-condensed>thead>tr>td,
 .table-condensed>thead>tr>th {
-    padding: 9px 8px;
+    padding: 3px 8px;
 }
 
 table td.action {

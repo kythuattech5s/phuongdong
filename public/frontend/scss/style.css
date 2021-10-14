@@ -369,7 +369,7 @@ body {
   max-width: 1920px;
   margin: auto;
   top: 0 !important;
-  color: #666666; }
+  color: #333333; }
 
 button:focus, input:focus {
   outline: none; }
@@ -1210,7 +1210,7 @@ html[lang='vi'] .header-top .search-box, html[lang='auto'] .header-top .search-b
     text-align: center;
     line-height: 38px; }
 
-.sale-item-side-bar img {
+.sale-item-side-bar img, .sale-item-header img, .sale-item-header img {
   width: 100%; }
 
 .form-contact-sidebar {
@@ -1865,7 +1865,7 @@ html[lang='vi'] .header-top .search-box, html[lang='auto'] .header-top .search-b
     box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1); }
     .title-info-new .author_info .img img {
       position: absolute;
-      top: 10px;
+      top: 0px;
       left: 0;
       width: 100%;
       -webkit-transition: all 0.3s ease-in-out;

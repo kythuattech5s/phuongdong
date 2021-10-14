@@ -5,7 +5,7 @@
         <div class="swiper-wrapper">
         	@foreach ($listBanner as $key => $itemBanner)
                 <div class="swiper-slide">
-                	<a href="{{$itemBanner->link}}" class="smooth" title="{{$itemBanner->name}}">
+                	<a href="{{$itemBanner->link}}" {{Support::showNofollow($itemBanner)}} class="smooth" title="{{$itemBanner->name}}">
                         @if ($key == 0)
                     	   @include('image_loader.all',['itemImage'=>$itemBanner,'noLazyLoad'=>1])
                         @else
@@ -127,7 +127,7 @@
     <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 mb-xxl-4">
             <p class="all-title wow fadeInUp">{[title_home_service]}</p>
-            <a href="{{VRoute::get('dich-vu-y-te')}}" class="hv-icon fs-16 btn-view-all d-none d-md-inline-block mt-3 wow fadeInUp" data-wow-delay="0.2s" title="Dịch vụ của chúng tôi">
+            <a href="{{VRoute::get('dich-vu')}}" class="hv-icon fs-16 btn-view-all d-none d-md-inline-block mt-3 wow fadeInUp" data-wow-delay="0.2s" title="Dịch vụ của chúng tôi">
                 <span class="text-uppercase smooth">Xem tất cả</span>
                 <i class="fa fa-plus-circle fs-20 ms-1" aria-hidden="true"></i>
             </a>

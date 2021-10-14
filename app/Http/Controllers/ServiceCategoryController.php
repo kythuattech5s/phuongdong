@@ -17,6 +17,8 @@ class ServiceCategoryController extends Controller
         if ($currentItem == null) {
             abort(404);
         }
+        $currentItem->count_view = (int)$currentItem->count_view + 1;
+        $currentItem->save();
         $dataContent = \Support::createdTocContent($currentItem->content);
         $listItems = $currentItem->services()->act()->ord()->paginate(12);
         $listCateChild = ServiceCategory::act()->where('parent',$currentItem->id)->Ord()->get();

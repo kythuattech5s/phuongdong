@@ -115,8 +115,13 @@
                 <div class="tag-new d-flex align-items-center flex-wrap my-3 my-xl-4 wow fadeInUp">
                     <span class="fs-15 me-3 mb-2"><i class="fa fa-tag me-1" aria-hidden="true"></i>Chủ đề</span>
                     @foreach ($tags as $item)
-                        <a href="{{Support::show($item, 'slug')}}" class="item-tag mb-2 me-2" title="{{$item->name}}">{{$item->name}}</a>
+                        <a href="{{Support::show($item, 'slug')}}" {{Support::showNofollow($item)}} class="item-tag mb-2 me-2" title="{{$item->name}}">{{$item->name}}</a>
                     @endforeach
+                </div>
+            @endif
+            @if (count($listNewsSelect) > 0)
+                <div class="mt-4">
+                    @include('news.new_bottom_detail',['listNews'=>$listNewsSelect])
                 </div>
             @endif
             @if (isset($videoRelate))

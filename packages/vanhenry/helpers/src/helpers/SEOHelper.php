@@ -184,6 +184,12 @@ class SEOHelper{
 		$ret .='<meta name="is-login" content="'.(\Auth::check() == true ? 1 : 0).'">';
 		$ret .='<meta name="current-lang" content="'.\App::getLocale().'">';
 		$ret .='<meta name="exchange-rate" content="'.self::getExchangeRate().'">';
+		if (isset($dataitem->noindex) && (int)$dataitem->noindex == 1) {
+			$ret .='<meta name="robots" content="noindex">';
+		}
+		if ((int)SettingHelper::getSetting('seo_index')) {
+			$ret .='<meta name="robots" content="noindex">';
+		}
 		return $ret;
 	}
 	public static function getExchangeRate()

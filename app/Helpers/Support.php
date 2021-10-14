@@ -1245,4 +1245,8 @@ class Support
 	    $str = trim($str, '-');
 	    return strtoupper($str);
 	}
+	public static function showNofollow($item)
+	{
+		echo isset($item->nofollow) && (int)$item->nofollow == 1 ? 'rel="nofollow"':'';
+	}
 }

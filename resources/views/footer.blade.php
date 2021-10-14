@@ -10,6 +10,9 @@
 	<a href="tel:{[hotline]}" class="btn-all btn-all-sp me-3 px-4" title="Gửi câu hỏi"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> {[hotline]}</a>
 	<a href="#" data-bs-toggle="modal" data-bs-target="#orderExaminationSchedule" class="btn-all btn-all-main" title=""><i class="fa fa-calendar" aria-hidden="true"></i> Đặt lịch khám</a>
 </div>
+<div class="container">
+	@include('banner_gdn.banner_gdn_footer')
+</div>
 <footer class="footer pt-3 pt-xxl-4">
 	<div class="container">
 		<div class="logo mb-3">

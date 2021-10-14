@@ -24,6 +24,11 @@ Breadcrumbs::for('doctors', function ($trail,$currentItem,$specialists) {
 	}
 	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
 });
+Breadcrumbs::for('doctors_specialist', function ($trail,$currentItem) {
+	$trail->push('Trang chủ', VRoute::get('home'));
+	$trail->push('Đội ngũ bác sĩ', VRoute::get('doi-ngu-bac-si'));
+	$trail->push($currentItem->name, \Support::show($currentItem, 'slug'));
+});
 Breadcrumbs::for('page', function ($trail,$currentItem) {
 	$trail->parent('home');
 	$trail->push($currentItem->name);
@@ -44,11 +49,11 @@ Breadcrumbs::for('specialist_category', function ($trail, $currentItem, $level =
 Breadcrumbs::for('news_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
-		// if ($currentItem->type_slug == 2) {
-		// 	$trail->push('Hướng dẫn khách hàng', VRoute::get('huong-dan-khach-hang'));
-		// }else {
-		// 	$trail->push('Tin tức', VRoute::get('tin-tuc'));
-		// }
+		if ($currentItem->type_slug == 2) {
+			$trail->push('Hướng dẫn khách hàng', VRoute::get('huong-dan-khach-hang'));
+		}else {
+			$trail->push('Tin tức', VRoute::get('tin-tuc'));
+		}
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\NewsCategory::where('news_categories.id', $currentItem->parent)->first();
@@ -164,7 +169,7 @@ Breadcrumbs::for('video_gallery', function ($trail, $currentItem, $parent) {
 Breadcrumbs::for('file_gallery_category', function ($trail, $currentItem, $level = 0) {
 	if ($level == 0) {
 		$trail->parent('home');
-		$trail->push('Thư viện file',VRoute::get('thu-vien-file'));
+		$trail->push('Tài liệu hướng dẫn',VRoute::get('tai-lieu-huong-dan'));
 	}
 	if ($currentItem->parent > 0) {
 		$parent = App\Models\ImageGalleryCategory::where('file_gallery_categories.id', $currentItem->parent)->first();

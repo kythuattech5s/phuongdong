@@ -126,7 +126,11 @@ var COMMENT = (function () {
         };
         div.append(textArea);
         formGroup.append(div);
+<<<<<<< HEAD
         formGroup.insertAdjacentHTML('beforeend',`<div class="d-flex gap-2 my-2">
+=======
+        formGroup.insertAdjacentHTML('beforeend',`<div class="d-flex gap-2">
+>>>>>>> 62c203ea7099470770ea3d74779a640da727f09f
             <div class="group-form" style="flex:1">
                 <input type="text" class="w-100 p-2" name="name" placeholder="Họ và tên">
             </div>

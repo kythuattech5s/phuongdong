@@ -5,7 +5,7 @@
 		    <div class="col-lg-8 shadow-box-right pt-xl-2 pb-3 pb-md-4 pe-lg-4">
 		        {{\Breadcrumbs::render('news_category',$currentItem)}}
 		        <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">{{$currentItem->name}}</h1>
-		        <p class="fs-16 wow fadeInUp">{{$currentItem->short_content}}</p>
+		        <p class="fs-16 wow fadeInUp">{!!$currentItem->short_content!!}</p>
 		        @foreach ($listItems as $key => $item)
 		            @if ($key < 1)
 		                <div class="new-big d-flex flex-wrap py-3 py-xxl-4 wow fadeInUp">

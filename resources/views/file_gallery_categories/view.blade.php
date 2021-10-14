@@ -3,7 +3,7 @@
 <section class="container">
     <div class="row">
         <div class="col-lg-8 shadow-box-right pb-3 pb-md-4 pt-xl-2 pe-xxl-5">
-            {{\Breadcrumbs::render('image_gallery_category',$currentItem)}}
+            {{\Breadcrumbs::render('file_gallery_category',$currentItem)}}
             <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">{{$currentItem->name}}</h1>
             <p class="fs-16-cv wow fadeInUp">{{$currentItem->short_content}}</p>
             @foreach ($listItems as $key => $item)
@@ -42,7 +42,7 @@
             <div class="row gx-lg-4">
                 @foreach ($listItems as $key => $item)
                     @if ($key >= 1)
-                        <div class="col-sm-6 mt-3 mt-xl-4 wow fadeInUp">
+                        <div class="col-6 col-lg-4 mt-3 mt-xl-4 wow fadeInUp">
                             @include('file_gallery.item')
                         </div>
                     @endif

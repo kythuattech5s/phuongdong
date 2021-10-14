@@ -118,3 +118,6 @@
 		</div>
 	</div>
 </div>
+<div class="container">
+	@include('banner_gdn.banner_gdn_header')
+</div>

@@ -92,12 +92,18 @@
         </div>
         <div class="col-12 col-lg-6 px-0 pe-lg-4">
             <div class="img-360 position-relative wow fadeInUp">
-                <div class="c-img">
-                    <iframe src="{[introduce_ga_link]}"></iframe>
-                </div>
-                <div class="icon-360-play">
-                    <img src="frontend/images/360-image.png" title="" alt="" class="img-fluid">
-                </div>
+                @if (\SettingHelper::getSetting('introduce_ga_link') != '')
+                    <div class="c-img">
+                        <iframe src="{[introduce_ga_link]}"></iframe>
+                    </div>
+                    <div class="icon-360-play">
+                        <img src="frontend/images/360-image.png" title="" alt="" class="img-fluid">
+                    </div>
+                @else
+                    <div class="c-img">
+                        <img src="{Iintroduce_ga_image.imgI}" title="{Iintroduce_ga_image.titleI}" alt="{Iintroduce_ga_image.altI}" class="img-fluid">
+                    </div>
+                @endif
             </div>
         </div>
     </div>

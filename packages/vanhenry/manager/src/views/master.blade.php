@@ -67,6 +67,7 @@
     <script type="text/javascript" src="admin/media/fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="admin/js/jquery.doubleScroll.js"></script>
     <script type="text/javascript" src="admin/js/social_share.js"></script>
+    <script type="text/javascript" src="admin/plug/ace/ace.js"></script>
     <script type="text/javascript" src="admin/js/webhooks.js"></script>
     @yield('css')
 </head>
