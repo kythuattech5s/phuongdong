@@ -134,4 +134,10 @@
     <script src="{{ asset('frontend/js/comment/xhr.js') }}"></script>
     <script src="{{ asset('frontend/js/comment/comment.js') }}"></script>
     <script src="{{ asset('frontend/js/comment/validatorIMG.js') }}"></script>
+    <script>
+        FORM_VALIDATION.setColor({
+            color:"white",
+            colorBackground: "black",
+        })
+    </script>
 @endsection

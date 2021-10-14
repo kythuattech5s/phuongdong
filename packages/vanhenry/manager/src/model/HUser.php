@@ -4,16 +4,11 @@
 
 namespace vanhenry\manager\model;
 
-
-
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-
 class HUser extends Authenticatable
-
 {
 
     /**
@@ -50,9 +45,8 @@ class HUser extends Authenticatable
 
     ];
 
-    public function hGroupUser(){
-        return $this->belongsTo('vanhenry\manager\model\HGroupUser','group')->with('hActions');
+    public function hGroupUser()
+    {
+        return $this->belongsTo('vanhenry\manager\model\HGroupUser', 'group')->with('hActions');
     }
-
 }
-

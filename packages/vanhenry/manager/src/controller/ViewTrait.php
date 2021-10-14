@@ -476,6 +476,7 @@ trait ViewTrait{
 		}else{
 			$values->orderBy('id','desc');
 		}
+		// dd($tab);
 		foreach($tab as $key => $name){
 			switch($key){
 				case 'home':
@@ -485,7 +486,12 @@ trait ViewTrait{
                             $q->whereNull('is_draft')->orWhere('is_draft', 0);
 						})->where(function($q){
                             $q->whereNull('trash')->orWhere('trash',0);
-						})->where('act',1)->paginate($paginate);
+						});
+
+						if(!isset($name['act'])){
+							$dataList['home']->where('act',1);
+						}
+						$dataList['home'] = $dataList['home']->paginate($paginate);
 					}else{
 						$dataList['home'] = $home->paginate($paginate);
 					}

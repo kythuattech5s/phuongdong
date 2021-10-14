@@ -1,6 +1,8 @@
-<?php 
+<?php
 namespace vanhenry\manager\listeners;
+
 use vanhenry\manager\model\HHistory;
+
 class ManagerEventListener
 {
     public function subscribe($events)
@@ -8,11 +10,9 @@ class ManagerEventListener
         $events->listen('vanhenry.manager.update_normal.preupdate', PreUpdate::class);
         $events->listen('vanhenry.manager.insert.preinsert', PreUpdate::class);
         $events->listen('vanhenry.manager.delete.predelete', PreDelete::class);
-        $events->listen('vanhenry.manager.delete.predelete', function ($table, $id)
-        {
+        $events->listen('vanhenry.manager.delete.predelete', function ($table, $id) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
 
@@ -20,9 +20,9 @@ class ManagerEventListener
             $arrIdSp = $id;
             $userAdmin = \Auth::guard('h_users')->user();
             if (is_array($arrIdSp)) {
-                \DB::table('h_user_record_maps')->where('table_name',$tbl)->where('h_user_id',$userAdmin->id)->whereIn('target_id',$arrIdSp)->delete();
-            }else {
-                \DB::table('h_user_record_maps')->where('table_name',$tbl)->where('h_user_id',$userAdmin->id)->where('target_id',$arrIdSp)->delete();
+                \DB::table('h_user_record_maps')->where('table_name', $tbl)->where('h_user_id', $userAdmin->id)->whereIn('target_id', $arrIdSp)->delete();
+            } else {
+                \DB::table('h_user_record_maps')->where('table_name', $tbl)->where('h_user_id', $userAdmin->id)->where('target_id', $arrIdSp)->delete();
             }
             /* End xóa thông tin phân quyền user */
 
@@ -36,21 +36,19 @@ class ManagerEventListener
             if (is_array($idSp)) {
                 foreach ($idSp as $itemId) {
                     $dataAdd['target_id'] = $itemId;
-                    $this->insertHistory($name,$content,$dataAdd);
+                    $this->insertHistory($name, $content, $dataAdd);
                 }
-            }else {
+            } else {
                 $dataAdd['target_id'] = $idSp;
-                $this->insertHistory($name,$content,$dataAdd);
+                $this->insertHistory($name, $content, $dataAdd);
             }
             return array(
                 "status" => true
             );
         });
-        $events->listen('vanhenry.manager.insert.success', function ($table, $data, $injects, $id)
-        {
+        $events->listen('vanhenry.manager.insert.success', function ($table, $data, $injects, $id) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
 
@@ -71,13 +69,11 @@ class ManagerEventListener
             $dataAdd['table_name'] = $table->table_map;
             $dataAdd['action'] = 'insert';
             $dataAdd['target_id'] = $id;
-            $this->insertHistory($name, $content,$dataAdd);
+            $this->insertHistory($name, $content, $dataAdd);
         });
-        $events->listen('vanhenry.manager.trash.success', function ($table, $id, $value)
-        {
+        $events->listen('vanhenry.manager.trash.success', function ($table, $id, $value) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
             $idSp = $id;
@@ -92,23 +88,21 @@ class ManagerEventListener
             if (is_array($idSp)) {
                 foreach ($idSp as $itemId) {
                     $dataAdd['target_id'] = $itemId;
-                    $this->insertHistory($name,$content,$dataAdd);
+                    $this->insertHistory($name, $content, $dataAdd);
                 }
-            }else {
+            } else {
                 $dataAdd['target_id'] = $idSp;
-                $this->insertHistory($name,$content,$dataAdd);
+                $this->insertHistory($name, $content, $dataAdd);
             }
         });
-        $events->listen('vanhenry.manager.update_normal.success', function ($table, $data, $injects, $id,$oldData = null)
-        {
+        $events->listen('vanhenry.manager.update_normal.success', function ($table, $data, $injects, $id, $oldData = null) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
-                $tbl = $table->name;
+            if ($table instanceof \vanhenry\manager\model\VTable) {
+                $tbl = $table->table_map;
             }
             $name = "Update Normal " . $tbl;
             $dataAdd = [];
-            $dataAdd['table_name'] = $table->table_map;
+            $dataAdd['table_name'] = $tbl;
             $dataAdd['action'] = 'update';
             $dataAdd['target_id'] = $id;
             $arrChangeField = [];
@@ -119,91 +113,78 @@ class ManagerEventListener
                     }
                 }
                 if (count($arrChangeField)) {
-                    $dataAdd['field_change'] = implode(',',$arrChangeField);
+                    $dataAdd['field_change'] = implode(',', $arrChangeField);
                 }
-                $arrNotCheckChange = ['created_at','updated_at','update_by','create_by'];
+                $arrNotCheckChange = ['created_at','updated_at','update_by','create_by','yoast_score'];
                 foreach ($arrNotCheckChange as $item) {
                     if (($keyD = array_search($item, $arrChangeField)) !== false) {
                         unset($arrChangeField[$keyD]);
                     }
                 }
                 if (count($arrChangeField)) {
-                    $dataAdd['field_change'] = implode(',',$arrChangeField);
+                    $dataAdd['field_change'] = implode(',', $arrChangeField);
                 }
             }
             $content = "Update " . $tbl . " id = " . $id . (isset($data["name"]) ? " name " . $data["name"] : "");
-            $this->insertHistory($name, $content , $dataAdd);
+            $this->insertHistory($name, $content, $dataAdd);
         });
-        $events->listen('vanhenry.manager.update_config.success', function ($table, $data, $id)
-        {
+        $events->listen('vanhenry.manager.update_config.success', function ($table, $data, $id) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
             $name = "Update Configs " . $tbl;
             $content = "Update " . $tbl . " id = " . $id;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.addtoparent.success', function ($table, $parent, $arrId)
-        {
+        $events->listen('vanhenry.manager.addtoparent.success', function ($table, $parent, $arrId) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
             $name = "Remove From Parent " . $tbl;
             $content = "Update " . $tbl . " remove from parent with parent = " . $parent . " id = " . implode(",", $arrId);
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.removefromparent.success', function ($table, $parent, $arrId)
-        {
+        $events->listen('vanhenry.manager.removefromparent.success', function ($table, $parent, $arrId) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
             $name = "Add To Parent " . $tbl;
             $content = "Update " . $tbl . " add to parent with parent = " . $parent . " id = " . implode(",", $arrId);
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.doassign.success', function ($table, $group_user)
-        {
+        $events->listen('vanhenry.manager.doassign.success', function ($table, $group_user) {
             $tbl = $table;
-            if ($table instanceof \vanhenry\manager\model\VTable)
-            {
+            if ($table instanceof \vanhenry\manager\model\VTable) {
                 $tbl = $table->name;
             }
             $name = "Assign " . $tbl;
             $content = "Update " . $tbl . " assign group user  = " . $group_user;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.media.delete.success', function ($fname, $id)
-        {
+        $events->listen('vanhenry.manager.media.delete.success', function ($fname, $id) {
             $name = "Delete Media";
             $content = "Delete Media id = " . $id . " name = " . $fname;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.media.createdir.success', function ($folder_name, $id)
-        {
+        $events->listen('vanhenry.manager.media.createdir.success', function ($folder_name, $id) {
             $name = "Create Folder Media";
             $content = "Create Folder Media id = " . $id . " folder = " . $folder_name;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.media.insert.success', function ($name, $id)
-        {
+        $events->listen('vanhenry.manager.media.insert.success', function ($name, $id) {
             $name = "Upload Image Media";
             $content = "Upload Image Media id = " . $id . " name = " . $name;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.media.update.success', function ($name, $id)
-        {
+        $events->listen('vanhenry.manager.media.update.success', function ($name, $id) {
             $name = "Update Media";
             $content = "Update Media id = " . $id . " name = " . $name;
             $this->insertHistory($name, $content);
         });
-        $events->listen('vanhenry.manager.media.convert.img.via.cron', function ($path)
-        {
+        $events->listen('vanhenry.manager.media.convert.img.via.cron', function ($path) {
             \DB::table('custom_media_images')->insert([
                 'name' => $path,
                 'act' => 0,
@@ -212,7 +193,7 @@ class ManagerEventListener
             ]);
         });
     }
-    private function insertHistory($name, $content,$addData = null)
+    private function insertHistory($name, $content, $addData = null)
     {
         $h = new HHistory;
         $h->name = $name;
@@ -234,4 +215,3 @@ class ManagerEventListener
         $h->save();
     }
 }
-

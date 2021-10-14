@@ -2910,3 +2910,11 @@ td.action[data-title="Chức năng"] {
     color: white;
     border-radius: 5px;
 }
+
+.filter-group a{
+    background: #087990;
+    color: white;
+    display: block;
+    padding: 3px 7px;
+    border-radius: 3px;
+}

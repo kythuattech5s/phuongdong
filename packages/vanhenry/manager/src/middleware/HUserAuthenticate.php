@@ -1,11 +1,13 @@
 <?php
 namespace vanhenry\manager\middleware;
+
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use vanhenry\manager\controller\Admin;
 use Session;
 use vanhenry\manager\helpers\CT;
 use vanhenry\helpers\helpers\JsonHelper as JsonHelper;
+
 class HUserAuthenticate
 {
     /**
@@ -22,49 +24,45 @@ class HUserAuthenticate
         if (!$gu->check()) {
             return redirect($admincp.'/login');
         }
-        if(isset($request->table)){
+        if (isset($request->table)) {
             $table = $request->table;
             $action = $request->segment(2);
-            if(!Admin::checkExistTable($table)){
+            if (!Admin::checkExistTable($table)) {
                 return redirect()->route('404');
             }
-            $ret =  $this->checkPermission($table,$action);
-            if($ret ==1){
-                if($request->ajax()){
-                    return JsonHelper::echoJson(400,trans('db::NO_PERMISSION'));
+            $ret =  $this->checkPermission($table, $action);
+            if ($ret ==1) {
+                if ($request->ajax()) {
+                    return JsonHelper::echoJson(400, trans('db::NO_PERMISSION'));
+                } else {
+                    return redirect()->route('no_permission');
                 }
-                else{
-                    return redirect()->route('no_permission');    
-                }
-            }
-            elseif($ret ==2){
+            } elseif ($ret ==2) {
                 return redirect()->route('404');
             }
             $transTable = \FCHelper::getTranslationTable($table);
             view()->share('transTable', $transTable);
-        }
-        else{
-            $isMedia = $request->segment(2,"");
-            if($isMedia=="media"){
+        } else {
+            $isMedia = $request->segment(2, "");
+            if ($isMedia=="media") {
                 $table = "media";
-                $action =$request->segment(3,"");
-                $ret = $this->checkPermissionMedia($table,$action);
-                if($ret ==1){
-                    if($request->ajax()){
-                        return JsonHelper::echoJson(400,trans('db::NO_PERMISSION'));
+                $action =$request->segment(3, "");
+                $ret = $this->checkPermissionMedia($table, $action);
+                if ($ret ==1) {
+                    if ($request->ajax()) {
+                        return JsonHelper::echoJson(400, trans('db::NO_PERMISSION'));
+                    } else {
+                        return redirect()->route('no_permission');
                     }
-                    else{
-                        return redirect()->route('no_permission');    
-                    }
-                }
-                elseif($ret ==2){
+                } elseif ($ret ==2) {
                     return redirect()->route('404');
                 }
             }
         }
         return $next($request);
     }
-    private function checkPermissionMedia($table,$action){
+    private function checkPermissionMedia($table, $action)
+    {
         switch ($action) {
             case "createDir":
             case "uploadFile":
@@ -98,19 +96,20 @@ class HUserAuthenticate
                 $_action="view";
             break;
         }
-        $ret =  $this->checkPermission($table,$_action);
+        $ret =  $this->checkPermission($table, $_action);
         return $ret;
     }
-    private function checkPermission($table,$action){
+    private function checkPermission($table, $action)
+    {
         $ar = Session::get(CT::$KEY_SESSION_USER_LOGIN);
-        if(!isset($ar) || !array_key_exists('module',$ar))
-        {
+        if (!isset($ar) || !array_key_exists('module', $ar)) {
             return 2;
         }
         $_action = "";
         switch ($action) {
             case 'view':
             case 'search':
+            case 'history':
             case 'getData':
             case 'getDataPivot':
             case 'getDataMenu':
@@ -153,10 +152,10 @@ class HUserAuthenticate
                 break;
         }
         $fil = collect($ar['module']);
-        $fil= $fil->filter(function($item) use($table,$_action){
+        $fil= $fil->filter(function ($item) use ($table, $_action) {
             return $item->table_map== $table && $item->name == $_action;
         });
-        if($fil->count()<=0){ //No permmission
+        if ($fil->count()<=0) { //No permmission
             return 1;
         }
         return 200;
