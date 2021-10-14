@@ -432,6 +432,12 @@ class Admin extends BaseAdminController
 		if($request->isMethod('post')){
 			$post = $request->input();
 			$id = isset($post['id'])?$post["id"]:0;
+			$tbl = $table;
+            if ($table instanceof \vanhenry\manager\model\VTable)
+            {
+                $tbl = $table->table_map;
+            }
+			$oldData = \DB::table($tbl)->find($id);
 
 			/* Check thêm quyền chỉ được sửa những bản ghi do user hoặc user trong group con tạo ra */
 			$check = \vanhenry\manager\helpers\RoleHelper::checkIdHUserCanInteractive($table,$id);
@@ -497,7 +503,7 @@ class Admin extends BaseAdminController
 				if (count($post) > 0) {
 					$ret = ModelHelper::update($table,$id,$post);
 				}
-				\Event::dispatch('vanhenry.manager.update_normal.success', array($table,$post,[],$id));
+				\Event::dispatch('vanhenry.manager.update_normal.success', array($table,$post,[],$id,$oldData));
 			}
 		 return	JsonHelper::echoJson($ret,trans('db::edit')." ".trans('db::success'));
 		}

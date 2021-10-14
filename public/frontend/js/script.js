@@ -227,8 +227,8 @@ var GUI = (function(){
 		} 
 	}
 	var scrollIntoViewNew = function () {
-        if ($(".toc_list").length == 0) return;
-        $(document).on("click", '.toc_list a[href^="#"]', function (e) {
+        if ($("#toc_container").length == 0) return;
+        $(document).on("click", '#toc_container a[href^="#"]', function (e) {
             e.preventDefault();
             var id = $(this).attr("href");
             var $id = $(id);

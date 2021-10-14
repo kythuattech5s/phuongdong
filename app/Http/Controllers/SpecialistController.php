@@ -16,8 +16,16 @@ class SpecialistController extends Controller
     {
     	$currentItem = Specialist::slug($link)->act()->first();
         if ($currentItem == null) { abort(404); }
-        $dataContent = \Support::createdTocContent($currentItem->content);
-        $listRelateDoctor = Doctor::where('specialist_id',$currentItem->id)->act()->get();
-        return view('specialists.view',compact('currentItem','listRelateDoctor','dataContent'));
+        if (\Support::getSegment($request, 1) == 'doi-ngu-bac-si') {
+            $listSpecialist = Specialist::act()->get();
+            $listItems = Doctor::act()->where('specialist_id',$currentItem->id)->Ord()->paginate(12);
+            return View::make('doctors.view_specialist',compact('currentItem','listItems','listSpecialist'));   
+        }else {
+            $currentItem->count_view = (int)$currentItem->count_view + 1;
+            $currentItem->save();
+            $dataContent = \Support::createdTocContent($currentItem->content);
+            $listRelateDoctor = Doctor::where('specialist_id',$currentItem->id)->act()->get();
+            return view('specialists.view',compact('currentItem','listRelateDoctor','dataContent'));
+        }
     }
 }

@@ -18,7 +18,7 @@ class FileGalleryCategoryController extends Controller
         if ($currentItem == null) {
             abort(404);
         }
-        $listItems = $currentItem->fileGallery()->act()->ord()->paginate(11);
+        $listItems = $currentItem->fileGallery()->act()->ord()->paginate(13);
         return view('file_gallery_categories.view', compact('currentItem','listItems'));
     }
 }

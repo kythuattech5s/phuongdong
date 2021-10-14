@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
 <section class="container pt-xl-2 pb-4">
-    {{\Breadcrumbs::render('static','Thư viện file','thu-vien-file')}}
+    {{\Breadcrumbs::render('static','Tài liệu hướng dẫn','tai-lieu-huong-dan')}}
     <h1 class="fs-30-cv robotob mb-1 wow fadeInUp">Thư viện file</h1>
 </section>
 <section class="hot-galley-module pt-4 pb-3">

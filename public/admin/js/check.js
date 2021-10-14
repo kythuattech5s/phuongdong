@@ -306,23 +306,25 @@ var USERONLINE = (function(){
 
     function buildContent(){
         const doing = document.querySelector('.list-link');
-        if(pathname.indexOf('/esystem/edit/configs/0') == 0){
+        if(pathname.includes('/esystem/edit/configs/0')){
             var content = JSON.stringify('đang sửa ' + (doing ? doing.innerText : 'không xác định'));
-        }else if(pathname.indexOf('/esystem/media/manager') == 0){
-            var content = JSON.stringify('đang ở trang trang Media');
-        }else if(pathname.indexOf('/esystem/editSitemap') == 0){
-            var content = JSON.stringify('đang ở trang trang Sitemap');
-        }else if(pathname.indexOf('/esystem/editRobot') == 0){
+        }else if(pathname.includes('/esystem/media/manager')){
+            var content = JSON.stringify('đang ở trang Media');
+        }else if(pathname.includes('/esystem/editSitemap')){
+            var content = JSON.stringify('đang ở trang Sitemap');
+        }else if(pathname.includes('/esystem/editRobot')){
             var content = JSON.stringify('đang ở trang Robots.txt');
-        }else if (pathname.indexOf('/esystem/edit') == 0){
+        }else if(pathname.includes('/esystem/edit/h_roles/0')){
+            var content = JSON.stringify('đang sửa ở trang Phân quyền');
+        }else if (pathname.includes('/esystem/edit')){
             const inputName = document.querySelector('input[name="name"]');
             var content = JSON.stringify('đang sửa ' + (inputName ? inputName.value : 'không xác định'));
-        }else if(pathname.indexOf('/esystem/insert') == 0){
+        }else if(pathname.includes('/esystem/insert')){
             var content = JSON.stringify('đang thêm mới ' + (doing ? doing.innerText : 'không xác định'));
-        }else if(pathname.indexOf('/esystem/copy') == 0){
+        }else if(pathname.includes('/esystem/copy')){
             const inputName = document.querySelector('input[name="name"]');
             var content = JSON.stringify('đang copy ' + (inputName ? inputName.value : 'không xác định'));
-        }else if(pathname.indexOf('/esystem/view') == 0){
+        }else if(pathname.includes('/esystem/view')){
             var content = JSON.stringify('đang ở trang ' + (doing ? doing.innerText : 'không xác định'));
         }else{
             var content = JSON.stringify('đang ở trang chủ');

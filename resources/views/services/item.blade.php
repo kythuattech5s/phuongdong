@@ -6,7 +6,7 @@
     </div>
     <div class="content lh-13">
         <h2 class="name">
-            <a href="{{Support::show($item, 'slug')}}" class="smooth fs-24-cv hv-main-sp robotob" title="{{$item->name}}">{{$item->name}}</a>
+            <a href="{{Support::show($item, 'slug')}}" class="smooth fs-20-cv hv-main-sp robotob" title="{{$item->name}}">{{$item->name}}</a>
         </h2>
         <div class="short_content fs-16-cv my-1 my-lg-2">
             {{Str::words($item->seo_des,'25')}}

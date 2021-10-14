@@ -9,7 +9,7 @@
         @endforeach
     </ul>
     @include('register_advise_form')
-    @include('banner_gdn_sidebar')
+    @include('banner_gdn.banner_gdn_sidebar')
     @php
         $listServiceHot = \App\Models\ServiceCategory::where('hot',1)->act()->get();
     @endphp

@@ -104,11 +104,11 @@ class ManagerEventListener
             $tbl = $table;
             if ($table instanceof \vanhenry\manager\model\VTable)
             {
-                $tbl = $table->name;
+                $tbl = $table->table_map;
             }
             $name = "Update Normal " . $tbl;
             $dataAdd = [];
-            $dataAdd['table_name'] = $table->table_map;
+            $dataAdd['table_name'] = $tbl;
             $dataAdd['action'] = 'update';
             $dataAdd['target_id'] = $id;
             $arrChangeField = [];
@@ -121,7 +121,7 @@ class ManagerEventListener
                 if (count($arrChangeField)) {
                     $dataAdd['field_change'] = implode(',',$arrChangeField);
                 }
-                $arrNotCheckChange = ['created_at','updated_at','update_by','create_by'];
+                $arrNotCheckChange = ['created_at','updated_at','update_by','create_by','yoast_score'];
                 foreach ($arrNotCheckChange as $item) {
                     if (($keyD = array_search($item, $arrChangeField)) !== false) {
                         unset($arrChangeField[$keyD]);

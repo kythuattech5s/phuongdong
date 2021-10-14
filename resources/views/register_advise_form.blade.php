@@ -4,6 +4,7 @@
         <p class="fs-16 px-3">Đặt hẹn ngay để nhận tư vấn và xếp lịch khám kịp thời</p>
     </div>
     <div class="form-content p-3 pt-xl-4">
+        <input type="hidden" name="type" value="1">
         <input type="text" name="fullname" placeholder="Họ và tên (*)">
         <input type="text" name="phone" placeholder="Số điện thoại (*)">
         <input type="email" name="email" placeholder="Email">

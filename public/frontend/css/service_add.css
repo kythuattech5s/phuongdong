@@ -1,0 +1,195 @@
+.maternity table {
+    overflow-x: scroll;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+.maternity table td, .maternity table th{
+    padding: 1rem .75rem;
+    border: 1px solid #ddd;
+}
+.box-maternity .inner-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #007dc3;
+    margin-top: 12px;
+    margin-bottom: 15px
+}
+
+.datatable-maternity .nav li a {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: 0;
+    background-color: #64bdef;
+    margin-right: 4px;
+    padding: 9px 24px;
+    border-radius: 8px 8px 0 0
+}
+.text-left{
+    text-align: left;
+}
+.datatable-maternity .nav li {
+    margin-bottom: 0
+}
+
+.datatable-maternity .nav {
+    border-bottom: 5px solid #007dc3
+}
+
+.datatable-maternity .nav-tabs>li>a.active,
+.datatable-maternity .nav-tabs>li>a.active:focus,
+.datatable-maternity .nav-tabs>li>a.active:hover {
+    color: #fff;
+    border: 0;
+    background-color: #007dc3
+}
+
+.title-maternity {
+    border: 1px solid #007dc3;
+    font-size: 16px;
+    color: #007dc3;
+    padding: 10px 0;
+    margin-bottom: -1px
+}
+
+.datatable-table th {
+    font-size: 14px;
+    background: #64bdef;
+    color: #fff
+}
+
+.datatable-table td,
+.datatable-table th {
+    border: 1px solid #050505;
+    padding: 1rem .75rem;
+}
+
+.datatable-table .inner-category {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 17.4px
+}
+
+.datatable-table .inner-category-desc {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 15.2px
+}
+
+.datatable-table td {
+    color: #231F20;
+    font-size: 14px;
+    font-weight: bold
+}
+
+.hotline-tuvan span {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #64bdef;
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 20px
+}
+
+.hotline-tuvan span b {
+    font-size: 20px;
+    color: #007dc3
+}
+
+.hotline-tuvan {
+    margin-top: 18px
+}
+
+.box-benefit p {
+    font-size: 16px;
+    color: #ED1C24;
+    margin-bottom: 6px
+}
+
+.datatable-benefit .panel {
+    border-radius: 0;
+    border-color: #050505
+}
+
+.datatable-benefit .panel-heading {
+    text-align: left;
+    background-color: transparent;
+    padding: 0;
+    border-color: #050505
+}
+
+.datatable-table .datatable-body tr:nth-of-type(odd) {
+    background-color: #FFFCEE
+}
+
+.datatable-benefit .panel-heading a {
+    display: block;
+    background: #64bdef;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 18px 20px;
+    position: relative
+}
+
+.datatable-benefit .panel-heading a::after {
+    content: '\f077';
+    font-family: FontAwesome;
+    position: absolute;
+    right: 20px;
+    top: 17px
+}
+
+.datatable-benefit .panel-heading a[aria-expanded="true"]::after {
+    content: '\f078'
+}
+
+.datatable-benefit .panel-heading a[aria-expanded="true"] {
+    background-color: #007dc3
+}
+
+.datatable-benefit .panel-body {
+    padding: 0;
+    border-top: 1px solid #050505 !important
+}
+
+.datatable-benefit tbody tr:nth-child(1) {
+    background-color: #FFFCEE
+}
+
+.datatable-benefit tbody tr td:nth-child(1) {
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 39%
+}
+
+.datatable-benefit tbody tr:nth-child(1) td {
+    font-size: 16px
+}
+
+.datatable-benefit .panel-group .panel+.panel {
+    margin-top: -1px
+}
+
+.datatable-benefit tbody td {
+    font-size: 14px
+}
+
+.inner-benefit {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 15px
+}
+
+.inner-benefit-desc {
+    font-size: 10px;
+    line-height: 10.87px
+}
+@media (max-width: 991px) {
+    .maternity table td, .maternity table th{
+        padding: 0.5rem .25rem;
+    }
+}

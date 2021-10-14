@@ -45,5 +45,5 @@
         </div>
     @endforeach
     @include('register_advise_form')
-    @include('banner_gdn_sidebar')
+    @include('banner_gdn.banner_gdn_sidebar')
 </div>

@@ -6,7 +6,7 @@
             {{\Breadcrumbs::render($currentItem->getTable(),$currentItem)}}
             <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
             <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                {!!$currentItem->content!!}
+                {!!Support::showContentHasGallery($dataContent['content'],$currentItem->imgs_template)!!}
             </div>
         </div>
         <div class="col-lg-4 col-xl-28 ps-lg-4">

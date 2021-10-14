@@ -145,7 +145,21 @@ class StaticController extends Controller
                 'redirect' => url()->previous()
             ]);
         }
+        $type = (int)$request->input('type');
+        $title = 'Đăng ký tư vấn';
+        switch ($type) {
+            case 1:
+                $title = 'Đăng ký tư vấn';
+                break;
+            case 2:
+                $title = 'Đăng ký gói thai sản';
+                break;
+            default:
+                $title = 'Đăng ký tư vấn';
+                break;
+        }
         $data = [
+            'title'     => $title,
             'fullname'  => $request->input('fullname'),
             'phone'     => $request->input('phone'),
             'email'     => $request->input('email'),

@@ -504,7 +504,12 @@ trait EditTrait{
 	}
 	private function __update_normal(Request $request,$table,$id){
 		if($request->isMethod('post')){
-			$oldData = \DB::table($table->table_map)->find($id);
+			$tbl = $table;
+            if ($table instanceof \vanhenry\manager\model\VTable)
+            {
+                $tbl = $table->table_map;
+            }
+			$oldData = \DB::table($tbl)->find($id);
 			$data = $request->post();
 			if(isset($data['_token']))
 			{

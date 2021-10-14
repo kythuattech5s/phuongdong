@@ -1,9 +1,19 @@
 @extends('index')
+@section('css')
+    <link href="frontend/css/service_add.css" type="text/css" rel="stylesheet" />
+@stop
 @section('content')
+    @php
+        $layoutPage = (int)$currentItem->layout_page;
+    @endphp
     @if (count($listItems) == 0 && count($listCateChild) == 0)
     <section class="container">
         <div class="row">
-            <div class="col-lg-8 col-xl-72 shadow-box-right pt-xl-2 pb-md-4 pb-xxl-5 pe-xxl-5">
+            @if ($layoutPage == 1)
+                <div class="col-lg-8 col-xl-72 shadow-box-right pt-xl-2 pb-md-4 pb-xxl-5 pe-xxl-5">
+            @else
+                <div class="col-12">
+            @endif
                 {{\Breadcrumbs::render('service_category',$currentItem)}}
                 <h1 class="fs-30-cv robotob mb-1 lh-13 wow fadeInUp">{{$currentItem->name}}</h1>
                 <div class="title-info-new d-flex flex-wrap my-3 pb-0 pb-xl-2 fs-15 wow fadeInUp" data-wow-delay="0.2s">
@@ -29,8 +39,9 @@
                     {!!$dataContent['toc']!!}
                 </div>
                 <div class="s-content my-3 new-content-main wow fadeInUp" data-wow-delay="0.6s">
-                    {!!$dataContent['content']!!}
+                    {!!Support::showContentHasGallery($dataContent['content'],$currentItem->imgs_template)!!}
                 </div>
+                {!!$currentItem['inject_html']!!}
                 @php
                     $listImageItem = json_decode($currentItem->imgs, true);
                 @endphp
@@ -69,12 +80,6 @@
                         </div>
                     </div>
                 @endif
-             {{--    @if ($currentItem->quote != '')
-                    <p class="all-title-detail wow fadeInUp mt-4 mb-2 text-uppercase">Bảng giá và danh mục {{$currentItem->name}}</p>
-                    <div class="s-content my-3 new-content-main wow fadeInUp">
-                        {!!$currentItem->quote!!}
-                    </div>
-                @endif --}}
                 @if (isset($videoIntro))
                     <div class="my-4 wow fadeInUp">
                         <p class="all-sub-title small-text long wow fadeInUp pt-xl-2 mt-4 mb-3 text-uppercase">Video giới thiệu {{$currentItem->name}}</p>
@@ -88,15 +93,19 @@
                         </h3>
                     </div>
                 @endif
-                @php /* @endphp <div class="my-4 fs-16 robotob">{!!$currentItem->end_content!!}</div> @php */ @endphp
                 @if (count($listNews) > 0)
-                    <p class="all-sub-title small-text long wow fadeInUp mb-3 text-uppercase">Bài viết về ung thư</p>
+                    <div class="mt-4 mt-xl-5"></div>
+                    @if ($currentItem->title_relate_new != '')
+                        <p class="all-sub-title small-text long wow fadeInUp mb-3 text-uppercase">{{$currentItem->title_relate_new}}</p>
+                    @endif
                     @include('news.new_bottom_detail',['listNews'=>$listNews])
                 @endif
             </div>
-            <div class="col-lg-4 col-xl-28 ps-lg-4">
-                @include('specialists.sidebar')
-            </div>
+            @if ($layoutPage == 1)
+                <div class="col-lg-4 col-xl-28 ps-lg-4">
+                    @include('specialists.sidebar')
+                </div>
+            @endif
         </div>
     </section>
     @else
