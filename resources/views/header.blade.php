@@ -54,7 +54,7 @@
 					<button class="btn-show-search-form me-3">
 						<i class="fa fa-search" aria-hidden="true"></i>
 					</button>
-					<button class="btn-lang btn-lang-en me-3" onclick="doGTranslate('vi|en');return false;">
+					<button class="btn-lang btn-lang-en me-3" onclick="backToDefaultLanguage()">
 						<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
 					</button>
 					<button class="btn-lang btn-lang-vi me-3" onclick="doGTranslate('en|vi');return false;">
@@ -78,7 +78,7 @@
 						@endphp
 						{{Support::showMenuRecursive($menu)}}
 					</nav>
-					<button class="btn-lang btn-lang-en" onclick="doGTranslate('vi|en');return false;">
+					<button class="btn-lang btn-lang-en" onclick="backToDefaultLanguage()">
 						<img src="frontend/images/lang_en.png" title="Tiếng anh" alt="Tiếng anh" class="img-fluid smooth">
 					</button>
 					<button class="btn-lang btn-lang-vi" onclick="doGTranslate('en|vi');return false;">
